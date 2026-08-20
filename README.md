@@ -1,84 +1,50 @@
-# Guida Slackbisma — Manuale Rigging
+# Kit di partenza — Manuale rigging Pietra di Bismantova
 
-Repository per il manuale di rigging Slackbisma, migrato dall'archivio locale
-`C:\Users\Carli\.ARCHIVIO\MANUALE_RIGGING_SLACKBISMA`.
+Cartella da aprire con Claude Code, con i video del montaggio in `./video/`.
 
-## Come caricare i file dal PC locale
+## Avvio
 
-Il repository è già inizializzato con `.gitignore` e `.gitattributes`.
-Da Windows, apri **PowerShell** ed esegui i comandi qui sotto.
+1. Copia questa cartella dove stanno i video (o sposta i video qui dentro, in `video/`).
+2. `pip install -r requirements.txt` e assicurati di avere `ffmpeg` nel PATH.
+3. Apri Claude Code nella cartella.
+4. Incolla come primo messaggio il contenuto di `PROMPT_INIZIALE.md`.
 
-### 1. Clona il repository in una cartella di lavoro
+`CLAUDE.md` viene letto automaticamente da Claude Code a ogni sessione: contiene le regole
+del progetto, la pipeline e le convenzioni grafiche.
 
-```powershell
-cd C:\Users\Carli
-git clone https://github.com/Carli87-Meg/Guida_slackbisma.git
-cd Guida_slackbisma
-git checkout claude/migrate-rigging-folder-cloud-6vj35n
+## Cosa c'è dentro
+
+| File | A cosa serve |
+|---|---|
+| `CLAUDE.md` | Istruzioni permanenti di progetto |
+| `PROMPT_INIZIALE.md` | Il messaggio da incollare per iniziare |
+| `design/design.py` | Sistema grafico: font, palette, componenti di impaginazione |
+| `riferimento/build_guida_sillschlucht_it.py` | Guida di 16 pagine già fatta, da usare come modello |
+| `riferimento/build_scheda_campo_it.py` | Scheda da campo su una pagina |
+| `tools/01_inventario.sh` | Durata, risoluzione e peso dei video |
+| `tools/02_trascrivi.py` | Audio → trascrizione italiana con timestamp |
+| `tools/03_estrai_frame.py` | Fotogrammi a timestamp precisi, con stima di nitidezza |
+| `tools/annota.py` | Frecce, cerchi, riquadri, numeri e didascalie sui frame |
+| `NOTE_RIGGING_TEMPLATE.md` | Struttura delle note intermedie |
+| `DUBBI_TEMPLATE.md` | Registro dei dati da confermare |
+
+## Prova rapida di `annota.py`
+
+```python
+from tools.annota import Annotatore
+a = Annotatore('frame.jpg')
+a.freccia((0.15, 0.85), (0.45, 0.58), '1', 'rosso')
+a.cerchio((0.48, 0.52), 0.09, 'grillo di collegamento', 'rosso')
+a.riquadro([0.62, 0.30, 0.92, 0.66], 'backup', 'verde')
+a.didascalia('Fase 3 — collegamento al masterpoint')
+a.salva('out.jpg')
 ```
 
-### 2. Copia dentro il contenuto della cartella locale
+Coordinate sempre relative (0–1): valgono a qualsiasi risoluzione.
+Colori disponibili: rosso, arancio, ambra, oliva, verde, acqua, azzurro, blu.
 
-```powershell
-robocopy "C:\Users\Carli\.ARCHIVIO\MANUALE_RIGGING_SLACKBISMA" "C:\Users\Carli\Guida_slackbisma" /E /XD .git
-```
+## Il punto che conta
 
-`/E` copia anche le sottocartelle (comprese quelle vuote), `/XD .git` evita di
-sovrascrivere i metadati git. Robocopy considera normale un exit code 1: vuol
-dire "file copiati con successo".
-
-### 3. Controlla cosa stai per caricare
-
-```powershell
-git status
-git add -A
-git status --short
-```
-
-Prima di procedere, verifica che non ci siano file oltre i 100 MB (limite di
-GitHub per singolo file):
-
-```powershell
-Get-ChildItem -Recurse -File | Where-Object { $_.Length -gt 100MB } |
-  Select-Object FullName, @{n='MB';e={[math]::Round($_.Length/1MB,1)}}
-```
-
-Se il comando non stampa nulla, sei a posto: salta al punto 4.
-Se stampa qualcosa, vedi la sezione "File pesanti" più sotto.
-
-### 4. Commit e push
-
-```powershell
-git commit -m "Import manuale rigging Slackbisma da archivio locale"
-git push -u origin claude/migrate-rigging-folder-cloud-6vj35n
-```
-
-Al primo push Git chiederà le credenziali GitHub: usa un
-[Personal Access Token](https://github.com/settings/tokens) al posto della
-password, oppure installa [GitHub CLI](https://cli.github.com/) e autenticati
-una volta sola con `gh auth login`.
-
-## File pesanti (oltre 100 MB)
-
-GitHub rifiuta i singoli file sopra i 100 MB. Se ne hai (video tutorial, scene
-`.blend` complete, texture ad alta risoluzione), hai due strade.
-
-**Opzione A — Git LFS** (consigliata se i file servono davvero nel repo):
-
-```powershell
-git lfs install
-git lfs track "*.mp4"
-git lfs track "*.blend"
-git add .gitattributes
-```
-
-Poi riprendi dal punto 3. Nota che il piano gratuito GitHub include 1 GB di
-storage LFS e 1 GB/mese di banda.
-
-**Opzione B — tenerli fuori dal repo**: aggiungi i pattern corrispondenti a
-`.gitignore` e archivia quei file su Google Drive o simili, linkandoli dal
-manuale.
-
-## Struttura
-
-Da compilare una volta caricati i contenuti.
+I video sono la sola fonte di verità. Quello che non si sente e non si vede non entra nel
+manuale come dato: entra come `[DA CONFERMARE]`. Su un documento di rigging, un numero
+inventato è peggio di un campo vuoto.

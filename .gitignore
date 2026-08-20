@@ -1,25 +1,28 @@
-# Sistema operativo
-Thumbs.db
-ehthumbs.db
-Desktop.ini
-$RECYCLE.BIN/
-.DS_Store
+# Materiale originale — pesa 6,4 GB e non va in git.
+# Resta sul disco: gli script lo leggono in sola lettura.
+video/
+video_icloud/
+foto/
+*.zip
 
-# File temporanei Office / LibreOffice
-~$*
-*.tmp
-.~lock.*#
+# Derivati rigenerabili: audio, trascrizioni, fotogrammi, provini, anteprime.
+# Si ricostruiscono con tools/02_trascrivi.py e tools/03_estrai_frame.py.
+lavorazione/
 
-# Backup e autosave software 3D
-*.blend[0-9]
-*.blend[0-9][0-9]
-*.max[0-9]*
-*.autosave
-*_backup.*
-*_recovered.*
-autosave/
-backup/
+# PDF prodotto da build/build_manuale.py
+output/
 
-# Cache
+# Guida di riferimento (3,7 MB, non prodotta qui)
+guida-highline-sillschlucht.pdf
+
+# Python
 __pycache__/
-*.pyc
+*.py[cod]
+.venv/
+
+# --- Materiale sorgente pesante: resta in locale, non su GitHub ---
+video/
+video_icloud/
+*.MOV
+*.mov
+*.zip
