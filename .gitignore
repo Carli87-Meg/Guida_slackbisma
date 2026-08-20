@@ -1,13 +1,30 @@
 # Materiale originale — pesa 6,4 GB e non va in git.
-# Resta sul disco: gli script lo leggono in sola lettura.
+# Resta sul disco locale: gli script lo leggono in sola lettura.
 video/
 video_icloud/
-foto/
+*.MOV
+*.mov
 *.zip
 
-# Derivati rigenerabili: audio, trascrizioni, fotogrammi, provini, anteprime.
-# Si ricostruiscono con tools/02_trascrivi.py e tools/03_estrai_frame.py.
-lavorazione/
+# Fotografie originali. In git entrano solo le versioni raddrizzate,
+# sotto lavorazione/foto_dritte/, che sono quelle che usa il build.
+foto/
+
+# Derivati di lavorazione.
+#
+# Nota: "rigenerabili con tools/02_trascrivi.py e 03_estrai_frame.py" vale solo
+# su una macchina che ha i video. In cloud i video non ci sono, quindi ciò che
+# serve per leggere le fonti e ricostruire il PDF va versionato.
+#
+# La forma "lavorazione/*" (invece di "lavorazione/") e' necessaria: git non
+# entra in una directory esclusa, quindi con "lavorazione/" le negazioni qui
+# sotto non avrebbero alcun effetto.
+lavorazione/*
+!lavorazione/frame_annotati/
+!lavorazione/foto_dritte/
+!lavorazione/trascrizioni/
+!lavorazione/dettagli/
+!lavorazione/piano_frame.txt
 
 # PDF prodotto da build/build_manuale.py
 output/
@@ -19,10 +36,3 @@ guida-highline-sillschlucht.pdf
 __pycache__/
 *.py[cod]
 .venv/
-
-# --- Materiale sorgente pesante: resta in locale, non su GitHub ---
-video/
-video_icloud/
-*.MOV
-*.mov
-*.zip
