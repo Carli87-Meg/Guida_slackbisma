@@ -20,9 +20,12 @@ FONTI — e solo queste:
     quella nota: o il catalogo e' stato aggiornato, o la ricognizione iniziale
     era parziale. Qui vale il render, che e' la fonte diretta; la riconciliazione
     con la nota e' il dubbio 53 di DUBBI.md.
-  - **Settore Giallo: non verificato.** Nessun render fornito. Resta segnato
-    assente come diceva NOTE_RIGGING.md, ma il dato e' ora incerto quanto lo era
-    quello di Despedida.
+  - **Settore Giallo: censito.** Il render del 20/08/2026 mostra tutte e quattro
+    le linee (28, 45, 50, 55 m). Anche qui NOTE_RIGGING.md lo dava assente.
+
+  Esito: i-pietra copre **22 linee su 24**. Mancano solo la 20 m e la 108 m
+  dell'Anfiteatro. Il conteggio di dodici che si legge in NOTE_RIGGING.md e'
+  superato: dubbio 53, chiuso.
 
 Il confronto fra le due fonti sta in NOTE_RIGGING.md, sezione «La locandina non
 coincide con i-pietra», ed e' gia' stato validato dall'utente.
@@ -46,7 +49,7 @@ NON_DOCUMENTATA = 'non documentata'  # si conosce solo nome, settore, lunghezza
 # (None = il settore non compare affatto nel catalogo i-pietra)
 SETTORE_IPIETRA = {
     'Rookie': 'Rookie',
-    'Settore Giallo': None,   # non verificato — vedi dubbio 53
+    'Settore Giallo': 'Settore Giallo',  # render 20/08/2026: tutte e quattro
     'Anfiteatro': 'Anfiteatro',
     'Anfite-altro': 'Anfiteatro',    # i-pietra le accorpa dentro Anfiteatro
     'Despedida': 'Despedida',  # render 20/08/2026: tutte e sei censite
@@ -62,10 +65,10 @@ _GREZZO = [
     ('Rookie',         40,  True,  NON_DOCUMENTATA),
     ('Rookie',         60,  True,  NON_DOCUMENTATA),
 
-    ('Settore Giallo', 28,  False, NON_DOCUMENTATA),
-    ('Settore Giallo', 45,  False, NON_DOCUMENTATA),
-    ('Settore Giallo', 50,  False, NON_DOCUMENTATA),
-    ('Settore Giallo', 55,  False, NON_DOCUMENTATA),
+    ('Settore Giallo', 28,  True, NON_DOCUMENTATA),
+    ('Settore Giallo', 45,  True, NON_DOCUMENTATA),
+    ('Settore Giallo', 50,  True, NON_DOCUMENTATA),
+    ('Settore Giallo', 55,  True, NON_DOCUMENTATA),
 
     ('Anfiteatro',     20,  False, NON_DOCUMENTATA),
     ('Anfiteatro',     27,  True,  NON_DOCUMENTATA),
@@ -138,7 +141,8 @@ SETTORI_IN_CONFLITTO = ['Anfite-altro']
 COLLISIONE_NOME = ['settore-giallo-50']
 
 # Settori la cui presenza in i-pietra non e' stata verificata su un render.
-NON_VERIFICATI = ['Settore Giallo']
+# Vuoto: al 20/08/2026 esiste un render per tutti e cinque i settori.
+NON_VERIFICATI = []
 
 
 def aree_assenti_da_ipietra():

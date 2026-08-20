@@ -115,8 +115,12 @@ def parte_planimetria():
         censite = sum(1 for l in ls if l['in_ipietra'])
         with _PILImage.open(f) as im:
             ow, oh = im.size
-        cap = ('Settore %s · %d linee tracciate sul render, %d censite sulla locandina'
-               % (area, censite, len(ls)))
+        # «Settore Giallo» contiene gia' la parola: non anteporla due volte
+        etichetta = area if area.lower().startswith('settore') else 'Settore ' + area
+        cap = ('%s · %d linee tracciate sul render, %d censite sulla locandina'
+               % (etichetta, censite, len(ls)))
+        if area in REG.SETTORI_IN_CONFLITTO:
+            cap += ' · etichettate «%s» in i-pietra' % REG.SETTORE_IPIETRA[area]
         S.append(PhotoStrip(str(f), FW, ow, oh, cap, C_AREA[area], 0.52, 0.5))
         S.append(SP(14))
     if mancanti:

@@ -178,7 +178,7 @@ S.append(data_table(
      ['2 · Materiale', '8-24', 'Lunghezze, diametri, modelli, quantità'],
      ['3 · Manovre', '25-36', 'Nomi di nodi, sequenze, esecuzione'],
      ['4 · Ancoraggio', '37-41, 50-51', 'Verifiche a immagine e scatti da fare'],
-     ['5 · Nome e fonti', '42-53', 'Denominazione, locandina, buchi di ripresa']],
+     ['5 · Nome e fonti', '42-52', 'Denominazione, locandina, buchi di ripresa']],
     [118, 78, FW - 196], color=LINEA))
 S.append(PageBreak())
 
@@ -315,11 +315,6 @@ sezione('5', 'Nome della linea, fonti, buchi di ripresa', 'Sezione 5 · apparato
               'etichetta «Anfiteatro» anche le tre linee che la locandina mette sotto '
               '<b>Anfite-altro</b> — 22, 30 e 135 m. Qual è il nome che usate voi?',
           'render 3D i-pietra · stesso rischio del dubbio 45', 3, True),
-         (53, 'Serve un <b>render i-pietra del Settore Giallo</b>. Il render di Despedida '
-              'mostra tutte e sei le linee censite, mentre le note davano Despedida '
-              'assente: il conteggio passa da 12 a <b>18 linee su 24</b>. Del Settore '
-              'Giallo non si sa, ed è l\'ultimo settore non verificato.',
-          'render despedida vs NOTE_RIGGING.md', 2),
          (42, 'Dati presi da i-pietra da validare: settore <b>Anfiteatro</b>, roccia '
               '<b>arenaria</b>, colore linea <b>#F97316</b>. Se il manuale li stampa devono '
               'essere corretti anche fuori dall\'app.', 'catalogo i-pietra'),
