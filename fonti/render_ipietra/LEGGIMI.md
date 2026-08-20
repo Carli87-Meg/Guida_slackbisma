@@ -14,7 +14,18 @@ fonti/render_ipietra/
   settore-giallo.jpg      ← manca: è il dubbio 53
 ```
 
-Estensioni accettate: `.jpg`, `.jpeg`, `.png`.
+Estensioni accettate: `.jpg`, `.jpeg`, `.png`. **Preferire JPEG**: questi render
+sono immagini fotografiche, e in PNG pesano dieci volte tanto senza guadagno
+visibile. I cinque file di partenza erano PNG per 14,5 MB complessivi e hanno
+portato il PDF a 32,9 MB, oltre il limite di 30 MB per la consegna; convertiti a
+JPEG qualita' 90 occupano 1,6 MB e le etichette restano identiche a un
+ingrandimento 200%.
+
+Per convertirli:
+
+    python -c "from PIL import Image; import glob; \
+    [Image.open(f).convert('RGB').save(f[:-4]+'.jpg','JPEG',quality=90, \
+    optimize=True,progressive=True) for f in glob.glob('*.png')]"
 
 Il build li impagina da solo nel capitolo 7. Non serve toccare il codice: basta
 mettere i file qui e rilanciare `python build/build_manuale.py`. I settori senza
@@ -37,3 +48,6 @@ Esportare a piena risoluzione, **senza ritagliare le etichette**: sono i nomi e
 le lunghezze delle linee a rendere il render una fonte e non una decorazione.
 Lato lungo utile ~2000 px; oltre è spreco, il manuale li stampa a larghezza di
 colonna su A4.
+
+Il nome del file non deve essere esatto: basta che contenga il nome del settore.
+`python build/schede_linee.py` stampa quale file viene assegnato a quale settore.
