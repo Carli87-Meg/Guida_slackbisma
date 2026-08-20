@@ -4,11 +4,20 @@ Elenco di tutto ciò che nel manuale sarebbe marcato `[DA CONFERMARE]`.
 Nessuna di queste voci va risolta per deduzione: servono risposte da chi ha montato la linea.
 
 Stato: Fasi 1-4 concluse. Bloccanti risolti il 19/08/2026.
-Il 20/08/2026 i render 3D di i-pietra confermano riga per riga la tabella di
-`NOTE_RIGGING.md`: 12 linee censite su 24, Anfite-altro accorpata in Anfiteatro.
-Da quella conferma nasce il dubbio 52.
-I render di Despedida e Settore Giallo **smentiscono** la tabella: dubbio 53,
-chiuso il 20/08/2026. Copertura reale di i-pietra: 22 linee su 24.
+
+**La copertura di i-pietra è un dato con una data, non un fatto fisso.**
+- Al **5 agosto 2026** — data dello snapshot `tool/catalog-admin/.cache/catalog-snapshot.json`,
+  l'unica fonte disponibile il 19/08 — il catalogo conteneva 551 rotte e 37 settori, e
+  i settori `despedida` e `settore-giallo` **non esistevano affatto**. Da lì il conteggio
+  di 12 linee su 24 in `NOTE_RIGGING.md`: era corretto per quello snapshot.
+- Al **20 agosto 2026** i render 3D forniti dall'utente mostrano censite anche Despedida
+  (6 linee) e Settore Giallo (4). Copertura: **22 su 24**, mancano solo la 20 m e la 108 m
+  dell'Anfiteatro.
+
+Nell'intervallo il catalogo è stato ampliato, oppure i render leggono i dati vivi invece
+della cache. In ogni caso **vale il dato del 20/08**, ed è quello che il manuale stampa —
+ma datato. Dubbio 53, chiuso. Dal confronto fra le due fonti nasce il dubbio 52.
+
 Fonti aggiuntive acquisite: catalogo **i-pietra** (sola lettura), che ha chiuso nome, lunghezza
 e tipo di roccia.
 
@@ -98,7 +107,7 @@ e tipo di roccia.
 | 50 | E | **C'è un A-frame** — due pali di legno con fettucce — visibile in `IMG_1396.JPG`, mai nominato in nessuna trascrizione né notato prima | Elemento strutturale del lato tensione: altezza, materiale e ancoraggio a terra sono tutti ignoti | `foto/IMG_1396.JPG` | aperto |
 | 51 | — | Il **nastro della linea appare bianco/crema** in `IMG_1401`, con un secondo nastro chiaro parallelo (backup?) | Chiude i dubbi 22 e 23 se confermato | `foto/IMG_1401.JPG` | aperto |
 | 52 | intro | **I due cataloghi non concordano sul nome del settore.** i-pietra etichetta «Anfiteatro» anche le tre linee che la locandina mette sotto **Anfite-altro** (22, 30, 135 m). Qual è il nome che usate voi? | Stesso rischio del dubbio 45: chi cerca una linea partendo dall'app e chi parte dalla locandina finisce in due settori diversi | render 3D i-pietra, forniti dall'utente il 20/08/2026 | **confermato a immagine** — in `fonti/render_ipietra/anfite-altro.png` le tre linee portano l'etichetta «Anfiteatro». Resta da decidere quale nome usa il manuale |
-| 53 | intro | **La copertura di i-pietra era stata letta male.** `NOTE_RIGGING.md` contava 12 linee su 24 e dava Settore Giallo e Despedida assenti | Il numero finisce stampato nel capitolo 7 | render 3D i-pietra dei cinque settori | ✅ **chiuso** — i render mostrano Despedida (6) e Settore Giallo (4) censite. i-pietra copre **22 linee su 24**: mancano solo la 20 m e la 108 m dell'Anfiteatro. La tabella di `NOTE_RIGGING.md` va corretta |
+| 53 | intro | **La copertura di i-pietra è cambiata fra le due letture.** Il 19/08 lo snapshot del 5 agosto dava 12 linee su 24, senza i settori Despedida e Settore Giallo; il 20/08 i render ne mostrano 22 su 24 | Il numero finisce stampato nel capitolo sulle linee | snapshot 05/08/2026 + render 3D 20/08/2026 | ✅ **chiuso** — vale il dato del 20/08: **22 su 24**, mancano la 20 m e la 108 m dell'Anfiteatro. ⚠ Non era una lettura sbagliata: lo snapshot del 5 agosto quei settori non li conteneva proprio. Il manuale stampa il dato **con la data** |
 
 ## Note da riportare nel manuale
 

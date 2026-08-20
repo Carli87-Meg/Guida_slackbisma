@@ -37,3 +37,4 @@ guida-highline-sillschlucht.pdf
 __pycache__/
 *.py[cod]
 .venv/
+fonti/render_originali_png/

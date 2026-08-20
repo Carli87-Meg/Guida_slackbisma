@@ -15,13 +15,17 @@ FONTI — e solo queste:
   - Anfiteatro e Rookie: le etichette leggibili coincidono riga per riga con la
     tabella di NOTE_RIGGING.md;
   - **Despedida: tutte e sei le linee risultano censite** (35, 45, 60, 70, 85,
-    165 m). Questo *contraddice* NOTE_RIGGING.md, che dava Despedida assente da
-    i-pietra e contava dodici linee su ventiquattro. Il render e' successivo a
-    quella nota: o il catalogo e' stato aggiornato, o la ricognizione iniziale
-    era parziale. Qui vale il render, che e' la fonte diretta; la riconciliazione
-    con la nota e' il dubbio 53 di DUBBI.md.
-  - **Settore Giallo: censito.** Il render del 20/08/2026 mostra tutte e quattro
-    le linee (28, 45, 50, 55 m). Anche qui NOTE_RIGGING.md lo dava assente.
+    165 m). **Settore Giallo: censito**, tutte e quattro (28, 45, 50, 55 m).
+
+    Questo non contraddice NOTE_RIGGING.md: lo contestualizza. Quella nota fu
+    scritta il 19/08 leggendo l'unica fonte allora disponibile, lo snapshot
+    `tool/catalog-admin/.cache/catalog-snapshot.json` **datato 5 agosto 2026**,
+    che conteneva 551 rotte e 37 settori fra cui `despedida` e `settore-giallo`
+    **non comparivano affatto**. Il conteggio di dodici su ventiquattro era
+    dunque esatto per quello snapshot. I render sono di quindici giorni dopo: nel
+    frattempo il catalogo e' stato ampliato, oppure i render leggono i dati vivi
+    invece della cache. Vale il dato piu' recente, ma va sempre stampato con la
+    sua data. Dubbio 53 di DUBBI.md.
 
   Esito: i-pietra copre **22 linee su 24**. Mancano solo la 20 m e la 108 m
   dell'Anfiteatro. Il conteggio di dodici che si legge in NOTE_RIGGING.md e'
