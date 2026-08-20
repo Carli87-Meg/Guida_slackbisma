@@ -165,9 +165,10 @@ sezione('1', 'Quadro generale della linea', 'Sezione 1 · dati di testata', LINE
           'mai pronunciata · nota N2 del manuale', 2, True),
          (2, 'Dislivello fra i due lati — l\'offlevel. Quanto, e da che parte pende? '
              'Influenza il tensionamento.', 'mai pronunciato'),
-         (3, 'Coordinate GPS dei due ancoraggi. Servono per le intestazioni cliccabili dei '
-             'blocchi materiale. I linePoints di i-pietra sono coordinate della scena 3D, '
-             'non GPS.', 'mai pronunciate'),
+         (3, 'Coordinate GPS dell\'<b>ancoraggio opposto</b>. Quello main lo ha dato l\'EXIF '
+             'di IMG_1416 — 44.419869, 10.412353 — perche\' la foto e\' stata scattata '
+             'standoci. Basta una foto geolocalizzata di la\'.',
+          'IMG_1416 · main risolto il 20/08/2026'),
          (4, 'Accesso e avvicinamento: da dove si parte, quanto si cammina, dove si '
              'parcheggia.', 'mai descritto', 3),
          (5, 'Autorizzazioni, divieti stagionali per nidificazione, accordi con il gestore. '
@@ -269,9 +270,15 @@ sezione('4', 'Ancoraggio e verifiche a immagine', 'Sezione 4 · da guardare e fo
          (41, 'La <b>corda verde acqua</b> è la linea vita o il cordino di collegamento fra '
               'i punti? In IMG_1371 si vede annodata fra i punti dell\'ancoraggio. Le due '
               'funzioni potrebbero coesistere.', 'IMG_1371.JPEG · [IMG_1350 @ 0:33]', 3),
-         (50, 'C\'è un <b>A-frame</b> — due pali di legno con fettucce — visibile in '
-              'IMG_1396, mai nominato in nessuna trascrizione. Altezza, materiale e '
-              'ancoraggio a terra sono tutti ignoti.', 'foto/IMG_1396.JPG', 3),
+         (50, '<b>A-frame</b>: quanto sono <b>alti</b> i pali, che legno e che diametro, '
+              'come sono legati in testa, e di quanto sollevano la linea sopra il bordo? '
+              'In IMG_1416 attorno al piede di un palo si vedono giri di <b>filo '
+              'metallico</b>: tengono il palo o sono un recinto che c\'era già?',
+          'IMG_1396 · IMG_1416', 4),
+         (54, 'Sullo sfondo di IMG_1416 e IMG_1396 corre una <b>linea tesa con sotto una '
+              'seconda linea appesa a festoni</b>. È la campata della 53 m vista di '
+              'scorcio o <b>un\'altra linea</b> dello spot? E la linea a festoni che cos\'è '
+              '— backup, tagline lasciata in posa, altro?', 'IMG_1416 · IMG_1396', 4),
          (51, 'Il nastro appare <b>bianco o crema</b> in IMG_1401, con un secondo nastro '
               'chiaro parallelo. Se confermato chiude le voci 22 e 23.',
           'foto/IMG_1401.JPG')])

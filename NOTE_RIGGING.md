@@ -268,13 +268,23 @@ provvisori miei**, non nomi pronunciati nei video.
 
 Non compaiono in nessuna trascrizione: emergono guardando le immagini.
 
-- **A-frame** — due pali di legno con fettucce, sul bordo. `IMG_1396.JPG`. Altezza,
-  materiale e modo di ancoraggio a terra: tutti `[DA CONFERMARE]`. È un elemento
-  strutturale, non un accessorio: va documentato prima di considerare finito il manuale.
+- **A-frame** — due pali di legno tondo incrociati in testa, sul bordo, con fettuccia
+  viola avvolta sulla testa. `IMG_1396.JPG` e `IMG_1416.JPG`. Quest'ultima, fornita
+  dall'utente il 20/08/2026, aggiunge che l'A-frame sta **sul lato dell'ancoraggio
+  main**, che i piedi **appoggiano sulla roccia** e che attorno al piede di un palo
+  corrono **giri di filo metallico** che proseguono orizzontali — se tengano il palo o
+  siano un recinto preesistente non è stabilito. Altezza, diametro del legno e legatura
+  in testa restano `[DA CONFERMARE]`. È un elemento strutturale, non un accessorio.
 - **Placchetta su bullone con dado esagonale** — `IMG_1371`, `IMG_1372`.
 - **Carrucola bloccante** `EN 567:2013 · Ø 7,8-11 mm` — `IMG_1371`.
 - **Nastro della linea chiaro, bianco o crema**, con un secondo nastro parallelo —
   `IMG_1401`. Se confermato chiude i dubbi su nastro e backup.
+- **Coordinate dell'ancoraggio main** — `44.419869, 10.412353`, quota 1025 m, dall'EXIF
+  di `IMG_1416` scattata stando all'ancoraggio alle 17:14. Primo dato di posizione del
+  progetto. Precisione di un GPS telefonico sotto parete: colloca, non quota.
+- **Una linea tesa con sotto una seconda linea appesa a festoni**, sullo sfondo di
+  `IMG_1416` e `IMG_1396`. Non è stabilito se sia la campata della 53 m vista di scorcio
+  o un'altra linea dello spot: dubbi 54 e 55.
 
 ## Avvertenze pronunciate nei video
 

@@ -90,7 +90,7 @@ def parte_53():
         ('13:55 — Tensionamento', 'Paranchino di base, pretensionamento'),
         ('14:09 — Blocco backup', 'Collegamento che prende sosta main e backup'),
         ('14:49 — Anti-slip', 'Nodo che impedisce lo slittamento nel weblock'),
-        ('17:08 — Linea camminata', 'Primi passaggi documentati dalle fotografie'),
+        ('17:08 — Linea camminata', 'Primi passaggi, documentati dalle fotografie fino alle 17:14'),
     ], LINEA, FW, 2))
     S.append(SP(14))
     S.append(callout('Un buco di un’ora e mezza',
@@ -328,9 +328,84 @@ def parte_53():
                      'dimenticanza di questo manuale: è un’assenza della fonte.', WARN, '!', FW, True))
     S.append(SP(26))
 
+    # ================================================================ p_ — A-frame
+    # Elemento strutturale che nessuna trascrizione nomina: esiste solo nelle
+    # fotografie, e per questo la sezione dice prima di tutto da dove viene.
+    sec(C_TEN, 'A-frame')
+    S.append(LineHeader('7', 'L’A-frame', _occh('lato tensione · A-frame'), C_TEN))
+    S.append(SP(10))
+    S.append(P('Sul lato dell’<b>ancoraggio main</b> la linea non esce dalla sosta e va '
+               'diritta nel vuoto: passa sopra un <b>A-frame</b>, due pali di legno tondo '
+               'incrociati in testa e appoggiati sul bordo. In ventidue minuti di parlato '
+               'nessuno lo nomina mai. È documentato <b>solo da due fotografie</b>, ed è per '
+               'questo che qui si descrive ciò che si vede e nient’altro.', lead))
+    S.append(SP(10))
+    S.append(ChipRow([('Pali', '2 · legno tondo'), ('Testa', 'Incrociata e legata'),
+                      ('Piede', 'Appoggiato su roccia'), ('Altezza', '[DA CONF.]')], C_TEN))
+    S.append(SP(12))
+    S.append(photo_pair(
+        str(FOTO / 'IMG_1416.jpg'), str(FOTO / 'IMG_1396.jpg'),
+        # Le didascalie di photo_pair vanno su una riga sola e non vengono
+        # mandate a capo: piu' larghe della colonna si sovrappongono a quella
+        # accanto. Meta' colonna regge circa cinquanta battute a corpo 7,4.
+        'Il palo visto dall’ancoraggio main · IMG_1416, 17:14',
+        'Testa dei pali, con la fettuccia viola · IMG_1396',
+        *dim(FOTO / 'IMG_1416.jpg'), color=C_TEN, ratio=1.28, focus=0.62,
+        ow2=dim(FOTO / 'IMG_1396.jpg')[0], oh2=dim(FOTO / 'IMG_1396.jpg')[1]))
+    S.append(SP(14))
+    S.append(two_cols(
+        gear_block('Ciò che si vede', [
+            'Due pali di legno tondo, incrociati e legati in testa',
+            'Fettuccia viola avvolta sulla testa dei pali',
+            'Corda verde fluo, fettuccia blu e corda rosa in testa',
+            'Piede dei pali appoggiato sulla roccia del bordo',
+            'Giri di filo metallico attorno al piede di un palo',
+        ], C_TEN),
+        gear_block('Ciò che manca', [
+            'Altezza dei pali — [DA CONFERMARE]',
+            'Diametro e tipo del legno — [DA CONFERMARE]',
+            'Come sono legati fra loro in testa — [DA CONFERMARE]',
+            'Se i piedi siano fermati o solo appoggiati — [DA CONFERMARE]',
+            'Se il filo metallico tenga il palo o sia un recinto — [DA CONFERMARE]',
+            'Di quanto solleva la linea sopra il bordo — [DA CONFERMARE]',
+        ], WARN)))
+    S.append(SP(12))
+    S.append(callout('Perché un elemento non nominato conta lo stesso',
+                     'L’A-frame solleva la linea sopra il bordo: cambia l’angolo con cui la '
+                     'linea carica la sosta e tiene il nastro lontano dalla roccia. '
+                     '<b>Non è un accessorio.</b> Che di un pezzo così non esista né una '
+                     'parola registrata né una misura è, di questo montaggio, il vuoto '
+                     'documentale più grande dopo l’ancoraggio.', WARN, '!', FW, True))
+    S.append(SP(26))
+
+    # ================================================================ dove si trova
+    sec(C_TEN, 'Posizione')
+    S.append(_apre(
+        LineHeader('', 'Dove si trova l’ancoraggio main', _occh('posizione'), C_TEN),
+        P('La fotografia delle 17:14 è stata scattata <b>stando all’ancoraggio main</b>, e il '
+          'telefono ha registrato la posizione. È il primo dato di posizione che questo '
+          'progetto possiede: nessun video la nomina, e il catalogo i-pietra non aiuta perché '
+          'le sue coordinate sono punti di una scena tridimensionale, non gradi sul terreno.',
+          lead)))
+    S.append(SP(12))
+    S.append(data_table(
+        ['Dato', 'Valore', 'Da dove viene'],
+        [['Latitudine, longitudine', '44.419869, 10.412353',
+          'EXIF di IMG_1416, 16/05/2026 17:14:38'],
+         ['Quota', '1025 m', 'EXIF di IMG_1416 — lettura del telefono'],
+         ['Ancoraggio opposto', '[DA CONFERMARE]', 'nessuna fotografia geolocalizzata']],
+        [128, 132, FW - 260], C_TEN))
+    S.append(SP(12))
+    S.append(callout('Una posizione, non un rilievo',
+                     'La coordinata dice dove stava <b>il telefono</b>, con la precisione che '
+                     'ha un GPS telefonico sotto una parete: colloca l’ancoraggio su una mappa, '
+                     'non lo quota. Vale come indicazione di avvicinamento — non per ritrovare '
+                     'il singolo punto, che va cercato a vista.', C_TEN))
+    S.append(SP(26))
+
     # ================================================================ la linea in opera
     sec(LINEA, 'In opera')
-    S.append(LineHeader('7', 'La linea in opera', _occh('in opera, ore 17:08'), LINEA))
+    S.append(LineHeader('8', 'La linea in opera', _occh('in opera, ore 17:08'), LINEA))
     S.append(SP(10))
     S.append(P('Il montaggio si chiude nel tardo pomeriggio. Le fotografie delle 17:08 sono la '
                'verifica che il sistema descritto in queste pagine ha retto: la campata è tesa '
