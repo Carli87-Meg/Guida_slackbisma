@@ -16,6 +16,19 @@ Il punto 4 e' un ripiego dichiarato: cambia l'aspetto rispetto al progetto
 Sillschlucht, e lo script lo dice invece di farlo di nascosto.
 
     python build/font.py          # verifica cosa userebbe, senza costruire il PDF
+
+Nota sulle facce grassetto: i file Lora scaricati da Google Fonts sono font
+*variabili* (asse wght 400-700), e ReportLab ne usa solo l'istanza di default.
+`Lora-Bold.ttf` e `Lora-BoldItalic.ttf` sono percio' istanze statiche a wght=700
+estratte una volta e tenute in build/fonts/. Per rigenerarle:
+
+    python -c "from fontTools.ttLib import TTFont; \
+    from fontTools.varLib.instancer import instantiateVariableFont as inst; \
+    f=TTFont('build/fonts/Lora-Regular.ttf'); \
+    inst(f,{'wght':700},inplace=True,updateFontNames=True); \
+    f.save('build/fonts/Lora-Bold.ttf')"
+
+Senza quei file il grassetto del testo in Lora e' silenziosamente piatto.
 """
 import sys
 import urllib.error
@@ -33,6 +46,10 @@ FONT = {
                ['constan.ttf', 'georgia.ttf', 'DejaVuSerif.ttf']),
     'Lora-I': ('Lora-Italic.ttf',       'lora/Lora-Italic%5Bwght%5D.ttf',
                ['constani.ttf', 'georgiai.ttf', 'DejaVuSerif-Italic.ttf']),
+    'Lora-B': ('Lora-Bold.ttf',         'lora/Lora%5Bwght%5D.ttf',
+               ['constanb.ttf', 'georgiab.ttf', 'DejaVuSerif-Bold.ttf']),
+    'Lora-BI': ('Lora-BoldItalic.ttf',  'lora/Lora-Italic%5Bwght%5D.ttf',
+                ['constanz.ttf', 'georgiaz.ttf', 'DejaVuSerif-BoldItalic.ttf']),
     'Pop':    ('Poppins-Regular.ttf',   'poppins/Poppins-Regular.ttf',
                ['GOTHIC.TTF', 'calibri.ttf', 'DejaVuSans.ttf']),
     'Pop-L':  ('Poppins-Light.ttf',     'poppins/Poppins-Light.ttf',
@@ -110,8 +127,8 @@ def registra(esito=None):
         raise SystemExit('Font non risolvibili: %s' % ', '.join(mancanti))
     for nome, (p, _) in esito.items():
         pdfmetrics.registerFont(TTFont(nome, str(p)))
-    pdfmetrics.registerFontFamily('Lora', normal='Lora', bold='Lora',
-                                  italic='Lora-I', boldItalic='Lora-I')
+    pdfmetrics.registerFontFamily('Lora', normal='Lora', bold='Lora-B',
+                                  italic='Lora-I', boldItalic='Lora-BI')
     return esito
 
 
