@@ -1,0 +1,20 @@
+# Normalizzazione fine riga: i file di testo vengono salvati con LF nel repo
+* text=auto
+
+# File binari: mai toccare i fine riga, mai tentare il merge testuale
+*.blend   binary
+*.fbx     binary
+*.ma      binary
+*.mb      binary
+*.psd     binary
+*.pdf     binary
+*.docx    binary
+*.xlsx    binary
+*.pptx    binary
+*.png     binary
+*.jpg     binary
+*.jpeg    binary
+*.gif     binary
+*.mp4     binary
+*.mov     binary
+*.zip     binary
