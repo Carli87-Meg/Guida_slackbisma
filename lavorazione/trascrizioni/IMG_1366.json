@@ -1,0 +1,113 @@
+{
+ "file": "IMG_1366",
+ "durata": 35.709625,
+ "segmenti": [
+  {
+   "start": 0.0,
+   "end": 35.5,
+   "testo": "Allora, qua, che gira qua dentro, questa qua sotto, fa il giro qui, che fa il giro qui dietro, pista, pif, paf, sotto, torna sotto.",
+   "parole": [
+    {
+     "w": "Allora,",
+     "t": 0.0
+    },
+    {
+     "w": "qua,",
+     "t": 1.48
+    },
+    {
+     "w": "che",
+     "t": 2.64
+    },
+    {
+     "w": "gira",
+     "t": 4.08
+    },
+    {
+     "w": "qua",
+     "t": 6.18
+    },
+    {
+     "w": "dentro,",
+     "t": 6.42
+    },
+    {
+     "w": "questa",
+     "t": 7.28
+    },
+    {
+     "w": "qua",
+     "t": 8.76
+    },
+    {
+     "w": "sotto,",
+     "t": 9.08
+    },
+    {
+     "w": "fa",
+     "t": 9.86
+    },
+    {
+     "w": "il",
+     "t": 11.36
+    },
+    {
+     "w": "giro",
+     "t": 11.56
+    },
+    {
+     "w": "qui,",
+     "t": 12.02
+    },
+    {
+     "w": "che",
+     "t": 12.58
+    },
+    {
+     "w": "fa",
+     "t": 17.43
+    },
+    {
+     "w": "il",
+     "t": 17.67
+    },
+    {
+     "w": "giro",
+     "t": 17.87
+    },
+    {
+     "w": "qui",
+     "t": 20.81
+    },
+    {
+     "w": "dietro,",
+     "t": 21.17
+    },
+    {
+     "w": "pista,",
+     "t": 22.23
+    },
+    {
+     "w": "pif,",
+     "t": 24.85
+    },
+    {
+     "w": "paf,",
+     "t": 27.11
+    },
+    {
+     "w": "sotto,",
+     "t": 27.93
+    },
+    {
+     "w": "torna",
+     "t": 32.88
+    },
+    {
+     "w": "sotto.",
+     "t": 35.26
+    }
+   ]
+  }
+ ]
+}

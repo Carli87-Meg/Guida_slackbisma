@@ -1,0 +1,25 @@
+{
+ "file": "IMG_1401",
+ "durata": 2.900625,
+ "segmenti": [
+  {
+   "start": 1.84,
+   "end": 2.88,
+   "testo": "Io cagano di...",
+   "parole": [
+    {
+     "w": "Io",
+     "t": 1.84
+    },
+    {
+     "w": "cagano",
+     "t": 2.2
+    },
+    {
+     "w": "di...",
+     "t": 2.74
+    }
+   ]
+  }
+ ]
+}

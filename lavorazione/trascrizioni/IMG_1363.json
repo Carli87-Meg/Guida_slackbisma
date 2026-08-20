@@ -1,0 +1,370 @@
+{
+ "file": "IMG_1363",
+ "durata": 38.611,
+ "segmenti": [
+  {
+   "start": 4.62,
+   "end": 10.88,
+   "testo": "Ecco, per dire, gli austriaci si sarebbero già fiondati sull'altro ancoraggio, questa roba sarebbe già fiondata dall'altro ancoraggio.",
+   "parole": [
+    {
+     "w": "Ecco,",
+     "t": 4.62
+    },
+    {
+     "w": "per",
+     "t": 5.08
+    },
+    {
+     "w": "dire,",
+     "t": 5.14
+    },
+    {
+     "w": "gli",
+     "t": 5.52
+    },
+    {
+     "w": "austriaci",
+     "t": 5.6
+    },
+    {
+     "w": "si",
+     "t": 6.14
+    },
+    {
+     "w": "sarebbero",
+     "t": 6.72
+    },
+    {
+     "w": "già",
+     "t": 7.42
+    },
+    {
+     "w": "fiondati",
+     "t": 7.64
+    },
+    {
+     "w": "sull",
+     "t": 8.34
+    },
+    {
+     "w": "'altro",
+     "t": 8.58
+    },
+    {
+     "w": "ancoraggio,",
+     "t": 8.74
+    },
+    {
+     "w": "questa",
+     "t": 9.4
+    },
+    {
+     "w": "roba",
+     "t": 9.58
+    },
+    {
+     "w": "sarebbe",
+     "t": 9.84
+    },
+    {
+     "w": "già",
+     "t": 10.1
+    },
+    {
+     "w": "fiondata",
+     "t": 10.26
+    },
+    {
+     "w": "dall",
+     "t": 10.64
+    },
+    {
+     "w": "'altro",
+     "t": 10.82
+    },
+    {
+     "w": "ancoraggio.",
+     "t": 10.88
+    }
+   ]
+  },
+  {
+   "start": 10.9,
+   "end": 11.62,
+   "testo": "Gli austriaci c'avevano il drone?",
+   "parole": [
+    {
+     "w": "Gli",
+     "t": 10.9
+    },
+    {
+     "w": "austriaci",
+     "t": 10.9
+    },
+    {
+     "w": "c",
+     "t": 10.9
+    },
+    {
+     "w": "'avevano",
+     "t": 11.02
+    },
+    {
+     "w": "il",
+     "t": 11.24
+    },
+    {
+     "w": "drone?",
+     "t": 11.46
+    }
+   ]
+  },
+  {
+   "start": 12.32,
+   "end": 12.76,
+   "testo": "No.",
+   "parole": [
+    {
+     "w": "No.",
+     "t": 12.32
+    }
+   ]
+  },
+  {
+   "start": 14.26,
+   "end": 20.14,
+   "testo": "Cioè, c'avevano il drone, però questo glielo ho passato io, perché c'era un vento boia.",
+   "parole": [
+    {
+     "w": "Cioè,",
+     "t": 14.26
+    },
+    {
+     "w": "c",
+     "t": 14.7
+    },
+    {
+     "w": "'avevano",
+     "t": 14.94
+    },
+    {
+     "w": "il",
+     "t": 15.48
+    },
+    {
+     "w": "drone,",
+     "t": 15.66
+    },
+    {
+     "w": "però",
+     "t": 15.88
+    },
+    {
+     "w": "questo",
+     "t": 16.08
+    },
+    {
+     "w": "glielo",
+     "t": 16.56
+    },
+    {
+     "w": "ho",
+     "t": 16.86
+    },
+    {
+     "w": "passato",
+     "t": 16.88
+    },
+    {
+     "w": "io,",
+     "t": 17.1
+    },
+    {
+     "w": "perché",
+     "t": 17.48
+    },
+    {
+     "w": "c",
+     "t": 18.48
+    },
+    {
+     "w": "'era",
+     "t": 19.38
+    },
+    {
+     "w": "un",
+     "t": 19.46
+    },
+    {
+     "w": "vento",
+     "t": 19.56
+    },
+    {
+     "w": "boia.",
+     "t": 19.76
+    }
+   ]
+  },
+  {
+   "start": 22.02,
+   "end": 22.9,
+   "testo": "Vento boia!",
+   "parole": [
+    {
+     "w": "Vento",
+     "t": 22.02
+    },
+    {
+     "w": "boia!",
+     "t": 22.46
+    }
+   ]
+  },
+  {
+   "start": 23.82,
+   "end": 24.84,
+   "testo": "Qua ci siamo.",
+   "parole": [
+    {
+     "w": "Qua",
+     "t": 23.82
+    },
+    {
+     "w": "ci",
+     "t": 24.26
+    },
+    {
+     "w": "siamo.",
+     "t": 24.38
+    }
+   ]
+  },
+  {
+   "start": 26.42,
+   "end": 27.3,
+   "testo": "Fottina, fottina.",
+   "parole": [
+    {
+     "w": "Fottina,",
+     "t": 26.42
+    },
+    {
+     "w": "fottina.",
+     "t": 26.86
+    }
+   ]
+  },
+  {
+   "start": 27.62,
+   "end": 30.5,
+   "testo": "Noi non la fai?",
+   "parole": [
+    {
+     "w": "Noi",
+     "t": 27.62
+    },
+    {
+     "w": "non",
+     "t": 30.12
+    },
+    {
+     "w": "la",
+     "t": 30.16
+    },
+    {
+     "w": "fai?",
+     "t": 30.32
+    }
+   ]
+  },
+  {
+   "start": 31.16,
+   "end": 31.6,
+   "testo": "Sì.",
+   "parole": [
+    {
+     "w": "Sì.",
+     "t": 31.16
+    }
+   ]
+  },
+  {
+   "start": 34.03,
+   "end": 35.69,
+   "testo": "Qua c'è un altro materiale dopo, eh.",
+   "parole": [
+    {
+     "w": "Qua",
+     "t": 34.03
+    },
+    {
+     "w": "c",
+     "t": 34.27
+    },
+    {
+     "w": "'è",
+     "t": 34.35
+    },
+    {
+     "w": "un",
+     "t": 34.41
+    },
+    {
+     "w": "altro",
+     "t": 34.45
+    },
+    {
+     "w": "materiale",
+     "t": 34.53
+    },
+    {
+     "w": "dopo,",
+     "t": 35.25
+    },
+    {
+     "w": "eh.",
+     "t": 35.55
+    }
+   ]
+  },
+  {
+   "start": 37.75,
+   "end": 38.03,
+   "testo": "Voi l'avete?",
+   "parole": [
+    {
+     "w": "Voi",
+     "t": 37.75
+    },
+    {
+     "w": "l",
+     "t": 37.99
+    },
+    {
+     "w": "'avete?",
+     "t": 37.99
+    }
+   ]
+  },
+  {
+   "start": 38.03,
+   "end": 38.21,
+   "testo": "Voi l'avete.",
+   "parole": [
+    {
+     "w": "Voi",
+     "t": 38.03
+    },
+    {
+     "w": "l",
+     "t": 38.03
+    },
+    {
+     "w": "'avete.",
+     "t": 38.03
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,29 @@
+{
+ "file": "IMG_1392",
+ "durata": 24.381625,
+ "segmenti": [
+  {
+   "start": 21.9,
+   "end": 24.04,
+   "testo": "Allora, ragazzi, tirate pure.",
+   "parole": [
+    {
+     "w": "Allora,",
+     "t": 21.9
+    },
+    {
+     "w": "ragazzi,",
+     "t": 22.56
+    },
+    {
+     "w": "tirate",
+     "t": 23.38
+    },
+    {
+     "w": "pure.",
+     "t": 23.8
+    }
+   ]
+  }
+ ]
+}

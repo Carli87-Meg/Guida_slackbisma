@@ -1,0 +1,29 @@
+{
+ "file": "IMG_1388",
+ "durata": 2.6995625,
+ "segmenti": [
+  {
+   "start": 0.0,
+   "end": 0.56,
+   "testo": "Questa è la mistica.",
+   "parole": [
+    {
+     "w": "Questa",
+     "t": 0.0
+    },
+    {
+     "w": "è",
+     "t": 0.0
+    },
+    {
+     "w": "la",
+     "t": 0.0
+    },
+    {
+     "w": "mistica.",
+     "t": 0.14
+    }
+   ]
+  }
+ ]
+}

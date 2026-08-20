@@ -1,0 +1,419 @@
+{
+ "file": "IMG_1369",
+ "durata": 50.557625,
+ "segmenti": [
+  {
+   "start": 0.0,
+   "end": 5.28,
+   "testo": "Qualcosa di twistato, questa andrebbe smollata perché penso che così lavori bene.",
+   "parole": [
+    {
+     "w": "Qualcosa",
+     "t": 0.0
+    },
+    {
+     "w": "di",
+     "t": 0.64
+    },
+    {
+     "w": "twistato,",
+     "t": 0.76
+    },
+    {
+     "w": "questa",
+     "t": 1.6
+    },
+    {
+     "w": "andrebbe",
+     "t": 1.78
+    },
+    {
+     "w": "smollata",
+     "t": 2.34
+    },
+    {
+     "w": "perché",
+     "t": 3.02
+    },
+    {
+     "w": "penso",
+     "t": 3.32
+    },
+    {
+     "w": "che",
+     "t": 3.98
+    },
+    {
+     "w": "così",
+     "t": 4.36
+    },
+    {
+     "w": "lavori",
+     "t": 4.66
+    },
+    {
+     "w": "bene.",
+     "t": 4.98
+    }
+   ]
+  },
+  {
+   "start": 5.64,
+   "end": 7.0,
+   "testo": "Tipo questo va bene no?",
+   "parole": [
+    {
+     "w": "Tipo",
+     "t": 5.64
+    },
+    {
+     "w": "questo",
+     "t": 6.2
+    },
+    {
+     "w": "va",
+     "t": 6.44
+    },
+    {
+     "w": "bene",
+     "t": 6.56
+    },
+    {
+     "w": "no?",
+     "t": 6.78
+    }
+   ]
+  },
+  {
+   "start": 9.98,
+   "end": 11.3,
+   "testo": "Quello esatto, top.",
+   "parole": [
+    {
+     "w": "Quello",
+     "t": 9.98
+    },
+    {
+     "w": "esatto,",
+     "t": 10.54
+    },
+    {
+     "w": "top.",
+     "t": 11.0
+    }
+   ]
+  },
+  {
+   "start": 12.45,
+   "end": 13.01,
+   "testo": "Perfetto.",
+   "parole": [
+    {
+     "w": "Perfetto.",
+     "t": 12.45
+    }
+   ]
+  },
+  {
+   "start": 13.29,
+   "end": 14.51,
+   "testo": "Chiudilo pure un attimo.",
+   "parole": [
+    {
+     "w": "Chiudilo",
+     "t": 13.29
+    },
+    {
+     "w": "pure",
+     "t": 13.81
+    },
+    {
+     "w": "un",
+     "t": 13.97
+    },
+    {
+     "w": "attimo.",
+     "t": 14.11
+    }
+   ]
+  },
+  {
+   "start": 17.9,
+   "end": 18.46,
+   "testo": "Ingrillini.",
+   "parole": [
+    {
+     "w": "Ingrillini.",
+     "t": 17.9
+    }
+   ]
+  },
+  {
+   "start": 20.18,
+   "end": 20.74,
+   "testo": "Ingrillino.",
+   "parole": [
+    {
+     "w": "Ingrillino.",
+     "t": 20.18
+    }
+   ]
+  },
+  {
+   "start": 21.08,
+   "end": 22.46,
+   "testo": "Poi, allora, così?",
+   "parole": [
+    {
+     "w": "Poi,",
+     "t": 21.08
+    },
+    {
+     "w": "allora,",
+     "t": 21.64
+    },
+    {
+     "w": "così?",
+     "t": 22.1
+    }
+   ]
+  },
+  {
+   "start": 22.84,
+   "end": 27.58,
+   "testo": "Sì, sì, sì, perché poi dopo devi lavorare in questo senso.",
+   "parole": [
+    {
+     "w": "Sì,",
+     "t": 22.84
+    },
+    {
+     "w": "sì,",
+     "t": 23.26
+    },
+    {
+     "w": "sì,",
+     "t": 23.64
+    },
+    {
+     "w": "perché",
+     "t": 23.76
+    },
+    {
+     "w": "poi",
+     "t": 23.88
+    },
+    {
+     "w": "dopo",
+     "t": 24.94
+    },
+    {
+     "w": "devi",
+     "t": 25.2
+    },
+    {
+     "w": "lavorare",
+     "t": 25.54
+    },
+    {
+     "w": "in",
+     "t": 26.06
+    },
+    {
+     "w": "questo",
+     "t": 26.76
+    },
+    {
+     "w": "senso.",
+     "t": 26.98
+    }
+   ]
+  },
+  {
+   "start": 27.58,
+   "end": 30.84,
+   "testo": "La slinga griva da sotto e lavora così.",
+   "parole": [
+    {
+     "w": "La",
+     "t": 27.58
+    },
+    {
+     "w": "slinga",
+     "t": 27.84
+    },
+    {
+     "w": "griva",
+     "t": 28.18
+    },
+    {
+     "w": "da",
+     "t": 28.42
+    },
+    {
+     "w": "sotto",
+     "t": 28.86
+    },
+    {
+     "w": "e",
+     "t": 30.22
+    },
+    {
+     "w": "lavora",
+     "t": 30.4
+    },
+    {
+     "w": "così.",
+     "t": 30.6
+    }
+   ]
+  },
+  {
+   "start": 31.04,
+   "end": 31.28,
+   "testo": "Va bene.",
+   "parole": [
+    {
+     "w": "Va",
+     "t": 31.04
+    },
+    {
+     "w": "bene.",
+     "t": 31.18
+    }
+   ]
+  },
+  {
+   "start": 31.28,
+   "end": 41.8,
+   "testo": "Va bene, e quindi ci serve poi la slinga verde lunga, la più grossa che c'è.",
+   "parole": [
+    {
+     "w": "Va",
+     "t": 31.28
+    },
+    {
+     "w": "bene,",
+     "t": 31.38
+    },
+    {
+     "w": "e",
+     "t": 31.38
+    },
+    {
+     "w": "quindi",
+     "t": 31.52
+    },
+    {
+     "w": "ci",
+     "t": 32.58
+    },
+    {
+     "w": "serve",
+     "t": 32.92
+    },
+    {
+     "w": "poi",
+     "t": 33.44
+    },
+    {
+     "w": "la",
+     "t": 33.78
+    },
+    {
+     "w": "slinga",
+     "t": 34.06
+    },
+    {
+     "w": "verde",
+     "t": 35.2
+    },
+    {
+     "w": "lunga,",
+     "t": 35.84
+    },
+    {
+     "w": "la",
+     "t": 36.52
+    },
+    {
+     "w": "più",
+     "t": 40.32
+    },
+    {
+     "w": "grossa",
+     "t": 41.06
+    },
+    {
+     "w": "che",
+     "t": 41.44
+    },
+    {
+     "w": "c",
+     "t": 41.54
+    },
+    {
+     "w": "'è.",
+     "t": 41.64
+    }
+   ]
+  },
+  {
+   "start": 42.0,
+   "end": 42.68,
+   "testo": "Questa.",
+   "parole": [
+    {
+     "w": "Questa.",
+     "t": 42.0
+    }
+   ]
+  },
+  {
+   "start": 42.86,
+   "end": 43.76,
+   "testo": "Tocca qui.",
+   "parole": [
+    {
+     "w": "Tocca",
+     "t": 42.86
+    },
+    {
+     "w": "qui.",
+     "t": 43.54
+    }
+   ]
+  },
+  {
+   "start": 47.28,
+   "end": 50.14,
+   "testo": "O meglio, meglio, aspetta, adesso capiamo.",
+   "parole": [
+    {
+     "w": "O",
+     "t": 47.28
+    },
+    {
+     "w": "meglio,",
+     "t": 47.62
+    },
+    {
+     "w": "meglio,",
+     "t": 48.36
+    },
+    {
+     "w": "aspetta,",
+     "t": 49.16
+    },
+    {
+     "w": "adesso",
+     "t": 49.58
+    },
+    {
+     "w": "capiamo.",
+     "t": 49.7
+    }
+   ]
+  }
+ ]
+}

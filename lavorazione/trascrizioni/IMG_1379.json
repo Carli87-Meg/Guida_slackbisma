@@ -1,0 +1,125 @@
+{
+ "file": "IMG_1379",
+ "durata": 42.9843125,
+ "segmenti": [
+  {
+   "start": 0.0,
+   "end": 42.96,
+   "testo": "Grazie a tutti per aver guardato il video, se il video vi è piaciuto lasciate un mi piace e iscrivetevi al canale, iscrivetevi al canale, iscrivetevi al canale.",
+   "parole": [
+    {
+     "w": "Grazie",
+     "t": 0.0
+    },
+    {
+     "w": "a",
+     "t": 0.08
+    },
+    {
+     "w": "tutti",
+     "t": 2.39
+    },
+    {
+     "w": "per",
+     "t": 4.69
+    },
+    {
+     "w": "aver",
+     "t": 5.03
+    },
+    {
+     "w": "guardato",
+     "t": 5.23
+    },
+    {
+     "w": "il",
+     "t": 5.61
+    },
+    {
+     "w": "video,",
+     "t": 5.69
+    },
+    {
+     "w": "se",
+     "t": 6.23
+    },
+    {
+     "w": "il",
+     "t": 6.37
+    },
+    {
+     "w": "video",
+     "t": 6.79
+    },
+    {
+     "w": "vi",
+     "t": 6.85
+    },
+    {
+     "w": "è",
+     "t": 6.99
+    },
+    {
+     "w": "piaciuto",
+     "t": 6.99
+    },
+    {
+     "w": "lasciate",
+     "t": 6.99
+    },
+    {
+     "w": "un",
+     "t": 6.99
+    },
+    {
+     "w": "mi",
+     "t": 6.99
+    },
+    {
+     "w": "piace",
+     "t": 6.99
+    },
+    {
+     "w": "e",
+     "t": 6.99
+    },
+    {
+     "w": "iscrivetevi",
+     "t": 6.99
+    },
+    {
+     "w": "al",
+     "t": 7.89
+    },
+    {
+     "w": "canale,",
+     "t": 7.91
+    },
+    {
+     "w": "iscrivetevi",
+     "t": 23.45
+    },
+    {
+     "w": "al",
+     "t": 29.44
+    },
+    {
+     "w": "canale,",
+     "t": 31.94
+    },
+    {
+     "w": "iscrivetevi",
+     "t": 41.52
+    },
+    {
+     "w": "al",
+     "t": 42.46
+    },
+    {
+     "w": "canale.",
+     "t": 42.46
+    }
+   ]
+  }
+ ]
+}

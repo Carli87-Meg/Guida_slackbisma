@@ -1,0 +1,145 @@
+{
+ "file": "IMG_1386",
+ "durata": 12.157625,
+ "segmenti": [
+  {
+   "start": 0.0,
+   "end": 1.7,
+   "testo": "Beh, tieni insieme l'altro piede, vecchio.",
+   "parole": [
+    {
+     "w": "Beh,",
+     "t": 0.0
+    },
+    {
+     "w": "tieni",
+     "t": 0.24
+    },
+    {
+     "w": "insieme",
+     "t": 0.64
+    },
+    {
+     "w": "l",
+     "t": 0.86
+    },
+    {
+     "w": "'altro",
+     "t": 0.92
+    },
+    {
+     "w": "piede,",
+     "t": 1.02
+    },
+    {
+     "w": "vecchio.",
+     "t": 1.4
+    }
+   ]
+  },
+  {
+   "start": 1.74,
+   "end": 3.64,
+   "testo": "Se sostituissimo la viola con questo?",
+   "parole": [
+    {
+     "w": "Se",
+     "t": 1.74
+    },
+    {
+     "w": "sostituissimo",
+     "t": 2.16
+    },
+    {
+     "w": "la",
+     "t": 2.88
+    },
+    {
+     "w": "viola",
+     "t": 3.06
+    },
+    {
+     "w": "con",
+     "t": 3.3
+    },
+    {
+     "w": "questo?",
+     "t": 3.36
+    }
+   ]
+  },
+  {
+   "start": 4.14,
+   "end": 5.52,
+   "testo": "Ah, è troppo tardi, dici?",
+   "parole": [
+    {
+     "w": "Ah,",
+     "t": 4.14
+    },
+    {
+     "w": "è",
+     "t": 4.66
+    },
+    {
+     "w": "troppo",
+     "t": 4.76
+    },
+    {
+     "w": "tardi,",
+     "t": 4.98
+    },
+    {
+     "w": "dici?",
+     "t": 5.34
+    }
+   ]
+  },
+  {
+   "start": 6.5,
+   "end": 7.38,
+   "testo": "Va bene.",
+   "parole": [
+    {
+     "w": "Va",
+     "t": 6.5
+    },
+    {
+     "w": "bene.",
+     "t": 6.94
+    }
+   ]
+  },
+  {
+   "start": 10.27,
+   "end": 11.97,
+   "testo": "Va bene, dai, ci saltiamo fuori.",
+   "parole": [
+    {
+     "w": "Va",
+     "t": 10.27
+    },
+    {
+     "w": "bene,",
+     "t": 10.71
+    },
+    {
+     "w": "dai,",
+     "t": 11.19
+    },
+    {
+     "w": "ci",
+     "t": 11.41
+    },
+    {
+     "w": "saltiamo",
+     "t": 11.45
+    },
+    {
+     "w": "fuori.",
+     "t": 11.75
+    }
+   ]
+  }
+ ]
+}

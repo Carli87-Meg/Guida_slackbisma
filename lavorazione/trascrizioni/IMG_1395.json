@@ -1,0 +1,1115 @@
+{
+ "file": "IMG_1395",
+ "durata": 253.7363125,
+ "segmenti": [
+  {
+   "start": 13.52,
+   "end": 15.92,
+   "testo": "Il... come si chiama? Questo è l'anti-slip.",
+   "parole": [
+    {
+     "w": "Il...",
+     "t": 13.52
+    },
+    {
+     "w": "come",
+     "t": 13.9
+    },
+    {
+     "w": "si",
+     "t": 14.54
+    },
+    {
+     "w": "chiama?",
+     "t": 14.68
+    },
+    {
+     "w": "Questo",
+     "t": 15.04
+    },
+    {
+     "w": "è",
+     "t": 15.16
+    },
+    {
+     "w": "l",
+     "t": 15.28
+    },
+    {
+     "w": "'anti",
+     "t": 15.3
+    },
+    {
+     "w": "-slip.",
+     "t": 15.46
+    }
+   ]
+  },
+  {
+   "start": 16.16,
+   "end": 25.74,
+   "testo": "Ok, soft-release.",
+   "parole": [
+    {
+     "w": "Ok,",
+     "t": 16.16
+    },
+    {
+     "w": "soft",
+     "t": 16.82
+    },
+    {
+     "w": "-release.",
+     "t": 25.16
+    }
+   ]
+  },
+  {
+   "start": 25.88,
+   "end": 29.98,
+   "testo": "Questo è l'anti-slip che serve per evitare che la linea slitti nella banana.",
+   "parole": [
+    {
+     "w": "Questo",
+     "t": 25.88
+    },
+    {
+     "w": "è",
+     "t": 26.12
+    },
+    {
+     "w": "l",
+     "t": 26.26
+    },
+    {
+     "w": "'anti",
+     "t": 26.32
+    },
+    {
+     "w": "-slip",
+     "t": 26.5
+    },
+    {
+     "w": "che",
+     "t": 27.04
+    },
+    {
+     "w": "serve",
+     "t": 27.4
+    },
+    {
+     "w": "per",
+     "t": 27.68
+    },
+    {
+     "w": "evitare",
+     "t": 27.84
+    },
+    {
+     "w": "che",
+     "t": 28.16
+    },
+    {
+     "w": "la",
+     "t": 28.32
+    },
+    {
+     "w": "linea",
+     "t": 28.42
+    },
+    {
+     "w": "slitti",
+     "t": 29.22
+    },
+    {
+     "w": "nella",
+     "t": 29.5
+    },
+    {
+     "w": "banana.",
+     "t": 29.64
+    }
+   ]
+  },
+  {
+   "start": 30.28,
+   "end": 30.74,
+   "testo": "Ok.",
+   "parole": [
+    {
+     "w": "Ok.",
+     "t": 30.28
+    }
+   ]
+  },
+  {
+   "start": 30.92,
+   "end": 31.98,
+   "testo": "Ed è fatto qui.",
+   "parole": [
+    {
+     "w": "Ed",
+     "t": 30.92
+    },
+    {
+     "w": "è",
+     "t": 31.12
+    },
+    {
+     "w": "fatto",
+     "t": 31.2
+    },
+    {
+     "w": "qui.",
+     "t": 31.58
+    }
+   ]
+  },
+  {
+   "start": 33.04,
+   "end": 34.62,
+   "testo": "Ah, l'avevo visto su...",
+   "parole": [
+    {
+     "w": "Ah,",
+     "t": 33.04
+    },
+    {
+     "w": "l",
+     "t": 33.54
+    },
+    {
+     "w": "'avevo",
+     "t": 33.68
+    },
+    {
+     "w": "visto",
+     "t": 33.84
+    },
+    {
+     "w": "su...",
+     "t": 34.1
+    }
+   ]
+  },
+  {
+   "start": 35.36,
+   "end": 84.42,
+   "testo": "Bel giro.",
+   "parole": [
+    {
+     "w": "Bel",
+     "t": 35.36
+    },
+    {
+     "w": "giro.",
+     "t": 83.94
+    }
+   ]
+  },
+  {
+   "start": 84.74,
+   "end": 107.18,
+   "testo": "Sì, non è bello.",
+   "parole": [
+    {
+     "w": "Sì,",
+     "t": 84.74
+    },
+    {
+     "w": "non",
+     "t": 106.5
+    },
+    {
+     "w": "è",
+     "t": 106.58
+    },
+    {
+     "w": "bello.",
+     "t": 106.7
+    }
+   ]
+  },
+  {
+   "start": 107.22,
+   "end": 108.3,
+   "testo": "Perché? Aspetta.",
+   "parole": [
+    {
+     "w": "Perché?",
+     "t": 107.22
+    },
+    {
+     "w": "Aspetta.",
+     "t": 107.82
+    }
+   ]
+  },
+  {
+   "start": 109.49,
+   "end": 112.01,
+   "testo": "Ah raga, ma sto pensando a una trattata...",
+   "parole": [
+    {
+     "w": "Ah",
+     "t": 109.49
+    },
+    {
+     "w": "raga,",
+     "t": 109.97
+    },
+    {
+     "w": "ma",
+     "t": 110.31
+    },
+    {
+     "w": "sto",
+     "t": 110.39
+    },
+    {
+     "w": "pensando",
+     "t": 110.53
+    },
+    {
+     "w": "a",
+     "t": 110.79
+    },
+    {
+     "w": "una",
+     "t": 110.97
+    },
+    {
+     "w": "trattata...",
+     "t": 111.05
+    }
+   ]
+  },
+  {
+   "start": 114.25,
+   "end": 114.59,
+   "testo": "Eh!",
+   "parole": [
+    {
+     "w": "Eh!",
+     "t": 114.25
+    }
+   ]
+  },
+  {
+   "start": 115.33,
+   "end": 115.75,
+   "testo": "Qui!",
+   "parole": [
+    {
+     "w": "Qui!",
+     "t": 115.33
+    }
+   ]
+  },
+  {
+   "start": 117.44,
+   "end": 117.92,
+   "testo": "Cosa?",
+   "parole": [
+    {
+     "w": "Cosa?",
+     "t": 117.44
+    }
+   ]
+  },
+  {
+   "start": 118.12,
+   "end": 119.26,
+   "testo": "È andato giù, giù, giù!",
+   "parole": [
+    {
+     "w": "È",
+     "t": 118.12
+    },
+    {
+     "w": "andato",
+     "t": 118.3
+    },
+    {
+     "w": "giù,",
+     "t": 118.6
+    },
+    {
+     "w": "giù,",
+     "t": 118.9
+    },
+    {
+     "w": "giù!",
+     "t": 119.1
+    }
+   ]
+  },
+  {
+   "start": 133.2,
+   "end": 134.16,
+   "testo": "Red-tarted.",
+   "parole": [
+    {
+     "w": "Red",
+     "t": 133.2
+    },
+    {
+     "w": "-tarted.",
+     "t": 133.68
+    }
+   ]
+  },
+  {
+   "start": 135.6,
+   "end": 138.42,
+   "testo": "Non ho la più valida idea di dove sia finito.",
+   "parole": [
+    {
+     "w": "Non",
+     "t": 135.6
+    },
+    {
+     "w": "ho",
+     "t": 136.14
+    },
+    {
+     "w": "la",
+     "t": 136.3
+    },
+    {
+     "w": "più",
+     "t": 136.66
+    },
+    {
+     "w": "valida",
+     "t": 136.84
+    },
+    {
+     "w": "idea",
+     "t": 137.28
+    },
+    {
+     "w": "di",
+     "t": 137.5
+    },
+    {
+     "w": "dove",
+     "t": 137.6
+    },
+    {
+     "w": "sia",
+     "t": 137.78
+    },
+    {
+     "w": "finito.",
+     "t": 137.92
+    }
+   ]
+  },
+  {
+   "start": 141.5,
+   "end": 148.88,
+   "testo": "All'erba.",
+   "parole": [
+    {
+     "w": "All",
+     "t": 141.5
+    },
+    {
+     "w": "'erba.",
+     "t": 148.38
+    }
+   ]
+  },
+  {
+   "start": 149.27,
+   "end": 161.27,
+   "testo": "Come stavo pensando, per passare la TAG alla 90, non converrebbe portarla qui e poi uno va sulla 55?",
+   "parole": [
+    {
+     "w": "Come",
+     "t": 149.27
+    },
+    {
+     "w": "stavo",
+     "t": 149.81
+    },
+    {
+     "w": "pensando,",
+     "t": 149.99
+    },
+    {
+     "w": "per",
+     "t": 150.33
+    },
+    {
+     "w": "passare",
+     "t": 150.53
+    },
+    {
+     "w": "la",
+     "t": 150.93
+    },
+    {
+     "w": "TAG",
+     "t": 151.05
+    },
+    {
+     "w": "alla",
+     "t": 151.45
+    },
+    {
+     "w": "90,",
+     "t": 152.17
+    },
+    {
+     "w": "non",
+     "t": 153.13
+    },
+    {
+     "w": "converrebbe",
+     "t": 155.35
+    },
+    {
+     "w": "portarla",
+     "t": 155.91
+    },
+    {
+     "w": "qui",
+     "t": 156.73
+    },
+    {
+     "w": "e",
+     "t": 156.91
+    },
+    {
+     "w": "poi",
+     "t": 157.09
+    },
+    {
+     "w": "uno",
+     "t": 157.33
+    },
+    {
+     "w": "va",
+     "t": 159.07
+    },
+    {
+     "w": "sulla",
+     "t": 159.33
+    },
+    {
+     "w": "55?",
+     "t": 160.31
+    }
+   ]
+  },
+  {
+   "start": 161.39,
+   "end": 165.33,
+   "testo": "Sì, era esattamente il piano che aveva buttato giù Herman.",
+   "parole": [
+    {
+     "w": "Sì,",
+     "t": 161.39
+    },
+    {
+     "w": "era",
+     "t": 161.75
+    },
+    {
+     "w": "esattamente",
+     "t": 161.99
+    },
+    {
+     "w": "il",
+     "t": 162.61
+    },
+    {
+     "w": "piano",
+     "t": 162.99
+    },
+    {
+     "w": "che",
+     "t": 163.25
+    },
+    {
+     "w": "aveva",
+     "t": 163.49
+    },
+    {
+     "w": "buttato",
+     "t": 163.65
+    },
+    {
+     "w": "giù",
+     "t": 163.97
+    },
+    {
+     "w": "Herman.",
+     "t": 164.37
+    }
+   ]
+  },
+  {
+   "start": 165.61,
+   "end": 166.09,
+   "testo": "Ah!",
+   "parole": [
+    {
+     "w": "Ah!",
+     "t": 165.61
+    }
+   ]
+  },
+  {
+   "start": 166.63,
+   "end": 170.35,
+   "testo": "Qualcuno si scaricola partendo da là, cioè dovrebbe partire da qua.",
+   "parole": [
+    {
+     "w": "Qualcuno",
+     "t": 166.63
+    },
+    {
+     "w": "si",
+     "t": 167.17
+    },
+    {
+     "w": "scaricola",
+     "t": 167.29
+    },
+    {
+     "w": "partendo",
+     "t": 167.97
+    },
+    {
+     "w": "da",
+     "t": 168.45
+    },
+    {
+     "w": "là,",
+     "t": 168.73
+    },
+    {
+     "w": "cioè",
+     "t": 168.99
+    },
+    {
+     "w": "dovrebbe",
+     "t": 169.49
+    },
+    {
+     "w": "partire",
+     "t": 169.77
+    },
+    {
+     "w": "da",
+     "t": 170.19
+    },
+    {
+     "w": "qua.",
+     "t": 170.31
+    }
+   ]
+  },
+  {
+   "start": 170.35,
+   "end": 170.71,
+   "testo": "Partendo da qui?",
+   "parole": [
+    {
+     "w": "Partendo",
+     "t": 170.35
+    },
+    {
+     "w": "da",
+     "t": 170.35
+    },
+    {
+     "w": "qui?",
+     "t": 170.47
+    }
+   ]
+  },
+  {
+   "start": 170.79,
+   "end": 171.13,
+   "testo": "Sì.",
+   "parole": [
+    {
+     "w": "Sì.",
+     "t": 170.79
+    }
+   ]
+  },
+  {
+   "start": 171.19,
+   "end": 172.17,
+   "testo": "Da qui, da qui.",
+   "parole": [
+    {
+     "w": "Da",
+     "t": 171.19
+    },
+    {
+     "w": "qui,",
+     "t": 171.61
+    },
+    {
+     "w": "da",
+     "t": 171.91
+    },
+    {
+     "w": "qui.",
+     "t": 172.03
+    }
+   ]
+  },
+  {
+   "start": 173.13,
+   "end": 174.57,
+   "testo": "No, intendo dire...",
+   "parole": [
+    {
+     "w": "No,",
+     "t": 173.13
+    },
+    {
+     "w": "intendo",
+     "t": 173.89
+    },
+    {
+     "w": "dire...",
+     "t": 174.15
+    }
+   ]
+  },
+  {
+   "start": 174.57,
+   "end": 175.85,
+   "testo": "Ah, perché la TAG la faresti...",
+   "parole": [
+    {
+     "w": "Ah,",
+     "t": 174.57
+    },
+    {
+     "w": "perché",
+     "t": 174.87
+    },
+    {
+     "w": "la",
+     "t": 175.09
+    },
+    {
+     "w": "TAG",
+     "t": 175.21
+    },
+    {
+     "w": "la",
+     "t": 175.39
+    },
+    {
+     "w": "faresti...",
+     "t": 175.43
+    }
+   ]
+  },
+  {
+   "start": 175.85,
+   "end": 178.19,
+   "testo": "Cioè, la linea dove la attacchi, di là o di là?",
+   "parole": [
+    {
+     "w": "Cioè,",
+     "t": 175.85
+    },
+    {
+     "w": "la",
+     "t": 176.13
+    },
+    {
+     "w": "linea",
+     "t": 176.21
+    },
+    {
+     "w": "dove",
+     "t": 176.41
+    },
+    {
+     "w": "la",
+     "t": 176.53
+    },
+    {
+     "w": "attacchi,",
+     "t": 176.73
+    },
+    {
+     "w": "di",
+     "t": 177.53
+    },
+    {
+     "w": "là",
+     "t": 177.73
+    },
+    {
+     "w": "o",
+     "t": 177.89
+    },
+    {
+     "w": "di",
+     "t": 177.97
+    },
+    {
+     "w": "là?",
+     "t": 178.07
+    }
+   ]
+  },
+  {
+   "start": 178.53,
+   "end": 179.05,
+   "testo": "Di là.",
+   "parole": [
+    {
+     "w": "Di",
+     "t": 178.53
+    },
+    {
+     "w": "là.",
+     "t": 178.77
+    }
+   ]
+  },
+  {
+   "start": 179.13,
+   "end": 180.41,
+   "testo": "La linea di là.",
+   "parole": [
+    {
+     "w": "La",
+     "t": 179.13
+    },
+    {
+     "w": "linea",
+     "t": 179.29
+    },
+    {
+     "w": "di",
+     "t": 179.85
+    },
+    {
+     "w": "là.",
+     "t": 180.27
+    }
+   ]
+  },
+  {
+   "start": 180.54,
+   "end": 181.02,
+   "testo": "Di là.",
+   "parole": [
+    {
+     "w": "Di",
+     "t": 180.54
+    },
+    {
+     "w": "là.",
+     "t": 180.88
+    }
+   ]
+  },
+  {
+   "start": 181.12,
+   "end": 181.44,
+   "testo": "Sì.",
+   "parole": [
+    {
+     "w": "Sì.",
+     "t": 181.12
+    }
+   ]
+  },
+  {
+   "start": 181.48,
+   "end": 182.48,
+   "testo": "Ok, perfetto.",
+   "parole": [
+    {
+     "w": "Ok,",
+     "t": 181.48
+    },
+    {
+     "w": "perfetto.",
+     "t": 181.76
+    }
+   ]
+  },
+  {
+   "start": 185.2,
+   "end": 187.26,
+   "testo": "Sarà asolata da quei led.",
+   "parole": [
+    {
+     "w": "Sarà",
+     "t": 185.2
+    },
+    {
+     "w": "asolata",
+     "t": 185.6
+    },
+    {
+     "w": "da",
+     "t": 186.0
+    },
+    {
+     "w": "quei",
+     "t": 186.62
+    },
+    {
+     "w": "led.",
+     "t": 187.0
+    }
+   ]
+  },
+  {
+   "start": 194.2,
+   "end": 197.8,
+   "testo": "Quindi se c'è da tensionare, bisogna rismontare quella?",
+   "parole": [
+    {
+     "w": "Quindi",
+     "t": 194.2
+    },
+    {
+     "w": "se",
+     "t": 194.6
+    },
+    {
+     "w": "c",
+     "t": 194.78
+    },
+    {
+     "w": "'è",
+     "t": 194.86
+    },
+    {
+     "w": "da",
+     "t": 194.94
+    },
+    {
+     "w": "tensionare,",
+     "t": 195.02
+    },
+    {
+     "w": "bisogna",
+     "t": 195.96
+    },
+    {
+     "w": "rismontare",
+     "t": 196.56
+    },
+    {
+     "w": "quella?",
+     "t": 197.58
+    }
+   ]
+  },
+  {
+   "start": 198.26,
+   "end": 198.66,
+   "testo": "Sì.",
+   "parole": [
+    {
+     "w": "Sì.",
+     "t": 198.26
+    }
+   ]
+  },
+  {
+   "start": 199.95,
+   "end": 200.35,
+   "testo": "Quale?",
+   "parole": [
+    {
+     "w": "Quale?",
+     "t": 199.95
+    }
+   ]
+  },
+  {
+   "start": 200.55,
+   "end": 201.59,
+   "testo": "Quella che stai facendo.",
+   "parole": [
+    {
+     "w": "Quella",
+     "t": 200.55
+    },
+    {
+     "w": "che",
+     "t": 200.95
+    },
+    {
+     "w": "stai",
+     "t": 201.05
+    },
+    {
+     "w": "facendo.",
+     "t": 201.23
+    }
+   ]
+  },
+  {
+   "start": 202.05,
+   "end": 203.43,
+   "testo": "Se c'è da tensionarla.",
+   "parole": [
+    {
+     "w": "Se",
+     "t": 202.05
+    },
+    {
+     "w": "c",
+     "t": 202.45
+    },
+    {
+     "w": "'è",
+     "t": 202.59
+    },
+    {
+     "w": "da",
+     "t": 202.67
+    },
+    {
+     "w": "tensionarla.",
+     "t": 202.73
+    }
+   ]
+  },
+  {
+   "start": 203.75,
+   "end": 205.49,
+   "testo": "Se c'è da ritensionare.",
+   "parole": [
+    {
+     "w": "Se",
+     "t": 203.75
+    },
+    {
+     "w": "c",
+     "t": 204.15
+    },
+    {
+     "w": "'è",
+     "t": 204.29
+    },
+    {
+     "w": "da",
+     "t": 204.41
+    },
+    {
+     "w": "ritensionare.",
+     "t": 204.47
+    }
+   ]
+  },
+  {
+   "start": 205.61,
+   "end": 206.65,
+   "testo": "Ah beh sì, certo.",
+   "parole": [
+    {
+     "w": "Ah",
+     "t": 205.61
+    },
+    {
+     "w": "beh",
+     "t": 205.93
+    },
+    {
+     "w": "sì,",
+     "t": 206.13
+    },
+    {
+     "w": "certo.",
+     "t": 206.39
+    }
+   ]
+  },
+  {
+   "start": 206.83,
+   "end": 210.07,
+   "testo": "Però bisogna comunque andarci sopra per vedere se è da tensionare.",
+   "parole": [
+    {
+     "w": "Però",
+     "t": 206.83
+    },
+    {
+     "w": "bisogna",
+     "t": 207.21
+    },
+    {
+     "w": "comunque",
+     "t": 207.59
+    },
+    {
+     "w": "andarci",
+     "t": 207.77
+    },
+    {
+     "w": "sopra",
+     "t": 208.19
+    },
+    {
+     "w": "per",
+     "t": 208.49
+    },
+    {
+     "w": "vedere",
+     "t": 208.85
+    },
+    {
+     "w": "se",
+     "t": 209.21
+    },
+    {
+     "w": "è",
+     "t": 209.39
+    },
+    {
+     "w": "da",
+     "t": 209.47
+    },
+    {
+     "w": "tensionare.",
+     "t": 209.53
+    }
+   ]
+  },
+  {
+   "start": 233.57,
+   "end": 234.69,
+   "testo": "Dai.",
+   "parole": [
+    {
+     "w": "Dai.",
+     "t": 233.57
+    }
+   ]
+  },
+  {
+   "start": 244.96,
+   "end": 245.52,
+   "testo": "Preciso.",
+   "parole": [
+    {
+     "w": "Preciso.",
+     "t": 244.96
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,114 @@
+{
+ "file": "IMG_1381",
+ "durata": 22.2483125,
+ "segmenti": [
+  {
+   "start": 5.83,
+   "end": 7.45,
+   "testo": "Ok, rilascio più un pochino.",
+   "parole": [
+    {
+     "w": "Ok,",
+     "t": 5.83
+    },
+    {
+     "w": "rilascio",
+     "t": 6.37
+    },
+    {
+     "w": "più",
+     "t": 6.91
+    },
+    {
+     "w": "un",
+     "t": 7.03
+    },
+    {
+     "w": "pochino.",
+     "t": 7.15
+    }
+   ]
+  },
+  {
+   "start": 9.72,
+   "end": 10.8,
+   "testo": "Adesso possiamo...",
+   "parole": [
+    {
+     "w": "Adesso",
+     "t": 9.72
+    },
+    {
+     "w": "possiamo...",
+     "t": 10.26
+    }
+   ]
+  },
+  {
+   "start": 11.18,
+   "end": 12.58,
+   "testo": "L'hai messa in asola?",
+   "parole": [
+    {
+     "w": "L",
+     "t": 11.18
+    },
+    {
+     "w": "'hai",
+     "t": 11.48
+    },
+    {
+     "w": "messa",
+     "t": 11.52
+    },
+    {
+     "w": "in",
+     "t": 12.04
+    },
+    {
+     "w": "asola?",
+     "t": 12.26
+    }
+   ]
+  },
+  {
+   "start": 12.98,
+   "end": 18.04,
+   "testo": "Ok, allora, tieni la banana però così recupero.",
+   "parole": [
+    {
+     "w": "Ok,",
+     "t": 12.98
+    },
+    {
+     "w": "allora,",
+     "t": 15.86
+    },
+    {
+     "w": "tieni",
+     "t": 16.38
+    },
+    {
+     "w": "la",
+     "t": 16.66
+    },
+    {
+     "w": "banana",
+     "t": 16.72
+    },
+    {
+     "w": "però",
+     "t": 16.98
+    },
+    {
+     "w": "così",
+     "t": 17.24
+    },
+    {
+     "w": "recupero.",
+     "t": 17.48
+    }
+   ]
+  }
+ ]
+}

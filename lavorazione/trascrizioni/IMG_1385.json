@@ -1,0 +1,315 @@
+{
+ "file": "IMG_1385",
+ "durata": 37.779,
+ "segmenti": [
+  {
+   "start": 1.82,
+   "end": 19.82,
+   "testo": "Sì, allora, qua c'è un attimo da capire come bloccarlo. Devi bloccarlo lì così? Aspetta, il mio piano era sostituirlo, quindi mi pare già questo. Eh no, perché in realtà questo doveva stare largo, capito?",
+   "parole": [
+    {
+     "w": "Sì,",
+     "t": 1.82
+    },
+    {
+     "w": "allora,",
+     "t": 2.26
+    },
+    {
+     "w": "qua",
+     "t": 2.7
+    },
+    {
+     "w": "c",
+     "t": 2.94
+    },
+    {
+     "w": "'è",
+     "t": 3.32
+    },
+    {
+     "w": "un",
+     "t": 3.4
+    },
+    {
+     "w": "attimo",
+     "t": 3.44
+    },
+    {
+     "w": "da",
+     "t": 3.7
+    },
+    {
+     "w": "capire",
+     "t": 3.82
+    },
+    {
+     "w": "come",
+     "t": 4.14
+    },
+    {
+     "w": "bloccarlo.",
+     "t": 4.34
+    },
+    {
+     "w": "Devi",
+     "t": 6.94
+    },
+    {
+     "w": "bloccarlo",
+     "t": 7.38
+    },
+    {
+     "w": "lì",
+     "t": 8.1
+    },
+    {
+     "w": "così?",
+     "t": 8.24
+    },
+    {
+     "w": "Aspetta,",
+     "t": 9.56
+    },
+    {
+     "w": "il",
+     "t": 10.06
+    },
+    {
+     "w": "mio",
+     "t": 10.76
+    },
+    {
+     "w": "piano",
+     "t": 11.08
+    },
+    {
+     "w": "era",
+     "t": 11.3
+    },
+    {
+     "w": "sostituirlo,",
+     "t": 11.44
+    },
+    {
+     "w": "quindi",
+     "t": 12.28
+    },
+    {
+     "w": "mi",
+     "t": 13.74
+    },
+    {
+     "w": "pare",
+     "t": 14.68
+    },
+    {
+     "w": "già",
+     "t": 14.98
+    },
+    {
+     "w": "questo.",
+     "t": 15.56
+    },
+    {
+     "w": "Eh",
+     "t": 16.18
+    },
+    {
+     "w": "no,",
+     "t": 16.56
+    },
+    {
+     "w": "perché",
+     "t": 16.72
+    },
+    {
+     "w": "in",
+     "t": 16.92
+    },
+    {
+     "w": "realtà",
+     "t": 17.12
+    },
+    {
+     "w": "questo",
+     "t": 17.36
+    },
+    {
+     "w": "doveva",
+     "t": 17.94
+    },
+    {
+     "w": "stare",
+     "t": 18.7
+    },
+    {
+     "w": "largo,",
+     "t": 18.84
+    },
+    {
+     "w": "capito?",
+     "t": 19.36
+    }
+   ]
+  },
+  {
+   "start": 20.14,
+   "end": 33.27,
+   "testo": "Ok, allora forse conviene toglierlo da qua? Perché o si... Non so se rimane lì così perché scivolerà verso là. Ah no, però quella pressione della linea rimane verso il basso.",
+   "parole": [
+    {
+     "w": "Ok,",
+     "t": 20.14
+    },
+    {
+     "w": "allora",
+     "t": 20.64
+    },
+    {
+     "w": "forse",
+     "t": 20.78
+    },
+    {
+     "w": "conviene",
+     "t": 21.16
+    },
+    {
+     "w": "toglierlo",
+     "t": 21.9
+    },
+    {
+     "w": "da",
+     "t": 23.1
+    },
+    {
+     "w": "qua?",
+     "t": 23.22
+    },
+    {
+     "w": "Perché",
+     "t": 26.13
+    },
+    {
+     "w": "o",
+     "t": 26.57
+    },
+    {
+     "w": "si...",
+     "t": 26.85
+    },
+    {
+     "w": "Non",
+     "t": 27.77
+    },
+    {
+     "w": "so",
+     "t": 28.07
+    },
+    {
+     "w": "se",
+     "t": 28.33
+    },
+    {
+     "w": "rimane",
+     "t": 28.47
+    },
+    {
+     "w": "lì",
+     "t": 28.95
+    },
+    {
+     "w": "così",
+     "t": 29.07
+    },
+    {
+     "w": "perché",
+     "t": 29.25
+    },
+    {
+     "w": "scivolerà",
+     "t": 29.49
+    },
+    {
+     "w": "verso",
+     "t": 30.11
+    },
+    {
+     "w": "là.",
+     "t": 30.27
+    },
+    {
+     "w": "Ah",
+     "t": 30.53
+    },
+    {
+     "w": "no,",
+     "t": 30.69
+    },
+    {
+     "w": "però",
+     "t": 30.85
+    },
+    {
+     "w": "quella",
+     "t": 30.95
+    },
+    {
+     "w": "pressione",
+     "t": 31.13
+    },
+    {
+     "w": "della",
+     "t": 31.65
+    },
+    {
+     "w": "linea",
+     "t": 31.79
+    },
+    {
+     "w": "rimane",
+     "t": 32.19
+    },
+    {
+     "w": "verso",
+     "t": 32.77
+    },
+    {
+     "w": "il",
+     "t": 32.87
+    },
+    {
+     "w": "basso.",
+     "t": 32.87
+    }
+   ]
+  },
+  {
+   "start": 33.27,
+   "end": 35.61,
+   "testo": "Allora nodo semplice. Nodo semplice.",
+   "parole": [
+    {
+     "w": "Allora",
+     "t": 33.27
+    },
+    {
+     "w": "nodo",
+     "t": 33.99
+    },
+    {
+     "w": "semplice.",
+     "t": 34.29
+    },
+    {
+     "w": "Nodo",
+     "t": 34.71
+    },
+    {
+     "w": "semplice.",
+     "t": 35.11
+    }
+   ]
+  }
+ ]
+}

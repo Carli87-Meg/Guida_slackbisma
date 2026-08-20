@@ -1,0 +1,860 @@
+{
+ "file": "IMG_1374",
+ "durata": 95.8483125,
+ "segmenti": [
+  {
+   "start": 2.74,
+   "end": 20.16,
+   "testo": "Allora, io posso fare anche io la scelta sui due punti qua.",
+   "parole": [
+    {
+     "w": "Allora,",
+     "t": 2.74
+    },
+    {
+     "w": "io",
+     "t": 3.16
+    },
+    {
+     "w": "posso",
+     "t": 18.5
+    },
+    {
+     "w": "fare",
+     "t": 18.68
+    },
+    {
+     "w": "anche",
+     "t": 18.9
+    },
+    {
+     "w": "io",
+     "t": 19.02
+    },
+    {
+     "w": "la",
+     "t": 19.16
+    },
+    {
+     "w": "scelta",
+     "t": 19.16
+    },
+    {
+     "w": "sui",
+     "t": 19.42
+    },
+    {
+     "w": "due",
+     "t": 19.62
+    },
+    {
+     "w": "punti",
+     "t": 19.72
+    },
+    {
+     "w": "qua.",
+     "t": 20.04
+    }
+   ]
+  },
+  {
+   "start": 21.4,
+   "end": 23.6,
+   "testo": "Ah ma perché non ce l'hanno fatta la famiglia, la c'hanno fatta.",
+   "parole": [
+    {
+     "w": "Ah",
+     "t": 21.4
+    },
+    {
+     "w": "ma",
+     "t": 21.72
+    },
+    {
+     "w": "perché",
+     "t": 21.8
+    },
+    {
+     "w": "non",
+     "t": 22.0
+    },
+    {
+     "w": "ce",
+     "t": 22.16
+    },
+    {
+     "w": "l",
+     "t": 22.28
+    },
+    {
+     "w": "'hanno",
+     "t": 22.34
+    },
+    {
+     "w": "fatta",
+     "t": 22.42
+    },
+    {
+     "w": "la",
+     "t": 22.62
+    },
+    {
+     "w": "famiglia,",
+     "t": 22.8
+    },
+    {
+     "w": "la",
+     "t": 23.14
+    },
+    {
+     "w": "c",
+     "t": 23.28
+    },
+    {
+     "w": "'hanno",
+     "t": 23.32
+    },
+    {
+     "w": "fatta.",
+     "t": 23.4
+    }
+   ]
+  },
+  {
+   "start": 24.03,
+   "end": 25.51,
+   "testo": "Sì, per il meno sono qua.",
+   "parole": [
+    {
+     "w": "Sì,",
+     "t": 24.03
+    },
+    {
+     "w": "per",
+     "t": 24.35
+    },
+    {
+     "w": "il",
+     "t": 24.91
+    },
+    {
+     "w": "meno",
+     "t": 25.01
+    },
+    {
+     "w": "sono",
+     "t": 25.09
+    },
+    {
+     "w": "qua.",
+     "t": 25.27
+    }
+   ]
+  },
+  {
+   "start": 25.93,
+   "end": 27.43,
+   "testo": "E anche con la tag è più facile.",
+   "parole": [
+    {
+     "w": "E",
+     "t": 25.93
+    },
+    {
+     "w": "anche",
+     "t": 26.25
+    },
+    {
+     "w": "con",
+     "t": 26.57
+    },
+    {
+     "w": "la",
+     "t": 26.73
+    },
+    {
+     "w": "tag",
+     "t": 26.79
+    },
+    {
+     "w": "è",
+     "t": 26.95
+    },
+    {
+     "w": "più",
+     "t": 27.03
+    },
+    {
+     "w": "facile.",
+     "t": 27.15
+    }
+   ]
+  },
+  {
+   "start": 28.41,
+   "end": 28.87,
+   "testo": "Da qua.",
+   "parole": [
+    {
+     "w": "Da",
+     "t": 28.41
+    },
+    {
+     "w": "qua.",
+     "t": 28.73
+    }
+   ]
+  },
+  {
+   "start": 29.57,
+   "end": 31.83,
+   "testo": "Ok, i punti quali sono? Uno, due e tre.",
+   "parole": [
+    {
+     "w": "Ok,",
+     "t": 29.57
+    },
+    {
+     "w": "i",
+     "t": 30.27
+    },
+    {
+     "w": "punti",
+     "t": 30.49
+    },
+    {
+     "w": "quali",
+     "t": 30.77
+    },
+    {
+     "w": "sono?",
+     "t": 30.93
+    },
+    {
+     "w": "Uno,",
+     "t": 31.15
+    },
+    {
+     "w": "due",
+     "t": 31.35
+    },
+    {
+     "w": "e",
+     "t": 31.55
+    },
+    {
+     "w": "tre.",
+     "t": 31.67
+    }
+   ]
+  },
+  {
+   "start": 33.31,
+   "end": 34.97,
+   "testo": "Ah, che cazzo la fai?",
+   "parole": [
+    {
+     "w": "Ah,",
+     "t": 33.31
+    },
+    {
+     "w": "che",
+     "t": 33.75
+    },
+    {
+     "w": "cazzo",
+     "t": 33.89
+    },
+    {
+     "w": "la",
+     "t": 34.39
+    },
+    {
+     "w": "fai?",
+     "t": 34.51
+    }
+   ]
+  },
+  {
+   "start": 35.17,
+   "end": 35.49,
+   "testo": "Eh?",
+   "parole": [
+    {
+     "w": "Eh?",
+     "t": 35.17
+    }
+   ]
+  },
+  {
+   "start": 36.9,
+   "end": 38.18,
+   "testo": "Cioè, non ho capito come la vuoi fare.",
+   "parole": [
+    {
+     "w": "Cioè,",
+     "t": 36.9
+    },
+    {
+     "w": "non",
+     "t": 37.2
+    },
+    {
+     "w": "ho",
+     "t": 37.28
+    },
+    {
+     "w": "capito",
+     "t": 37.32
+    },
+    {
+     "w": "come",
+     "t": 37.66
+    },
+    {
+     "w": "la",
+     "t": 37.8
+    },
+    {
+     "w": "vuoi",
+     "t": 37.9
+    },
+    {
+     "w": "fare.",
+     "t": 38.04
+    }
+   ]
+  },
+  {
+   "start": 38.18,
+   "end": 40.12,
+   "testo": "No, no, no, stavo scherzando, stavo facendo una battuta.",
+   "parole": [
+    {
+     "w": "No,",
+     "t": 38.18
+    },
+    {
+     "w": "no,",
+     "t": 38.46
+    },
+    {
+     "w": "no,",
+     "t": 38.52
+    },
+    {
+     "w": "stavo",
+     "t": 38.56
+    },
+    {
+     "w": "scherzando,",
+     "t": 38.76
+    },
+    {
+     "w": "stavo",
+     "t": 39.32
+    },
+    {
+     "w": "facendo",
+     "t": 39.44
+    },
+    {
+     "w": "una",
+     "t": 39.64
+    },
+    {
+     "w": "battuta.",
+     "t": 39.8
+    }
+   ]
+  },
+  {
+   "start": 40.14,
+   "end": 41.9,
+   "testo": "Ah, eh no, perché lì è un po' più arduo, secondo me, o no?",
+   "parole": [
+    {
+     "w": "Ah,",
+     "t": 40.14
+    },
+    {
+     "w": "eh",
+     "t": 40.2
+    },
+    {
+     "w": "no,",
+     "t": 40.2
+    },
+    {
+     "w": "perché",
+     "t": 40.28
+    },
+    {
+     "w": "lì",
+     "t": 40.42
+    },
+    {
+     "w": "è",
+     "t": 40.66
+    },
+    {
+     "w": "un",
+     "t": 40.74
+    },
+    {
+     "w": "po'",
+     "t": 40.8
+    },
+    {
+     "w": "più",
+     "t": 40.86
+    },
+    {
+     "w": "arduo,",
+     "t": 40.92
+    },
+    {
+     "w": "secondo",
+     "t": 41.34
+    },
+    {
+     "w": "me,",
+     "t": 41.58
+    },
+    {
+     "w": "o",
+     "t": 41.78
+    },
+    {
+     "w": "no?",
+     "t": 41.84
+    }
+   ]
+  },
+  {
+   "start": 42.06,
+   "end": 46.74,
+   "testo": "3 punti, slide next su 3 punti e vaffanculo così.",
+   "parole": [
+    {
+     "w": "3",
+     "t": 42.06
+    },
+    {
+     "w": "punti,",
+     "t": 43.68
+    },
+    {
+     "w": "slide",
+     "t": 44.24
+    },
+    {
+     "w": "next",
+     "t": 45.02
+    },
+    {
+     "w": "su",
+     "t": 45.24
+    },
+    {
+     "w": "3",
+     "t": 45.48
+    },
+    {
+     "w": "punti",
+     "t": 45.6
+    },
+    {
+     "w": "e",
+     "t": 45.96
+    },
+    {
+     "w": "vaffanculo",
+     "t": 46.02
+    },
+    {
+     "w": "così.",
+     "t": 46.52
+    }
+   ]
+  },
+  {
+   "start": 47.04,
+   "end": 49.1,
+   "testo": "Tanto, non dobbiamo bansarci.",
+   "parole": [
+    {
+     "w": "Tanto,",
+     "t": 47.04
+    },
+    {
+     "w": "non",
+     "t": 47.36
+    },
+    {
+     "w": "dobbiamo",
+     "t": 48.24
+    },
+    {
+     "w": "bansarci.",
+     "t": 48.58
+    }
+   ]
+  },
+  {
+   "start": 49.1,
+   "end": 54.28,
+   "testo": "Va bene.",
+   "parole": [
+    {
+     "w": "Va",
+     "t": 49.1
+    },
+    {
+     "w": "bene.",
+     "t": 53.88
+    }
+   ]
+  },
+  {
+   "start": 56.32,
+   "end": 57.44,
+   "testo": "Ma io capisco.",
+   "parole": [
+    {
+     "w": "Ma",
+     "t": 56.32
+    },
+    {
+     "w": "io",
+     "t": 56.74
+    },
+    {
+     "w": "capisco.",
+     "t": 56.92
+    }
+   ]
+  },
+  {
+   "start": 64.85,
+   "end": 67.77,
+   "testo": "Allora, questo dovrebbe essere...",
+   "parole": [
+    {
+     "w": "Allora,",
+     "t": 64.85
+    },
+    {
+     "w": "questo",
+     "t": 65.27
+    },
+    {
+     "w": "dovrebbe",
+     "t": 65.69
+    },
+    {
+     "w": "essere...",
+     "t": 66.43
+    }
+   ]
+  },
+  {
+   "start": 67.77,
+   "end": 71.8,
+   "testo": "No, l'ho sbagliato io.",
+   "parole": [
+    {
+     "w": "No,",
+     "t": 67.77
+    },
+    {
+     "w": "l",
+     "t": 71.16
+    },
+    {
+     "w": "'ho",
+     "t": 71.26
+    },
+    {
+     "w": "sbagliato",
+     "t": 71.38
+    },
+    {
+     "w": "io.",
+     "t": 71.64
+    }
+   ]
+  },
+  {
+   "start": 73.24,
+   "end": 73.66,
+   "testo": "Ciao.",
+   "parole": [
+    {
+     "w": "Ciao.",
+     "t": 73.24
+    }
+   ]
+  },
+  {
+   "start": 73.78,
+   "end": 75.86,
+   "testo": "A parte che mi stai intrippando malissimo, io cazzo.",
+   "parole": [
+    {
+     "w": "A",
+     "t": 73.78
+    },
+    {
+     "w": "parte",
+     "t": 73.86
+    },
+    {
+     "w": "che",
+     "t": 74.02
+    },
+    {
+     "w": "mi",
+     "t": 74.1
+    },
+    {
+     "w": "stai",
+     "t": 74.22
+    },
+    {
+     "w": "intrippando",
+     "t": 74.42
+    },
+    {
+     "w": "malissimo,",
+     "t": 74.86
+    },
+    {
+     "w": "io",
+     "t": 75.38
+    },
+    {
+     "w": "cazzo.",
+     "t": 75.56
+    }
+   ]
+  },
+  {
+   "start": 76.16,
+   "end": 76.58,
+   "testo": "Perché?",
+   "parole": [
+    {
+     "w": "Perché?",
+     "t": 76.16
+    }
+   ]
+  },
+  {
+   "start": 76.84,
+   "end": 77.5,
+   "testo": "Boh, beh.",
+   "parole": [
+    {
+     "w": "Boh,",
+     "t": 76.84
+    },
+    {
+     "w": "beh.",
+     "t": 77.36
+    }
+   ]
+  },
+  {
+   "start": 78.14,
+   "end": 79.22,
+   "testo": "Non lo sto capendo.",
+   "parole": [
+    {
+     "w": "Non",
+     "t": 78.14
+    },
+    {
+     "w": "lo",
+     "t": 78.56
+    },
+    {
+     "w": "sto",
+     "t": 78.66
+    },
+    {
+     "w": "capendo.",
+     "t": 78.74
+    }
+   ]
+  },
+  {
+   "start": 81.8,
+   "end": 86.36,
+   "testo": "Cioè, volevo provare una maniera più intelligente di fare sta roba, ma in realtà mi sto complicando di brutto la vita.",
+   "parole": [
+    {
+     "w": "Cioè,",
+     "t": 81.8
+    },
+    {
+     "w": "volevo",
+     "t": 82.22
+    },
+    {
+     "w": "provare",
+     "t": 82.64
+    },
+    {
+     "w": "una",
+     "t": 82.94
+    },
+    {
+     "w": "maniera",
+     "t": 83.04
+    },
+    {
+     "w": "più",
+     "t": 83.32
+    },
+    {
+     "w": "intelligente",
+     "t": 83.46
+    },
+    {
+     "w": "di",
+     "t": 83.98
+    },
+    {
+     "w": "fare",
+     "t": 84.08
+    },
+    {
+     "w": "sta",
+     "t": 84.24
+    },
+    {
+     "w": "roba,",
+     "t": 84.38
+    },
+    {
+     "w": "ma",
+     "t": 84.66
+    },
+    {
+     "w": "in",
+     "t": 84.74
+    },
+    {
+     "w": "realtà",
+     "t": 84.84
+    },
+    {
+     "w": "mi",
+     "t": 85.0
+    },
+    {
+     "w": "sto",
+     "t": 85.14
+    },
+    {
+     "w": "complicando",
+     "t": 85.26
+    },
+    {
+     "w": "di",
+     "t": 85.72
+    },
+    {
+     "w": "brutto",
+     "t": 85.84
+    },
+    {
+     "w": "la",
+     "t": 86.12
+    },
+    {
+     "w": "vita.",
+     "t": 86.2
+    }
+   ]
+  },
+  {
+   "start": 89.23,
+   "end": 91.19,
+   "testo": "Se ce ne avete uno in più...",
+   "parole": [
+    {
+     "w": "Se",
+     "t": 89.23
+    },
+    {
+     "w": "ce",
+     "t": 89.65
+    },
+    {
+     "w": "ne",
+     "t": 89.93
+    },
+    {
+     "w": "avete",
+     "t": 90.03
+    },
+    {
+     "w": "uno",
+     "t": 90.19
+    },
+    {
+     "w": "in",
+     "t": 90.43
+    },
+    {
+     "w": "più...",
+     "t": 90.55
+    }
+   ]
+  },
+  {
+   "start": 91.8,
+   "end": 92.74,
+   "testo": "Ah, sì, perfetto.",
+   "parole": [
+    {
+     "w": "Ah,",
+     "t": 91.8
+    },
+    {
+     "w": "sì,",
+     "t": 92.34
+    },
+    {
+     "w": "perfetto.",
+     "t": 92.46
+    }
+   ]
+  },
+  {
+   "start": 93.08,
+   "end": 94.08,
+   "testo": "Gli altri mi servono.",
+   "parole": [
+    {
+     "w": "Gli",
+     "t": 93.08
+    },
+    {
+     "w": "altri",
+     "t": 93.46
+    },
+    {
+     "w": "mi",
+     "t": 93.6
+    },
+    {
+     "w": "servono.",
+     "t": 93.74
+    }
+   ]
+  }
+ ]
+}

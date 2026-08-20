@@ -1,0 +1,192 @@
+{
+ "file": "IMG_1349",
+ "durata": 50.131,
+ "segmenti": [
+  {
+   "start": 0.02,
+   "end": 6.18,
+   "testo": "Sosta main, quella con le slinghe viola, sosta backup, quella con le corde rosa.",
+   "parole": [
+    {
+     "w": "Sosta",
+     "t": 0.02
+    },
+    {
+     "w": "main,",
+     "t": 0.52
+    },
+    {
+     "w": "quella",
+     "t": 0.9
+    },
+    {
+     "w": "con",
+     "t": 1.08
+    },
+    {
+     "w": "le",
+     "t": 1.22
+    },
+    {
+     "w": "slinghe",
+     "t": 1.32
+    },
+    {
+     "w": "viola,",
+     "t": 1.62
+    },
+    {
+     "w": "sosta",
+     "t": 2.04
+    },
+    {
+     "w": "backup,",
+     "t": 2.9
+    },
+    {
+     "w": "quella",
+     "t": 4.42
+    },
+    {
+     "w": "con",
+     "t": 4.62
+    },
+    {
+     "w": "le",
+     "t": 4.8
+    },
+    {
+     "w": "corde",
+     "t": 4.94
+    },
+    {
+     "w": "rosa.",
+     "t": 5.32
+    }
+   ]
+  },
+  {
+   "start": 6.38,
+   "end": 28.82,
+   "testo": "Ok, la main, ok, shoe, shoe and bracing.",
+   "parole": [
+    {
+     "w": "Ok,",
+     "t": 6.38
+    },
+    {
+     "w": "la",
+     "t": 8.53
+    },
+    {
+     "w": "main,",
+     "t": 9.07
+    },
+    {
+     "w": "ok,",
+     "t": 9.73
+    },
+    {
+     "w": "shoe,",
+     "t": 19.82
+    },
+    {
+     "w": "shoe",
+     "t": 25.97
+    },
+    {
+     "w": "and",
+     "t": 28.36
+    },
+    {
+     "w": "bracing.",
+     "t": 28.74
+    }
+   ]
+  },
+  {
+   "start": 32.17,
+   "end": 34.05,
+   "testo": "Slide in X lì, ovviamente.",
+   "parole": [
+    {
+     "w": "Slide",
+     "t": 32.17
+    },
+    {
+     "w": "in",
+     "t": 32.77
+    },
+    {
+     "w": "X",
+     "t": 33.01
+    },
+    {
+     "w": "lì,",
+     "t": 33.23
+    },
+    {
+     "w": "ovviamente.",
+     "t": 33.57
+    }
+   ]
+  },
+  {
+   "start": 34.7,
+   "end": 35.3,
+   "testo": "Ovviamente.",
+   "parole": [
+    {
+     "w": "Ovviamente.",
+     "t": 34.7
+    }
+   ]
+  },
+  {
+   "start": 35.8,
+   "end": 43.08,
+   "testo": "Ok, poi qui.",
+   "parole": [
+    {
+     "w": "Ok,",
+     "t": 35.8
+    },
+    {
+     "w": "poi",
+     "t": 38.74
+    },
+    {
+     "w": "qui.",
+     "t": 42.78
+    }
+   ]
+  },
+  {
+   "start": 43.5,
+   "end": 48.48,
+   "testo": "Oh! No, adesso lo leghiamo!",
+   "parole": [
+    {
+     "w": "Oh!",
+     "t": 43.5
+    },
+    {
+     "w": "No,",
+     "t": 46.96
+    },
+    {
+     "w": "adesso",
+     "t": 47.62
+    },
+    {
+     "w": "lo",
+     "t": 47.9
+    },
+    {
+     "w": "leghiamo!",
+     "t": 48.06
+    }
+   ]
+  }
+ ]
+}

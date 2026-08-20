@@ -1,0 +1,75 @@
+{
+ "file": "IMG_1391",
+ "durata": 18.067,
+ "segmenti": [
+  {
+   "start": 3.7,
+   "end": 4.84,
+   "testo": "Buono il paccioio!",
+   "parole": [
+    {
+     "w": "Buono",
+     "t": 3.7
+    },
+    {
+     "w": "il",
+     "t": 4.14
+    },
+    {
+     "w": "paccioio!",
+     "t": 4.26
+    }
+   ]
+  },
+  {
+   "start": 10.84,
+   "end": 12.38,
+   "testo": "Con roba da escalade!",
+   "parole": [
+    {
+     "w": "Con",
+     "t": 10.84
+    },
+    {
+     "w": "roba",
+     "t": 11.28
+    },
+    {
+     "w": "da",
+     "t": 11.72
+    },
+    {
+     "w": "escalade!",
+     "t": 11.74
+    }
+   ]
+  },
+  {
+   "start": 14.66,
+   "end": 15.96,
+   "testo": "Vai, vai, dacci un occhio!",
+   "parole": [
+    {
+     "w": "Vai,",
+     "t": 14.66
+    },
+    {
+     "w": "vai,",
+     "t": 15.14
+    },
+    {
+     "w": "dacci",
+     "t": 15.32
+    },
+    {
+     "w": "un",
+     "t": 15.54
+    },
+    {
+     "w": "occhio!",
+     "t": 15.62
+    }
+   ]
+  }
+ ]
+}

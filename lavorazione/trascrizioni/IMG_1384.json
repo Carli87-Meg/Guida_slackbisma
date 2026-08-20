@@ -1,0 +1,505 @@
+{
+ "file": "IMG_1384",
+ "durata": 71.229625,
+ "segmenti": [
+  {
+   "start": 0.0,
+   "end": 34.75,
+   "testo": "Quindi tu la metti qui dentro, gli fai praticamente fare un altro giro da sopra, così, ok, questo è il disegno che deve venire fuori, dopodiché questo lo attacchiamo, scusa, da questo lato al grillo, adesso gli devo far fare questo giro brutto, chiudiamo il grillo, mettiamo il griglio, e adesso questo...",
+   "parole": [
+    {
+     "w": "Quindi",
+     "t": 0.0
+    },
+    {
+     "w": "tu",
+     "t": 1.47
+    },
+    {
+     "w": "la",
+     "t": 1.83
+    },
+    {
+     "w": "metti",
+     "t": 1.91
+    },
+    {
+     "w": "qui",
+     "t": 2.19
+    },
+    {
+     "w": "dentro,",
+     "t": 2.29
+    },
+    {
+     "w": "gli",
+     "t": 2.79
+    },
+    {
+     "w": "fai",
+     "t": 5.0
+    },
+    {
+     "w": "praticamente",
+     "t": 5.22
+    },
+    {
+     "w": "fare",
+     "t": 5.52
+    },
+    {
+     "w": "un",
+     "t": 6.12
+    },
+    {
+     "w": "altro",
+     "t": 7.27
+    },
+    {
+     "w": "giro",
+     "t": 7.51
+    },
+    {
+     "w": "da",
+     "t": 7.97
+    },
+    {
+     "w": "sopra,",
+     "t": 8.21
+    },
+    {
+     "w": "così,",
+     "t": 8.65
+    },
+    {
+     "w": "ok,",
+     "t": 9.33
+    },
+    {
+     "w": "questo",
+     "t": 12.76
+    },
+    {
+     "w": "è",
+     "t": 13.2
+    },
+    {
+     "w": "il",
+     "t": 13.32
+    },
+    {
+     "w": "disegno",
+     "t": 13.36
+    },
+    {
+     "w": "che",
+     "t": 13.66
+    },
+    {
+     "w": "deve",
+     "t": 13.78
+    },
+    {
+     "w": "venire",
+     "t": 13.92
+    },
+    {
+     "w": "fuori,",
+     "t": 14.2
+    },
+    {
+     "w": "dopodiché",
+     "t": 14.61
+    },
+    {
+     "w": "questo",
+     "t": 16.01
+    },
+    {
+     "w": "lo",
+     "t": 17.32
+    },
+    {
+     "w": "attacchiamo,",
+     "t": 18.24
+    },
+    {
+     "w": "scusa,",
+     "t": 19.16
+    },
+    {
+     "w": "da",
+     "t": 19.56
+    },
+    {
+     "w": "questo",
+     "t": 19.68
+    },
+    {
+     "w": "lato",
+     "t": 19.9
+    },
+    {
+     "w": "al",
+     "t": 20.26
+    },
+    {
+     "w": "grillo,",
+     "t": 20.32
+    },
+    {
+     "w": "adesso",
+     "t": 20.78
+    },
+    {
+     "w": "gli",
+     "t": 20.96
+    },
+    {
+     "w": "devo",
+     "t": 21.1
+    },
+    {
+     "w": "far",
+     "t": 21.24
+    },
+    {
+     "w": "fare",
+     "t": 21.38
+    },
+    {
+     "w": "questo",
+     "t": 21.54
+    },
+    {
+     "w": "giro",
+     "t": 21.8
+    },
+    {
+     "w": "brutto,",
+     "t": 22.14
+    },
+    {
+     "w": "chiudiamo",
+     "t": 22.6
+    },
+    {
+     "w": "il",
+     "t": 24.03
+    },
+    {
+     "w": "grillo,",
+     "t": 24.13
+    },
+    {
+     "w": "mettiamo",
+     "t": 24.55
+    },
+    {
+     "w": "il",
+     "t": 29.68
+    },
+    {
+     "w": "griglio,",
+     "t": 29.8
+    },
+    {
+     "w": "e",
+     "t": 30.24
+    },
+    {
+     "w": "adesso",
+     "t": 32.65
+    },
+    {
+     "w": "questo...",
+     "t": 33.75
+    }
+   ]
+  },
+  {
+   "start": 37.32,
+   "end": 54.54,
+   "testo": "Ah, l'abbiamo già pretensionata! Ok, questo fa da blocco del backup, e prende sia sosta backup che sosta main.",
+   "parole": [
+    {
+     "w": "Ah,",
+     "t": 37.32
+    },
+    {
+     "w": "l",
+     "t": 37.92
+    },
+    {
+     "w": "'abbiamo",
+     "t": 38.06
+    },
+    {
+     "w": "già",
+     "t": 38.24
+    },
+    {
+     "w": "pretensionata!",
+     "t": 38.4
+    },
+    {
+     "w": "Ok,",
+     "t": 47.45
+    },
+    {
+     "w": "questo",
+     "t": 48.03
+    },
+    {
+     "w": "fa",
+     "t": 48.33
+    },
+    {
+     "w": "da",
+     "t": 49.11
+    },
+    {
+     "w": "blocco",
+     "t": 49.29
+    },
+    {
+     "w": "del",
+     "t": 49.63
+    },
+    {
+     "w": "backup,",
+     "t": 49.79
+    },
+    {
+     "w": "e",
+     "t": 51.51
+    },
+    {
+     "w": "prende",
+     "t": 52.7
+    },
+    {
+     "w": "sia",
+     "t": 53.06
+    },
+    {
+     "w": "sosta",
+     "t": 53.16
+    },
+    {
+     "w": "backup",
+     "t": 53.42
+    },
+    {
+     "w": "che",
+     "t": 53.7
+    },
+    {
+     "w": "sosta",
+     "t": 54.04
+    },
+    {
+     "w": "main.",
+     "t": 54.28
+    }
+   ]
+  },
+  {
+   "start": 55.92,
+   "end": 61.54,
+   "testo": "Qua adesso dovremmo farci poi l'anti-slip dopo che abbiamo tensionato tutto, secondo me è come il backup fuori...",
+   "parole": [
+    {
+     "w": "Qua",
+     "t": 55.92
+    },
+    {
+     "w": "adesso",
+     "t": 56.36
+    },
+    {
+     "w": "dovremmo",
+     "t": 56.5
+    },
+    {
+     "w": "farci",
+     "t": 56.98
+    },
+    {
+     "w": "poi",
+     "t": 57.26
+    },
+    {
+     "w": "l",
+     "t": 57.46
+    },
+    {
+     "w": "'anti",
+     "t": 57.52
+    },
+    {
+     "w": "-slip",
+     "t": 57.7
+    },
+    {
+     "w": "dopo",
+     "t": 58.06
+    },
+    {
+     "w": "che",
+     "t": 58.18
+    },
+    {
+     "w": "abbiamo",
+     "t": 58.38
+    },
+    {
+     "w": "tensionato",
+     "t": 58.56
+    },
+    {
+     "w": "tutto,",
+     "t": 59.14
+    },
+    {
+     "w": "secondo",
+     "t": 59.86
+    },
+    {
+     "w": "me",
+     "t": 60.2
+    },
+    {
+     "w": "è",
+     "t": 60.38
+    },
+    {
+     "w": "come",
+     "t": 60.42
+    },
+    {
+     "w": "il",
+     "t": 60.54
+    },
+    {
+     "w": "backup",
+     "t": 60.68
+    },
+    {
+     "w": "fuori...",
+     "t": 60.88
+    }
+   ]
+  },
+  {
+   "start": 64.0,
+   "end": 65.14,
+   "testo": "Ma è dentro o niente?",
+   "parole": [
+    {
+     "w": "Ma",
+     "t": 64.0
+    },
+    {
+     "w": "è",
+     "t": 64.44
+    },
+    {
+     "w": "dentro",
+     "t": 64.56
+    },
+    {
+     "w": "o",
+     "t": 64.78
+    },
+    {
+     "w": "niente?",
+     "t": 64.92
+    }
+   ]
+  },
+  {
+   "start": 65.85,
+   "end": 71.21,
+   "testo": "Boh, backup fuori in realtà non è che ce ne sia tantissimo, secondo me siamo in un altro momento...",
+   "parole": [
+    {
+     "w": "Boh,",
+     "t": 65.85
+    },
+    {
+     "w": "backup",
+     "t": 66.31
+    },
+    {
+     "w": "fuori",
+     "t": 66.55
+    },
+    {
+     "w": "in",
+     "t": 67.05
+    },
+    {
+     "w": "realtà",
+     "t": 67.15
+    },
+    {
+     "w": "non",
+     "t": 67.37
+    },
+    {
+     "w": "è",
+     "t": 67.59
+    },
+    {
+     "w": "che",
+     "t": 67.69
+    },
+    {
+     "w": "ce",
+     "t": 67.79
+    },
+    {
+     "w": "ne",
+     "t": 67.89
+    },
+    {
+     "w": "sia",
+     "t": 67.99
+    },
+    {
+     "w": "tantissimo,",
+     "t": 68.13
+    },
+    {
+     "w": "secondo",
+     "t": 68.79
+    },
+    {
+     "w": "me",
+     "t": 70.33
+    },
+    {
+     "w": "siamo",
+     "t": 70.51
+    },
+    {
+     "w": "in",
+     "t": 70.71
+    },
+    {
+     "w": "un",
+     "t": 70.77
+    },
+    {
+     "w": "altro",
+     "t": 70.83
+    },
+    {
+     "w": "momento...",
+     "t": 70.99
+    }
+   ]
+  }
+ ]
+}

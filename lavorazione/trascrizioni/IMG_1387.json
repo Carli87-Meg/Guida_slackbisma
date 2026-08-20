@@ -1,0 +1,29 @@
+{
+ "file": "IMG_1387",
+ "durata": 2.999375,
+ "segmenti": [
+  {
+   "start": 0.24,
+   "end": 2.96,
+   "testo": "Sì, tipo acroyoga misto.",
+   "parole": [
+    {
+     "w": "Sì,",
+     "t": 0.24
+    },
+    {
+     "w": "tipo",
+     "t": 0.86
+    },
+    {
+     "w": "acroyoga",
+     "t": 1.28
+    },
+    {
+     "w": "misto.",
+     "t": 2.56
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,29 @@
+{
+ "file": "IMG_1377",
+ "durata": 3.091,
+ "segmenti": [
+  {
+   "start": 0.24,
+   "end": 1.92,
+   "testo": "No, no, non chiudere.",
+   "parole": [
+    {
+     "w": "No,",
+     "t": 0.24
+    },
+    {
+     "w": "no,",
+     "t": 0.82
+    },
+    {
+     "w": "non",
+     "t": 0.98
+    },
+    {
+     "w": "chiudere.",
+     "t": 1.32
+    }
+   ]
+  }
+ ]
+}

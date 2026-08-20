@@ -1,0 +1,33 @@
+{
+ "file": "IMG_1364",
+ "durata": 2.966625,
+ "segmenti": [
+  {
+   "start": 0.0,
+   "end": 1.3,
+   "testo": "Che sei vestito da esploratore!",
+   "parole": [
+    {
+     "w": "Che",
+     "t": 0.0
+    },
+    {
+     "w": "sei",
+     "t": 0.08
+    },
+    {
+     "w": "vestito",
+     "t": 0.14
+    },
+    {
+     "w": "da",
+     "t": 0.54
+    },
+    {
+     "w": "esploratore!",
+     "t": 0.58
+    }
+   ]
+  }
+ ]
+}

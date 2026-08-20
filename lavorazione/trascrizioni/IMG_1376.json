@@ -1,0 +1,81 @@
+{
+ "file": "IMG_1376",
+ "durata": 46.525625,
+ "segmenti": [
+  {
+   "start": 2.38,
+   "end": 26.27,
+   "testo": "The 8, per tenere il verso, che poi vai ad attaccare, e quando io ne cacci solo.",
+   "parole": [
+    {
+     "w": "The",
+     "t": 2.38
+    },
+    {
+     "w": "8,",
+     "t": 2.86
+    },
+    {
+     "w": "per",
+     "t": 3.5
+    },
+    {
+     "w": "tenere",
+     "t": 6.3
+    },
+    {
+     "w": "il",
+     "t": 6.76
+    },
+    {
+     "w": "verso,",
+     "t": 6.9
+    },
+    {
+     "w": "che",
+     "t": 7.38
+    },
+    {
+     "w": "poi",
+     "t": 10.32
+    },
+    {
+     "w": "vai",
+     "t": 15.34
+    },
+    {
+     "w": "ad",
+     "t": 15.6
+    },
+    {
+     "w": "attaccare,",
+     "t": 15.76
+    },
+    {
+     "w": "e",
+     "t": 16.74
+    },
+    {
+     "w": "quando",
+     "t": 25.05
+    },
+    {
+     "w": "io",
+     "t": 25.33
+    },
+    {
+     "w": "ne",
+     "t": 25.53
+    },
+    {
+     "w": "cacci",
+     "t": 25.63
+    },
+    {
+     "w": "solo.",
+     "t": 25.89
+    }
+   ]
+  }
+ ]
+}

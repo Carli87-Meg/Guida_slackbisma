@@ -1,0 +1,372 @@
+{
+ "file": "IMG_1351",
+ "durata": 34.5363125,
+ "segmenti": [
+  {
+   "start": 2.2,
+   "end": 4.36,
+   "testo": "Ah, e corda rosa che c'è là.",
+   "parole": [
+    {
+     "w": "Ah,",
+     "t": 2.2
+    },
+    {
+     "w": "e",
+     "t": 2.76
+    },
+    {
+     "w": "corda",
+     "t": 2.86
+    },
+    {
+     "w": "rosa",
+     "t": 3.5
+    },
+    {
+     "w": "che",
+     "t": 3.78
+    },
+    {
+     "w": "c",
+     "t": 4.06
+    },
+    {
+     "w": "'è",
+     "t": 4.18
+    },
+    {
+     "w": "là.",
+     "t": 4.26
+    }
+   ]
+  },
+  {
+   "start": 4.68,
+   "end": 5.12,
+   "testo": "Questa?",
+   "parole": [
+    {
+     "w": "Questa?",
+     "t": 4.68
+    }
+   ]
+  },
+  {
+   "start": 5.58,
+   "end": 6.02,
+   "testo": "Esatto.",
+   "parole": [
+    {
+     "w": "Esatto.",
+     "t": 5.58
+    }
+   ]
+  },
+  {
+   "start": 6.1,
+   "end": 6.68,
+   "testo": "Questa qua?",
+   "parole": [
+    {
+     "w": "Questa",
+     "t": 6.1
+    },
+    {
+     "w": "qua?",
+     "t": 6.5
+    }
+   ]
+  },
+  {
+   "start": 6.78,
+   "end": 6.98,
+   "testo": "Sì.",
+   "parole": [
+    {
+     "w": "Sì.",
+     "t": 6.78
+    }
+   ]
+  },
+  {
+   "start": 7.68,
+   "end": 8.12,
+   "testo": "Basta.",
+   "parole": [
+    {
+     "w": "Basta.",
+     "t": 7.68
+    }
+   ]
+  },
+  {
+   "start": 8.81,
+   "end": 9.25,
+   "testo": "Sì.",
+   "parole": [
+    {
+     "w": "Sì.",
+     "t": 8.81
+    }
+   ]
+  },
+  {
+   "start": 11.85,
+   "end": 13.03,
+   "testo": "Tic tuc tac.",
+   "parole": [
+    {
+     "w": "Tic",
+     "t": 11.85
+    },
+    {
+     "w": "tuc",
+     "t": 12.29
+    },
+    {
+     "w": "tac.",
+     "t": 12.71
+    }
+   ]
+  },
+  {
+   "start": 13.27,
+   "end": 13.67,
+   "testo": "Di che tipo?",
+   "parole": [
+    {
+     "w": "Di",
+     "t": 13.27
+    },
+    {
+     "w": "che",
+     "t": 13.35
+    },
+    {
+     "w": "tipo?",
+     "t": 13.41
+    }
+   ]
+  },
+  {
+   "start": 14.23,
+   "end": 14.67,
+   "testo": "Trovato.",
+   "parole": [
+    {
+     "w": "Trovato.",
+     "t": 14.23
+    }
+   ]
+  },
+  {
+   "start": 16.3,
+   "end": 16.74,
+   "testo": "Questo.",
+   "parole": [
+    {
+     "w": "Questo.",
+     "t": 16.3
+    }
+   ]
+  },
+  {
+   "start": 19.55,
+   "end": 23.47,
+   "testo": "Ah, tu hai anche un Mighty Lock, giusto?",
+   "parole": [
+    {
+     "w": "Ah,",
+     "t": 19.55
+    },
+    {
+     "w": "tu",
+     "t": 19.99
+    },
+    {
+     "w": "hai",
+     "t": 20.21
+    },
+    {
+     "w": "anche",
+     "t": 21.07
+    },
+    {
+     "w": "un",
+     "t": 21.35
+    },
+    {
+     "w": "Mighty",
+     "t": 21.67
+    },
+    {
+     "w": "Lock,",
+     "t": 22.95
+    },
+    {
+     "w": "giusto?",
+     "t": 23.25
+    }
+   ]
+  },
+  {
+   "start": 23.63,
+   "end": 25.87,
+   "testo": "Il Mighty Lock?",
+   "parole": [
+    {
+     "w": "Il",
+     "t": 23.63
+    },
+    {
+     "w": "Mighty",
+     "t": 23.71
+    },
+    {
+     "w": "Lock?",
+     "t": 25.25
+    }
+   ]
+  },
+  {
+   "start": 25.99,
+   "end": 26.75,
+   "testo": "Quello quadratino.",
+   "parole": [
+    {
+     "w": "Quello",
+     "t": 25.99
+    },
+    {
+     "w": "quadratino.",
+     "t": 26.17
+    }
+   ]
+  },
+  {
+   "start": 27.07,
+   "end": 28.57,
+   "testo": "Io sì, ne ho uno io.",
+   "parole": [
+    {
+     "w": "Io",
+     "t": 27.07
+    },
+    {
+     "w": "sì,",
+     "t": 27.35
+    },
+    {
+     "w": "ne",
+     "t": 27.55
+    },
+    {
+     "w": "ho",
+     "t": 28.05
+    },
+    {
+     "w": "uno",
+     "t": 28.17
+    },
+    {
+     "w": "io.",
+     "t": 28.33
+    }
+   ]
+  },
+  {
+   "start": 28.59,
+   "end": 31.09,
+   "testo": "Perfetto, lo possiamo utilizzare per il backup di questa, va bene?",
+   "parole": [
+    {
+     "w": "Perfetto,",
+     "t": 28.59
+    },
+    {
+     "w": "lo",
+     "t": 28.97
+    },
+    {
+     "w": "possiamo",
+     "t": 29.05
+    },
+    {
+     "w": "utilizzare",
+     "t": 29.27
+    },
+    {
+     "w": "per",
+     "t": 29.79
+    },
+    {
+     "w": "il",
+     "t": 29.91
+    },
+    {
+     "w": "backup",
+     "t": 30.03
+    },
+    {
+     "w": "di",
+     "t": 30.23
+    },
+    {
+     "w": "questa,",
+     "t": 30.47
+    },
+    {
+     "w": "va",
+     "t": 30.81
+    },
+    {
+     "w": "bene?",
+     "t": 30.87
+    }
+   ]
+  },
+  {
+   "start": 31.81,
+   "end": 33.89,
+   "testo": "Sì, però aspetta qua le due.",
+   "parole": [
+    {
+     "w": "Sì,",
+     "t": 31.81
+    },
+    {
+     "w": "però",
+     "t": 32.25
+    },
+    {
+     "w": "aspetta",
+     "t": 32.57
+    },
+    {
+     "w": "qua",
+     "t": 33.57
+    },
+    {
+     "w": "le",
+     "t": 33.67
+    },
+    {
+     "w": "due.",
+     "t": 33.77
+    }
+   ]
+  },
+  {
+   "start": 33.89,
+   "end": 34.17,
+   "testo": "Allora.",
+   "parole": [
+    {
+     "w": "Allora.",
+     "t": 33.89
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,29 @@
+{
+ "file": "IMG_1365",
+ "durata": 2.4328125,
+ "segmenti": [
+  {
+   "start": 1.26,
+   "end": 2.4,
+   "testo": "Grazie per la visione!",
+   "parole": [
+    {
+     "w": "Grazie",
+     "t": 1.26
+    },
+    {
+     "w": "per",
+     "t": 1.74
+    },
+    {
+     "w": "la",
+     "t": 1.96
+    },
+    {
+     "w": "visione!",
+     "t": 2.06
+    }
+   ]
+  }
+ ]
+}

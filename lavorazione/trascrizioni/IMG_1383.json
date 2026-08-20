@@ -1,0 +1,196 @@
+{
+ "file": "IMG_1383",
+ "durata": 23.699,
+ "segmenti": [
+  {
+   "start": 7.36,
+   "end": 10.54,
+   "testo": "Guarda, se la recupero un po' io ho la tensione.",
+   "parole": [
+    {
+     "w": "Guarda,",
+     "t": 7.36
+    },
+    {
+     "w": "se",
+     "t": 7.64
+    },
+    {
+     "w": "la",
+     "t": 7.7
+    },
+    {
+     "w": "recupero",
+     "t": 7.84
+    },
+    {
+     "w": "un",
+     "t": 8.3
+    },
+    {
+     "w": "po'",
+     "t": 8.4
+    },
+    {
+     "w": "io",
+     "t": 8.54
+    },
+    {
+     "w": "ho",
+     "t": 8.68
+    },
+    {
+     "w": "la",
+     "t": 8.8
+    },
+    {
+     "w": "tensione.",
+     "t": 9.62
+    }
+   ]
+  },
+  {
+   "start": 10.68,
+   "end": 11.28,
+   "testo": "Guarda, sei legato.",
+   "parole": [
+    {
+     "w": "Guarda,",
+     "t": 10.68
+    },
+    {
+     "w": "sei",
+     "t": 10.8
+    },
+    {
+     "w": "legato.",
+     "t": 10.9
+    }
+   ]
+  },
+  {
+   "start": 11.6,
+   "end": 11.88,
+   "testo": "Sì.",
+   "parole": [
+    {
+     "w": "Sì.",
+     "t": 11.6
+    }
+   ]
+  },
+  {
+   "start": 16.45,
+   "end": 17.71,
+   "testo": "Top, basta, basta, va bene.",
+   "parole": [
+    {
+     "w": "Top,",
+     "t": 16.45
+    },
+    {
+     "w": "basta,",
+     "t": 16.89
+    },
+    {
+     "w": "basta,",
+     "t": 17.29
+    },
+    {
+     "w": "va",
+     "t": 17.43
+    },
+    {
+     "w": "bene.",
+     "t": 17.57
+    }
+   ]
+  },
+  {
+   "start": 18.13,
+   "end": 19.31,
+   "testo": "Va bene come tensione?",
+   "parole": [
+    {
+     "w": "Va",
+     "t": 18.13
+    },
+    {
+     "w": "bene",
+     "t": 18.41
+    },
+    {
+     "w": "come",
+     "t": 18.59
+    },
+    {
+     "w": "tensione?",
+     "t": 18.75
+    }
+   ]
+  },
+  {
+   "start": 19.33,
+   "end": 22.55,
+   "testo": "No, no, no, adesso dopo la tensioniamo a modo, però in sciancio va bene.",
+   "parole": [
+    {
+     "w": "No,",
+     "t": 19.33
+    },
+    {
+     "w": "no,",
+     "t": 19.61
+    },
+    {
+     "w": "no,",
+     "t": 19.77
+    },
+    {
+     "w": "adesso",
+     "t": 19.89
+    },
+    {
+     "w": "dopo",
+     "t": 20.01
+    },
+    {
+     "w": "la",
+     "t": 20.23
+    },
+    {
+     "w": "tensioniamo",
+     "t": 20.39
+    },
+    {
+     "w": "a",
+     "t": 21.19
+    },
+    {
+     "w": "modo,",
+     "t": 21.29
+    },
+    {
+     "w": "però",
+     "t": 21.49
+    },
+    {
+     "w": "in",
+     "t": 21.65
+    },
+    {
+     "w": "sciancio",
+     "t": 21.97
+    },
+    {
+     "w": "va",
+     "t": 22.31
+    },
+    {
+     "w": "bene.",
+     "t": 22.41
+    }
+   ]
+  }
+ ]
+}

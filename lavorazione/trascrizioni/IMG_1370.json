@@ -1,0 +1,216 @@
+{
+ "file": "IMG_1370",
+ "durata": 19.453625,
+ "segmenti": [
+  {
+   "start": 0.0,
+   "end": 8.78,
+   "testo": "Slippa, questo qua dovrebbe ruotare, e ruotando potrebbe, se il peso è giusto e la frizione...",
+   "parole": [
+    {
+     "w": "Slippa,",
+     "t": 0.0
+    },
+    {
+     "w": "questo",
+     "t": 0.46
+    },
+    {
+     "w": "qua",
+     "t": 1.52
+    },
+    {
+     "w": "dovrebbe",
+     "t": 1.78
+    },
+    {
+     "w": "ruotare,",
+     "t": 2.24
+    },
+    {
+     "w": "e",
+     "t": 3.18
+    },
+    {
+     "w": "ruotando",
+     "t": 3.82
+    },
+    {
+     "w": "potrebbe,",
+     "t": 5.34
+    },
+    {
+     "w": "se",
+     "t": 6.56
+    },
+    {
+     "w": "il",
+     "t": 7.1
+    },
+    {
+     "w": "peso",
+     "t": 7.26
+    },
+    {
+     "w": "è",
+     "t": 7.48
+    },
+    {
+     "w": "giusto",
+     "t": 7.64
+    },
+    {
+     "w": "e",
+     "t": 7.9
+    },
+    {
+     "w": "la",
+     "t": 8.0
+    },
+    {
+     "w": "frizione...",
+     "t": 8.06
+    }
+   ]
+  },
+  {
+   "start": 8.78,
+   "end": 10.26,
+   "testo": "Ah sì, girarlo, ok.",
+   "parole": [
+    {
+     "w": "Ah",
+     "t": 8.78
+    },
+    {
+     "w": "sì,",
+     "t": 8.9
+    },
+    {
+     "w": "girarlo,",
+     "t": 9.22
+    },
+    {
+     "w": "ok.",
+     "t": 9.88
+    }
+   ]
+  },
+  {
+   "start": 10.34,
+   "end": 13.16,
+   "testo": "Sì, poi è un pallino che non accade mai, però...",
+   "parole": [
+    {
+     "w": "Sì,",
+     "t": 10.34
+    },
+    {
+     "w": "poi",
+     "t": 10.56
+    },
+    {
+     "w": "è",
+     "t": 10.6
+    },
+    {
+     "w": "un",
+     "t": 10.76
+    },
+    {
+     "w": "pallino",
+     "t": 11.3
+    },
+    {
+     "w": "che",
+     "t": 11.66
+    },
+    {
+     "w": "non",
+     "t": 11.82
+    },
+    {
+     "w": "accade",
+     "t": 11.94
+    },
+    {
+     "w": "mai,",
+     "t": 12.34
+    },
+    {
+     "w": "però...",
+     "t": 12.74
+    }
+   ]
+  },
+  {
+   "start": 13.16,
+   "end": 15.38,
+   "testo": "No, però teoricamente quindi praticamente può cadere.",
+   "parole": [
+    {
+     "w": "No,",
+     "t": 13.16
+    },
+    {
+     "w": "però",
+     "t": 13.3
+    },
+    {
+     "w": "teoricamente",
+     "t": 13.38
+    },
+    {
+     "w": "quindi",
+     "t": 14.18
+    },
+    {
+     "w": "praticamente",
+     "t": 14.46
+    },
+    {
+     "w": "può",
+     "t": 14.8
+    },
+    {
+     "w": "cadere.",
+     "t": 15.08
+    }
+   ]
+  },
+  {
+   "start": 15.46,
+   "end": 15.9,
+   "testo": "Esatto.",
+   "parole": [
+    {
+     "w": "Esatto.",
+     "t": 15.46
+    }
+   ]
+  },
+  {
+   "start": 15.96,
+   "end": 16.76,
+   "testo": "Tieni un attimo questo.",
+   "parole": [
+    {
+     "w": "Tieni",
+     "t": 15.96
+    },
+    {
+     "w": "un",
+     "t": 16.24
+    },
+    {
+     "w": "attimo",
+     "t": 16.36
+    },
+    {
+     "w": "questo.",
+     "t": 16.58
+    }
+   ]
+  }
+ ]
+}

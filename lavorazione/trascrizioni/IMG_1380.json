@@ -1,0 +1,242 @@
+{
+ "file": "IMG_1380",
+ "durata": 63.9763125,
+ "segmenti": [
+  {
+   "start": 9.44,
+   "end": 11.96,
+   "testo": "Asulina per paranchino di tensionamento della base.",
+   "parole": [
+    {
+     "w": "Asulina",
+     "t": 9.44
+    },
+    {
+     "w": "per",
+     "t": 9.96
+    },
+    {
+     "w": "paranchino",
+     "t": 10.1
+    },
+    {
+     "w": "di",
+     "t": 10.66
+    },
+    {
+     "w": "tensionamento",
+     "t": 10.76
+    },
+    {
+     "w": "della",
+     "t": 11.4
+    },
+    {
+     "w": "base.",
+     "t": 11.62
+    }
+   ]
+  },
+  {
+   "start": 31.76,
+   "end": 34.82,
+   "testo": "Asling, ne avete ancora bisogno o no?",
+   "parole": [
+    {
+     "w": "Asling,",
+     "t": 31.76
+    },
+    {
+     "w": "ne",
+     "t": 32.58
+    },
+    {
+     "w": "avete",
+     "t": 33.1
+    },
+    {
+     "w": "ancora",
+     "t": 33.86
+    },
+    {
+     "w": "bisogno",
+     "t": 34.06
+    },
+    {
+     "w": "o",
+     "t": 34.58
+    },
+    {
+     "w": "no?",
+     "t": 34.66
+    }
+   ]
+  },
+  {
+   "start": 35.56,
+   "end": 38.9,
+   "testo": "Perché ci sono? In realtà forse no.",
+   "parole": [
+    {
+     "w": "Perché",
+     "t": 35.56
+    },
+    {
+     "w": "ci",
+     "t": 36.26
+    },
+    {
+     "w": "sono?",
+     "t": 36.54
+    },
+    {
+     "w": "In",
+     "t": 36.98
+    },
+    {
+     "w": "realtà",
+     "t": 37.42
+    },
+    {
+     "w": "forse",
+     "t": 37.82
+    },
+    {
+     "w": "no.",
+     "t": 38.64
+    }
+   ]
+  },
+  {
+   "start": 44.1,
+   "end": 45.12,
+   "testo": "Faria adesso.",
+   "parole": [
+    {
+     "w": "Faria",
+     "t": 44.1
+    },
+    {
+     "w": "adesso.",
+     "t": 44.8
+    }
+   ]
+  },
+  {
+   "start": 46.17,
+   "end": 50.33,
+   "testo": "Sì, sì, gli orchi di Saruman.",
+   "parole": [
+    {
+     "w": "Sì,",
+     "t": 46.17
+    },
+    {
+     "w": "sì,",
+     "t": 46.87
+    },
+    {
+     "w": "gli",
+     "t": 49.05
+    },
+    {
+     "w": "orchi",
+     "t": 49.05
+    },
+    {
+     "w": "di",
+     "t": 49.65
+    },
+    {
+     "w": "Saruman.",
+     "t": 49.69
+    }
+   ]
+  },
+  {
+   "start": 54.19,
+   "end": 57.56,
+   "testo": "Perché ando dentro di brutta?",
+   "parole": [
+    {
+     "w": "Perché",
+     "t": 54.19
+    },
+    {
+     "w": "ando",
+     "t": 56.14
+    },
+    {
+     "w": "dentro",
+     "t": 56.84
+    },
+    {
+     "w": "di",
+     "t": 56.98
+    },
+    {
+     "w": "brutta?",
+     "t": 57.2
+    }
+   ]
+  },
+  {
+   "start": 57.62,
+   "end": 61.46,
+   "testo": "Sì, perché andrebbe fatto dopo, quando c'è del peso.",
+   "parole": [
+    {
+     "w": "Sì,",
+     "t": 57.62
+    },
+    {
+     "w": "perché",
+     "t": 58.08
+    },
+    {
+     "w": "andrebbe",
+     "t": 58.26
+    },
+    {
+     "w": "fatto",
+     "t": 58.9
+    },
+    {
+     "w": "dopo,",
+     "t": 59.58
+    },
+    {
+     "w": "quando",
+     "t": 60.1
+    },
+    {
+     "w": "c",
+     "t": 60.82
+    },
+    {
+     "w": "'è",
+     "t": 60.98
+    },
+    {
+     "w": "del",
+     "t": 61.08
+    },
+    {
+     "w": "peso.",
+     "t": 61.16
+    }
+   ]
+  },
+  {
+   "start": 62.7,
+   "end": 63.4,
+   "testo": "Herman!",
+   "parole": [
+    {
+     "w": "Herman!",
+     "t": 62.7
+    }
+   ]
+  }
+ ]
+}

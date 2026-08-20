@@ -1,0 +1,520 @@
+{
+ "file": "IMG_1350",
+ "durata": 65.213625,
+ "segmenti": [
+  {
+   "start": 0.21,
+   "end": 3.15,
+   "testo": "Corda rosa del backup con BFK.",
+   "parole": [
+    {
+     "w": "Corda",
+     "t": 0.21
+    },
+    {
+     "w": "rosa",
+     "t": 0.85
+    },
+    {
+     "w": "del",
+     "t": 1.27
+    },
+    {
+     "w": "backup",
+     "t": 1.87
+    },
+    {
+     "w": "con",
+     "t": 2.21
+    },
+    {
+     "w": "BFK.",
+     "t": 2.55
+    }
+   ]
+  },
+  {
+   "start": 30.71,
+   "end": 33.15,
+   "testo": "Vai, vai, adesso finisci qua e...",
+   "parole": [
+    {
+     "w": "Vai,",
+     "t": 30.71
+    },
+    {
+     "w": "vai,",
+     "t": 31.21
+    },
+    {
+     "w": "adesso",
+     "t": 31.31
+    },
+    {
+     "w": "finisci",
+     "t": 31.47
+    },
+    {
+     "w": "qua",
+     "t": 32.57
+    },
+    {
+     "w": "e...",
+     "t": 32.79
+    }
+   ]
+  },
+  {
+   "start": 33.15,
+   "end": 36.81,
+   "testo": "Allora, noi ce l'abbiamo, vezzo una corda per fare la linea vita sull'altra sosta.",
+   "parole": [
+    {
+     "w": "Allora,",
+     "t": 33.15
+    },
+    {
+     "w": "noi",
+     "t": 33.65
+    },
+    {
+     "w": "ce",
+     "t": 34.01
+    },
+    {
+     "w": "l",
+     "t": 34.23
+    },
+    {
+     "w": "'abbiamo,",
+     "t": 34.31
+    },
+    {
+     "w": "vezzo",
+     "t": 34.55
+    },
+    {
+     "w": "una",
+     "t": 34.73
+    },
+    {
+     "w": "corda",
+     "t": 34.87
+    },
+    {
+     "w": "per",
+     "t": 35.15
+    },
+    {
+     "w": "fare",
+     "t": 35.25
+    },
+    {
+     "w": "la",
+     "t": 35.43
+    },
+    {
+     "w": "linea",
+     "t": 35.59
+    },
+    {
+     "w": "vita",
+     "t": 35.85
+    },
+    {
+     "w": "sull",
+     "t": 35.99
+    },
+    {
+     "w": "'altra",
+     "t": 36.31
+    },
+    {
+     "w": "sosta.",
+     "t": 36.47
+    }
+   ]
+  },
+  {
+   "start": 37.13,
+   "end": 41.97,
+   "testo": "Sarà la corda azzurra che però prima dobbiamo utilizzarla per portare...",
+   "parole": [
+    {
+     "w": "Sarà",
+     "t": 37.13
+    },
+    {
+     "w": "la",
+     "t": 37.61
+    },
+    {
+     "w": "corda",
+     "t": 37.69
+    },
+    {
+     "w": "azzurra",
+     "t": 38.05
+    },
+    {
+     "w": "che",
+     "t": 38.45
+    },
+    {
+     "w": "però",
+     "t": 38.65
+    },
+    {
+     "w": "prima",
+     "t": 38.87
+    },
+    {
+     "w": "dobbiamo",
+     "t": 39.05
+    },
+    {
+     "w": "utilizzarla",
+     "t": 39.45
+    },
+    {
+     "w": "per",
+     "t": 40.19
+    },
+    {
+     "w": "portare...",
+     "t": 40.97
+    }
+   ]
+  },
+  {
+   "start": 41.97,
+   "end": 42.95,
+   "testo": "La taglia.",
+   "parole": [
+    {
+     "w": "La",
+     "t": 41.97
+    },
+    {
+     "w": "taglia.",
+     "t": 42.57
+    }
+   ]
+  },
+  {
+   "start": 43.03,
+   "end": 43.41,
+   "testo": "Esatto.",
+   "parole": [
+    {
+     "w": "Esatto.",
+     "t": 43.03
+    }
+   ]
+  },
+  {
+   "start": 43.55,
+   "end": 45.91,
+   "testo": "Beh, allora io intanto vado a fare la sosta dall'altra parte.",
+   "parole": [
+    {
+     "w": "Beh,",
+     "t": 43.55
+    },
+    {
+     "w": "allora",
+     "t": 43.79
+    },
+    {
+     "w": "io",
+     "t": 43.95
+    },
+    {
+     "w": "intanto",
+     "t": 44.23
+    },
+    {
+     "w": "vado",
+     "t": 44.47
+    },
+    {
+     "w": "a",
+     "t": 44.65
+    },
+    {
+     "w": "fare",
+     "t": 44.73
+    },
+    {
+     "w": "la",
+     "t": 44.83
+    },
+    {
+     "w": "sosta",
+     "t": 44.95
+    },
+    {
+     "w": "dall",
+     "t": 45.17
+    },
+    {
+     "w": "'altra",
+     "t": 45.37
+    },
+    {
+     "w": "parte.",
+     "t": 45.57
+    }
+   ]
+  },
+  {
+   "start": 46.17,
+   "end": 46.57,
+   "testo": "Breathing.",
+   "parole": [
+    {
+     "w": "Breathing.",
+     "t": 46.17
+    }
+   ]
+  },
+  {
+   "start": 46.69,
+   "end": 47.05,
+   "testo": "Time.",
+   "parole": [
+    {
+     "w": "Time.",
+     "t": 46.69
+    }
+   ]
+  },
+  {
+   "start": 47.51,
+   "end": 48.17,
+   "testo": "Quale sosta?",
+   "parole": [
+    {
+     "w": "Quale",
+     "t": 47.51
+    },
+    {
+     "w": "sosta?",
+     "t": 47.99
+    }
+   ]
+  },
+  {
+   "start": 48.43,
+   "end": 49.59,
+   "testo": "Quella della 50.",
+   "parole": [
+    {
+     "w": "Quella",
+     "t": 48.43
+    },
+    {
+     "w": "della",
+     "t": 48.91
+    },
+    {
+     "w": "50.",
+     "t": 49.09
+    }
+   ]
+  },
+  {
+   "start": 50.53,
+   "end": 51.49,
+   "testo": "La 50 di là?",
+   "parole": [
+    {
+     "w": "La",
+     "t": 50.53
+    },
+    {
+     "w": "50",
+     "t": 50.85
+    },
+    {
+     "w": "di",
+     "t": 51.11
+    },
+    {
+     "w": "là?",
+     "t": 51.39
+    }
+   ]
+  },
+  {
+   "start": 51.73,
+   "end": 52.03,
+   "testo": "Sì.",
+   "parole": [
+    {
+     "w": "Sì.",
+     "t": 51.73
+    }
+   ]
+  },
+  {
+   "start": 52.49,
+   "end": 52.97,
+   "testo": "Perfetto.",
+   "parole": [
+    {
+     "w": "Perfetto.",
+     "t": 52.49
+    }
+   ]
+  },
+  {
+   "start": 53.86,
+   "end": 56.4,
+   "testo": "Quindi prendo 4 dei tuoi delta.",
+   "parole": [
+    {
+     "w": "Quindi",
+     "t": 53.86
+    },
+    {
+     "w": "prendo",
+     "t": 54.34
+    },
+    {
+     "w": "4",
+     "t": 54.82
+    },
+    {
+     "w": "dei",
+     "t": 55.48
+    },
+    {
+     "w": "tuoi",
+     "t": 55.88
+    },
+    {
+     "w": "delta.",
+     "t": 56.06
+    }
+   ]
+  },
+  {
+   "start": 56.6,
+   "end": 57.66,
+   "testo": "Prendi la roba di...",
+   "parole": [
+    {
+     "w": "Prendi",
+     "t": 56.6
+    },
+    {
+     "w": "la",
+     "t": 57.0
+    },
+    {
+     "w": "roba",
+     "t": 57.12
+    },
+    {
+     "w": "di...",
+     "t": 57.38
+    }
+   ]
+  },
+  {
+   "start": 57.66,
+   "end": 60.22,
+   "testo": "Aspetta, la mia roba teniamola per il mio setup.",
+   "parole": [
+    {
+     "w": "Aspetta,",
+     "t": 57.66
+    },
+    {
+     "w": "la",
+     "t": 58.2
+    },
+    {
+     "w": "mia",
+     "t": 58.38
+    },
+    {
+     "w": "roba",
+     "t": 58.52
+    },
+    {
+     "w": "teniamola",
+     "t": 58.86
+    },
+    {
+     "w": "per",
+     "t": 59.58
+    },
+    {
+     "w": "il",
+     "t": 59.72
+    },
+    {
+     "w": "mio",
+     "t": 59.84
+    },
+    {
+     "w": "setup.",
+     "t": 59.98
+    }
+   ]
+  },
+  {
+   "start": 61.02,
+   "end": 63.9,
+   "testo": "E ci dovrebbe essere un mucchiettino di roba di slepreggio qua.",
+   "parole": [
+    {
+     "w": "E",
+     "t": 61.02
+    },
+    {
+     "w": "ci",
+     "t": 61.48
+    },
+    {
+     "w": "dovrebbe",
+     "t": 61.68
+    },
+    {
+     "w": "essere",
+     "t": 61.98
+    },
+    {
+     "w": "un",
+     "t": 62.24
+    },
+    {
+     "w": "mucchiettino",
+     "t": 62.42
+    },
+    {
+     "w": "di",
+     "t": 62.88
+    },
+    {
+     "w": "roba",
+     "t": 62.92
+    },
+    {
+     "w": "di",
+     "t": 63.18
+    },
+    {
+     "w": "slepreggio",
+     "t": 63.24
+    },
+    {
+     "w": "qua.",
+     "t": 63.76
+    }
+   ]
+  }
+ ]
+}

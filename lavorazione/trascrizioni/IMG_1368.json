@@ -1,0 +1,61 @@
+{
+ "file": "IMG_1368",
+ "durata": 24.893625,
+ "segmenti": [
+  {
+   "start": 1.87,
+   "end": 23.56,
+   "testo": "Aspetta, vai, vai pure, aspetta, stop, vai, stop, vai, stop, stop, stop.",
+   "parole": [
+    {
+     "w": "Aspetta,",
+     "t": 1.87
+    },
+    {
+     "w": "vai,",
+     "t": 2.49
+    },
+    {
+     "w": "vai",
+     "t": 6.52
+    },
+    {
+     "w": "pure,",
+     "t": 10.55
+    },
+    {
+     "w": "aspetta,",
+     "t": 10.89
+    },
+    {
+     "w": "stop,",
+     "t": 16.46
+    },
+    {
+     "w": "vai,",
+     "t": 17.32
+    },
+    {
+     "w": "stop,",
+     "t": 19.34
+    },
+    {
+     "w": "vai,",
+     "t": 20.77
+    },
+    {
+     "w": "stop,",
+     "t": 21.35
+    },
+    {
+     "w": "stop,",
+     "t": 23.22
+    },
+    {
+     "w": "stop.",
+     "t": 23.46
+    }
+   ]
+  }
+ ]
+}

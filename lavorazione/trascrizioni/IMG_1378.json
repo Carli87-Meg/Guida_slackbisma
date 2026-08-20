@@ -1,0 +1,65 @@
+{
+ "file": "IMG_1378",
+ "durata": 46.483,
+ "segmenti": [
+  {
+   "start": 42.06,
+   "end": 46.45,
+   "testo": "Ora ci servirebbe una corda di backup per lui e un altro Grigri.",
+   "parole": [
+    {
+     "w": "Ora",
+     "t": 42.06
+    },
+    {
+     "w": "ci",
+     "t": 42.7
+    },
+    {
+     "w": "servirebbe",
+     "t": 43.34
+    },
+    {
+     "w": "una",
+     "t": 43.8
+    },
+    {
+     "w": "corda",
+     "t": 43.94
+    },
+    {
+     "w": "di",
+     "t": 44.28
+    },
+    {
+     "w": "backup",
+     "t": 44.32
+    },
+    {
+     "w": "per",
+     "t": 44.58
+    },
+    {
+     "w": "lui",
+     "t": 44.92
+    },
+    {
+     "w": "e",
+     "t": 45.16
+    },
+    {
+     "w": "un",
+     "t": 45.65
+    },
+    {
+     "w": "altro",
+     "t": 45.85
+    },
+    {
+     "w": "Grigri.",
+     "t": 46.13
+    }
+   ]
+  }
+ ]
+}

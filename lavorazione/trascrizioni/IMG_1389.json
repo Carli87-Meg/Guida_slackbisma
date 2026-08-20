@@ -1,0 +1,45 @@
+{
+ "file": "IMG_1389",
+ "durata": 11.197625,
+ "segmenti": [
+  {
+   "start": 2.45,
+   "end": 9.8,
+   "testo": "Ok, potrebbe essere lì, sì, verde e nera.",
+   "parole": [
+    {
+     "w": "Ok,",
+     "t": 2.45
+    },
+    {
+     "w": "potrebbe",
+     "t": 6.32
+    },
+    {
+     "w": "essere",
+     "t": 8.06
+    },
+    {
+     "w": "lì,",
+     "t": 8.36
+    },
+    {
+     "w": "sì,",
+     "t": 8.68
+    },
+    {
+     "w": "verde",
+     "t": 8.88
+    },
+    {
+     "w": "e",
+     "t": 9.4
+    },
+    {
+     "w": "nera.",
+     "t": 9.54
+    }
+   ]
+  }
+ ]
+}

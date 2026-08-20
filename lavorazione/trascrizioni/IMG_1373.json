@@ -1,0 +1,469 @@
+{
+ "file": "IMG_1373",
+ "durata": 60.157625,
+ "segmenti": [
+  {
+   "start": 2.13,
+   "end": 6.59,
+   "testo": "Infatti Malte è morto",
+   "parole": [
+    {
+     "w": "Infatti",
+     "t": 2.13
+    },
+    {
+     "w": "Malte",
+     "t": 2.69
+    },
+    {
+     "w": "è",
+     "t": 3.09
+    },
+    {
+     "w": "morto",
+     "t": 3.41
+    }
+   ]
+  },
+  {
+   "start": 8.11,
+   "end": 9.99,
+   "testo": "Anche il distruttore nazionale faceva",
+   "parole": [
+    {
+     "w": "Anche",
+     "t": 8.11
+    },
+    {
+     "w": "il",
+     "t": 8.59
+    },
+    {
+     "w": "distruttore",
+     "t": 8.71
+    },
+    {
+     "w": "nazionale",
+     "t": 9.11
+    },
+    {
+     "w": "faceva",
+     "t": 9.57
+    }
+   ]
+  },
+  {
+   "start": 9.99,
+   "end": 11.91,
+   "testo": "Quando si staccano faceva le legrate così,",
+   "parole": [
+    {
+     "w": "Quando",
+     "t": 9.99
+    },
+    {
+     "w": "si",
+     "t": 10.43
+    },
+    {
+     "w": "staccano",
+     "t": 10.67
+    },
+    {
+     "w": "faceva",
+     "t": 11.03
+    },
+    {
+     "w": "le",
+     "t": 11.29
+    },
+    {
+     "w": "legrate",
+     "t": 11.43
+    },
+    {
+     "w": "così,",
+     "t": 11.75
+    }
+   ]
+  },
+  {
+   "start": 11.97,
+   "end": 14.25,
+   "testo": "Morte morte morte morte morte morte!",
+   "parole": [
+    {
+     "w": "Morte",
+     "t": 11.97
+    },
+    {
+     "w": "morte",
+     "t": 12.77
+    },
+    {
+     "w": "morte",
+     "t": 13.03
+    },
+    {
+     "w": "morte",
+     "t": 13.27
+    },
+    {
+     "w": "morte",
+     "t": 13.69
+    },
+    {
+     "w": "morte!",
+     "t": 13.93
+    }
+   ]
+  },
+  {
+   "start": 14.53,
+   "end": 15.03,
+   "testo": "Ok salvo",
+   "parole": [
+    {
+     "w": "Ok",
+     "t": 14.53
+    },
+    {
+     "w": "salvo",
+     "t": 14.71
+    }
+   ]
+  },
+  {
+   "start": 15.63,
+   "end": 17.27,
+   "testo": "Così, perfetto",
+   "parole": [
+    {
+     "w": "Così,",
+     "t": 15.63
+    },
+    {
+     "w": "perfetto",
+     "t": 15.99
+    }
+   ]
+  },
+  {
+   "start": 24.43,
+   "end": 27.41,
+   "testo": "Quante volte è successo che fossimo in quattro e su una sosta per la Bifida?",
+   "parole": [
+    {
+     "w": "Quante",
+     "t": 24.43
+    },
+    {
+     "w": "volte",
+     "t": 24.91
+    },
+    {
+     "w": "è",
+     "t": 25.13
+    },
+    {
+     "w": "successo",
+     "t": 25.23
+    },
+    {
+     "w": "che",
+     "t": 25.59
+    },
+    {
+     "w": "fossimo",
+     "t": 25.69
+    },
+    {
+     "w": "in",
+     "t": 26.05
+    },
+    {
+     "w": "quattro",
+     "t": 26.17
+    },
+    {
+     "w": "e",
+     "t": 26.41
+    },
+    {
+     "w": "su",
+     "t": 26.53
+    },
+    {
+     "w": "una",
+     "t": 26.61
+    },
+    {
+     "w": "sosta",
+     "t": 26.69
+    },
+    {
+     "w": "per",
+     "t": 26.97
+    },
+    {
+     "w": "la",
+     "t": 27.11
+    },
+    {
+     "w": "Bifida?",
+     "t": 27.23
+    }
+   ]
+  },
+  {
+   "start": 27.47,
+   "end": 28.91,
+   "testo": "Infatti adesso vado a Lai Montone per la sosta",
+   "parole": [
+    {
+     "w": "Infatti",
+     "t": 27.47
+    },
+    {
+     "w": "adesso",
+     "t": 27.71
+    },
+    {
+     "w": "vado",
+     "t": 27.89
+    },
+    {
+     "w": "a",
+     "t": 28.17
+    },
+    {
+     "w": "Lai",
+     "t": 28.17
+    },
+    {
+     "w": "Montone",
+     "t": 28.35
+    },
+    {
+     "w": "per",
+     "t": 28.63
+    },
+    {
+     "w": "la",
+     "t": 28.77
+    },
+    {
+     "w": "sosta",
+     "t": 28.77
+    }
+   ]
+  },
+  {
+   "start": 28.91,
+   "end": 30.47,
+   "testo": "No, ma va bene ci sta, ci sta",
+   "parole": [
+    {
+     "w": "No,",
+     "t": 28.91
+    },
+    {
+     "w": "ma",
+     "t": 29.43
+    },
+    {
+     "w": "va",
+     "t": 29.63
+    },
+    {
+     "w": "bene",
+     "t": 29.69
+    },
+    {
+     "w": "ci",
+     "t": 29.69
+    },
+    {
+     "w": "sta,",
+     "t": 29.93
+    },
+    {
+     "w": "ci",
+     "t": 30.19
+    },
+    {
+     "w": "sta",
+     "t": 30.27
+    }
+   ]
+  },
+  {
+   "start": 30.47,
+   "end": 33.93,
+   "testo": "Facciamo la ripresa raga",
+   "parole": [
+    {
+     "w": "Facciamo",
+     "t": 30.47
+    },
+    {
+     "w": "la",
+     "t": 33.07
+    },
+    {
+     "w": "ripresa",
+     "t": 33.19
+    },
+    {
+     "w": "raga",
+     "t": 33.65
+    }
+   ]
+  },
+  {
+   "start": 36.36,
+   "end": 38.22,
+   "testo": "Ripresa! Io adesso ti passo sopra",
+   "parole": [
+    {
+     "w": "Ripresa!",
+     "t": 36.36
+    },
+    {
+     "w": "Io",
+     "t": 36.84
+    },
+    {
+     "w": "adesso",
+     "t": 37.24
+    },
+    {
+     "w": "ti",
+     "t": 37.4
+    },
+    {
+     "w": "passo",
+     "t": 37.56
+    },
+    {
+     "w": "sopra",
+     "t": 37.76
+    }
+   ]
+  },
+  {
+   "start": 41.36,
+   "end": 47.39,
+   "testo": "qui ci siamo con ci mettono sling piccolino a questo punto una di quelle viola",
+   "parole": [
+    {
+     "w": "qui",
+     "t": 41.36
+    },
+    {
+     "w": "ci",
+     "t": 41.84
+    },
+    {
+     "w": "siamo",
+     "t": 42.51
+    },
+    {
+     "w": "con",
+     "t": 44.45
+    },
+    {
+     "w": "ci",
+     "t": 44.61
+    },
+    {
+     "w": "mettono",
+     "t": 44.73
+    },
+    {
+     "w": "sling",
+     "t": 45.09
+    },
+    {
+     "w": "piccolino",
+     "t": 45.39
+    },
+    {
+     "w": "a",
+     "t": 45.95
+    },
+    {
+     "w": "questo",
+     "t": 46.07
+    },
+    {
+     "w": "punto",
+     "t": 46.17
+    },
+    {
+     "w": "una",
+     "t": 46.41
+    },
+    {
+     "w": "di",
+     "t": 46.57
+    },
+    {
+     "w": "quelle",
+     "t": 46.67
+    },
+    {
+     "w": "viola",
+     "t": 46.85
+    }
+   ]
+  },
+  {
+   "start": 49.47,
+   "end": 59.63,
+   "testo": "la da due verde verde allora poi anche di mezzo",
+   "parole": [
+    {
+     "w": "la",
+     "t": 49.47
+    },
+    {
+     "w": "da",
+     "t": 50.74
+    },
+    {
+     "w": "due",
+     "t": 51.62
+    },
+    {
+     "w": "verde",
+     "t": 51.82
+    },
+    {
+     "w": "verde",
+     "t": 52.28
+    },
+    {
+     "w": "allora",
+     "t": 53.48
+    },
+    {
+     "w": "poi",
+     "t": 53.84
+    },
+    {
+     "w": "anche",
+     "t": 58.83
+    },
+    {
+     "w": "di",
+     "t": 59.05
+    },
+    {
+     "w": "mezzo",
+     "t": 59.21
+    }
+   ]
+  }
+ ]
+}
