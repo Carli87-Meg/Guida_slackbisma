@@ -49,17 +49,46 @@ C_AREA = {
 }
 
 
+def _norm(t):
+    """Minuscolo e senza separatori: «Anfite-altro» e «anfite_altro» coincidono."""
+    return ''.join(c for c in t.lower() if c.isalnum())
+
+
 def _slug_area(area):
     return area.lower().replace(' ', '-')
 
 
-def render_di(area):
-    """Render i-pietra del settore, se qualcuno l'ha esportato."""
-    for ext in _ESTENSIONI:
-        f = RENDER_IPIETRA / (_slug_area(area) + ext)
-        if f.exists():
-            return f
+def _cartella_render():
+    """La cartella dei render, comunque sia scritta.
+
+    Windows non distingue maiuscole e minuscole, Linux si': una cartella creata
+    come «Render_ipietra» sarebbe invisibile al build senza questa ricerca.
+    """
+    if RENDER_IPIETRA.is_dir():
+        return RENDER_IPIETRA
+    base = RENDER_IPIETRA.parent
+    if base.is_dir():
+        atteso = _norm(RENDER_IPIETRA.name)
+        for d in sorted(base.iterdir()):
+            if d.is_dir() and _norm(d.name) == atteso:
+                return d
     return None
+
+
+def render_di(area):
+    """Render i-pietra del settore, se qualcuno l'ha esportato.
+
+    Il nome del file non deve essere esatto: basta che contenga il nome del
+    settore. «Anfiteatro.jpg», «render_anfiteatro.png» e «anfiteatro-vista2.jpg»
+    vanno tutti bene. Non si puo' pretendere che un export sia rinominato a mano.
+    """
+    d = _cartella_render()
+    if d is None:
+        return None
+    bersaglio = _norm(area)
+    trovati = sorted(f for f in d.iterdir()
+                     if f.suffix.lower() in _ESTENSIONI and bersaglio in _norm(f.stem))
+    return trovati[0] if trovati else None
 
 
 def parte_planimetria():
@@ -362,3 +391,17 @@ def nota_copertura():
     return ('Dalla locandina «La Pietra». Il catalogo i-pietra ne registra <b>%d sulle '
             '%d</b>: %s. La differenza è segnalata ma non risolta.%s'
             % (c['in_ipietra'], c['totale'], dettaglio, incerto))
+
+
+if __name__ == '__main__':
+    # diagnostica: che cosa il build vede davvero nella cartella dei render
+    d = _cartella_render()
+    print('cartella render: %s' % (d if d else '— NON TROVATA —'))
+    if d:
+        immagini = [f.name for f in sorted(d.iterdir())
+                    if f.suffix.lower() in _ESTENSIONI]
+        print('immagini presenti: %s' % (', '.join(immagini) if immagini else 'nessuna'))
+    print()
+    for area in REG.AREE:
+        f = render_di(area)
+        print('  %-16s %s' % (area, f.name if f else '—'))
