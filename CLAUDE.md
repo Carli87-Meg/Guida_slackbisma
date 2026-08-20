@@ -1,7 +1,17 @@
-# Manuale di rigging — Highline 50 m, Pietra di Bismantova
+# Guida alle highline della Pietra di Bismantova
 
-Progetto: produrre un manuale PDF del rigging della highline da 50 m alla Pietra di
-Bismantova (Castelnovo ne' Monti, RE), partendo da una cartella di video del montaggio.
+Progetto: produrre in PDF una guida alle highline della Pietra di Bismantova
+(Castelnovo ne' Monti, RE).
+
+Il perimetro è cresciuto rispetto all'impostazione iniziale. Si partiva dal solo
+montaggio della «50» — che il catalogo i-pietra registra come **Anfiteatro 53 m** e che
+sul campo chiamano così — documentato da una cartella di video. La locandina «La Pietra»
+e i render i-pietra hanno poi mostrato che le linee censite sono **ventiquattro su cinque
+aree**, e la guida le copre tutte.
+
+Di una sola esiste documentazione di rigging. Le altre ventitré hanno una **scheda di
+rilievo**: campi vuoti da compilare sul posto e riportare in `dati/linee.py`. La guida è
+anche lo strumento con cui si documenta ciò che manca.
 
 ## Regola numero uno
 
@@ -52,7 +62,7 @@ build/
   design.py               # copiato da design/
   build_manuale.py        # script di assemblaggio PDF
 output/
-  Bismantova_Rigging_50m.pdf
+  Pietra_Bismantova_Highline.pdf
 NOTE_RIGGING.md           # sintesi strutturata estratta dai video
 DUBBI.md                  # elenco di tutto ciò che va confermato
 ```

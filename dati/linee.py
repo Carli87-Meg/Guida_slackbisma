@@ -149,6 +149,37 @@ COLLISIONE_NOME = ['settore-giallo-50']
 NON_VERIFICATI = []
 
 
+# ---------------------------------------------------------------- rilievo
+# Campi che una scheda di linea non ancora documentata chiede di compilare sul
+# campo. Sono qui, e non nell'impaginazione, per la stessa ragione delle
+# lunghezze: i dati stanno in un posto solo.
+#
+# L'elenco ricalca le voci che per la 53 m sono state ricavate dalle riprese, e
+# quelle che in DUBBI.md risultano ancora aperte anche per quella linea: cio' che
+# e' mancato una volta manchera' anche alle altre.
+#
+# Ogni voce e' (etichetta, righe_di_scrittura).
+CAMPI_RILIEVO = [
+    ('Lunghezza misurata', 1),
+    ('Dislivello / offlevel', 1),
+    ('Ancoraggio lato A — tipo e numero punti', 2),
+    ('Ancoraggio lato B — tipo e numero punti', 2),
+    ('Angolo di apertura', 1),
+    ('Collegamento fra i punti', 1),
+    ('Nastro e backup della linea', 2),
+    ('Materiale del lato tensione', 2),
+    ('Accesso e avvicinamento', 2),
+    ('Vincoli: autorizzazioni, stagionalita', 2),
+    ('Rilevata da', 1),
+    ('Data del rilievo', 1),
+]
+
+
+def campi_rilievo():
+    """Copia dei campi di rilievo, cosi' chi impagina non muta l'originale."""
+    return list(CAMPI_RILIEVO)
+
+
 def aree_assenti_da_ipietra():
     return [a for a in AREE if not any(l['in_ipietra'] for l in per_area(a))]
 

@@ -21,6 +21,7 @@ sys.path.insert(0, str(RADICE / 'build'))
 sys.path.insert(0, str(RADICE / 'dati'))
 
 from design import *                                                # noqa: E402,F403
+from campi import griglia_campi                                     # noqa: E402
 from reportlab.platypus import (PageBreak, Table, TableStyle,       # noqa: E402
                                 Paragraph, KeepTogether)
 
@@ -195,7 +196,7 @@ def nota_settori():
 def parte_catalogo():
     c = REG.conteggi()
     S = [Accent(LINEA, 'Le linee della Pietra'),
-         LineHeader('7', 'Le linee della Pietra', 'Catalogo · cinque aree', LINEA),
+         LineHeader('', 'Le linee della Pietra', 'Catalogo · cinque aree', LINEA),
          SP(10),
          P('La locandina «La Pietra — Yeah Vez!» censisce <b>%d linee</b> distribuite su '
            'cinque aree. Il catalogo i-pietra ne registra <b>%d</b>. Di tutte, una sola — '
@@ -220,7 +221,7 @@ def parte_catalogo():
                       '<font name="Pop-M" size="7.6" color="%s">%d LINEE · %s</font>'
                       % (area, MUT.hexval().replace('0x', '#'), len(ls),
                          occhiello.upper()),
-                      ParagraphStyle('ar', leading=15)),
+                      ParagraphStyle('ar', fontName='Pop', leading=15)),
             SP(6),
             tabella_area(area),
             SP(14)]))
@@ -313,6 +314,105 @@ def _intro_segnaposti(da):
     return testo
 
 
+def scheda_rilievo(l):
+    """Scheda di una linea non documentata, con i campi da compilare sul campo.
+
+    Non e' un segnaposto: e' lo strumento con cui la linea viene documentata. I
+    campi vengono da REG.CAMPI_RILIEVO, cioe' dalle stesse voci che per la 53 m
+    sono state ricavate dalle riprese o che in DUBBI.md restano aperte.
+    """
+    col = C_AREA[l['settore']]
+    ts = ParagraphStyle('rn', fontName='Pop-B', fontSize=13, leading=16)
+    fs = ParagraphStyle('rf', fontName='Pop-M', fontSize=7, leading=10,
+                        textColor=MUT)
+    ds = ParagraphStyle('rd', fontName='Lora', fontSize=8.4, leading=11.6,
+                        textColor=INK2)
+
+    fonte = 'LOCANDINA' + (' · CENSITA IN I-PIETRA' if l['in_ipietra']
+                           else ' · NON IN I-PIETRA')
+    note = []
+    if not l['in_ipietra']:
+        note.append('Non compare nel catalogo i-pietra: esiste sulla locandina, '
+                    'ma nell’app non c’è.')
+    if l['settore'] in REG.SETTORI_IN_CONFLITTO:
+        note.append('i-pietra la etichetta <b>Anfiteatro</b>, la locandina '
+                    '<b>Anfite-altro</b>: due nomi per lo stesso posto.')
+    if l['id'] in REG.COLLISIONE_NOME:
+        note.append('<b>Attenzione al nome:</b> anche l’Anfiteatro ha una linea '
+                    'chiamata «la 50». Citare sempre il settore.')
+
+    testa = [[Paragraph(nome(l), ts)], [Paragraph(fonte, fs)]]
+    if note:
+        testa.append([SP(4)])
+        testa.append([Paragraph(' '.join(note), ds)])
+    it = Table(testa, colWidths=[FW - 24])
+    it.setStyle(TableStyle([('LEFTPADDING', (0, 0), (-1, -1), 0),
+                            ('RIGHTPADDING', (0, 0), (-1, -1), 0),
+                            ('TOPPADDING', (0, 0), (-1, -1), 0),
+                            ('BOTTOMPADDING', (0, 0), (-1, -1), 0),
+                            ('BOTTOMPADDING', (0, 0), (0, 0), 2)]))
+
+    corpo = [[it],
+             [SP(10)],
+             [griglia_campi(REG.campi_rilievo(), w=FW - 24, cols=2)]]
+    t = Table(corpo, colWidths=[FW - 24])
+    t.setStyle(TableStyle([('LEFTPADDING', (0, 0), (-1, -1), 0),
+                           ('RIGHTPADDING', (0, 0), (-1, -1), 0),
+                           ('TOPPADDING', (0, 0), (-1, -1), 0),
+                           ('BOTTOMPADDING', (0, 0), (-1, -1), 0)]))
+
+    fuori = Table([[t]], colWidths=[FW])
+    fuori.setStyle(TableStyle([('LINEBEFORE', (0, 0), (0, 0), 3, col),
+                               ('BACKGROUND', (0, 0), (-1, -1), tint(col, 0.05)),
+                               ('LEFTPADDING', (0, 0), (-1, -1), 14),
+                               ('RIGHTPADDING', (0, 0), (-1, -1), 10),
+                               ('TOPPADDING', (0, 0), (-1, -1), 12),
+                               ('BOTTOMPADDING', (0, 0), (-1, -1), 6),
+                               ('VALIGN', (0, 0), (-1, -1), 'TOP')]))
+    return fuori
+
+
+def parte_rilievi():
+    """Una scheda di rilievo per ogni linea non ancora documentata."""
+    da = REG.da_documentare()
+    S = [Accent(LINEA, 'Rilievo'),
+         LineHeader('', 'Schede di rilievo', 'Le %d linee ancora da documentare'
+                    % len(da), LINEA),
+         SP(10),
+         P('Di queste linee si conoscono soltanto settore e lunghezza di catalogo: '
+           'nessuna ripresa, nessuna trascrizione, nessun fotogramma. Le schede che '
+           'seguono <b>non sono capitoli incompleti, sono moduli da compilare</b>: '
+           'una pagina per linea, con i campi che per la 53 m dell’Anfiteatro sono '
+           'stati ricavati dalle riprese, e quelli che anche per quella linea restano '
+           'aperti.', lead),
+         SP(8),
+         P('Compilate sul posto, si riportano poi in <b>dati/linee.py</b> e la linea '
+           'smette di essere un modulo e diventa un capitolo.', body),
+         SP(14),
+         callout('Compilare solo ciò che si è visto',
+                 'Vale qui la regola di tutto il documento: un campo lasciato in bianco '
+                 'è un dato mancante dichiarato, e va benissimo. Un campo riempito a '
+                 'memoria o per somiglianza con un’altra linea è un dato falso, e su un '
+                 'documento di rigging è la cosa peggiore che ci possa finire dentro.',
+                 WARN, '!', FW, True),
+         PageBreak()]
+
+    for area in REG.AREE:
+        ls = [l for l in da if l['settore'] == area]
+        for i, l in enumerate(ls):
+            if i == 0:
+                S.append(Paragraph(
+                    '<font name="Pop-B" size="10.5" color="#%s">%s</font>'
+                    % (C_AREA[area].hexval()[2:], area.upper()),
+                    ParagraphStyle('rh', fontName='Pop', leading=14)))
+                S.append(SP(8))
+            S.append(scheda_rilievo(l))
+            S.append(SP(14))
+        if ls:
+            S.append(PageBreak())
+    return S
+
+
 def parte_segnaposti():
     da = REG.da_documentare()
     S = [Accent(LINEA, 'Da documentare'),
@@ -337,7 +437,7 @@ def parte_segnaposti():
                          if len(coppia) == 2 else scheda(coppia[0]))
             righe.append(SP(10))
         testa = Paragraph('<font name="Pop-B" size="10.5">%s</font>' % area,
-                          ParagraphStyle('ah', leading=14))
+                          ParagraphStyle('ah', fontName='Pop', leading=14))
         S.append(Accent(LINEA, 'Da documentare'))
         # l'intestazione dell'area non resta mai sola in fondo alla pagina:
         # viaggia insieme alla prima riga di schede

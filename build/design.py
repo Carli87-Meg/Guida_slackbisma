@@ -372,7 +372,7 @@ def callout(title, text, color=BRAND, icon='!', w=FW, strong=False):
                             ('TOPPADDING', (0, 1), (-1, -1), 0)]))
     badge = Paragraph('<font name="Pop-B" size="13" color="%s">%s</font>'
                       % ((WHITE if strong else color).hexval().replace('0x', '#'), icon),
-                      ParagraphStyle('bd', alignment=TA_CENTER, leading=16))
+                      ParagraphStyle('bd', fontName='Pop-B', alignment=TA_CENTER, leading=16))
     t = Table([[badge, it]], colWidths=[26, w - 26])
     t.setStyle(TableStyle([('BACKGROUND', (0, 0), (-1, -1), bg),
                            ('LINEBEFORE', (0, 0), (0, 0), 3, color),

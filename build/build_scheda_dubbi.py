@@ -31,41 +31,14 @@ C_ASL = LC[5]                   # anti-slip       (verde)
 
 
 # ---------------------------------------------------------------- componenti
-class Righe(Flowable):
-    """Righe vuote su cui scrivere la risposta a penna."""
-
-    def __init__(self, n=2, w=FW, passo=21):
-        self.n, self.w, self.passo = n, w, passo
-        self.h = n * passo
-
-    def wrap(self, aw, ah):
-        return (self.w, self.h)
-
-    def draw(self):
-        c = self.canv
-        c.setStrokeColor(HAIR)
-        c.setLineWidth(0.6)
-        for i in range(self.n):
-            y = self.h - (i + 1) * self.passo + 5
-            c.line(0, y, self.w, y)
-
+# Righe e campo stanno in build/campi.py: li usa anche schede_linee.py per le
+# schede di rilievo, e una seconda copia sarebbe divergita alla prima modifica.
+from campi import Righe, campo                                      # noqa: E402,F401
 
 qs = ParagraphStyle('q', fontName='Lora', fontSize=9.8, leading=13.8, textColor=INK)
 fs = ParagraphStyle('f', fontName='Pop-M', fontSize=7.0, leading=10, textColor=MUT)
 bs = ParagraphStyle('b', fontName='Pop-B', fontSize=13, leading=15,
                     alignment=TA_RIGHT)
-
-
-def campo(label, w):
-    """Etichetta piccola sopra una riga su cui scrivere."""
-    st = ParagraphStyle('cl', fontName='Pop-M', fontSize=7.2, leading=10,
-                        textColor=MUT)
-    t = Table([[Paragraph(label.upper(), st)], [Righe(1, w=w)]], colWidths=[w])
-    t.setStyle(TableStyle([('LEFTPADDING', (0, 0), (-1, -1), 0),
-                           ('RIGHTPADDING', (0, 0), (-1, -1), 0),
-                           ('TOPPADDING', (0, 0), (-1, -1), 0),
-                           ('BOTTOMPADDING', (0, 0), (-1, -1), 0)]))
-    return t
 
 
 def domanda(num, testo, fonte, color, righe=2, prio=False):
