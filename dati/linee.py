@@ -8,10 +8,21 @@ FONTI — e solo queste:
 
 * **locandina** «La Pietra — Yeah Vez!», fornita dall'utente: censisce cinque
   aree e ventiquattro linee. E' la fonte dell'elenco e delle lunghezze.
-* **i-pietra**, catalogo consultato in sola lettura: ne registra dodici, e
-  accorpa Anfite-altro dentro Anfiteatro. Confermato a immagine dai render 3D
-  del settore Anfiteatro e del settore Rookie (20/08/2026), dove le etichette
-  leggibili coincidono riga per riga con la tabella di NOTE_RIGGING.md.
+* **i-pietra**, catalogo consultato in sola lettura. Accorpa Anfite-altro dentro
+  Anfiteatro. La copertura e' stata verificata a immagine sui render 3D forniti
+  dall'utente il 20/08/2026:
+
+  - Anfiteatro e Rookie: le etichette leggibili coincidono riga per riga con la
+    tabella di NOTE_RIGGING.md;
+  - **Despedida: tutte e sei le linee risultano censite** (35, 45, 60, 70, 85,
+    165 m). Questo *contraddice* NOTE_RIGGING.md, che dava Despedida assente da
+    i-pietra e contava dodici linee su ventiquattro. Il render e' successivo a
+    quella nota: o il catalogo e' stato aggiornato, o la ricognizione iniziale
+    era parziale. Qui vale il render, che e' la fonte diretta; la riconciliazione
+    con la nota e' il dubbio 53 di DUBBI.md.
+  - **Settore Giallo: non verificato.** Nessun render fornito. Resta segnato
+    assente come diceva NOTE_RIGGING.md, ma il dato e' ora incerto quanto lo era
+    quello di Despedida.
 
 Il confronto fra le due fonti sta in NOTE_RIGGING.md, sezione «La locandina non
 coincide con i-pietra», ed e' gia' stato validato dall'utente.
@@ -23,16 +34,22 @@ ventitre' non esiste nemmeno un tentativo di misura.
 
 # stato della documentazione di rigging di una linea
 DOCUMENTATA = 'documentata'          # esistono video, trascrizioni, fotogrammi
+FOTOGRAFATA = 'fotografata'          # esistono foto della linea montata, non il rigging
 NON_DOCUMENTATA = 'non documentata'  # si conosce solo nome, settore, lunghezza
+
+# Lo stato «fotografata» non e' scritto qui: si ricava dalla presenza di una
+# cartella in lavorazione/foto_linee/<id>/. Vedi il LEGGIMI li' dentro.
+# Una foto della linea in opera NON documenta il rigging: mostra che la linea
+# esiste ed e' stata camminata, non come e' stata ancorata.
 
 # settore secondo la locandina -> settore secondo i-pietra
 # (None = il settore non compare affatto nel catalogo i-pietra)
 SETTORE_IPIETRA = {
     'Rookie': 'Rookie',
-    'Settore Giallo': None,
+    'Settore Giallo': None,   # non verificato — vedi dubbio 53
     'Anfiteatro': 'Anfiteatro',
     'Anfite-altro': 'Anfiteatro',    # i-pietra le accorpa dentro Anfiteatro
-    'Despedida': None,
+    'Despedida': 'Despedida',  # render 20/08/2026: tutte e sei censite
 }
 
 # Ordine di presentazione delle aree, come sulla locandina.
@@ -62,12 +79,12 @@ _GREZZO = [
     ('Anfite-altro',   30,  True,  NON_DOCUMENTATA),
     ('Anfite-altro',  135,  True,  NON_DOCUMENTATA),
 
-    ('Despedida',      35,  False, NON_DOCUMENTATA),
-    ('Despedida',      45,  False, NON_DOCUMENTATA),
-    ('Despedida',      60,  False, NON_DOCUMENTATA),
-    ('Despedida',      70,  False, NON_DOCUMENTATA),
-    ('Despedida',      85,  False, NON_DOCUMENTATA),
-    ('Despedida',     165,  False, NON_DOCUMENTATA),
+    ('Despedida',      35,  True, NON_DOCUMENTATA),
+    ('Despedida',      45,  True, NON_DOCUMENTATA),
+    ('Despedida',      60,  True, NON_DOCUMENTATA),
+    ('Despedida',      70,  True, NON_DOCUMENTATA),
+    ('Despedida',      85,  True, NON_DOCUMENTATA),
+    ('Despedida',     165,  True, NON_DOCUMENTATA),
 ]
 
 
@@ -115,8 +132,30 @@ def conteggi():
 # ambiguita' del dubbio 45.
 SETTORI_IN_CONFLITTO = ['Anfite-altro']
 
+# La 50 m del Settore Giallo e' la linea reale con cui collide il nome di lavoro
+# «la 50» dato alla 53 m dell'Anfiteatro: dubbio 45, il punto in cui un lettore
+# potrebbe attrezzare la linea sbagliata. Va evidenziata ovunque compaia.
+COLLISIONE_NOME = ['settore-giallo-50']
+
+# Settori la cui presenza in i-pietra non e' stata verificata su un render.
+NON_VERIFICATI = ['Settore Giallo']
+
+
+def aree_assenti_da_ipietra():
+    return [a for a in AREE if not any(l['in_ipietra'] for l in per_area(a))]
+
+
+def lunghezze_assenti(area):
+    """Lunghezze di un'area presenti sulla locandina ma non in i-pietra."""
+    return [l['lunghezza'] for l in per_area(area) if not l['in_ipietra']]
+
 
 if __name__ == '__main__':
+    import sys as _s
+    if '--id' in _s.argv:
+        for l in LINEE:
+            print('%-18s %s · %d m' % (l['id'], l['settore'], l['lunghezza']))
+        raise SystemExit(0)
     c = conteggi()
     print('linee totali: %(totale)d · in i-pietra: %(in_ipietra)d · '
           'documentate: %(documentate)d' % c)

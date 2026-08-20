@@ -17,7 +17,8 @@ RADICE = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(RADICE / 'build'))
 
 from design import *                                                # noqa: E402,F403
-from schede_linee import parte_linee                                # noqa: E402
+from schede_linee import (parte_linee, tabella_aree,                # noqa: E402
+                          nota_copertura)
 from reportlab.platypus import (BaseDocTemplate, PageTemplate, Frame,   # noqa: E402
                                 PageBreak, NextPageTemplate, Table,
                                 TableStyle, Paragraph, Spacer)
@@ -193,18 +194,12 @@ S.append(callout('Attenzione al nome',
 S.append(SP(12))
 S.append(P('<b>Le highline censite alla Pietra</b>', h3))
 S.append(SP(5))
-S.append(data_table(
-    ['Area', 'Lunghezze rilevate (m)', 'N.'],
-    [['Rookie', '18 · 27 · 40 · 60', '4'],
-     ['Settore Giallo', '28 · 45 · <b>50</b> · 55', '4'],
-     ['Anfiteatro', '20 · 27 · 46 · <b>53</b> · 97 · 108 · 113', '7'],
-     ['Anfite-altro', '22 · 30 · 135', '3'],
-     ['Despedida', '35 · 45 · 60 · 70 · 85 · 165', '6']],
-    [104, 340, 47], LINEA))
+# tabella e nota vengono dal registro dati/linee.py: erano scritte a mano qui
+# accanto agli stessi dati, e le due copie sono andate in conflitto appena il
+# catalogo i-pietra e' cambiato.
+S.append(tabella_aree())
 S.append(SP(6))
-S.append(P('Dalla locandina «La Pietra». Il catalogo i-pietra ne registra dodici sulle '
-           'ventiquattro: mancano Settore Giallo e Despedida per intero, e all’Anfiteatro '
-           'la 20 m e la 108 m. La differenza è segnalata ma non risolta.', small))
+S.append(P(nota_copertura(), small))
 S.append(SP(12))
 S.append(data_table(
     ['Voce', 'Valore', 'Fonte'],
@@ -456,7 +451,7 @@ S.extend(parte_linee())
 
 # ================================================================ p11 — glossario e chiusura
 sec(LINEA, 'Glossario')
-S.append(LineHeader('7', 'Glossario', 'Il gergo del gruppo', LINEA))
+S.append(LineHeader('9', 'Glossario', 'Il gergo del gruppo', LINEA))
 S.append(SP(10))
 S.append(P('I termini sono riportati come vengono pronunciati sul campo, con accanto il '
            'nome corrente. Dove il gergo è ambiguo, è segnalato.', lead))

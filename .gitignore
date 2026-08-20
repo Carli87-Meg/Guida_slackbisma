@@ -25,6 +25,7 @@ lavorazione/*
 !lavorazione/trascrizioni/
 !lavorazione/dettagli/
 !lavorazione/piano_frame.txt
+!lavorazione/foto_linee/
 
 # PDF prodotto da build/build_manuale.py
 output/

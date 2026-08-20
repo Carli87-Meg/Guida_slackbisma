@@ -24,7 +24,14 @@ from design import *                                                # noqa: E402
 from reportlab.platypus import (PageBreak, Table, TableStyle,       # noqa: E402
                                 Paragraph, KeepTogether)
 
+from PIL import Image as _PILImage                                  # noqa: E402
+
 import linee as REG                                                 # noqa: E402
+
+# Una cartella per linea, chiamata con l'id della linea. Vedi il LEGGIMI li'
+# dentro: basta creare la cartella e metterci i file, nessun codice da toccare.
+FOTO_LINEE = RADICE / 'lavorazione' / 'foto_linee'
+_ESTENSIONI = ('.jpg', '.jpeg', '.png', '.JPG', '.JPEG', '.PNG')
 
 LINEA = HexColor(0xF97316)      # colore che i-pietra assegna alla 53 m
 
@@ -36,6 +43,21 @@ C_AREA = {
     'Anfite-altro':   LC[1],
     'Despedida':      LC[7],
 }
+
+
+def foto_di(l):
+    """Fotografie della linea montata, se qualcuno ne ha messe."""
+    d = FOTO_LINEE / l['id']
+    if not d.is_dir():
+        return []
+    return sorted(f for f in d.iterdir() if f.suffix in _ESTENSIONI)
+
+
+def stato_effettivo(l):
+    """Stato reale: il registro dice il rigging, il disco dice le foto."""
+    if l['stato'] == REG.DOCUMENTATA:
+        return REG.DOCUMENTATA
+    return REG.FOTOGRAFATA if foto_di(l) else REG.NON_DOCUMENTATA
 
 
 def nome(l):
@@ -59,7 +81,7 @@ def tabella_area(area):
 def parte_catalogo():
     c = REG.conteggi()
     S = [Accent(LINEA, 'Le linee della Pietra'),
-         LineHeader('8', 'Le linee della Pietra', 'Catalogo · cinque aree', LINEA),
+         LineHeader('7', 'Le linee della Pietra', 'Catalogo · cinque aree', LINEA),
          SP(10),
          P('La locandina «La Pietra — Yeah Vez!» censisce <b>%d linee</b> distribuite su '
            'cinque aree. Il catalogo i-pietra ne registra <b>%d</b>. Di tutte, una sola — '
@@ -126,16 +148,68 @@ def segnaposto(l):
     return t
 
 
+def scheda_fotografata(l):
+    """Linea montata e fotografata, ma senza documentazione di rigging."""
+    col = C_AREA[l['settore']]
+    fs = foto_di(l)
+    ts = ParagraphStyle('fn', fontName='Pop-B', fontSize=11, leading=14)
+    ds = ParagraphStyle('fd', fontName='Lora', fontSize=8.6, leading=12,
+                        textColor=INK2)
+    with _PILImage.open(fs[0]) as im:
+        ow, oh = im.size
+    conta = '%d fotografie' % len(fs) if len(fs) > 1 else '1 fotografia'
+    inner = [[PhotoStrip(str(fs[0]), COL - 22, ow, oh, None, col, 0.62, 0.5)],
+             [SP(7)],
+             [Paragraph(nome(l), ts)],
+             [Paragraph('Montata e fotografata · %s. <b>Rigging non documentato</b>: '
+                        'la fotografia mostra che la linea esiste, non come è stata '
+                        'ancorata.' % conta, ds)]]
+    it = Table(inner, colWidths=[COL - 22])
+    it.setStyle(TableStyle([('LEFTPADDING', (0, 0), (-1, -1), 0),
+                            ('RIGHTPADDING', (0, 0), (-1, -1), 0),
+                            ('TOPPADDING', (0, 0), (-1, -1), 0),
+                            ('BOTTOMPADDING', (0, 0), (-1, -1), 0),
+                            ('BOTTOMPADDING', (0, 2), (0, 2), 3)]))
+    t = Table([[it]], colWidths=[COL])
+    t.setStyle(TableStyle([('BACKGROUND', (0, 0), (-1, -1), tint(col, 0.07)),
+                           ('LINEBEFORE', (0, 0), (0, 0), 3, col),
+                           ('LEFTPADDING', (0, 0), (-1, -1), 12),
+                           ('RIGHTPADDING', (0, 0), (-1, -1), 10),
+                           ('TOPPADDING', (0, 0), (-1, -1), 10),
+                           ('BOTTOMPADDING', (0, 0), (-1, -1), 11),
+                           ('VALIGN', (0, 0), (-1, -1), 'TOP')]))
+    t.hAlign = 'LEFT'
+    return t
+
+
+def scheda(l):
+    """La scheda giusta per lo stato in cui la linea si trova."""
+    return (scheda_fotografata(l) if stato_effettivo(l) == REG.FOTOGRAFATA
+            else segnaposto(l))
+
+
+def _intro_segnaposti(da):
+    fotografate = [l for l in da if stato_effettivo(l) == REG.FOTOGRAFATA]
+    testo = ('Di ognuna delle <b>%d linee</b> qui sotto non esiste documentazione di '
+             'rigging: sono segnaposto dichiarati, non capitoli incompleti.' % len(da))
+    if fotografate:
+        testo += (' Di <b>%d</b> esistono fotografie della linea montata, che mostrano '
+                  'che è stata attrezzata e camminata — non come è stata ancorata. '
+                  'Delle altre %d si conoscono soltanto settore e lunghezza di catalogo.'
+                  % (len(fotografate), len(da) - len(fotografate)))
+    else:
+        testo += (' Di tutte si conoscono soltanto il settore e la lunghezza di '
+                  'catalogo: nessuna ripresa, nessuna trascrizione, nessun fotogramma.')
+    return testo
+
+
 def parte_segnaposti():
     da = REG.da_documentare()
     S = [Accent(LINEA, 'Da documentare'),
-         LineHeader('9', 'Le linee da documentare', 'Impalcatura · %d schede vuote'
+         LineHeader('8', 'Le linee da documentare', 'Impalcatura · %d schede vuote'
                     % len(da), LINEA),
          SP(10),
-         P('Di ognuna delle <b>%d linee</b> qui sotto si conoscono soltanto il settore e '
-           'la lunghezza di catalogo. Nessuna ripresa di montaggio, nessuna trascrizione, '
-           'nessun fotogramma: sono segnaposto dichiarati, non capitoli incompleti.'
-           % len(da), lead),
+         P(_intro_segnaposti(da), lead),
          SP(12),
          P('Perché una di queste diventi un capitolo servono, nell\'ordine: riprese del '
            'montaggio con audio, la trascrizione, la selezione dei fotogrammi e la '
@@ -149,8 +223,8 @@ def parte_segnaposti():
         righe = []
         for i in range(0, len(ls), 2):
             coppia = ls[i:i + 2]
-            righe.append(two_cols(segnaposto(coppia[0]), segnaposto(coppia[1]))
-                         if len(coppia) == 2 else segnaposto(coppia[0]))
+            righe.append(two_cols(scheda(coppia[0]), scheda(coppia[1]))
+                         if len(coppia) == 2 else scheda(coppia[0]))
             righe.append(SP(10))
         testa = Paragraph('<font name="Pop-B" size="10.5">%s</font>' % area,
                           ParagraphStyle('ah', leading=14))
@@ -166,3 +240,48 @@ def parte_segnaposti():
 def parte_linee():
     """Tutta la parte multi-linea, pronta da concatenare alla storia del manuale."""
     return parte_catalogo() + [PageBreak()] + parte_segnaposti() + [PageBreak()]
+
+
+# ---------------------------------------------------------------- riepilogo aree
+def tabella_aree():
+    """Le cinque aree con le lunghezze: una riga per area.
+
+    Generata dal registro. Prima era scritta a mano accanto agli stessi dati, e
+    le due copie sono andate in conflitto appena i-pietra e' cambiato.
+    """
+    righe = []
+    for area in REG.AREE:
+        ls = REG.per_area(area)
+        lunghezze = ' · '.join(
+            '<b>%d</b>' % l['lunghezza']
+            if l['stato'] == REG.DOCUMENTATA or l['id'] in REG.COLLISIONE_NOME
+            else str(l['lunghezza']) for l in ls)
+        righe.append([area, lunghezze, str(len(ls))])
+    return data_table(['Area', 'Lunghezze rilevate (m)', 'N.'],
+                      righe, [104, 340, 47], color=LINEA)
+
+
+def nota_copertura():
+    """Frase sulla copertura di i-pietra, calcolata invece che trascritta."""
+    c = REG.conteggi()
+    pezzi = []
+    assenti = REG.aree_assenti_da_ipietra()
+    if assenti:
+        pezzi.append('manca %s per intero' % ' e '.join('<b>%s</b>' % a for a in assenti))
+    for area in REG.AREE:
+        if area in assenti:
+            continue
+        mancanti = REG.lunghezze_assenti(area)
+        if mancanti:
+            pezzi.append('all\'%s mancano %s' % (
+                area, ' e '.join('la %d m' % m for m in mancanti)))
+    dettaglio = '; '.join(pezzi) if pezzi else 'le copre tutte'
+    incerto = ''
+    if REG.NON_VERIFICATI:
+        incerto = (' La presenza di %s in i-pietra <b>non è stata verificata</b> su un '
+                   'render: è segnata assente sulla fede di una ricognizione più vecchia '
+                   '(dubbio 53).'
+                   % ' e '.join(REG.NON_VERIFICATI))
+    return ('Dalla locandina «La Pietra». Il catalogo i-pietra ne registra <b>%d sulle '
+            '%d</b>: %s. La differenza è segnalata ma non risolta.%s'
+            % (c['in_ipietra'], c['totale'], dettaglio, incerto))

@@ -7,6 +7,7 @@ Stato: Fasi 1-4 concluse. Bloccanti risolti il 19/08/2026.
 Il 20/08/2026 i render 3D di i-pietra confermano riga per riga la tabella di
 `NOTE_RIGGING.md`: 12 linee censite su 24, Anfite-altro accorpata in Anfiteatro.
 Da quella conferma nasce il dubbio 52.
+Il render di Despedida invece **smentisce** la tabella: dubbio 53.
 Fonti aggiuntive acquisite: catalogo **i-pietra** (sola lettura), che ha chiuso nome, lunghezza
 e tipo di roccia.
 
@@ -96,6 +97,7 @@ e tipo di roccia.
 | 50 | E | **C'è un A-frame** — due pali di legno con fettucce — visibile in `IMG_1396.JPG`, mai nominato in nessuna trascrizione né notato prima | Elemento strutturale del lato tensione: altezza, materiale e ancoraggio a terra sono tutti ignoti | `foto/IMG_1396.JPG` | aperto |
 | 51 | — | Il **nastro della linea appare bianco/crema** in `IMG_1401`, con un secondo nastro chiaro parallelo (backup?) | Chiude i dubbi 22 e 23 se confermato | `foto/IMG_1401.JPG` | aperto |
 | 52 | intro | **I due cataloghi non concordano sul nome del settore.** i-pietra etichetta «Anfiteatro» anche le tre linee che la locandina mette sotto **Anfite-altro** (22, 30, 135 m). Qual è il nome che usate voi? | Stesso rischio del dubbio 45: chi cerca una linea partendo dall'app e chi parte dalla locandina finisce in due settori diversi | render 3D i-pietra dei settori Anfiteatro e Rookie, forniti dall'utente il 20/08/2026 | aperto |
+| 53 | intro | **La copertura di i-pietra e' cambiata o era stata letta male.** Il render di Despedida del 20/08/2026 mostra tutte e sei le linee censite, mentre `NOTE_RIGGING.md` dava Despedida assente e contava 12 linee su 24. Il registro ora ne conta **18 su 24**. Resta da verificare il **Settore Giallo**, per cui non esiste render | Il numero finisce stampato nel manuale: se e' sbagliato, e' sbagliato in copertina del capitolo 8 | render 3D i-pietra di Despedida vs tabella di NOTE_RIGGING.md | aperto — **serve un render del Settore Giallo** |
 
 ## Note da riportare nel manuale
 
