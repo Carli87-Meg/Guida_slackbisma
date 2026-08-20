@@ -166,9 +166,10 @@ S.append(callout('La regola di questo progetto',
                  'ma sbagliato, in un documento che descrive una linea sospesa nel vuoto, '
                  'è un rischio reale.', WARN, icon='!', strong=True))
 S.append(SP(16))
-S.append(P('<b>Le sei voci segnate PRIORITARIO</b> sono quelle che DUBBI.md indica come più '
-           'gravi: la portata delle brache, il nome della linea, la fotografia dell\'ancoraggio, '
-           'la lunghezza della campata, il nastro e il suo backup. Se il tempo con i ragazzi '
+S.append(P('<b>Le sette voci segnate PRIORITARIO</b> sono quelle che DUBBI.md indica come '
+           'più gravi: la portata delle brache, il nome della linea e quello del settore, '
+           'la fotografia dell\'ancoraggio, la lunghezza della campata, il nastro e il suo '
+           'backup. Se il tempo con i ragazzi '
            'è poco, si parte da lì.', body))
 S.append(SP(14))
 S.append(data_table(
@@ -177,7 +178,7 @@ S.append(data_table(
      ['2 · Materiale', '8-24', 'Lunghezze, diametri, modelli, quantità'],
      ['3 · Manovre', '25-36', 'Nomi di nodi, sequenze, esecuzione'],
      ['4 · Ancoraggio', '37-41, 50-51', 'Verifiche a immagine e scatti da fare'],
-     ['5 · Nome e fonti', '42-49', 'Denominazione, locandina, buchi di ripresa']],
+     ['5 · Nome e fonti', '42-52', 'Denominazione, locandina, buchi di ripresa']],
     [118, 78, FW - 196], color=LINEA))
 S.append(PageBreak())
 
@@ -310,6 +311,10 @@ sezione('5', 'Nome della linea, fonti, buchi di ripresa', 'Sezione 5 · apparato
               'Settore Giallo</b>, che esiste davvero: un lettore potrebbe attrezzare la '
               'linea sbagliata. Come si chiama davvero questa linea fra di voi?',
           'locandina · l\'ambiguità più pericolosa del documento', 3, True),
+         (52, '<b>I due cataloghi non concordano sul nome del settore.</b> i-pietra '
+              'etichetta «Anfiteatro» anche le tre linee che la locandina mette sotto '
+              '<b>Anfite-altro</b> — 22, 30 e 135 m. Qual è il nome che usate voi?',
+          'render 3D i-pietra · stesso rischio del dubbio 45', 3, True),
          (42, 'Dati presi da i-pietra da validare: settore <b>Anfiteatro</b>, roccia '
               '<b>arenaria</b>, colore linea <b>#F97316</b>. Se il manuale li stampa devono '
               'essere corretti anche fuori dall\'app.', 'catalogo i-pietra'),

@@ -4,6 +4,9 @@ Elenco di tutto ciò che nel manuale sarebbe marcato `[DA CONFERMARE]`.
 Nessuna di queste voci va risolta per deduzione: servono risposte da chi ha montato la linea.
 
 Stato: Fasi 1-4 concluse. Bloccanti risolti il 19/08/2026.
+Il 20/08/2026 i render 3D di i-pietra confermano riga per riga la tabella di
+`NOTE_RIGGING.md`: 12 linee censite su 24, Anfite-altro accorpata in Anfiteatro.
+Da quella conferma nasce il dubbio 52.
 Fonti aggiuntive acquisite: catalogo **i-pietra** (sola lettura), che ha chiuso nome, lunghezza
 e tipo di roccia.
 
@@ -92,6 +95,7 @@ e tipo di roccia.
 | 48 | — | I video nuovi contengono parlato tecnico? | Speranza di colmare i buchi dell'audio | `video_icloud/` | ✅ **no.** Trascritti tutti e 14: 11 sono Live Photo da 1-3 s; `IMG_1408` (0:49) dice solo «Olé, olé, olé», `IMG_1411` e `IMG_1417` sono muti. Valgono come **immagini**, non come fonte parlata |
 | 50 | E | **C'è un A-frame** — due pali di legno con fettucce — visibile in `IMG_1396.JPG`, mai nominato in nessuna trascrizione né notato prima | Elemento strutturale del lato tensione: altezza, materiale e ancoraggio a terra sono tutti ignoti | `foto/IMG_1396.JPG` | aperto |
 | 51 | — | Il **nastro della linea appare bianco/crema** in `IMG_1401`, con un secondo nastro chiaro parallelo (backup?) | Chiude i dubbi 22 e 23 se confermato | `foto/IMG_1401.JPG` | aperto |
+| 52 | intro | **I due cataloghi non concordano sul nome del settore.** i-pietra etichetta «Anfiteatro» anche le tre linee che la locandina mette sotto **Anfite-altro** (22, 30, 135 m). Qual è il nome che usate voi? | Stesso rischio del dubbio 45: chi cerca una linea partendo dall'app e chi parte dalla locandina finisce in due settori diversi | render 3D i-pietra dei settori Anfiteatro e Rookie, forniti dall'utente il 20/08/2026 | aperto |
 
 ## Note da riportare nel manuale
 

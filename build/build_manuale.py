@@ -17,6 +17,7 @@ RADICE = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(RADICE / 'build'))
 
 from design import *                                                # noqa: E402,F403
+from schede_linee import parte_linee                                # noqa: E402
 from reportlab.platypus import (BaseDocTemplate, PageTemplate, Frame,   # noqa: E402
                                 PageBreak, NextPageTemplate, Table,
                                 TableStyle, Paragraph, Spacer)
@@ -446,6 +447,12 @@ S.append(SP(14))
 S.append(foto('IMG_1398.jpg', FW, 'La campata vista dal bordo · IMG_1398, 17:08',
               LINEA, ratio=0.62, focus=0.5))
 S.append(PageBreak())
+
+# ================================================================ le altre linee
+# Catalogo delle ventiquattro linee e schede segnaposto per quelle non ancora
+# documentate. Contenuto e impaginazione stanno in build/schede_linee.py, che
+# legge il registro dati/linee.py.
+S.extend(parte_linee())
 
 # ================================================================ p11 — glossario e chiusura
 sec(LINEA, 'Glossario')
