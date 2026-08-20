@@ -31,6 +31,10 @@ import linee as REG                                                 # noqa: E402
 # Una cartella per linea, chiamata con l'id della linea. Vedi il LEGGIMI li'
 # dentro: basta creare la cartella e metterci i file, nessun codice da toccare.
 FOTO_LINEE = RADICE / 'lavorazione' / 'foto_linee'
+
+# Viste 3D del catalogo i-pietra, un file per settore. Vedi il LEGGIMI li'
+# dentro. I settori senza render vengono saltati e il manuale lo dichiara.
+RENDER_IPIETRA = RADICE / 'fonti' / 'render_ipietra'
 _ESTENSIONI = ('.jpg', '.jpeg', '.png', '.JPG', '.JPEG', '.PNG')
 
 LINEA = HexColor(0xF97316)      # colore che i-pietra assegna alla 53 m
@@ -43,6 +47,55 @@ C_AREA = {
     'Anfite-altro':   LC[1],
     'Despedida':      LC[7],
 }
+
+
+def _slug_area(area):
+    return area.lower().replace(' ', '-')
+
+
+def render_di(area):
+    """Render i-pietra del settore, se qualcuno l'ha esportato."""
+    for ext in _ESTENSIONI:
+        f = RENDER_IPIETRA / (_slug_area(area) + ext)
+        if f.exists():
+            return f
+    return None
+
+
+def parte_planimetria():
+    """Le viste 3D disponibili, una per settore.
+
+    Non e' una planimetria topografica: sono viste prospettiche di un modello
+    fotogrammetrico, e mostrano le linee secondo i-pietra, che non coincidono
+    con quelle della locandina. La didascalia lo dichiara.
+    """
+    disponibili = [(a, render_di(a)) for a in REG.AREE]
+    disponibili = [(a, f) for a, f in disponibili if f]
+    mancanti = [a for a in REG.AREE if not render_di(a)]
+    if not disponibili:
+        return [P('Nessun render del catalogo i-pietra è disponibile: i settori sono '
+                  'descritti solo dalle tabelle qui sotto. I file vanno in '
+                  'fonti/render_ipietra/ — vedi il LEGGIMI lì dentro.', small), SP(12)]
+    S = [P('<b>Le viste del catalogo i-pietra.</b> Non sono planimetrie topografiche: '
+           'sono viste prospettiche di un modello fotogrammetrico, e tracciano le linee '
+           '<b>secondo i-pietra</b>, che accorpa Anfite-altro dentro Anfiteatro. '
+           'Servono a riconoscere dove corre ciascuna linea sulla parete, non a '
+           'misurarla.', body), SP(12)]
+    for area, f in disponibili:
+        ls = REG.per_area(area)
+        censite = sum(1 for l in ls if l['in_ipietra'])
+        with _PILImage.open(f) as im:
+            ow, oh = im.size
+        cap = ('Settore %s · %d linee tracciate sul render, %d censite sulla locandina'
+               % (area, censite, len(ls)))
+        S.append(PhotoStrip(str(f), FW, ow, oh, cap, C_AREA[area], 0.52, 0.5))
+        S.append(SP(14))
+    if mancanti:
+        S.append(P('Senza render: %s. Finché manca, la copertura di i-pietra su quel '
+                   'settore non è verificata — è il dubbio 53.'
+                   % ' e '.join('<b>%s</b>' % a for a in mancanti), small))
+        S.append(SP(12))
+    return S
 
 
 def foto_di(l):
@@ -78,6 +131,34 @@ def tabella_area(area):
                       righe, [138, 78, FW - 216], color=C_AREA[area])
 
 
+def nota_settori():
+    """Testo del callout sui settori, calcolato dal registro.
+
+    Era scritto a mano e si e' contraddetto con il paragrafo sopra appena la
+    copertura di i-pietra e' cambiata. Ora non puo' piu' andare fuori sincrono.
+    """
+    pezzi = []
+    for area in REG.SETTORI_IN_CONFLITTO:
+        ip = REG.SETTORE_IPIETRA[area]
+        ls = REG.per_area(area)
+        pezzi.append('chiama «%s» anche le %d linee che la locandina mette '
+                     'sotto «%s» — %s m'
+                     % (ip, len(ls), area,
+                        ', '.join(str(l['lunghezza']) for l in ls[:-1])
+                        + ' e ' + str(ls[-1]['lunghezza'])))
+    assenti = REG.aree_assenti_da_ipietra()
+    if assenti:
+        pezzi.append('non registra %s' % ' né '.join('<b>%s</b>' % a for a in assenti))
+    # il nome del catalogo e' minuscolo per convenzione: la frase parte da
+    # «Il catalogo» cosi' nessuna maiuscola automatica lo storpia
+    testo = ('Il catalogo i-pietra ' + ', e '.join(pezzi) if pezzi
+             else 'Le due fonti coincidono')
+    return (testo + '. Chi cerca una linea partendo dall\'app e '
+            'chi parte dalla locandina può quindi finire in due posti diversi. Finché non '
+            'è chiarito, in questo manuale ogni linea è nominata <b>settore più '
+            'lunghezza</b>, mai con la lunghezza da sola.')
+
+
 def parte_catalogo():
     c = REG.conteggi()
     S = [Accent(LINEA, 'Le linee della Pietra'),
@@ -92,14 +173,10 @@ def parte_catalogo():
          P('Le lunghezze qui sotto sono <b>valori di catalogo</b>, non misure fatte sui '
            'punti: vale per tutte quello che la nota N2 dice della 53 m.', body),
          SP(14),
-         callout('Le due fonti non concordano sui settori',
-                 'i-pietra chiama «Anfiteatro» anche le tre linee che la locandina mette '
-                 'sotto «Anfite-altro» — 22, 30 e 135 m — e non registra affatto Settore '
-                 'Giallo e Despedida. Chi cerca una linea partendo dall\'app e chi parte '
-                 'dalla locandina può quindi finire in due posti diversi. Finché non è '
-                 'chiarito, in questo manuale ogni linea è nominata <b>settore più '
-                 'lunghezza</b>, mai con la lunghezza da sola.', WARN, strong=True),
+         callout('Le due fonti non concordano sui settori', nota_settori(),
+                 WARN, strong=True),
          SP(16)]
+    S.extend(parte_planimetria())
     for area in REG.AREE:
         ls = REG.per_area(area)
         ip = REG.SETTORE_IPIETRA[area]

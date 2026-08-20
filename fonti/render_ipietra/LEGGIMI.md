@@ -1,0 +1,39 @@
+# Render 3D del catalogo i-pietra
+
+Viste del modello tridimensionale della Pietra con le linee di un settore
+tracciate ed etichettate, esportate da i-pietra.
+
+Un file per settore, chiamato con il nome del settore in minuscolo e gli spazi
+sostituiti da trattini:
+
+```
+fonti/render_ipietra/
+  anfiteatro.jpg
+  rookie.jpg
+  despedida.jpg
+  settore-giallo.jpg      ← manca: è il dubbio 53
+```
+
+Estensioni accettate: `.jpg`, `.jpeg`, `.png`.
+
+Il build li impagina da solo nel capitolo 7. Non serve toccare il codice: basta
+mettere i file qui e rilanciare `python build/build_manuale.py`. I settori senza
+render vengono semplicemente saltati, e il manuale lo dichiara.
+
+## Che cosa sono e che cosa non sono
+
+**Non sono una planimetria topografica.** Sono viste prospettiche di un modello
+fotogrammetrico: mostrano dove corre ciascuna linea sulla parete e quanto è
+lunga secondo il catalogo, non distanze misurate né quote.
+
+Mostrano inoltre **le linee secondo i-pietra**, che non coincidono con quelle
+della locandina: i-pietra accorpa Anfite-altro dentro Anfiteatro (dubbio 52) e
+la sua copertura è cambiata nel tempo (dubbio 53). La didascalia nel manuale lo
+dichiara.
+
+## Formato
+
+Esportare a piena risoluzione, **senza ritagliare le etichette**: sono i nomi e
+le lunghezze delle linee a rendere il render una fonte e non una decorazione.
+Lato lungo utile ~2000 px; oltre è spreco, il manuale li stampa a larghezza di
+colonna su A4.
