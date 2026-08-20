@@ -54,14 +54,14 @@ e tipo di roccia.
 | 9 | A | Diametro, tipo e lunghezza delle corde **rosa** del backup | Tabella materiale | `[IMG_1349 @ 0:00]` | aperto |
 | 10 | A | Modello del **BFK** sulla corda rosa | Tabella materiale | `[IMG_1350 @ 0:00]` | aperto |
 | 11 | A | Diametro e lunghezza della corda **azzurra** (tagline, poi linea vita) | Tabella materiale | `[IMG_1350 @ 0:37]` | aperto |
-| 12 | A | Misura e materiale delle **4 maglie delta** | Unica quantità certa del corpus, manca la misura | `[IMG_1350 @ 0:53]` | aperto |
+| 12 | A | Misura e materiale delle **4 maglie delta** | Unica quantità certa del corpus, manca la misura | `[IMG_1350 @ 0:53]`, `IMG_1360` | aperto — in `IMG_1360` se ne vede una **d'acciaio, con ghiera filettata incisa**, ma l'incisione non è leggibile |
 | 13 | A | Cos'è il «**Mighty Lock**», «quello quadratino» | Nome commerciale storpiato dalla trascrizione | `[IMG_1351 @ 0:19-0:28]` | aperto |
 | 14 | C | Misura della fettuccia **verde lunga**, «la più grossa che c'è» | Tabella materiale | `[IMG_1369 @ 0:31]` | aperto |
 | 15 | D | Misura della fettuccia **piccola viola** | Tabella materiale | `[IMG_1373 @ 0:41]` | aperto |
 | 16 | G | Misura della fettuccia **verde e nera** | Tabella materiale | `[IMG_1389 @ 0:02]` | aperto |
 | 17 | E–G | «**Banana**»: è il weblock? Quale modello? | Nome di gergo non risolto | `[IMG_1381 @ 0:12]`, `[IMG_1395 @ 0:25]` | ✅ **weblock azzurro anodizzato**, visibile in `IMG_1384 @ 0:03` e `0:50`. Modello ancora aperto |
 | 18 | G | Modello del **softrelease** | Tabella materiale | `[IMG_1394 @ 0:15]` | aperto |
-| 19 | F | Misura e tipo dei **grilli** | Tabella materiale | `[IMG_1384 @ 0:00]` | aperto |
+| 19 | F | Misura e tipo dei **grilli** | Tabella materiale | `[IMG_1384 @ 0:00]`, `IMG_1360` | aperto — in `IMG_1360` si vedono **grilli a lira d'acciaio con perno**, marcature non leggibili |
 | 20 | E | Composizione del **paranchino di tensionamento della base** (carrucole, rapporto) | Sequenza di tensionamento | `[IMG_1380 @ 0:09]` | aperto |
 | 21 | E | Quanti **Grigri** in totale e su cosa | «un altro Grigri» implica almeno due | `[IMG_1378 @ 0:42]` | aperto |
 | 22 | — | Nastro della highline: marca, larghezza, tipo | Mai nominato in nessun video | — | aperto |
@@ -89,7 +89,7 @@ e tipo di roccia.
 
 | # | Fase | Cosa manca | Perché serve | Fonte del dubbio | Stato |
 |---|---|---|---|---|---|
-| 37 | A–D | **Portata (WLL) delle slinghe.** Tipo ✅ confermato: brache ad anello industriali. Resta la portata: in `IMG_1366 @ 0:17` la viola ha **una riga nera**; viola + 1 riga = 1 t in EN 1492-2 | Due indizi convergenti non sono una marcatura. Scrivere una portata sbagliata è il danno peggiore possibile in questo documento | `IMG_1366 @ 0:17` + conferma utente | **aperto — serve foto di un'etichetta** |
+| 37 | A–D | **Portata (WLL) delle slinghe.** Tipo ✅ confermato: brache ad anello industriali. Resta la portata: in `IMG_1366 @ 0:17` la viola ha **una riga scura** per il lungo | Due indizi convergenti non sono una marcatura. Scrivere una portata sbagliata è il danno peggiore possibile in questo documento | `IMG_1366 @ 0:17`, `IMG_1360`, `IMG_1357` | **aperto, ma adesso si sa dove guardare** — in `IMG_1360` (utente, 20/08/2026) **l'etichetta si vede**: bianca, cucita con filo blu sulla cucitura della calza, **rivoltata e illeggibile**. Ne compare una anche in `IMG_1357`. Serve **una foto ravvicinata dell'etichetta distesa**, nient'altro |
 | 38 | D | **Nell'ancoraggio c'è protezione veloce (friend) accanto ai punti fissi?** Un dispositivo compatibile si intravede ma il fotogramma è mosso | Cambia la sezione ancoraggi e la checklist | `IMG_1374 @ 0:33` | **rimandato al campo** — l'utente farà lo scatto. Il manuale porta una nota esplicita al posto del dato |
 | 39 | D | **Che tipo sono i «punti»** | Sezione ancoraggi | `IMG_1371.JPEG`, `IMG_1372.JPEG` (foto iCloud, 13:41) | ✅ **placchetta metallica su bullone con dado esagonale** — quindi tassello/fittone meccanico, **non** spit a vite né resinato con occhiello integrato. Marca e diametro del bullone restano aperti |
 | 40 | D | Marca e modello del dispositivo nero | Tabella materiale | `IMG_1371.JPEG` (dettaglio in `lavorazione/dettagli/`) | ✅ **carrucola bloccante**, guancie nere e puleggia arancio. Marcature lette: `CE 0082`, `UK CA 20`, **`EN 567:2013`**, `Ø 7,8-11 mm`. ⚠ Avevo letto `EN 892` dal video: la foto smentisce. Marca ancora aperta (logo non leggibile) |

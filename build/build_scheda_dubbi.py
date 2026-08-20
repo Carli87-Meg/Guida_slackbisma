@@ -252,11 +252,12 @@ sezione('4', 'Ancoraggio e verifiche a immagine', 'Sezione 4 · da guardare e fo
         C_ANC,
         'Voci emerse esaminando i fotogrammi. Alcune si chiudono guardando meglio, altre '
         'richiedono uno scatto nuovo da fare sul posto.',
-        [(37, '<b>Portata (WLL) delle brache.</b> Il tipo è confermato: brache ad anello '
-              'industriali. In IMG_1366 @ 0:17 la viola ha una riga nera, e viola + 1 riga '
-              'in EN 1492-2 vale 1 t — ma due indizi convergenti non sono una marcatura. '
-              '<b>Serve la fotografia di un\'etichetta.</b>',
-          'IMG_1366 @ 0:17 · il danno peggiore possibile se sbagliata', 2, True),
+        [(37, '<b>Portata (WLL) delle brache.</b> L\'etichetta esiste e si vede in '
+              'IMG_1360 e IMG_1357 — bianca, cucita con filo blu sulla cucitura della '
+              'calza — ma in tutte le inquadrature è rivoltata. <b>Serve una fotografia '
+              'ravvicinata dell\'etichetta distesa</b>, di una braca per ogni tipo usato: '
+              'e\' l\'unico modo di scrivere la portata senza indovinarla.',
+          'IMG_1360 · IMG_1357 · il danno peggiore possibile se sbagliata', 2, True),
          (38, 'Nell\'ancoraggio c\'è <b>protezione veloce</b> — un friend — accanto ai punti '
               'fissi? Un dispositivo compatibile si intravede ma il fotogramma è mosso. '
               '<b>Scatto da fare sul campo.</b>',

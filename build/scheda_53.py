@@ -24,6 +24,7 @@ from PIL import Image as _PILImage                                  # noqa: E402
 
 ANN = RADICE / 'lavorazione' / 'frame_annotati'
 FOTO = RADICE / 'lavorazione' / 'foto_dritte'
+DETT = RADICE / 'lavorazione' / 'dettagli'
 
 LINEA = HexColor(0xF97316)
 C_ANC = LC[1]                   # ancoraggio      (rosso)
@@ -47,7 +48,9 @@ def dim(p):
 
 
 def foto(nome, w, cap, color=None, ratio=None, focus=0.5):
-    p = FOTO / nome if (FOTO / nome).exists() else ANN / nome
+    # tre cartelle, un nome solo: foto raddrizzate, frame annotati, ritagli di
+    # dettaglio. Cosi' chi scrive una pagina non deve sapere dove sta il file.
+    p = next((c / nome for c in (FOTO, ANN, DETT) if (c / nome).exists()), FOTO / nome)
     ow, oh = dim(p)
     return PhotoStrip(str(p), w, ow, oh, cap, color, ratio, focus)
 
@@ -124,6 +127,10 @@ def parte_53():
         *dim(FOTO / 'IMG_1357.jpg'), color=C_SOS, ratio=1.02, focus=0.5,
         ow2=dim(FOTO / 'IMG_1359.jpg')[0], oh2=dim(FOTO / 'IMG_1359.jpg')[1]))
     S.append(SP(14))
+    S.append(foto('IMG_1360.jpg', FW,
+                  'Slinghe viola, corde rosa, fettuccia verde, grilli e maglie rapide '
+                  '· IMG_1360, 13:07', C_SOS, ratio=0.70, focus=0.42))
+    S.append(SP(14))
     S.append(P('<b>Come procede</b>', h3))
     S.append(SP(5))
     S.append(BU('Le due soste vengono allestite <b>in parallelo</b>, non una dopo l’altra: '
@@ -138,6 +145,32 @@ def parte_53():
     S.append(SP(10))
     S.append(P('Lunghezze e diametri di slinghe e corde non vengono pronunciati: sono ' + DC +
                ' e vanno raccolti dal gruppo.', small))
+    S.append(SP(26))
+
+    # ================================================================ etichette
+    # La portata delle slinghe e' il dato piu' pericoloso da sbagliare di tutto
+    # il documento: qui si dice che l'etichetta esiste e non si legge, e basta.
+    sec(C_SOS, 'Le due soste')
+    S.append(_apre(
+        LineHeader('', 'La portata delle slinghe', _occh('le due soste · etichette'), C_SOS),
+        P('Le slinghe della sosta main sono <b>brache ad anello industriali</b>: calza cucita '
+          'per il lungo ed etichetta in tessuto. Nelle fotografie delle 13:07 l’etichetta '
+          '<b>c’è</b> — bianca, cucita con filo blu sulla cucitura della calza — ma è '
+          'rivoltata, e in nessuna inquadratura si legge. <b>La portata resta sconosciuta.</b>',
+          lead)))
+    S.append(SP(12))
+    S.append(foto('IMG_1360_etichetta.jpg', FW,
+                  'L’etichetta cucita sulla calza, rivoltata · dettaglio da IMG_1360, 13:07',
+                  C_SOS, ratio=0.66, focus=0.5))
+    S.append(SP(14))
+    S.append(callout('Il colore non è una marcatura',
+                     'Una calza viola con una riga scura assomiglia a una portata dichiarata, e '
+                     'la tentazione di scriverla è forte. Non viene scritta. Il colore sbiadisce '
+                     'al sole, le codifiche non sono le stesse per tutti i costruttori, e una '
+                     'riga cucita non è una riga di portata. <b>L’unico dato che vale è quello '
+                     'stampato sull’etichetta</b>, e per averlo serve una fotografia ravvicinata '
+                     'dell’etichetta distesa. Finché non c’è, questa scheda non dichiara quanto '
+                     'tengono le slinghe su cui sta appesa la linea.', WARN, '!', FW, True))
     S.append(SP(26))
 
     # ================================================================ p5 — ancoraggio
