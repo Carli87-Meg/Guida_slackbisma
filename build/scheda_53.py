@@ -19,7 +19,7 @@ RADICE = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(RADICE / 'build'))
 
 from design import *                                                # noqa: E402,F403
-from reportlab.platypus import PageBreak                            # noqa: E402
+from reportlab.platypus import PageBreak, KeepTogether                            # noqa: E402
 from PIL import Image as _PILImage                                  # noqa: E402
 
 ANN = RADICE / 'lavorazione' / 'frame_annotati'
@@ -52,6 +52,20 @@ def foto(nome, w, cap, color=None, ratio=None, focus=0.5):
     return PhotoStrip(str(p), w, ow, oh, cap, color, ratio, focus)
 
 
+def _apre(testata, *seguito):
+    """Testata di sottosezione legata a cio' che la segue.
+
+    Il capitolo scorre invece di aprire una pagina per ogni fase: senza questo
+    vincolo una testata potrebbe restare in fondo alla pagina con il suo testo
+    di la'. Dove serve si lega anche il primo blocco visivo, cosi' una fase non
+    si apre con l'ultimo centimetro di pagina disponibile.
+    """
+    dentro = [testata, SP(10)]
+    for f in seguito:
+        dentro.append(f)
+    return KeepTogether(dentro)
+
+
 def parte_53():
     S = []
 
@@ -61,6 +75,7 @@ def parte_53():
 
     # ================================================================ p4 — cronologia
     sec(LINEA, 'La giornata')
+    S.append(Segna('cap53'))
     S.append(LineHeader('', 'La giornata del 16 maggio', _occh('cronologia'), LINEA))
     S.append(SP(10))
     S.append(P('I file portano l’ora di ripresa, e questo permette di ricostruire la sequenza '
@@ -86,18 +101,18 @@ def parte_53():
     S.append(P('Nel complesso i video coprono <b>ventidue minuti e mezzo</b> su un arco di oltre '
                'quattro ore. Sono campioni sparsi, non una ripresa continua: buona parte delle '
                'operazioni non è stata filmata, e il manuale documenta ciò che si vede.', body))
-    S.append(PageBreak())
+    S.append(SP(26))
 
 
     # ================================================================ le due soste
     sec(C_SOS, 'Le due soste')
-    S.append(LineHeader('1', 'Sosta main e sosta backup', _occh('le due soste'), C_SOS))
-    S.append(SP(10))
-    S.append(P('Il montaggio si apre allestendo <b>due soste indipendenti</b> sullo stesso lato, '
-               'distinte a colpo d’occhio dal materiale: «sosta main, quella con le slinghe '
-               'viola; sosta backup, quella con le corde rosa». Il codice colore non è '
-               'decorativo — serve a non confondere i due sistemi mentre si lavora in parete.',
-               lead))
+    S.append(_apre(
+        LineHeader('1', 'Sosta main e sosta backup', _occh('le due soste'), C_SOS),
+        P('Il montaggio si apre allestendo <b>due soste indipendenti</b> sullo stesso lato, '
+          'distinte a colpo d’occhio dal materiale: «sosta main, quella con le slinghe '
+          'viola; sosta backup, quella con le corde rosa». Il codice colore non è '
+          'decorativo — serve a non confondere i due sistemi mentre si lavora in parete.',
+          lead)))
     S.append(SP(10))
     S.append(ChipRow([('Sosta main', 'Slinghe viola'), ('Sosta backup', 'Corde rosa'),
                       ('Connettore', 'BFK'), ('Maglie', '4 delta')], C_SOS))
@@ -123,7 +138,7 @@ def parte_53():
     S.append(SP(10))
     S.append(P('Lunghezze e diametri di slinghe e corde non vengono pronunciati: sono ' + DC +
                ' e vanno raccolti dal gruppo.', small))
-    S.append(PageBreak())
+    S.append(SP(26))
 
     # ================================================================ p5 — ancoraggio
     sec(C_ANC, 'Ancoraggio')
@@ -140,7 +155,7 @@ def parte_53():
     S.append(foto('D1_ancoraggio.jpg', FW, 'Sosta su roccia — placchetta, cordino di '
                   'collegamento, carrucola bloccante e slinga viola  ·  IMG_1371, 13:41',
                   C_ANC, ratio=1.02, focus=0.78))
-    S.append(PageBreak())
+    S.append(SP(26))
 
     sec(C_ANC, 'Ancoraggio')
     S.append(LineHeader('', 'Che cosa si vede e che cosa manca', _occh('ancoraggio · inventario'), C_ANC))
@@ -168,16 +183,16 @@ def parte_53():
                      'apertura non è quindi verificabile. <b>Questa scheda resta incompleta fino '
                      'a quando non verrà scattata una fotografia d’insieme dell’ancoraggio.</b>',
                      WARN, '!', FW, True))
-    S.append(PageBreak())
+    S.append(SP(26))
 
     # ================================================================ p6 — dettaglio punto
     sec(C_ANC, 'Ancoraggio')
-    S.append(LineHeader('3', 'Il singolo punto', _occh('ancoraggio · dettaglio'), C_ANC))
-    S.append(SP(10))
-    S.append(P('Il punto è una <b>placchetta metallica fissata con un dado esagonale su '
-               'bullone</b>. Si tratta quindi di un tassello meccanico: non di uno spit a vite, '
-               'e non di un resinato con occhiello integrato. Misura, marca e anno di posa non '
-               'sono ricavabili dalle immagini.', lead))
+    S.append(_apre(
+        LineHeader('3', 'Il singolo punto', _occh('ancoraggio · dettaglio'), C_ANC),
+        P('Il punto è una <b>placchetta metallica fissata con un dado esagonale su '
+          'bullone</b>. Si tratta quindi di un tassello meccanico: non di uno spit a vite, '
+          'e non di un resinato con occhiello integrato. Misura, marca e anno di posa non '
+          'sono ricavabili dalle immagini.', lead)))
     S.append(SP(12))
     S.append(foto('D2_placchetta_dettaglio.jpg', FW,
                   'Placchetta e dado esagonale  ·  ingrandimento da IMG_1372, 13:41', C_ANC))
@@ -199,7 +214,7 @@ def parte_53():
     S.append(P('Questo elenco discende dal tipo di ancoraggio osservato, non da una procedura '
                'dettata nei video: nessuno, nelle riprese, enuncia una lista di controlli. '
                'La checklist realmente usata dal gruppo è ' + DC + '.', small))
-    S.append(PageBreak())
+    S.append(SP(26))
 
     # ================================================================ p7 — la sosta
     sec(C_SOS, 'Sosta')
@@ -232,7 +247,7 @@ def parte_53():
     S.append(P('Trascrizione da IMG_1367, minuto 0:43. In ventidue minuti di parlato è '
                'l’unico momento in cui qualcuno spiega <i>perché</i> sceglie una soluzione '
                'invece di un’altra.', small))
-    S.append(PageBreak())
+    S.append(SP(26))
 
     # ================================================================ p8 — tensione e anti-slip
     sec(C_TEN, 'Tensione')
@@ -243,18 +258,9 @@ def parte_53():
                'sulla linea la cui funzione è l’unica del corpus a essere insieme spiegata a '
                'voce e mostrata.', lead))
     S.append(SP(12))
-    S.append(photo_pair(
-        str(ANN / 'F1_weblock_grillo.jpg'), str(ANN / 'G1_antislip.jpg'),
-        'Weblock e grillo a lira  ·  IMG_1384, 14:09',
-        'Anti-slip  ·  IMG_1395, 14:49',
-        *dim(ANN / 'F1_weblock_grillo.jpg'), color=C_TEN,
-        ow2=dim(ANN / 'G1_antislip.jpg')[0], oh2=dim(ANN / 'G1_antislip.jpg')[1]))
-    S.append(SP(14))
-    S.append(callout('«Serve per evitare che la linea slitti nella banana»',
-                     'IMG_1395, minuto 0:25. La <b>funzione</b> dell’anti-slip è quindi certa. '
-                     'Il <b>nodo</b> con cui viene realizzato, il materiale impiegato e il punto '
-                     'esatto in cui va posizionato restano ' + DC + '.', C_ASL))
-    S.append(SP(12))
+    # la sequenza sta prima delle fotografie: messa in coda tracimava sulla
+    # pagina successiva e la lasciava riempita per un quinto. Letta qui e' anche
+    # l'indice di cio' che le due fotografie mostrano.
     S.append(two_cols(
         gear_block('Sequenza osservata', [
             '13:58 — pretensionamento provvisorio',
@@ -272,15 +278,28 @@ def parte_53():
                'parla non nomina l’oggetto: si capisce che qualcosa va fatto dopo e che '
                'qualcosa può cadere, non che cosa. Sono riportate perciò come citazioni, '
                'non come istruzioni.', small))
-    S.append(PageBreak())
+    S.append(SP(12))
+    S.append(photo_pair(
+        str(ANN / 'F1_weblock_grillo.jpg'), str(ANN / 'G1_antislip.jpg'),
+        'Weblock e grillo a lira  ·  IMG_1384, 14:09',
+        'Anti-slip  ·  IMG_1395, 14:49',
+        *dim(ANN / 'F1_weblock_grillo.jpg'), color=C_TEN,
+        ow2=dim(ANN / 'G1_antislip.jpg')[0], oh2=dim(ANN / 'G1_antislip.jpg')[1]))
+    S.append(SP(14))
+    S.append(callout('«Serve per evitare che la linea slitti nella banana»',
+                     'IMG_1395, minuto 0:25. La <b>funzione</b> dell’anti-slip è quindi certa. '
+                     'Il <b>nodo</b> con cui viene realizzato, il materiale impiegato e il punto '
+                     'esatto in cui va posizionato restano ' + DC + '.', C_ASL))
+    S.append(SP(26))
 
     # ================================================================ p9 — materiale
     sec(LINEA, 'Materiale')
-    S.append(LineHeader('6', 'Il materiale', _occh('materiale'), LINEA))
-    S.append(SP(10))
-    S.append(P('Elenco costruito incrociando i nomi pronunciati nei video con gli oggetti '
-               'riconoscibili nelle immagini. La colonna delle misure è quasi interamente '
-               'vuota, e resta tale.', lead))
+    S.append(KeepTogether([
+        LineHeader('6', 'Il materiale', _occh('materiale'), LINEA),
+        SP(10),
+        P('Elenco costruito incrociando i nomi pronunciati nei video con gli oggetti '
+          'riconoscibili nelle immagini. La colonna delle misure è quasi interamente '
+          'vuota, e resta tale.', lead)]))
     S.append(SP(12))
     S.append(data_table(
         ['Qtà', 'Articolo', 'Misura', 'Fonte'],
@@ -307,7 +326,7 @@ def parte_53():
                      'Nastro, backup e leash sono gli elementi centrali di qualunque highline, '
                      'e <b>non vengono nominati in nessuno dei quarantadue video</b>. Non è una '
                      'dimenticanza di questo manuale: è un’assenza della fonte.', WARN, '!', FW, True))
-    S.append(PageBreak())
+    S.append(SP(26))
 
     # ================================================================ la linea in opera
     sec(LINEA, 'In opera')

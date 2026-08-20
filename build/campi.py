@@ -42,26 +42,57 @@ class Righe(Flowable):
             c.line(0, y, self.w, y)
 
 
-def campo(label, w, righe=1):
+def campo(label, w, righe=1, passo=21):
     """Etichetta piccola sopra una o piu' righe su cui scrivere."""
     st = ParagraphStyle('cl', fontName='Pop-M', fontSize=7.2, leading=10,
                         textColor=MUT)
-    t = Table([[Paragraph(label.upper(), st)], [Righe(righe, w=w)]], colWidths=[w])
+    t = Table([[Paragraph(label.upper(), st)], [Righe(righe, w=w, passo=passo)]],
+              colWidths=[w])
     t.setStyle(TableStyle(_SENZA_BORDI))
     return t
 
 
-def griglia_campi(etichette, w=FW, cols=2, gap=14):
+# altezza dell'etichetta di un campo e aria sotto l'ultima riga: servono a
+# calcolare il passo, non sono numeri decorativi
+_H_ETICHETTA = 10.0
+_PAD_CAMPO = 12.0
+PASSO_MIN, PASSO_MAX = 22.0, 42.0
+
+
+def passo_per_altezza(etichette, altezza, cols=2):
+    """Passo delle righe che riempie `altezza` con i campi dati.
+
+    Una scheda da compilare in parete che occupa meta' pagina spreca carta due
+    volte: lascia il foglio vuoto e lascia righe corte su cui non ci sta la
+    descrizione di un ancoraggio. Il passo viene calcolato perche' la griglia
+    arrivi a fondo pagina, entro limiti leggibili.
+    """
+    n_righe = 0
+    for i in range(0, len(etichette), cols):
+        blocco = etichette[i:i + cols]
+        n_righe += max((e[1] if isinstance(e, (tuple, list)) else 1) for e in blocco)
+    n_blocchi = (len(etichette) + cols - 1) // cols
+    fisso = n_blocchi * (_H_ETICHETTA + _PAD_CAMPO)
+    if n_righe <= 0:
+        return PASSO_MIN
+    return max(PASSO_MIN, min(PASSO_MAX, (altezza - fisso) / n_righe))
+
+
+def griglia_campi(etichette, w=FW, cols=2, gap=14, passo=None, altezza=None):
     """Campi da compilare disposti su piu' colonne.
 
     `etichette` e' una sequenza di stringhe, oppure di coppie (etichetta, righe)
-    per i campi che hanno bisogno di piu' spazio.
+    per i campi che hanno bisogno di piu' spazio. Con `altezza` la griglia
+    calcola da se' il passo per riempire quello spazio.
     """
+    if passo is None:
+        passo = (passo_per_altezza(etichette, altezza, cols) if altezza
+                 else 21)
     cw = (w - gap * (cols - 1)) / cols
     celle = []
     for e in etichette:
         lab, righe = e if isinstance(e, (tuple, list)) else (e, 1)
-        celle.append(campo(lab, cw, righe))
+        celle.append(campo(lab, cw, righe, passo))
 
     righe_tab = [celle[i:i + cols] for i in range(0, len(celle), cols)]
     if righe_tab and len(righe_tab[-1]) < cols:            # pareggia l'ultima riga

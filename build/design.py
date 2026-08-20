@@ -138,6 +138,32 @@ class Rule(Flowable):
         self.canv.line(0, self.s / 2, self.w, self.s / 2)
 
 
+# ---------------------------------------------------------------- rimandi
+# Mappa chiave -> numero di pagina, riempita durante l'impaginazione. Serve a
+# stampare «p. 27» nell'indice e nel catalogo: in un documento di cinquanta
+# pagine un elenco senza numeri non e' un indice, e' una lista.
+PAGINE = {}
+
+
+class Segna(Flowable):
+    """Marcatore invisibile: registra su quale pagina cade questo punto."""
+
+    def __init__(self, chiave):
+        self.chiave = chiave
+
+    def wrap(self, aw, ah):
+        return (0, 0)
+
+    def draw(self):
+        PAGINE[self.chiave] = self.canv.getPageNumber()
+
+
+def rif(chiave, vuoto='—'):
+    """Rimando di pagina, se la passata precedente lo ha gia' registrato."""
+    n = PAGINE.get(chiave)
+    return 'p. %d' % n if n else vuoto
+
+
 class Accent(Flowable):
     """Marcatore invisibile: fissa il colore d'accento della pagina."""
 

@@ -159,17 +159,21 @@ NON_VERIFICATI = []
 # e' mancato una volta manchera' anche alle altre.
 #
 # Ogni voce e' (etichetta, righe_di_scrittura).
+# Etichetta e numero di righe su cui scrivere. Il numero di righe e' una
+# indicazione di spazio, non un dato: descrivere un ancoraggio a tre punti
+# richiede piu' spazio che scrivere una data. Il passo fra le righe lo calcola
+# l'impaginazione perche' la scheda arrivi a fondo pagina.
 CAMPI_RILIEVO = [
     ('Lunghezza misurata', 1),
     ('Dislivello / offlevel', 1),
-    ('Ancoraggio lato A — tipo e numero punti', 2),
-    ('Ancoraggio lato B — tipo e numero punti', 2),
+    ('Ancoraggio lato A — tipo e numero punti', 3),
+    ('Ancoraggio lato B — tipo e numero punti', 3),
     ('Angolo di apertura', 1),
-    ('Collegamento fra i punti', 1),
-    ('Nastro e backup della linea', 2),
-    ('Materiale del lato tensione', 2),
-    ('Accesso e avvicinamento', 2),
-    ('Vincoli: autorizzazioni, stagionalita', 2),
+    ('Collegamento fra i punti', 2),
+    ('Nastro e backup della linea', 3),
+    ('Materiale del lato tensione', 3),
+    ('Accesso e avvicinamento', 3),
+    ('Vincoli: autorizzazioni, stagionalita', 3),
     ('Rilevata da', 1),
     ('Data del rilievo', 1),
 ]
