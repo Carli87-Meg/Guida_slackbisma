@@ -55,12 +55,35 @@ COLORE_AREA = {
 # `punta` e' il punto sulla parete a cui la linea di richiamo arriva;
 # `etichetta` e' dove sta la pastiglia col nome.
 #
-# VUOTO DI PROPOSITO. Nessuna di queste posizioni e' ricavabile dai render
-# attuali: si sovrappongono a coppie (Rookie-Anfiteatro, Anfiteatro-Anfite-altro,
-# Despedida-Settore Giallo) ma nessuno collega i due gruppi fra loro, e su una
-# vista d'insieme le etichette di i-pietra non sono leggibili.
+# FONTE: panoramica etichettata a mano dall'utente il 21/08/2026, conservata in
+# fonti/render_ipietra/riferimento_settori_utente.jpg. Non sono ricavate dai
+# render per settore — quelli si sovrappongono a coppie e non collegano i due
+# gruppi fra loro.
+#
+# Le punte sono state RIPORTATE sulla panoramica pulita, che ha un inquadramento
+# diverso, registrando le due viste con SIFT + RANSAC: 184 corrispondenze
+# valide, errore di riproiezione mediano 1,31 px e 2,64 px al novantacinquesimo
+# percentile. E' piu' preciso di quanto le punte siano state lette a occhio, ma
+# resta una misura su immagine: se la panoramica viene riesportata da un altro
+# punto di vista, le posizioni vanno rifatte.
+#
+# Cio' che dichiarano, e che prima non si sapeva, e' l'ordine dei settori lungo
+# la cresta, da sinistra a destra nella vista da sud-ovest:
+#
+#     Rookie - Anfiteatro - Anfite-altro - Settore Giallo - Despedida
+#
+# L'ordine e' il dato solido, ed e' quello con cui il manuale presenta le aree
+# (dati/linee.py, AREE). Le coordinate puntano un tratto di parete, non un
+# ancoraggio: servono a orientare, non a localizzare. La `y` e' prospettiva,
+# non quota: non va usata per dislivelli.
 # ---------------------------------------------------------------------------
-POSIZIONI = {}
+POSIZIONI = {
+    'Rookie':         ((0.208, 0.404), (0.208, 0.262)),
+    'Anfiteatro':     ((0.563, 0.374), (0.563, 0.240)),
+    'Anfite-altro':   ((0.669, 0.319), (0.669, 0.177)),
+    'Settore Giallo': ((0.777, 0.210), (0.777, 0.118)),
+    'Despedida':      ((0.811, 0.229), (0.811, 0.066)),
+}
 
 
 def panoramica():
@@ -72,6 +95,13 @@ def panoramica():
                 p in f.stem.lower() for p in ('panoramica', 'insieme', 'generale')):
             return f
     return None
+
+
+def _misura(d, testo, px):
+    """Ingombro della pastiglia attorno al suo centro: (larghezza, altezza)."""
+    l, t, r, b = d.textbbox((0, 0), testo, font=_font(px))
+    imb = px * 0.55
+    return (r - l) + imb * 2, (b - t) + imb * 1.44
 
 
 def _pastiglia(d, xy, testo, colore, px):
@@ -88,16 +118,61 @@ def _pastiglia(d, xy, testo, colore, px):
     return box
 
 
+def _scosta(etichette, aria, limite):
+    """Allontana le pastiglie che si accavallano, senza toccare le punte.
+
+    Le posizioni sono lette a occhio su una panoramica, e due settori vicini
+    sulla cresta hanno etichette vicine: Anfite-altro e Settore Giallo si
+    sovrapponevano di cinque pixel. Qui la pastiglia che sta piu' in basso viene
+    spinta verso la sua punta finche' non e' libera, cosi' il disegno regge
+    anche se cambia il numero di linee o la panoramica.
+
+    `etichette` e' una lista di dizionari con centro, ingombro e punta.
+    """
+    for _ in range(40):
+        fermo = True
+        ordinate = sorted(etichette, key=lambda e: e['cy'])
+        for i, a in enumerate(ordinate):
+            for b in ordinate[i + 1:]:
+                sx = min(a['cx'] + a['w'] / 2, b['cx'] + b['w'] / 2)                     - max(a['cx'] - a['w'] / 2, b['cx'] - b['w'] / 2)
+                sy = min(a['cy'] + a['h'] / 2, b['cy'] + b['h'] / 2)                     - max(a['cy'] - a['h'] / 2, b['cy'] - b['h'] / 2)
+                if sx <= 0 or sy <= -aria:
+                    continue
+                # b sta piu' in basso: scende verso la sua punta
+                giu = min(sy + aria, max(0.0, b['py'] - limite - b['cy']))
+                if giu <= 0.5:
+                    continue
+                b['cy'] += giu
+                fermo = False
+        if fermo:
+            break
+    return etichette
+
+
 def disegna(sorgente, posizioni, out):
     im = Image.open(sorgente).convert('RGB')
     velo = Image.new('RGBA', im.size, (0, 0, 0, 0))
     d = ImageDraw.Draw(velo)
     px = max(15, int(im.size[0] / 52))
 
+    etichette = []
     for area, ((px_, py_), (lx, ly)) in posizioni.items():
-        col = COLORE_AREA[area]
-        p = (px_ * im.size[0], py_ * im.size[1])
-        e = (lx * im.size[0], ly * im.size[1])
+        testo = '%s · %d linee' % (area, len(REG.per_area(area)))
+        w, h = _misura(d, testo, px)
+        etichette.append(dict(area=area, testo=testo, w=w, h=h,
+                              cx=lx * im.size[0], cy=ly * im.size[1],
+                              ax=px_ * im.size[0], py=py_ * im.size[1]))
+    # la punta resta dov'e': si sposta solo la pastiglia, e mai a ridosso
+    _scosta(etichette, aria=px * 0.52, limite=px * 1.6)
+
+    # prima tutti i richiami, poi tutte le pastiglie: dove due settori sono
+    # vicini un richiamo passa sopra l'etichetta di un altro, e tagliata in due
+    # una parola non si legge. Cosi' la linea sparisce dietro la pastiglia, che
+    # e' come si comporta una cartina.
+    for et in etichette:
+        col = COLORE_AREA[et['area']]
+        p = (et['ax'], et['py'])
+        e = (et['cx'], et['cy'])
         # richiamo: filo bianco sotto, colore sopra, cosi' si legge su roccia
         # chiara come su bosco scuro
         d.line([e, p], fill=COLORI['bianco'] + (190,), width=max(5, px // 4))
@@ -106,8 +181,9 @@ def disegna(sorgente, posizioni, out):
         d.ellipse([p[0] - r, p[1] - r, p[0] + r, p[1] + r],
                   fill=col + (255,), outline=COLORI['bianco'] + (220,),
                   width=max(2, px // 10))
-        n = len(REG.per_area(area))
-        _pastiglia(d, e, '%s · %d linee' % (area, n), col, px)
+    for et in etichette:
+        _pastiglia(d, (et['cx'], et['cy']), et['testo'],
+                   COLORE_AREA[et['area']], px)
 
     out.parent.mkdir(parents=True, exist_ok=True)
     Image.alpha_composite(im.convert('RGBA'), velo).convert('RGB').save(

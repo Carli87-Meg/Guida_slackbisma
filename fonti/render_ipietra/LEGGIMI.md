@@ -8,11 +8,40 @@ sostituiti da trattini:
 
 ```
 fonti/render_ipietra/
-  anfiteatro.jpg
   rookie.jpg
+  anfiteatro.jpg
+  anfite-altro.jpg
+  settore-giallo.jpg
   despedida.jpg
-  settore-giallo.jpg      ← manca: è il dubbio 53
 ```
+
+Ci sono tutti e cinque: il dubbio 53, che teneva aperta la copertura del Settore
+Giallo, è chiuso dal render del 20/08/2026.
+
+## La vista d'insieme
+
+Oltre ai render per settore c'è una **panoramica** dell'intero massiccio:
+
+```
+  panoramica.jpg                    ← la base, senza etichette
+  riferimento_settori_utente.jpg    ← non è un render: vedi sotto
+```
+
+`panoramica.jpg` apre il capitolo «Le linee della Pietra». Deve arrivare
+**pulita, senza etichette impresse**: le pastiglie dei settori le disegna
+`build/panoramica_settori.py` con i colori del manuale e il numero di linee
+preso da `dati/linee.py`. Una panoramica già etichettata produce due giri di
+scritte sovrapposte.
+
+`riferimento_settori_utente.jpg` è lo screenshot su cui l'utente ha segnato a
+mano dove cade ciascun settore, il 21/08/2026. Non entra nel manuale: è la
+**fonte delle posizioni** in `POSIZIONI`, e si conserva perché quelle coordinate
+non sono ricavabili dai render per settore. Il nome non contiene «panoramica»
+apposta, così il build non lo scambia per la base.
+
+Le posizioni valgono per l'inquadratura di `panoramica.jpg`. **Se la panoramica
+viene riesportata da un altro punto di vista, vanno rifatte**: `--griglia`
+sovrappone caselle nominate per farsele indicare senza stimare coordinate.
 
 Estensioni accettate: `.jpg`, `.jpeg`, `.png`. **Preferire JPEG**: questi render
 sono immagini fotografiche, e in PNG pesano dieci volte tanto senza guadagno

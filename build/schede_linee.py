@@ -92,6 +92,31 @@ def render_di(area):
     return trovati[0] if trovati else None
 
 
+def vista_insieme():
+    """La panoramica coi cinque settori etichettati, rigenerata se serve.
+
+    Il manuale non dipende dall'aver lanciato prima panoramica_settori.py: se la
+    figura manca o e' piu' vecchia della panoramica o del registro, viene
+    ridisegnata qui. Se manca la panoramica di partenza, il capitolo si apre
+    senza figura e piu' sotto lo dichiara.
+    """
+    try:
+        import panoramica_settori as PS
+    except Exception:
+        return None
+    sorgente = PS.panoramica()
+    if sorgente is None or not PS.POSIZIONI:
+        return None
+    fatta = PS.DEST / 'panoramica_settori.jpg'
+    fonti = [sorgente, RADICE / 'dati' / 'linee.py',
+             RADICE / 'build' / 'panoramica_settori.py']
+    if (not fatta.exists()
+            or fatta.stat().st_mtime < max(f.stat().st_mtime for f in fonti
+                                           if f.exists())):
+        PS.disegna(sorgente, PS.POSIZIONI, fatta)
+    return fatta
+
+
 def parte_planimetria():
     """Le viste 3D disponibili, una per settore.
 
@@ -310,13 +335,32 @@ def parte_catalogo():
            'la %d m dell\'Anfiteatro — è documentata da riprese di montaggio ed è quella '
            'descritta nei capitoli precedenti.'
            % (c['totale'], c['in_ipietra'], REG.documentate()[0]['lunghezza']), lead),
-         SP(12),
-         P('Le lunghezze qui sotto sono <b>valori di catalogo</b>, non misure fatte sui '
-           'punti: vale per tutte quello che la nota N2 dice della 53 m.', body),
-         SP(14),
-         callout('Le due fonti non concordano sui settori', nota_settori(),
-                 WARN, strong=True),
-         SP(16)]
+         SP(12)]
+
+    # la vista d'insieme apre il capitolo: i render per settore mostrano una
+    # parete per volta e non dicono mai come i settori stiano fra loro
+    vista = vista_insieme()
+    if vista is not None:
+        with _PILImage.open(vista) as _im:
+            _ow, _oh = _im.size
+        S.append(PhotoStrip(
+            str(vista), FW, _ow, _oh,
+            'I cinque settori sulla vista d’insieme i-pietra · '
+            'da sinistra a destra come stanno sulla cresta', LINEA))
+        S.append(SP(14))
+        S.append(P('I settori sono indicati nell’ordine in cui si susseguono '
+                   'lungo la cresta, ed è l’ordine con cui compaiono in tutta '
+                   'la guida. Le pastiglie segnano <b>un tratto di parete, non un '
+                   'ancoraggio</b>: servono a orientarsi, non a trovare un punto. '
+                   'L’altezza a cui cadono è prospettiva, non quota.', small))
+        S.append(SP(14))
+
+    S += [P('Le lunghezze qui sotto sono <b>valori di catalogo</b>, non misure fatte sui '
+            'punti: vale per tutte quello che la nota N2 dice della 53 m.', body),
+          SP(14),
+          callout('Le due fonti non concordano sui settori', nota_settori(),
+                  WARN, strong=True),
+          SP(16)]
     S.extend(parte_planimetria())
     S.append(PageBreak())
     S.append(Accent(LINEA, 'Le linee della Pietra'))
