@@ -59,8 +59,18 @@ SETTORE_IPIETRA = {
     'Despedida': 'Despedida',  # render 20/08/2026: tutte e sei censite
 }
 
-# Ordine di presentazione delle aree, come sulla locandina.
-AREE = ['Rookie', 'Settore Giallo', 'Anfiteatro', 'Anfite-altro', 'Despedida']
+# Ordine di presentazione delle aree: come stanno sulla cresta, da sinistra a
+# destra nella vista d'insieme di i-pietra (fonti/render_ipietra/panoramica.jpg,
+# settori indicati dall'utente il 21/08/2026).
+#
+# Prima era l'ordine della locandina, che metteva il Settore Giallo secondo
+# mentre sulla montagna e' quarto. Un documento che si legge sul posto conviene
+# che elenchi i settori nell'ordine in cui li si incontra: cosi' il catalogo, le
+# schede di rilievo e i render si susseguono come la parete.
+#
+# La locandina resta la fonte di QUALI linee esistono e di quanto sono lunghe.
+# Qui cambia soltanto l'ordine in cui vengono presentate.
+AREE = ['Rookie', 'Anfiteatro', 'Anfite-altro', 'Settore Giallo', 'Despedida']
 
 # (settore locandina, lunghezza m, presente in i-pietra, stato)
 _GREZZO = [
