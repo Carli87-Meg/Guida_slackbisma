@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 """Sistema grafico per la Guida Highline Sillschlucht (edizione italiana)."""
+import re
 from reportlab.lib.pagesizes import A4
 from reportlab.lib import colors
 from reportlab.lib.colors import HexColor
@@ -109,13 +110,21 @@ def A(url, text, c=None):
     return '<link href="%s"><font color="#%s">%s</font></link>' % (url, col, text)
 
 
+_UNITA = re.compile(r'(\d) (m|mm|cm|kN|kg|t|L)\b')
+
+
+def unito(t):
+    """Numero e unita' di misura non si separano a fine riga: \u00ab53 m\u00bb, non \u00ab53 / m\u00bb."""
+    return _UNITA.sub(r'\1&nbsp;\2', t)
+
+
 def P(t, s=body):
-    return Paragraph(t, s)
+    return Paragraph(unito(t), s)
 
 
 def BU(t, c=MUT):
     st = ParagraphStyle('i%s' % id(t), parent=item, bulletColor=c)
-    return Paragraph(t, st, bulletText='\u2014')
+    return Paragraph(unito(t), st, bulletText='\u2014')
 
 
 def SP(h):
@@ -173,9 +182,40 @@ class Accent(Flowable):
     def wrap(self, aw, ah):
         return (0, 0)
 
+    def drawOn(self, canvas, x, y, _sW=0):
+        # Una sezione che si apre in cima alla cornice e' quella della pagina.
+        # Una che si apre piu' in basso no: la pagina appartiene ancora alla
+        # sezione in corso, e la testatina deve dire quella. Prima vinceva
+        # l'ultimo marcatore disegnato, e la testatina annunciava il capitolo
+        # che cominciava in fondo pagina.
+        if y >= getattr(canvas, '_cima_cornice', float('inf')) - 1.0:
+            canvas._sect_pagina = self.label
+            canvas._accent_pagina = self.color
+        Flowable.drawOn(self, canvas, x, y, _sW)
+
     def draw(self):
         self.canv._accent = self.color
         self.canv._sect = self.label
+
+
+def lega_testate(storia):
+    """Lega ogni testata a cio' che la segue, cosi' non resta sola in fondo pagina.
+
+    Vale per le testate di capitolo e per i titoletti h3. Gli spaziatori subito
+    dopo vengono legati anche loro: una testata legata a uno spazio vuoto
+    resterebbe comunque orfana.
+    """
+    for i, f in enumerate(storia):
+        testata = isinstance(f, LineHeader) or (
+            isinstance(f, Paragraph) and getattr(f.style, 'name', '') == 'h3')
+        if not testata:
+            continue
+        f.keepWithNext = 1
+        j = i + 1
+        while j < len(storia) and isinstance(storia[j], Spacer):
+            storia[j].keepWithNext = 1
+            j += 1
+    return storia
 
 
 class LineHeader(Flowable):
@@ -387,9 +427,9 @@ def callout(title, text, color=BRAND, icon='!', w=FW, strong=False):
                         textColor=tc)
     bs = ParagraphStyle('cb', fontName='Lora', fontSize=9.0, leading=13,
                         textColor=WHITE if strong else INK2)
-    inner = [[Paragraph(title, ts)]]
+    inner = [[Paragraph(unito(title), ts)]]
     if text:
-        inner.append([Paragraph(text, bs)])
+        inner.append([Paragraph(unito(text), bs)])
     it = Table(inner, colWidths=[w - 46])
     it.setStyle(TableStyle([('LEFTPADDING', (0, 0), (-1, -1), 0),
                             ('RIGHTPADDING', (0, 0), (-1, -1), 0),
@@ -453,14 +493,40 @@ def photo_row(items, color=None, w=FW, gap=12):
     return t
 
 
+def _a_capo(testo, font, corpo, larghezza):
+    """Spezza un testo in righe che stanno nella larghezza data."""
+    righe, riga = [], ''
+    for parola in testo.split():
+        prova = (riga + ' ' + parola).strip()
+        if riga and stringWidth(prova, font, corpo) > larghezza:
+            righe.append(riga)
+            riga = parola
+        else:
+            riga = prova
+    if riga:
+        righe.append(riga)
+    return righe or ['']
+
+
 class Steps(Flowable):
-    """Sequenza numerata su due colonne."""
+    """Sequenza numerata su due colonne.
+
+    La descrizione va a capo. Prima veniva accorciata un carattere alla volta
+    finche' non entrava, e il passo 8 della cronologia finiva in «fino alle 17:».
+    """
+
+    INTERLINEA = 10.4
 
     def __init__(self, steps, color, w=FW, cols=2):
         self.s, self.c, self.w, self.cols = steps, color, w, cols
-        self.rows = (len(steps) + cols - 1) // cols
-        self.rh = 34
-        self.h = self.rows * self.rh
+        cw = w / cols
+        self.righe = [_a_capo(d, 'Lora', 8.2, cw - 34) for _, d in steps]
+        n_righe = (len(steps) + cols - 1) // cols
+        self.alt_riga = []
+        for r in range(n_righe):
+            gruppo = self.righe[r * cols:(r + 1) * cols]
+            self.alt_riga.append(24 + self.INTERLINEA * max(len(g) for g in gruppo))
+        self.h = sum(self.alt_riga)
 
     def wrap(self, aw, ah):
         return (self.w, self.h)
@@ -468,25 +534,29 @@ class Steps(Flowable):
     def draw(self):
         cv = self.canv
         cw = self.w / self.cols
-        for i, (t, d) in enumerate(self.s):
-            col, row = i % self.cols, i // self.cols
-            x = col * cw
-            y = self.h - (row + 1) * self.rh
-            cv.setFillColor(self.c)
-            cv.circle(x + 9, y + 20, 9, stroke=0, fill=1)
-            cv.setFillColor(WHITE)
-            cv.setFont('Pop-B', 8.4)
-            n = str(i + 1)
-            cv.drawString(x + 9 - stringWidth(n, 'Pop-B', 8.4) / 2, y + 17, n)
-            cv.setFillColor(INK)
-            cv.setFont('Pop-M', 8.6)
-            cv.drawString(x + 25, y + 20, t)
-            cv.setFillColor(MUT)
-            cv.setFont('Lora', 8.2)
-            s2 = d
-            while stringWidth(s2, 'Lora', 8.2) > cw - 34 and len(s2) > 6:
-                s2 = s2[:-2]
-            cv.drawString(x + 25, y + 8, s2)
+        cima = self.h
+        for r, alt in enumerate(self.alt_riga):
+            for k in range(self.cols):
+                i = r * self.cols + k
+                if i >= len(self.s):
+                    break
+                t, _ = self.s[i]
+                x = k * cw
+                y = cima - 14          # linea di base del titolo del passo
+                cv.setFillColor(self.c)
+                cv.circle(x + 9, y + 3, 9, stroke=0, fill=1)
+                cv.setFillColor(WHITE)
+                cv.setFont('Pop-B', 8.4)
+                n = str(i + 1)
+                cv.drawString(x + 9 - stringWidth(n, 'Pop-B', 8.4) / 2, y, n)
+                cv.setFillColor(INK)
+                cv.setFont('Pop-M', 8.6)
+                cv.drawString(x + 25, y + 3, t)
+                cv.setFillColor(MUT)
+                cv.setFont('Lora', 8.2)
+                for k2, riga in enumerate(self.righe[i]):
+                    cv.drawString(x + 25, y - 9 - k2 * self.INTERLINEA, riga)
+            cima -= alt
 
 
 class Bars(Flowable):

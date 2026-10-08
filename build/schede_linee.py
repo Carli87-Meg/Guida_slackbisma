@@ -117,44 +117,9 @@ def vista_insieme():
     return fatta
 
 
-def parte_planimetria():
-    """Le viste 3D disponibili, una per settore.
-
-    Non e' una planimetria topografica: sono viste prospettiche di un modello
-    fotogrammetrico, e mostrano le linee secondo i-pietra, che non coincidono
-    con quelle della locandina. La didascalia lo dichiara.
-    """
-    disponibili = [(a, render_di(a)) for a in REG.AREE]
-    disponibili = [(a, f) for a, f in disponibili if f]
-    mancanti = [a for a in REG.AREE if not render_di(a)]
-    if not disponibili:
-        return [P('Nessun render del catalogo i-pietra è disponibile: i settori sono '
-                  'descritti solo dalle tabelle qui sotto. I file vanno in '
-                  'fonti/render_ipietra/ — vedi il LEGGIMI lì dentro.', small), SP(12)]
-    S = [P('<b>Le viste del catalogo i-pietra.</b> Non sono planimetrie topografiche: '
-           'sono viste prospettiche di un modello fotogrammetrico, e tracciano le linee '
-           '<b>secondo i-pietra</b>, che accorpa Anfite-altro dentro Anfiteatro. '
-           'Servono a riconoscere dove corre ciascuna linea sulla parete, non a '
-           'misurarla.', body), SP(12)]
-    for area, f in disponibili:
-        ls = REG.per_area(area)
-        censite = sum(1 for l in ls if l['in_ipietra'])
-        with _PILImage.open(f) as im:
-            ow, oh = im.size
-        # «Settore Giallo» contiene gia' la parola: non anteporla due volte
-        etichetta = area if area.lower().startswith('settore') else 'Settore ' + area
-        cap = ('%s · %d linee tracciate sul render, %d censite sulla locandina'
-               % (etichetta, censite, len(ls)))
-        if area in REG.SETTORI_IN_CONFLITTO:
-            cap += ' · etichettate «%s» in i-pietra' % REG.SETTORE_IPIETRA[area]
-        S.append(PhotoStrip(str(f), FW, ow, oh, cap, C_AREA[area], 0.58, 0.5))
-        S.append(SP(14))
-    if mancanti:
-        S.append(P('Senza render: %s. Finché manca, la copertura di i-pietra su quel '
-                   'settore non è verificata — è il dubbio 53.'
-                   % ' e '.join('<b>%s</b>' % a for a in mancanti), small))
-        S.append(SP(12))
-    return S
+def _etichetta(area):
+    """«Settore Giallo» contiene gia' la parola: non anteporla due volte."""
+    return area if area.lower().startswith('settore') else 'Settore ' + area
 
 
 def foto_di(l):
@@ -178,65 +143,63 @@ def nome(l):
 
 
 # ---------------------------------------------------------------- catalogo
-def tabella_catalogo():
-    """Le ventiquattro linee in una sola tabella, divisa per settore.
+def numero_scheda(l):
+    """Numero della scheda di rilievo di una linea, nell'ordine della cresta.
 
-    Prima erano cinque tabelle separate che ripetevano la stessa testata cinque
-    volte e non stavano su una pagina sola: due pagine riempite a meta'. Qui il
-    settore diventa una banda colorata dentro un'unica tabella, e il catalogo
-    torna a leggersi tutto insieme.
-
-    La colonna dei rimandi e' il motivo per cui il documento viene impaginato
-    piu' volte: senza, il catalogo elenca ventiquattro linee e non dice dove
-    andare a leggerne una.
+    Le schede stanno in un fascicolo a parte: un numero di pagina del fascicolo
+    stampato nella guida si confonderebbe con le pagine della guida stessa. Il
+    numero di scheda no, ed e' quello che si scrive sul foglio.
     """
-    larghezze = [126, 70, FW - 126 - 70 - 52, 52]
-    dati = [[Paragraph(t.upper(), th) for t in
-             ('Lunghezza (catalogo)', 'In i-pietra', 'Rigging documentato', 'Vedi')]]
-    stile = [('BACKGROUND', (0, 0), (-1, 0), INK),
-             ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
-             ('LEFTPADDING', (0, 0), (-1, -1), 8),
-             ('RIGHTPADDING', (0, 0), (-1, -1), 8),
-             ('TOPPADDING', (0, 0), (-1, -1), 4),
-             ('BOTTOMPADDING', (0, 0), (-1, -1), 4)]
-    r = 1
-    for area in REG.AREE:
-        ls = REG.per_area(area)
-        col = C_AREA[area]
-        ip = REG.SETTORE_IPIETRA[area]
-        occhiello = 'in i-pietra: «%s»' % ip if ip else 'assente da i-pietra'
-        banda = Paragraph(
-            '<font name="Pop-B" size="9">%s</font>&nbsp;&nbsp;'
-            '<font name="Pop-M" size="7">%d LINEE · %s</font>'
-            % (area, len(ls), occhiello.upper()),
-            ParagraphStyle('bd', fontName='Pop', leading=12, textColor=WHITE))
-        dati.append([banda, '', '', ''])
-        stile += [('BACKGROUND', (0, r), (-1, r), col),
-                  ('SPAN', (0, r), (-1, r)),
-                  ('TOPPADDING', (0, r), (-1, r), 5),
-                  ('BOTTOMPADDING', (0, r), (-1, r), 5)]
-        r += 1
-        for k, l in enumerate(ls):
-            if l['stato'] == REG.DOCUMENTATA:
-                doc, vai = 'sì — capitolo di questo manuale', rif('cap53')
-                lung = '<b>%d m</b>' % l['lunghezza']
-            else:
-                doc, vai = '—', rif('linea:%s' % l['id'])
-                lung = '%d m' % l['lunghezza']
-            dati.append([
-                Paragraph(lung, td),
-                Paragraph('sì' if l['in_ipietra'] else 'no', td),
-                Paragraph(doc, td),
-                Paragraph('<font name="Pop-M" size="8.2">%s</font>' % vai,
-                          ParagraphStyle('vp', fontName='Pop', leading=11,
-                                         textColor=col))])
-            if k % 2:
-                stile.append(('BACKGROUND', (0, r), (-1, r), PAPER))
-            stile.append(('LINEBELOW', (0, r), (-1, r), 0.4, HAIR))
-            r += 1
-    t = Table(dati, colWidths=larghezze, repeatRows=1)
-    t.setStyle(TableStyle(stile))
-    return t
+    da = [x for area in REG.AREE for x in REG.da_documentare() if x['settore'] == area]
+    for i, x in enumerate(da, start=1):
+        if x['id'] == l['id']:
+            return i
+    return None
+
+
+def tabella_settore(area):
+    """Le linee di un settore, con il rimando a dove se ne legge di piu'.
+
+    La documentata rimanda al suo capitolo; le altre alla loro scheda di rilievo,
+    nel fascicolo a parte.
+    """
+    col = C_AREA[area]
+    righe = []
+    for l in REG.per_area(area):
+        if l['stato'] == REG.DOCUMENTATA:
+            lung = '<b>%d m</b>' % l['lunghezza']
+            doc = 'sì — è «la 50», capitolo in questa guida'
+            dove = rif('cap53')
+        else:
+            lung = '%d m' % l['lunghezza']
+            doc = '—'
+            dove = 'scheda %d' % numero_scheda(l)
+        righe.append([Paragraph(lung, td),
+                      Paragraph('sì' if l['in_ipietra'] else 'no', td),
+                      Paragraph(doc, td),
+                      Paragraph('<font name="Pop-M" size="8.2">%s</font>' % dove,
+                                ParagraphStyle('dv', fontName='Pop', leading=11,
+                                               textColor=col))])
+    return data_table(['Lunghezza (catalogo)', 'In i-pietra', 'Rigging documentato', 'Dove'],
+                      righe, [118, 64, FW - 118 - 64 - 64, 64], color=col)
+
+
+def nota_nome(area):
+    """Il nome «la 50» vale per due linee: lo si dice dove serve, in una riga.
+
+    Il riquadro rosso «Due nomi che possono ingannare» e' stato tolto dalla
+    pagina dello spot nella revisione su Figma dell'autore. L'informazione no:
+    il dubbio 45 la chiama l'ambiguita' piu' pericolosa del documento, perche'
+    un lettore potrebbe attrezzare la linea sbagliata. Resta qui, accanto alle
+    due linee che riguarda.
+    """
+    if area == 'Anfiteatro':
+        return ('La 53 m è la linea che sul campo chiamano <b>«la 50»</b>: non va confusa '
+                'con la 50 m del Settore Giallo.')
+    if any(l['id'] in REG.COLLISIONE_NOME for l in REG.per_area(area)):
+        return ('La 50 m di questo settore <b>non è «la 50»</b> documentata in questa guida: '
+                'quel nome indica la 53 m dell’Anfiteatro, a %s.' % rif('cap53'))
+    return None
 
 
 def nota_settori():
@@ -324,17 +287,59 @@ def _bilancia(blocchi, altezza=None):
     return fuori
 
 
+def pagina_settore(area, k):
+    """Una pagina per settore: la vista i-pietra sopra, le sue linee sotto.
+
+    E' la struttura che l'autore ha disegnato a mano su Figma. Prima i cinque
+    render stavano su tre pagine e le ventiquattro linee in una tabella sola
+    piu' avanti: per sapere quali linee mostrasse un render bisognava voltare
+    pagina e cercarle.
+    """
+    col = C_AREA[area]
+    ls = REG.per_area(area)
+    ip = REG.SETTORE_IPIETRA[area]
+    occhiello = 'Settore %d di %d · %d linee · %s' % (
+        k, len(REG.AREE), len(ls),
+        'in i-pietra «%s»' % ip if ip else 'assente da i-pietra')
+    S = [Accent(col, 'Le linee · %s' % area),
+         Segna('settore:%s' % area)]
+    blocco = [LineHeader('', area, occhiello, col), SP(12)]
+    f = render_di(area)
+    if f:
+        with _PILImage.open(f) as im:
+            ow, oh = im.size
+        censite = sum(1 for l in ls if l['in_ipietra'])
+        cap = ('%s · %d linee tracciate sul render, %d censite sulla locandina'
+               % (_etichetta(area), censite, len(ls)))
+        if area in REG.SETTORI_IN_CONFLITTO:
+            cap += ' · etichettate «%s» in i-pietra' % REG.SETTORE_IPIETRA[area]
+        blocco += [PhotoStrip(str(f), FW, ow, oh, cap, col), SP(16)]
+    else:
+        blocco += [P('Di questo settore non c’è un render i-pietra.', small), SP(10)]
+    blocco.append(tabella_settore(area))
+    nota = nota_nome(area)
+    if nota:
+        blocco += [SP(10), P(nota, small)]
+    S.append(KeepTogether(blocco))
+    return S
+
+
 def parte_catalogo():
     c = REG.conteggi()
-    S = [Accent(LINEA, 'Le linee della Pietra'),
+    # Testata, testo e panoramica viaggiano insieme. Sotto «Lo spot» la
+    # panoramica non entra: da sola sarebbe scivolata alla pagina dopo, e la
+    # testata del catalogo sarebbe rimasta in fondo, separata dalla sua figura.
+    # Marcatore e segnalibro stanno dentro il blocco, cosi' il numero di pagina
+    # dell'indice e' quello dove il capitolo si apre davvero.
+    apertura = [Accent(LINEA, 'Le linee della Pietra'),
          Segna('catalogo'),
          LineHeader('', 'Le linee della Pietra', 'Catalogo · cinque aree', LINEA),
          SP(10),
          P('La locandina «La Pietra — Yeah Vez!» censisce <b>%d linee</b> distribuite su '
-           'cinque aree. Il catalogo i-pietra ne registra <b>%d</b>. Di tutte, una sola — '
-           'la %d m dell\'Anfiteatro — è documentata da riprese di montaggio ed è quella '
-           'descritta nei capitoli precedenti.'
-           % (c['totale'], c['in_ipietra'], REG.documentate()[0]['lunghezza']), lead),
+           'cinque aree, e il catalogo i-pietra ne registra <b>%d</b>. Una sola — la %d m '
+           'dell’Anfiteatro — è documentata da riprese di montaggio: il suo capitolo è a %s.'
+           % (c['totale'], c['in_ipietra'], REG.documentate()[0]['lunghezza'],
+              rif('cap53')), lead),
          SP(12)]
 
     # la vista d'insieme apre il capitolo: i render per settore mostrano una
@@ -343,28 +348,31 @@ def parte_catalogo():
     if vista is not None:
         with _PILImage.open(vista) as _im:
             _ow, _oh = _im.size
-        S.append(PhotoStrip(
+        apertura.append(PhotoStrip(
             str(vista), FW, _ow, _oh,
             'I cinque settori sulla vista d’insieme i-pietra · '
             'da sinistra a destra come stanno sulla cresta', LINEA))
+    S = [KeepTogether(apertura)]
+    if vista is not None:
         S.append(SP(14))
-        S.append(P('I settori sono indicati nell’ordine in cui si susseguono '
-                   'lungo la cresta, ed è l’ordine con cui compaiono in tutta '
-                   'la guida. Le pastiglie segnano <b>un tratto di parete, non un '
-                   'ancoraggio</b>: servono a orientarsi, non a trovare un punto. '
-                   'L’altezza a cui cadono è prospettiva, non quota.', small))
+        S.append(P('I settori seguono l’ordine in cui stanno sulla cresta, ed è l’ordine di '
+                   'tutta la guida. Le pastiglie segnano <b>un tratto di parete, non un '
+                   'ancoraggio</b>: servono a orientarsi, non a trovare un punto. L’altezza a '
+                   'cui cadono è prospettiva, non quota.', small))
         S.append(SP(14))
 
-    S += [P('Le lunghezze qui sotto sono <b>valori di catalogo</b>, non misure fatte sui '
-            'punti: vale per tutte quello che la nota N2 dice della 53 m.', body),
-          SP(14),
-          callout('Le due fonti non concordano sui settori', nota_settori(),
+    S += [callout('Le due fonti non concordano sui settori', nota_settori(),
                   WARN, strong=True),
-          SP(16)]
-    S.extend(parte_planimetria())
-    S.append(PageBreak())
-    S.append(Accent(LINEA, 'Le linee della Pietra'))
-    S.append(tabella_catalogo())
+          SP(14),
+          P('Nelle pagine che seguono ogni settore ha la sua vista i-pietra e l’elenco delle '
+            'sue linee. Le viste <b>non sono planimetrie</b>: sono prospettive di un modello '
+            'fotogrammetrico, e servono a riconoscere dove corre una linea sulla parete, non '
+            'a misurarla. Le lunghezze sono <b>valori di catalogo</b>, non misure fatte sui '
+            'punti: nemmeno la 53 m è ancora stata rimisurata. Nella colonna «Dove», il '
+            'numero di scheda rimanda al fascicolo delle schede di rilievo.', body)]
+    for k, area in enumerate(REG.AREE, start=1):
+        S.append(PageBreak())
+        S.extend(pagina_settore(area, k))
     return S
 
 
@@ -477,8 +485,8 @@ def scheda_rilievo(l, primo_di_area=False):
     ds = ParagraphStyle('rd', fontName='Lora', fontSize=8.4, leading=11.6,
                         textColor=INK2)
 
-    fonte = 'LOCANDINA' + (' · CENSITA IN I-PIETRA' if l['in_ipietra']
-                           else ' · NON IN I-PIETRA')
+    fonte = ('SCHEDA %d · LOCANDINA' % numero_scheda(l)
+             + (' · CENSITA IN I-PIETRA' if l['in_ipietra'] else ' · NON IN I-PIETRA'))
     note = []
     if not l['in_ipietra']:
         note.append('Non compare nel catalogo i-pietra: esiste sulla locandina, '
@@ -562,8 +570,10 @@ def indice_schede(da, cols=3):
                 # il settore prende il suo colore: il quadratino unicode non
                 # esiste in questo font e stampava un vuoto
                 riga.append(Paragraph(
+                    '<font name="Pop-M" size="7.6" color="#%s">%d</font>&nbsp;&nbsp;'
                     '<font color="#%s">%s</font> · %d m'
-                    % (col.hexval()[2:], area, l['lunghezza']), ns))
+                    % (MUT.hexval()[2:], numero_scheda(l), col.hexval()[2:], area,
+                       l['lunghezza']), ns))
                 riga.append(Paragraph(
                     '<font name="Pop-M" size="8" color="#%s">%s</font>'
                     % (col.hexval()[2:], rif('linea:%s' % l['id'])),
@@ -588,34 +598,45 @@ def indice_schede(da, cols=3):
 
 
 def parte_rilievi():
-    """Una scheda di rilievo per ogni linea non ancora documentata."""
+    """Il fascicolo delle schede di rilievo: introduzione, indice, una scheda per linea.
+
+    Nella revisione su Figma l'autore ha spostato le ventitre' schede fuori dalla
+    guida: per ora non servono a chi la legge, servono a chi va a rilevare. Ora
+    sono un documento a se', da stampare e portare in parete
+    (build/build_schede_rilievo.py). La guida le cita per numero.
+    """
     da = REG.da_documentare()
-    S = [Accent(LINEA, 'Rilievo'),
+    S = [Accent(LINEA, 'Introduzione'),
          Segna('rilievi'),
          LineHeader('', 'Schede di rilievo', 'Le %d linee ancora da documentare'
                     % len(da), LINEA),
          SP(10),
          P('Di queste linee si conoscono soltanto settore e lunghezza di catalogo: '
-           'nessuna ripresa, nessuna trascrizione, nessun fotogramma. Le schede che '
-           'seguono <b>non sono capitoli incompleti, sono moduli da compilare</b>: '
-           'una pagina per linea, con i campi che per la 53 m dell’Anfiteatro sono '
-           'stati ricavati dalle riprese, e quelli che anche per quella linea restano '
-           'aperti.', lead),
+           'nessuna ripresa, nessuna trascrizione, nessun fotogramma. Ogni scheda è un '
+           '<b>modulo da compilare sul posto</b>, con i campi che per la 53 m '
+           'dell’Anfiteatro sono stati ricavati dalle riprese e quelli che anche per '
+           'quella linea restano aperti.', lead),
          SP(8),
-         P('Compilate sul posto, si riportano poi in <b>dati/linee.py</b> e la linea '
-           'smette di essere un modulo e diventa un capitolo.', body),
+         P('Una scheda compilata permette di documentare la linea: da modulo diventa un '
+           'capitolo della guida.', body),
          SP(14),
          callout('Compilare solo ciò che si è visto',
-                 'Vale qui la regola di tutto il documento: un campo lasciato in bianco '
-                 'è un dato mancante dichiarato, e va benissimo. Un campo riempito a '
-                 'memoria o per somiglianza con un’altra linea è un dato falso, e su un '
-                 'documento di rigging è la cosa peggiore che ci possa finire dentro.',
-                 WARN, '!', FW, True),
+                 'Un campo lasciato in bianco è un dato mancante dichiarato, e va benissimo. '
+                 'Un campo riempito a memoria o per somiglianza con un’altra linea è un dato '
+                 'falso, e su un documento di rigging è la cosa peggiore che ci possa finire '
+                 'dentro.', WARN, '!', FW, True),
          SP(18),
          P('<font name="Pop-M" size="7.4" color="#%s">DOVE STA CIASCUNA SCHEDA</font>'
            % MUT.hexval()[2:], ParagraphStyle('ds', fontName='Pop', leading=11)),
          SP(7),
          indice_schede(da),
+         SP(20),
+         Rule(FW, 0.6, HAIR, 8),
+         SP(8),
+         P('<b>Avvertenza.</b> Highlining e slacklining comportano rischi. Queste schede '
+           'servono a raccogliere dati, non a montare: non sostituiscono formazione, '
+           'esperienza diretta e verifica autonoma di ogni ancoraggio prima di ogni '
+           'utilizzo.', small),
          PageBreak()]
 
     for area in REG.AREE:
@@ -623,8 +644,8 @@ def parte_rilievi():
         for i, l in enumerate(ls):
             # il colore del settore vale anche per testatina e piede della
             # pagina, non solo per il filetto della cornice
+            S.append(Accent(C_AREA[area], 'Scheda %d · %s' % (numero_scheda(l), area)))
             S.append(Segna('linea:%s' % l['id']))
-            S.append(Accent(C_AREA[area], 'Rilievo · %s' % area))
             if i == 0:
                 S.append(Paragraph(
                     '<font name="Pop-B" size="10.5" color="#%s">%s</font>'
@@ -716,9 +737,9 @@ def nota_copertura():
                    'render: è segnata assente sulla fede di una ricognizione più vecchia '
                    '(dubbio 53).'
                    % ' e '.join(REG.NON_VERIFICATI))
-    return ('Dalla locandina «La Pietra». Il catalogo i-pietra ne registra <b>%d sulle '
-            '%d</b>: %s. La differenza è segnalata ma non risolta.%s'
-            % (c['in_ipietra'], c['totale'], dettaglio, incerto))
+    return ('Delle %d linee della locandina, il catalogo i-pietra ne registra <b>%d</b>: '
+            '%s. La differenza è segnalata ma non risolta.%s'
+            % (c['totale'], c['in_ipietra'], dettaglio, incerto))
 
 
 if __name__ == '__main__':
