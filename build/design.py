@@ -257,6 +257,52 @@ class LineHeader(Flowable):
         c.line(0, 2, self.w, 2)
 
 
+class TestataLinea(Flowable):
+    """Testata di una scheda linea: sigla del settore, nome, lunghezza in grande.
+
+    Ricalca la scheda linea della guida Sillschlucht di Innsbruck, che e' il
+    modello di riferimento del progetto: chi apre la scheda vede subito quale
+    linea e' e quanto e' lunga.
+    """
+
+    def __init__(self, sigla, titolo, sotto, lunghezza, colore, w=FW):
+        self.sigla, self.titolo, self.sotto = sigla, titolo, sotto
+        self.lung, self.c, self.w = lunghezza, colore, w
+        self.h = 64
+
+    def wrap(self, aw, ah):
+        return (self.w, self.h)
+
+    def draw(self):
+        c = self.canv
+        c.setFillColor(PAPER)
+        c.roundRect(0, 0, self.w, self.h, 4, stroke=0, fill=1)
+        c.setFillColor(self.c)
+        c.rect(0, self.h - 3, self.w, 3, stroke=0, fill=1)
+        s = 38
+        y = (self.h - 3 - s) / 2
+        c.roundRect(14, y, s, s, 4, stroke=0, fill=1)
+        c.setFillColor(WHITE)
+        corpo = 15 if len(self.sigla) < 3 else 12
+        c.setFont('Pop-B', corpo)
+        c.drawString(14 + (s - stringWidth(self.sigla, 'Pop-B', corpo)) / 2,
+                     y + s / 2 - corpo * 0.36, self.sigla)
+        x = 14 + s + 14
+        c.setFillColor(INK)
+        c.setFont('Pop-B', 18)
+        c.drawString(x, self.h - 30, self.titolo)
+        c.setFillColor(MUT)
+        c.setFont('Lora', 9.4)
+        c.drawString(x, self.h - 46, self.sotto)
+        # la lunghezza a destra, grande, con l'unita' piccola accanto
+        c.setFillColor(self.c)
+        c.setFont('Pop-M', 10)
+        c.drawRightString(self.w - 14, self.h - 40, 'm')
+        c.setFont('Pop-B', 26)
+        c.drawRightString(self.w - 14 - stringWidth('m', 'Pop-M', 10) - 3, self.h - 40,
+                          str(self.lung))
+
+
 class ChipRow(Flowable):
     """Riga di pastiglie dati (etichetta piccola + valore)."""
 

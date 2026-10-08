@@ -323,7 +323,7 @@ def costruisci():
             ('catalogo', 'Le linee della Pietra',
              'I cinque settori sulla cresta, con le loro linee')]),
         ('2', 'Come si monta una linea', C_SOS, 'parziale', [
-            ('lati', 'Una linea, due lati', 'Lato tensione e lato opposto'),
+            ('lati', 'Una linea, due lati', 'Lato tensione e lato statico'),
             ('materiale', 'Prima di uscire: il materiale', 'La lista per una linea'),
             ('sequenza', 'La sequenza di montaggio', 'Le fasi in ordine'),
             ('ancoraggi', 'Gli ancoraggi su roccia', 'Placchette, punti, controlli'),

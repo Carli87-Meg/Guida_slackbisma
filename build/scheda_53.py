@@ -56,58 +56,173 @@ def foto(nome, w, cap, color=None, ratio=None, focus=0.5):
     return PhotoStrip(str(p), w, ow, oh, cap, color, ratio, focus)
 
 
+# ---------------------------------------------------------------- dove sta
+# Estremi della 53 m nel render i-pietra dell'Anfiteatro, come frazioni
+# dell'immagine. Trovati per colore — i-pietra disegna la 53 m in arancio
+# #f97316, lo stesso colore che le da' nel catalogo — e verificati a vista:
+# l'etichetta «Anfiteatro – 53m» poggia su quella linea e non su un'altra.
+# Su un render 1354 x 884 sono i pixel (476, 299) e (840, 337).
+# Se il render viene riesportato vanno ritrovati: python build/scheda_53.py
+ESTREMI_53 = ((476 / 1354, 299 / 884), (840 / 1354, 337 / 884))
+# porzione del render da mostrare: sinistra, alto, destra, basso
+RITAGLIO_53 = (0.20, 0.16, 0.82, 0.62)
+ARANCIO_IPIETRA = (249, 115, 22)
+
+
+def figura_posizione():
+    """Il render dell'Anfiteatro ritagliato sulla 53 m, con i due ancoraggi cerchiati.
+
+    I due estremi non portano il nome del lato: quale dei due sia il lato
+    tensione il render non lo dice, e la didascalia lo dichiara.
+    """
+    from PIL import Image, ImageDraw
+    from schede_linee import render_di
+    import panoramica_settori as PS
+    sorgente = render_di('Anfiteatro')
+    if sorgente is None:
+        return None
+    out = PS.DEST / 'anfiteatro_53.jpg'
+    fonti = [sorgente, Path(__file__), RADICE / 'build' / 'panoramica_settori.py']
+    if out.exists() and out.stat().st_mtime >= max(f.stat().st_mtime for f in fonti):
+        return out
+    im = Image.open(sorgente).convert('RGB')
+    W0, H0 = im.size
+    l, t, r, b = [int(v * m) for v, m in zip(RITAGLIO_53, (W0, H0, W0, H0))]
+    k = 2                                   # il render e' piccolo: si ingrandisce
+    im = im.crop((l, t, r, b)).resize(((r - l) * k, (b - t) * k), Image.LANCZOS)
+    velo = Image.new('RGBA', im.size, (0, 0, 0, 0))
+    d = ImageDraw.Draw(velo)
+    px = max(18, int(im.size[0] / 42))
+    punti = [((fx * W0 - l) * k, (fy * H0 - t) * k) for fx, fy in ESTREMI_53]
+    pastiglie = [(x + verso * px * 2.4, y - px * 3.4)
+                 for (x, y), verso in zip(punti, (-1, 1))]
+    for (x, y), (cx, cy) in zip(punti, pastiglie):
+        d.line([(cx, cy), (x, y)], fill=(255, 255, 255, 200), width=max(5, px // 4))
+        d.line([(cx, cy), (x, y)], fill=ARANCIO_IPIETRA + (255,), width=max(2, px // 8))
+    for x, y in punti:
+        R = px * 0.8
+        d.ellipse([x - R, y - R, x + R, y + R], outline=(255, 255, 255, 240),
+                  width=max(4, px // 5))
+        R2 = R * 0.78
+        d.ellipse([x - R2, y - R2, x + R2, y + R2], outline=ARANCIO_IPIETRA + (255,),
+                  width=max(3, px // 7))
+    for cx, cy in pastiglie:
+        PS._pastiglia(d, (cx, cy), 'ancoraggio', ARANCIO_IPIETRA, px)
+    out.parent.mkdir(parents=True, exist_ok=True)
+    Image.alpha_composite(im.convert('RGBA'), velo).convert('RGB').save(
+        out, 'JPEG', quality=90, optimize=True, progressive=True)
+    return out
+
+
+# ---------------------------------------------------------------- la scheda
+C_SETTORE = LC[2]                       # Anfiteatro, come nel catalogo
+MAPPA = 'https://www.google.com/maps?q=44.419869,10.412353'
+
+
 def parte_53():
-    """La scheda della 53 m: dati della linea, posizione, fotografie in opera."""
-    S = [Accent(LINEA, 'Anfiteatro 53 m'),
+    """La scheda della 53 m, sul modello della guida Sillschlucht.
+
+    Testata con la lunghezza, dove sta sulla parete, i due ancoraggi affiancati
+    — tensione e statico, ciascuno con la sua posizione e il suo materiale —, le
+    fotografie dei due lati, i dati e cio' che manca.
+    """
+    S = [Accent(C_SETTORE, 'Anfiteatro 53 m'),
          Segna('cap53'),
          KeepTogether([
-             LineHeader('', 'Anfiteatro · 53 m', '«la 50» · la linea documentata', LINEA),
+             TestataLinea('AN', 'Anfiteatro 53 m', 'Detta «la 50» · A-frame sul lato tensione',
+                          53, C_SETTORE),
              SP(10),
-             P('La linea che sul campo chiamano <b>«la 50»</b>: da non confondere con la '
-               '50 m del Settore Giallo. È la linea su cui è documentato il metodo della '
-               'parte 2, montata il 16 maggio 2026.', lead),
-             SP(10),
-             ChipRow([('Settore', 'Anfiteatro'), ('Lunghezza', '53 m · catalogo'),
-                      ('Ancoraggi', 'Roccia, due lati'), ('A-frame', 'Lato tensione')],
-                     LINEA)]),
-         SP(14)]
-    # NOTE_RIGGING, «Quadro generale»; GPS dall'EXIF di IMG_1416, 17:14:38
+             P('La linea che sul campo chiamano <b>«la 50»</b>: da non confondere con la 50 m '
+               'del Settore Giallo. Come si monta è descritto nella parte 2; qui ci sono i dati '
+               'propri di questa linea.', lead)]),
+         SP(12)]
+
+    fig = figura_posizione()
+    if fig is not None:
+        with _PILImage.open(fig) as _im:
+            _ow, _oh = _im.size
+        S.append(KeepTogether([
+            PhotoStrip(str(fig), FW, _ow, _oh,
+                       'Dove corre la 53 m nella vista i-pietra dell’Anfiteatro: '
+                       'i due cerchi sono gli ancoraggi', C_SETTORE),
+            SP(4),
+            P('Quale dei due sia l’ancoraggio di tensione: ' + DC + '.', small)]))
+        S.append(SP(14))
+
+    # NOTE_RIGGING, «Materiale nominato» e sezioni A-F; lati: dubbio 56
+    S.append(two_cols(
+        gear_block('T · Ancoraggio di tensione', [
+            'Sosta main: slinghe viola — quante e quanto lunghe ' + DC,
+            'Sosta backup: corde rosa, collegate con 1 BFK',
+            '1 weblock («banana») con grillo a lira',
+            '1 paranchino di tensionamento della base',
+            'Blocco del backup su sosta main e sosta backup',
+            'A-frame: 2 pali di legno tondo sul bordo',
+        ], C_TEN, coord='44.419869 · 10.412353 · 1025 m', url=MAPPA),
+        gear_block('S · Ancoraggio statico', [
+            'Posizione: ' + DC,
+            '3 placchette su bullone',
+            '1 corda verde acqua fra i punti',
+            'Slinga viola e carrucola bloccante',
+            '1 corda azzurra: linea vita',
+            'Sosta backup — com’è fatta ' + DC,
+        ], C_ANC)))
+    S.append(SP(10))
+    S.append(P('La coordinata del lato tensione è quella registrata dal telefono stando '
+               'all’ancoraggio main: serve ad avvicinarsi, non a ritrovare il singolo punto, '
+               'che va cercato a vista.', small))
+    S.append(SP(16))
+
+    S.append(KeepTogether([
+        photo_pair(
+            str(FOTO / 'IMG_1416.jpg'), str(ANN / 'D1_ancoraggio.jpg'),
+            'Lato tensione: l’A-frame visto dall’ancoraggio', 'Lato statico: la sosta su tre punti',
+            *dim(FOTO / 'IMG_1416.jpg'), color=C_SETTORE, ratio=1.05, focus=0.6,
+            ow2=dim(ANN / 'D1_ancoraggio.jpg')[0], oh2=dim(ANN / 'D1_ancoraggio.jpg')[1])]))
+    S.append(SP(14))
     S.append(data_table(
         ['Voce', 'Valore'],
-        [['Lunghezza', '53 m di catalogo (i-pietra e locandina) — misura sui punti '
-          + DC],
+        [['Lunghezza', '53 m di catalogo (i-pietra e locandina) — misura sui punti ' + DC],
          ['Dislivello, offlevel', DC],
-         ['Lato tensione', 'Sosta main e sosta backup, A-frame sul bordo — numero e tipo '
-          'dei punti ' + DC],
-         ['Lato opposto', 'Sosta su tre punti, placchette su bullone collegate con corda '
-          'annodata'],
-         ['Ancoraggio main', '44.419869, 10.412353 · quota 1025 m'],
-         ['Ancoraggio opposto', 'Posizione ' + DC],
          ['Nastro, backup, leash', DC],
          ['Ultimo montaggio documentato', '16 maggio 2026']],
-        [150, FW - 150], LINEA))
-    S.append(SP(12))
-    S.append(callout('Una posizione, non un rilievo',
-                     'La coordinata è quella registrata dal telefono stando all’ancoraggio '
-                     'main, con la precisione di un GPS sotto una parete: serve ad avvicinarsi, '
-                     'non a ritrovare il singolo punto, che va cercato a vista.', LINEA))
+        [150, FW - 150], C_SETTORE))
     S.append(SP(14))
     S.append(KeepTogether([
         P('<b>Ancora da rilevare su questa linea</b>', h3),
         SP(5),
-        BU('La lunghezza, misurata sui punti.', LINEA),
-        BU('Il dislivello fra i due ancoraggi.', LINEA),
-        BU('I punti del lato tensione: quanti e di che tipo.', LINEA),
-        BU('Una fotografia d’insieme dei tre punti del lato opposto, per l’angolo di '
-           'apertura.', LINEA),
-        BU('L’etichetta delle slinghe, distesa e leggibile.', LINEA),
-        BU('La posizione dell’ancoraggio opposto.', LINEA)]))
-    S.append(SP(14))
-    S.append(KeepTogether([
-        foto('IMG_1401.jpg', FW, 'La linea in opera, percorsa con il leash', LINEA,
-             ratio=0.62, focus=0.5)]))
-    S.append(SP(14))
-    S.append(foto('IMG_1398.jpg', FW, 'La campata vista dal bordo', LINEA,
-                  ratio=0.56, focus=0.5))
+        BU('Quale dei due estremi è l’ancoraggio di tensione.', C_SETTORE),
+        BU('La lunghezza, misurata sui punti, e il dislivello.', C_SETTORE),
+        BU('I punti dell’ancoraggio di tensione: quanti e di che tipo.', C_SETTORE),
+        BU('La posizione dell’ancoraggio statico.', C_SETTORE),
+        BU('Una fotografia d’insieme dei tre punti, per l’angolo di apertura.', C_SETTORE),
+        BU('L’etichetta delle slinghe, distesa e leggibile.', C_SETTORE)]))
+    S.append(SP(12))
+    # Le due fotografie in opera affiancate a mezza colonna: una sola a tutta
+    # larghezza scivolava su una pagina in piu', e tagliata a striscia perdeva la
+    # persona sulla linea, che sta al centro di una foto verticale.
+    S.append(photo_pair(
+        str(FOTO / 'IMG_1401.jpg'), str(FOTO / 'IMG_1398.jpg'),
+        'La linea in opera, percorsa con il leash', 'La campata vista dal bordo',
+        *dim(FOTO / 'IMG_1401.jpg'), color=C_SETTORE, ratio=0.68, focus=0.55,
+        ow2=dim(FOTO / 'IMG_1398.jpg')[0], oh2=dim(FOTO / 'IMG_1398.jpg')[1]))
     S.append(PageBreak())
     return S
+
+
+if __name__ == '__main__':
+    # Diagnostica: dove stanno i pixel arancio della 53 m nel render. Da usare
+    # se il render viene riesportato e ESTREMI_53 va aggiornato.
+    import numpy as np
+    from PIL import Image
+    from schede_linee import render_di
+    f = render_di('Anfiteatro')
+    a = np.asarray(Image.open(f).convert('RGB')).astype(int)
+    r, g, b = a[..., 0], a[..., 1], a[..., 2]
+    ys, xs = np.nonzero((r > 200) & (g > 70) & (g < 160) & (b < 80) & (r - g > 80))
+    print('render %s: %d x %d' % (f.name, a.shape[1], a.shape[0]))
+    if len(xs):
+        print('pixel arancio: %d, x %d-%d, y %d-%d' % (len(xs), xs.min(), xs.max(),
+                                                       ys.min(), ys.max()))
+        print('estremo sinistro ~ (%d, %d), destro ~ (%d, %d)' % (
+            xs.min(), ys[xs.argmin()], xs.max(), ys[xs.argmax()]))

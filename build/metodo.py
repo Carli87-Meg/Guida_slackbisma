@@ -55,7 +55,7 @@ def parte_metodo():
         _testata(1, 'Una linea, due lati', 'schema', LINEA),
         P('Una linea ha due ancoraggi. Sul <b>lato tensione</b> si costruiscono due soste '
           'indipendenti, si tensiona la linea e la si fa passare sopra l’A-frame. Sul '
-          '<b>lato opposto</b> c’è la sosta su più punti a cui la linea arriva. Sulla 53 m '
+          '<b>lato statico</b> c’è la sosta su più punti a cui la linea arriva. Sulla 53 m '
           'dell’Anfiteatro gli ancoraggi sono su roccia da entrambi i lati.', lead)))
     S.append(SP(14))
     S.append(two_cols(
@@ -68,7 +68,7 @@ def parte_metodo():
             'Anti-slip sulla linea, a tensione fatta',
             'A-frame sul bordo',
         ], C_TEN),
-        gear_block('Lato opposto', [
+        gear_block('Lato statico', [
             'Sosta su tre punti: placchette su bullone',
             'Punti collegati con una corda annodata',
             'Slinga viola e carrucola bloccante',
@@ -78,7 +78,7 @@ def parte_metodo():
     S.append(SP(12))
     S.append(callout('Quale lato è quale',
                      'Sulla 53 m la tensione si fa dove stanno sosta main e sosta backup, ed è '
-                     'il lato dell’A-frame; la sosta su tre punti è sul lato opposto. È '
+                     'il lato dell’A-frame; la sosta su tre punti è sul lato statico. È '
                      'ricostruito dall’ordine delle operazioni, e va confermato: ' + DC + '.',
                      C_TEN))
     S.append(SP(26))
@@ -140,10 +140,10 @@ def parte_metodo():
         Steps([
             ('Dividere il materiale', 'Viola alla sosta main, rosa alla backup'),
             ('Due soste in parallelo', 'Main e backup sul lato tensione; intanto una '
-             'persona raggiunge il lato opposto'),
+             'persona raggiunge il lato statico'),
             ('Instradare le slinghe', 'Nell’anello d’acciaio, con il nodo che le forza'),
             ('Orientare e ingrillare', 'Slinghe nel verso di lavoro, senza torsioni'),
-            ('Sosta sul lato opposto', 'Su tre punti, collegati con una corda annodata'),
+            ('Sosta sul lato statico', 'Su tre punti, collegati con una corda annodata'),
             ('Portare la linea', 'La corda azzurra porta la tagline, poi fa da linea vita'),
             ('Pretensionare', 'Paranchino di base, tensione provvisoria'),
             ('Bloccare il backup', 'Un collegamento che prende sosta main e sosta backup'),
@@ -165,12 +165,12 @@ def parte_metodo():
     # IMG_1371, IMG_1372, IMG_1374 @ 0:29; roccia dalla scheda di settore i-pietra
     sec(C_ANC, 'Ancoraggi', 'ancoraggi')
     S.append(KeepTogether([
-        _testata(4, 'Gli ancoraggi su roccia', 'lato opposto', C_ANC),
+        _testata(4, 'Gli ancoraggi su roccia', 'lato statico', C_ANC),
         SP(10),
         P('La roccia della Pietra è <b>arenaria</b>, meno tenace del calcare: va valutata '
           'attorno a ogni foro. I punti sono <b>placchette metalliche fissate con un dado '
           'esagonale su bullone</b> — un tassello meccanico, non uno spit a vite né un '
-          'resinato con occhiello. Sulla 53 m la sosta del lato opposto usa <b>tre punti</b>, '
+          'resinato con occhiello. Sulla 53 m la sosta del lato statico usa <b>tre punti</b>, '
           'collegati con una corda annodata.', lead),
         SP(10),
         ChipRow([('Punti', '3'), ('Tipo', 'Placchetta su bullone'),
@@ -245,7 +245,7 @@ def parte_metodo():
         P('<b>Come si procede</b>', h3),
         SP(5),
         BU('Le due soste si allestiscono <b>in parallelo</b>: mentre una persona lavora sul '
-           'lato tensione, un’altra raggiunge il lato opposto per costruire la sosta di là.',
+           'lato tensione, un’altra raggiunge il lato statico per costruire la sosta di là.',
            C_SOS),
         BU('La corda rosa del backup si collega con un <b>BFK</b>, il moschettone '
            'd’acciaio grande.', C_SOS),
@@ -301,7 +301,7 @@ def parte_metodo():
     S.append(_apre(
         _testata(7, 'Portare la linea, la linea vita', 'fra i due lati', C_SOS),
         P('La <b>corda azzurra</b> ha due usi: prima porta la tagline da un lato all’altro, '
-          'poi diventa <b>linea vita</b> sulla sosta del lato opposto. Per chi lavora in '
+          'poi diventa <b>linea vita</b> sulla sosta del lato statico. Per chi lavora in '
           'sosta servono una <b>corda di backup</b> e un <b>Grigri</b>.', lead),
         SP(8),
         P('Come si porta la tagline da un lato all’altro: ' + DC + '.', small)))
