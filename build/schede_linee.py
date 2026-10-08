@@ -168,7 +168,7 @@ def tabella_settore(area):
     for l in REG.per_area(area):
         if l['stato'] == REG.DOCUMENTATA:
             lung = '<b>%d m</b>' % l['lunghezza']
-            doc = 'sì — è «la 50», capitolo in questa guida'
+            doc = 'sì — è «la 50», scheda in questa guida'
             dove = rif('cap53')
         else:
             lung = '%d m' % l['lunghezza']
@@ -337,7 +337,8 @@ def parte_catalogo():
          SP(10),
          P('La locandina «La Pietra — Yeah Vez!» censisce <b>%d linee</b> distribuite su '
            'cinque aree, e il catalogo i-pietra ne registra <b>%d</b>. Una sola — la %d m '
-           'dell’Anfiteatro — è documentata da riprese di montaggio: il suo capitolo è a %s.'
+           'dell’Anfiteatro — è documentata: la sua scheda è a %s, e il metodo con cui è '
+           'montata è nella parte 2.'
            % (c['totale'], c['in_ipietra'], REG.documentate()[0]['lunghezza'],
               rif('cap53')), lead),
          SP(12)]

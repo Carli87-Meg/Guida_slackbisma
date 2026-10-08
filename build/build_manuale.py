@@ -27,6 +27,7 @@ sys.path.insert(0, str(RADICE / 'dati'))
 from design import *                                                # noqa: E402,F403
 from schede_linee import parte_catalogo, nota_copertura             # noqa: E402
 from scheda_53 import parte_53                                      # noqa: E402
+from metodo import parte_metodo                                     # noqa: E402
 import linee as REG                                                 # noqa: E402
 from reportlab.platypus import (BaseDocTemplate, PageTemplate, Frame,   # noqa: E402
                                 PageBreak, NextPageTemplate, Spacer,
@@ -103,9 +104,9 @@ def cover(cv, doc):
     cv.setFont('Lora', 10.4)
     cv.setFillColor(HexColor(0xE8E5E0))
     for i, r in enumerate([
-            'Ventiquattro linee su cinque aree.',
-            'Di una esiste la documentazione completa del montaggio;',
-            'delle altre, una scheda da compilare sul campo.']):
+            'Ventiquattro linee su cinque aree:',
+            'dove sono, e come si monta una linea.',
+            'I dati che mancano sono dichiarati, e si aggiungono man mano.']):
         cv.drawString(LM, H - 324 - i * 15, r)
 
     cv.setFillColor(WHITE)
@@ -317,21 +318,26 @@ def costruisci():
     _da_fare = _c['totale'] - _c['documentate']
     fonti = FONTI()
     CAPITOLI[:] = [
-        ('1', 'La Pietra', LINEA, 'completo', [
-            ('spot', 'La Pietra di Bismantova',
-             'Il massiccio e i numeri dello spot'),
+        ('1', 'Lo spot', LINEA, 'completo', [
+            ('spot', 'La Pietra di Bismantova', 'Il massiccio e i numeri dello spot'),
             ('catalogo', 'Le linee della Pietra',
-             'I cinque settori sulla cresta, ognuno con la sua vista i-pietra e le '
-             'sue linee')]),
-        ('2', 'Tecnica', C_ANC, 'parziale', [
-            ('roccia', 'La roccia e gli ancoraggi',
-             'Arenaria, placchette su tassello meccanico, controlli prima di caricare'),
-            ('glossario', 'Il gergo del gruppo',
-             'Come si chiamano sul campo le cose che si usano')]),
-        ('3', 'Le linee', C_SOS, '1 linea su %d' % _c['totale'], [
+             'I cinque settori sulla cresta, con le loro linee')]),
+        ('2', 'Come si monta una linea', C_SOS, 'parziale', [
+            ('lati', 'Una linea, due lati', 'Lato tensione e lato opposto'),
+            ('materiale', 'Prima di uscire: il materiale', 'La lista per una linea'),
+            ('sequenza', 'La sequenza di montaggio', 'Le fasi in ordine'),
+            ('ancoraggi', 'Gli ancoraggi su roccia', 'Placchette, punti, controlli'),
+            ('soste', 'Le soste: main e backup', 'Il codice colore, la portata'),
+            ('slinga', 'Instradamento della slinga', 'Il nodo che forza la slinga'),
+            ('lineavita', 'Portare la linea, la linea vita', 'Tagline e corda azzurra'),
+            ('tensione', 'Il lato tensione', 'Weblock, blocco del backup, anti-slip'),
+            ('aframe', 'L’A-frame', 'I due pali sul bordo'),
+            ('smontaggio', 'Lo smontaggio', 'Da documentare')]),
+        ('3', 'Le linee', LINEA, '1 linea su %d' % _c['totale'], [
             ('cap53', 'Anfiteatro 53 m, «la 50»',
-             'Il montaggio del 16 maggio 2026, dalle soste alla linea in opera')]),
+             'Dati, posizione, fotografie in opera')]),
         ('4', 'Apparato', LINEA, 'completo', [
+            ('glossario', 'Il gergo del gruppo', 'Come si chiamano le cose sul campo'),
             ('fonti', 'Da dove viene ogni dato',
              'Le %s fonti con la loro data, e l’avvertenza finale'
              % NUMERI.get(len(fonti), str(len(fonti))))]),
@@ -354,19 +360,10 @@ def costruisci():
     S.extend(elenco_capitoli())
     S.append(SP(16))
     S.append(callout('Una guida che si compila',
-                     'Di ventiquattro linee, <b>una sola</b> ha una documentazione di rigging. '
-                     'Per le altre %d c’è un <b>fascicolo a parte di schede di rilievo</b>, '
-                     'una per linea, da compilare sul posto. Quando una linea viene '
-                     'documentata, entra in questa guida come capitolo.' % _da_fare, LINEA))
-    S.append(SP(14))
-    S.append(P('<b>Come leggere i dati</b>', h3))
-    S.append(SP(5))
-    S.append(BU('Ogni numero porta la sua fonte. Dove la fonte è un catalogo che cambia '
-                'nel tempo, porta anche la data della lettura.', LINEA))
-    S.append(BU('%s significa che il dato non compare in nessuna fonte. Non è una '
-                'dimenticanza: è un campo vuoto dichiarato.' % DC, LINEA))
-    S.append(BU('Ciò che è stato osservato su una linea sola è attribuito a quella linea, '
-                'non presentato come pratica dello spot.', LINEA))
+                     'Ciò che manca è marcato %s: si completa sul campo, con chi monta, e '
+                     'non si deduce. Per le %d linee non ancora documentate c’è un fascicolo '
+                     'a parte di schede di rilievo, da compilare sul posto.' % (DC, _da_fare),
+                     LINEA))
     S.append(PageBreak())
 
     # ================================================================ PARTE 1
@@ -407,65 +404,32 @@ def costruisci():
     # ================================================================ PARTE 2
     # parte_catalogo() non chiude con un'interruzione: senza questa, il frontespizio
     # della parte finiva in coda alla pagina precedente invece di aprirne una nuova.
+    # La parte «Tecnica» non c'e' piu': roccia e ancoraggi stanno nel metodo, il
+    # glossario nell'apparato.
     S.append(PageBreak())
-    parte(S, '2', 'Tecnica', 'La roccia, il tipo di ancoraggio, il gergo del gruppo: ciò che '
-          'vale per lo spot e non per una linea sola. Ogni voce dichiara su quante linee '
-          'è stata vista.', C_ANC,
-          voci=_voci('2'))
+    parte(S, '2', 'Come si monta una linea', 'Il metodo con cui il gruppo monta una linea '
+          'alla Pietra, dagli ancoraggi all’anti-slip, documentato sulla 53 m '
+          'dell’Anfiteatro. Ciò che manca è marcato [DA CONFERMARE] e si aggiunge man mano.',
+          C_SOS, voci=_voci('2'))
+    S.extend(parte_metodo())
 
-    sec(S, C_ANC, 'Tecnica')
-    S.append(Segna('roccia'))
-    S.append(LineHeader('', 'La roccia e gli ancoraggi', 'Che cosa vale per lo spot', C_ANC))
-    S.append(SP(10))
-    S.append(P('<b>Di un solo montaggio su ventiquattro esistono riprese</b>, e da un caso '
-               'solo non si ricava la pratica di uno spot. Qui entra quindi soltanto ciò che '
-               'dipende dal luogo — la roccia, l’attrezzatura fissa — e non dalle scelte di '
-               'un pomeriggio.', lead))
-    S.append(SP(14))
-    S.append(data_table(
-        ['Elemento', 'Che cosa si è osservato', 'Su quante linee'],
-        [['Roccia', 'Arenaria: meno tenace del calcare, va valutata attorno al foro',
-          'dato di settore'],
-         ['Punti di ancoraggio', 'Placchetta metallica su bullone con dado esagonale: '
-          'tassello meccanico, non spit a vite né resinato con occhiello', '1 su %d'
-          % _c['totale']],
-         ['Collegamento fra i punti', 'Corda annodata fra le placchette', '1 su %d'
-          % _c['totale']],
-         ['Numero di punti', 'Tre, sul lato documentato', '1 su %d' % _c['totale']]],
-        [104, 292, 95], C_ANC))
-    S.append(SP(12))
-    S.append(foto('D2_placchetta_dettaglio.jpg', FW,
-                  'Placchetta e dado esagonale · Anfiteatro 53 m, 16/05/2026', C_ANC))
-    S.append(SP(14))
-    # una lista di controlli spezzata a meta' fra due pagine e' una lista che si
-    # smette di leggere: resta unita.
-    # Era stampata due volte, qui e nel capitolo della 53 m. Resta qui, dove
-    # vale per tutto lo spot; il capitolo rimanda a questa pagina.
-    S.append(Segna('controlli'))
-    S.append(KeepTogether([
-        P('<b>Controlli prima di caricare un punto</b>', h3),
-        SP(5),
-        BU('Che il dado sia serrato e non presenti gioco.', C_ANC),
-        BU('Che la placchetta non ruoti sul bullone.', C_ANC),
-        BU('Che la roccia attorno al foro non presenti fratture o sfaldature: '
-           'l’arenaria è meno tenace del calcare.', C_ANC),
-        BU('Che non vi sia corrosione visibile su placchetta, dado o bullone.', C_ANC)]))
-    S.append(SP(10))
-    S.append(P('L’elenco discende dal <i>tipo</i> di ancoraggio osservato: nei video nessuno '
-               'enuncia una lista di controlli. La checklist realmente usata dal gruppo è '
-               + DC + '.', small))
-    # niente interruzione qui: la checklist da sola occupava un ottavo di pagina
-    # e il glossario ne apriva un'altra riempita a meta'. I due capitoli di
-    # Tecnica stanno sulla stessa pagina, separati dalla testata del glossario.
-    S.append(SP(22))
+    # ================================================================ PARTE 3
+    parte(S, '3', 'Le linee', 'Una scheda per linea: dove sta, quanto è lunga, com’è '
+          'ancorata, che cosa manca. Per ora è completa quella della 53 m dell’Anfiteatro; '
+          'le altre %d hanno una scheda di rilievo da compilare, nel fascicolo a parte.'
+          % _da_fare, LINEA, voci=_voci('3'))
 
-    sec(S, C_ANC, 'Tecnica')
+    S.extend(parte_53())
+
+    # ================================================================ PARTE 4
+    # Anche la Parte 4 non ha frontespizio: e' una pagina sola, e un titolo
+    # davanti a una pagina sola raddoppia l'apparato senza aggiungere niente.
+    sec(S, LINEA, 'Glossario')
+    S.append(Segna('parte4'))
     S.append(Segna('glossario'))
-    S.append(KeepTogether([
-        LineHeader('', 'Il gergo del gruppo', 'Glossario operativo', C_ANC),
-        SP(10),
-        P('I termini come si dicono sul campo, con accanto il nome corrente. Valgono per '
-          'chiunque monti alla Pietra con il gruppo, non per una linea sola.', lead)]))
+    S.append(LineHeader('', 'Il gergo del gruppo', 'Glossario', LINEA))
+    S.append(SP(10))
+    S.append(P('I termini come si dicono sul campo, con accanto il nome corrente.', lead))
     S.append(SP(10))
     S.append(data_table(
         ['Come lo chiamano', 'Che cos’è'],
@@ -475,28 +439,17 @@ def costruisci():
          ['delta', 'Maglia rapida a forma di delta'],
          ['sosta main', 'Ancoraggio principale'],
          ['sosta backup', 'Ancoraggio di sicurezza, indipendente'],
+         ['blocco del backup', 'Collegamento che prende sosta main e sosta backup'],
          ['anti-slip', 'Nodo che impedisce lo slittamento della linea nel weblock'],
          ['tag, tagline', 'Cordino di servizio per portare la linea da un lato all’altro'],
          ['linea vita', 'Corda di sicurezza per chi si muove sull’ancoraggio'],
          ['ingrillare', 'Collegare con un grillo'],
          ['paranchino', 'Piccolo paranco di tensionamento'],
-         ['«slide next»', 'Termine non identificato: trascrizione incerta [DA CONFERMARE]']],
-        [150, 341], C_ANC))
+         ['«slide next»', 'Termine non identificato, forma incerta: [DA CONFERMARE]']],
+        [150, 341], LINEA))
     S.append(PageBreak())
 
-    # ================================================================ PARTE 3
-    parte(S, '3', 'Le linee', 'La 53 m dell’Anfiteatro, che sul campo chiamano «la 50», '
-          'è l’unica linea di cui esista la documentazione del montaggio. Le altre %d hanno '
-          'una scheda di rilievo da compilare, nel fascicolo a parte.' % _da_fare, C_SOS,
-          voci=_voci('3'))
-
-    S.extend(parte_53())
-
-    # ================================================================ PARTE 4
-    # Anche la Parte 4 non ha frontespizio: e' una pagina sola, e un titolo
-    # davanti a una pagina sola raddoppia l'apparato senza aggiungere niente.
     sec(S, LINEA, 'Fonti')
-    S.append(Segna('parte4'))
     S.append(Segna('fonti'))
     S.append(LineHeader('', 'Da dove viene ogni dato', 'Fonti e date', LINEA))
     S.append(SP(10))

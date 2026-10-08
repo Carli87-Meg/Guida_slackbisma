@@ -110,6 +110,7 @@ def A(url, text, c=None):
     return '<link href="%s"><font color="#%s">%s</font></link>' % (url, col, text)
 
 
+_re_dc = re.compile(r'<font color="#B3261E">(\[DA CONF[^<]*\])</font>')
 _UNITA = re.compile(r'(\d) (m|mm|cm|kN|kg|t|L)\b')
 
 
@@ -427,6 +428,11 @@ def callout(title, text, color=BRAND, icon='!', w=FW, strong=False):
                         textColor=tc)
     bs = ParagraphStyle('cb', fontName='Lora', fontSize=9.0, leading=13,
                         textColor=WHITE if strong else INK2)
+    # Sul fondo pieno il segno [DA CONFERMARE], rosso, spariva: rosso su rosso.
+    # Proprio nelle avvertenze il dato mancante non si vedeva. Qui diventa bianco
+    # e in grassetto.
+    if strong and text:
+        text = _re_dc.sub(lambda m: '<b>%s</b>' % m.group(1), text)
     inner = [[Paragraph(unito(title), ts)]]
     if text:
         inner.append([Paragraph(unito(text), bs)])
