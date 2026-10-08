@@ -35,6 +35,7 @@ C_TEN = LC[3]                   # lato tensione   (ambra)
 C_ASL = LC[5]                   # anti-slip       (verde)
 
 DC = '<font color="#B3261E">[DA CONFERMARE]</font>'
+DCC = '[DA CONF.]'
 
 # occhiello ripetuto su ogni testata: la linea e il giorno, sempre
 GIORNO = '16/05/2026'
@@ -126,9 +127,10 @@ MAPPA_S = 'https://www.google.com/maps?q=44.419453,10.412072'
 def parte_53():
     """La scheda della 53 m, sul modello della guida Sillschlucht.
 
-    Testata con la lunghezza, dove sta sulla parete, i due ancoraggi affiancati
-    — tensione e statico, ciascuno con la sua posizione e il suo materiale —, le
-    fotografie dei due lati, i dati e cio' che manca.
+    Qui sta tutto cio' che e' proprio di questa linea, e nella parte 2 non c'e'
+    piu': dove corre, i due ancoraggi con posizione e materiale, l'elenco
+    completo del materiale con le quantita', l'A-frame con le sue misure, quale
+    lato e' quale, che cosa manca, la variante con i bungee.
     """
     S = [Accent(C_SETTORE, 'Anfiteatro 53 m'),
          Segna('cap53'),
@@ -137,10 +139,11 @@ def parte_53():
                           53, C_SETTORE),
              SP(10),
              P('La linea che sul campo chiamano <b>«la 50»</b>: da non confondere con la 50 m '
-               'del Settore Giallo. Come si monta è descritto nella parte 2; qui ci sono i dati '
-               'propri di questa linea.', lead)]),
+               'del Settore Giallo. Come si monta una linea è descritto nella parte 2; qui c’è '
+               'com’è fatta questa.', lead)]),
          SP(12)]
 
+    # ------------------------------------------------ dove corre
     fig = figura_posizione()
     if fig is not None:
         with _PILImage.open(fig) as _im:
@@ -153,7 +156,9 @@ def parte_53():
             P('Quale dei due sia l’ancoraggio di tensione: ' + DC + '.', small)]))
         S.append(SP(14))
 
-    # NOTE_RIGGING, «Materiale nominato» e sezioni A-F; lati: dubbio 56
+    # ------------------------------------------------ i due ancoraggi
+    # NOTE_RIGGING, «Materiale nominato» e sezioni A-F; lati: dubbio 56.
+    # Coordinate: IMG_1416 (16/05, main) e IMG_3323-3332 (22/08, l'altro capo).
     S.append(two_cols(
         gear_block('T · Ancoraggio di tensione', [
             'Sosta main: slinghe viola — quante e quanto lunghe ' + DC,
@@ -175,21 +180,96 @@ def parte_53():
                'servono ad avvicinarsi, non a ritrovare il singolo punto, che va cercato a vista. '
                'Le due posizioni distano circa 51 m, coerente con i 53 m della linea: non è una '
                'misura.', small))
-    S.append(SP(16))
+    S.append(PageBreak())
 
+    # ------------------------------------------------ il materiale di questa linea
+    # NOTE_RIGGING, «Materiale nominato», con la colonna «dove si usa». La parte
+    # 2 dice che cosa serve per funzione; qui ci sono le quantita' della 53 m.
+    S.append(Segna('materiale53'))
     S.append(KeepTogether([
-        photo_pair(
-            str(FOTO / 'IMG_1416.jpg'), str(ANN / 'D1_ancoraggio.jpg'),
-            'Lato tensione: l’A-frame visto dall’ancoraggio', 'Lato statico: la sosta su tre punti',
-            *dim(FOTO / 'IMG_1416.jpg'), color=C_SETTORE, ratio=1.05, focus=0.6,
-            ow2=dim(ANN / 'D1_ancoraggio.jpg')[0], oh2=dim(ANN / 'D1_ancoraggio.jpg')[1])]))
+        P('<b>Il materiale del montaggio del 16 maggio</b>', h3),
+        SP(6),
+        data_table(
+            ['Qtà', 'Articolo', 'Dove si usa', 'Misura'],
+            [['n.d.', 'Slinghe viola — brache ad anello industriali', 'sosta main', DCC],
+             ['n.d.', 'Corde rosa', 'sosta backup', DCC],
+             ['1', 'BFK, moschettone d’acciaio grande', 'sulla corda rosa del backup', DCC],
+             ['4', 'Maglie rapide delta', DCC, DCC],
+             ['1', '«Mighty Lock», «quello quadratino» — nome incerto', 'backup', DCC],
+             ['1', 'Slinga verde lunga, «la più grossa che c’è»', DCC, DCC],
+             ['1', 'Slinga piccola viola', DCC, DCC],
+             ['≥1', 'Slinga verde e nera', DCC, DCC],
+             ['1', 'Corda azzurra', 'tagline, poi linea vita', DCC],
+             ['1', 'Corda verde acqua', 'collegamento fra i punti', DCC],
+             ['≥1', 'Carrucola bloccante · EN 567:2013 · Ø 7,8-11 mm', 'sull’ancoraggio',
+              'marca ' + DCC],
+             ['1', 'Weblock azzurro anodizzato, detto «banana»', 'lato tensione',
+              'modello ' + DCC],
+             ['≥1', 'Grillo a lira in acciaio', 'collegamento della sosta', DCC],
+             ['1', 'Paranchino', 'tensionamento della base', DCC],
+             ['1', 'Softrelease', DCC, 'modello ' + DCC],
+             ['≥2', 'Grigri', 'backup e calata', '—'],
+             ['1', 'Corda di backup', 'per chi lavora in sosta', DCC],
+             ['n.d.', 'Nastro, backup della linea, leash', '—', DCC]],
+            [36, 222, 142, 91], C_SETTORE)]))
     S.append(SP(14))
+    S.append(foto('IMG_1360.jpg', FW, 'Il materiale steso prima del montaggio, 16 maggio 2026',
+                  C_SETTORE, ratio=0.34, focus=0.42))
+    S.append(PageBreak())
+
+    # ------------------------------------------------ fotografie dei due lati
+    S.append(photo_pair(
+        str(FOTO / 'IMG_1416.jpg'), str(ANCO / 'IMG_3329.jpg'),
+        'Lato tensione: l’A-frame visto dall’ancoraggio', 'Lato statico: placchette e slinghe',
+        *dim(FOTO / 'IMG_1416.jpg'), color=C_SETTORE, ratio=0.82, focus=0.6,
+        ow2=dim(ANCO / 'IMG_3329.jpg')[0], oh2=dim(ANCO / 'IMG_3329.jpg')[1]))
+    S.append(SP(16))
+    # Le due fotografie in opera affiancate a mezza colonna: una sola a tutta
+    # larghezza scivolava su una pagina in piu', e tagliata a striscia perdeva la
+    # persona sulla linea, che sta al centro di una foto verticale.
+    S.append(photo_pair(
+        str(FOTO / 'IMG_1401.jpg'), str(FOTO / 'IMG_1398.jpg'),
+        'La linea in opera, percorsa con il leash', 'La campata vista dal bordo',
+        *dim(FOTO / 'IMG_1401.jpg'), color=C_SETTORE, ratio=0.68, focus=0.55,
+        ow2=dim(FOTO / 'IMG_1398.jpg')[0], oh2=dim(FOTO / 'IMG_1398.jpg')[1]))
+    S.append(SP(16))
+    # ------------------------------------------------ l'A-frame di questa linea
+    # IMG_1396 e IMG_1416; posizione sul lato main dalla risposta del 20/08
+    S.append(KeepTogether([
+        P('<b>L’A-frame di questa linea</b>', h3),
+        SP(6),
+        ChipRow([('Pali', '2 · legno tondo'), ('Testa', 'Incrociata e legata'),
+                 ('Piede', 'Appoggiato su roccia'), ('Altezza', DCC)], C_TEN),
+        SP(10),
+        two_cols(
+            gear_block('Com’è fatto', [
+                'Due pali di legno tondo, incrociati e legati in testa',
+                'Fettuccia viola avvolta sulla testa dei pali',
+                'Corda verde fluo, fettuccia blu e corda rosa in testa',
+                'Piedi appoggiati sulla roccia del bordo',
+                'Giri di filo metallico attorno al piede di un palo',
+            ], C_TEN),
+            gear_block('Ancora da rilevare', [
+                'Altezza dei pali — ' + DCC,
+                'Diametro e tipo del legno — ' + DCC,
+                'Come sono legati in testa — ' + DCC,
+                'Se i piedi sono fermati o solo appoggiati — ' + DCC,
+                'Se il filo metallico tiene il palo o è un recinto — ' + DCC,
+                'Di quanto solleva la linea sopra il bordo — ' + DCC,
+            ], WARN))]))
+    S.append(SP(16))
+    S.append(callout('Quale lato è quale',
+                     'In questa scheda la tensione sta dove stanno sosta main, sosta backup e '
+                     'A-frame, e la sosta su tre punti è sul lato statico. È ricostruito '
+                     'dall’ordine delle operazioni del 16 maggio, e va confermato: ' + DC + '.',
+                     C_TEN))
+    S.append(SP(16))
     S.append(data_table(
         ['Voce', 'Valore'],
         [['Lunghezza', '53 m di catalogo (i-pietra e locandina) — misura sui punti ' + DC],
          ['Dislivello, offlevel', DC],
          ['Nastro, backup, leash', DC],
-         ['Ultimo montaggio documentato', '16 maggio 2026']],
+         ['Montaggi documentati', '16 maggio 2026; 22 agosto 2026, con i bungee']],
         [150, FW - 150], C_SETTORE))
     S.append(SP(14))
     S.append(KeepTogether([
@@ -199,8 +279,12 @@ def parte_53():
         BU('La lunghezza, misurata sui punti, e il dislivello.', C_SETTORE),
         BU('I punti dell’ancoraggio di tensione: quanti e di che tipo.', C_SETTORE),
         BU('Una fotografia d’insieme dei tre punti, per l’angolo di apertura.', C_SETTORE),
-        BU('L’etichetta delle slinghe, distesa e leggibile.', C_SETTORE)]))
-    S.append(PageBreak())
+        BU('Diametro e marca del bullone; marca della carrucola bloccante.', C_SETTORE),
+        BU('Se accanto ai punti fissi c’è protezione veloce.', C_SETTORE),
+        BU('L’etichetta delle slinghe: c’è, ma nelle fotografie è rivoltata.', C_SETTORE)]))
+    S.append(SP(18))
+
+    # ------------------------------------------------ la variante con i bungee
     # IMG_3323-3332, 22/08/2026, all'altro capo della linea (51,5 m dal main).
     # L'utente: «il montaggio fatto quel giorno era della 53 ma con i bungee».
     # Le placchette sono fisse e valgono per ogni montaggio; slinghe, corda verde,
@@ -218,15 +302,6 @@ def parte_53():
             'Placchette, slinghe viola e corda annodata', 'Dal masterpoint ai bungee',
             *dim(ANCO / 'IMG_3324.jpg'), color=C_SETTORE, ratio=0.95, focus=0.45,
             ow2=dim(ANCO / 'IMG_3325.jpg')[0], oh2=dim(ANCO / 'IMG_3325.jpg')[1])]))
-    S.append(SP(18))
-    # Le due fotografie in opera affiancate a mezza colonna: una sola a tutta
-    # larghezza scivolava su una pagina in piu', e tagliata a striscia perdeva la
-    # persona sulla linea, che sta al centro di una foto verticale.
-    S.append(photo_pair(
-        str(FOTO / 'IMG_1401.jpg'), str(FOTO / 'IMG_1398.jpg'),
-        'La linea in opera, percorsa con il leash', 'La campata vista dal bordo',
-        *dim(FOTO / 'IMG_1401.jpg'), color=C_SETTORE, ratio=0.68, focus=0.55,
-        ow2=dim(FOTO / 'IMG_1398.jpg')[0], oh2=dim(FOTO / 'IMG_1398.jpg')[1]))
     S.append(PageBreak())
     return S
 

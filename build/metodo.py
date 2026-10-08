@@ -1,19 +1,21 @@
 # -*- coding: utf-8 -*-
 """Parte 2 della guida: come si monta una linea alla Pietra.
 
-Fino all'edizione dell'8 ottobre la stessa materia stava in un capitolo
-intitolato alla giornata del 16 maggio: una cronologia, citazioni dai video,
-osservazioni su che cosa le riprese mostrassero o no. Era la ricostruzione di un
-montaggio. Qui diventa il metodo, ordinato come lo si esegue: i due lati di una
-linea, il materiale, la sequenza, poi ogni fase.
+Il metodo, ordinato come lo si esegue: i due lati di una linea, che cosa serve,
+la sequenza, poi ogni fase. Fino all'edizione dell'8 ottobre la stessa materia
+stava in un capitolo intitolato alla giornata del 16 maggio, una cronologia.
 
-Le fonti non cambiano, cambia dove si dicono. Ogni riga di queste pagine viene
-dal montaggio della 53 m dell'Anfiteatro (trascrizioni e fotogrammi, vedi
-NOTE_RIGGING.md, sezioni A-G) o dalle risposte di chi ha montato; i riferimenti
-ai file stanno nei commenti, non nel testo per il lettore. Dove una voce vale per
-quella linea sola, il testo lo dice. Dove manca, resta [DA CONFERMARE].
+Il criterio che separa questa parte dalla scheda di una linea, lo stesso della
+guida Sillschlucht di Innsbruck: **qui si dice come si fa** — funzioni, tipi di
+materiale, principi. **La scheda dice com'e' fatta quella linea**: quantita',
+colori, numero di punti, posizioni, che cosa manca. Le fotografie della 53 m
+compaiono qui solo come esempi, e la didascalia lo dichiara.
 
-Nessuna regola generica di highlining entra qui per riempire un vuoto.
+Le fonti: il montaggio della 53 m dell'Anfiteatro (trascrizioni e fotogrammi,
+NOTE_RIGGING.md, sezioni A-G), il montaggio con i bungee del 22/08/2026 e le
+risposte di chi ha montato. I riferimenti ai file stanno nei commenti, non nel
+testo per il lettore. Dove manca qualcosa resta [DA CONFERMARE]: nessuna regola
+generica di highlining entra qui per riempire un vuoto.
 
     from metodo import parte_metodo
 """
@@ -27,8 +29,6 @@ from design import *                                                # noqa: E402
 from reportlab.platypus import KeepTogether, PageBreak              # noqa: E402
 from scheda_53 import (foto, dim, ANN, FOTO, LINEA, C_ANC, C_SOS,   # noqa: E402
                        C_TEN, C_ASL, DC)
-
-DCC = '[DA CONF.]'
 
 
 def _apre(testata, *seguito):
@@ -48,103 +48,81 @@ def parte_metodo():
         S.append(Segna(chiave))
 
     # ============================================================ 1 · i due lati
-    # Lati ricostruiti dall'ordine delle operazioni (NOTE_RIGGING A, D, E, F) e
-    # dalla risposta del 20/08 sull'A-frame: dubbio 56.
+    # Ruoli dei due lati dall'ordine delle operazioni (NOTE_RIGGING A, D, E, F).
+    # Quale lato sia quale sulla 53 m e' il dubbio 56, e sta nella sua scheda.
     sec(LINEA, 'Due lati', 'lati')
     S.append(_apre(
         _testata(1, 'Una linea, due lati', 'schema', LINEA),
-        P('Una linea ha due ancoraggi. Sul <b>lato tensione</b> si costruiscono due soste '
-          'indipendenti, si tensiona la linea e la si fa passare sopra l’A-frame. Sul '
-          '<b>lato statico</b> c’è la sosta su più punti a cui la linea arriva. Sulla 53 m '
-          'dell’Anfiteatro gli ancoraggi sono su roccia da entrambi i lati.', lead)))
+        P('Una linea ha due ancoraggi, con compiti diversi. Sul <b>lato tensione</b> si '
+          'costruiscono due soste indipendenti, main e backup, e si tensiona la linea. Sul '
+          '<b>lato statico</b> c’è una sosta su più punti a cui la linea arriva.', lead)))
     S.append(SP(14))
     S.append(two_cols(
         gear_block('Lato tensione', [
-            'Sosta main con slinghe viola',
-            'Sosta backup con corde rosa, collegate con un BFK',
-            'Weblock («banana») e grillo a lira',
-            'Paranchino di tensionamento della base',
+            'Sosta main',
+            'Sosta backup, indipendente dalla main',
+            'Sistema di tensione: weblock, grillo, paranchino',
             'Blocco del backup, che prende entrambe le soste',
             'Anti-slip sulla linea, a tensione fatta',
-            'A-frame sul bordo',
+            'A-frame sul bordo, se la linea lo prevede',
         ], C_TEN),
         gear_block('Lato statico', [
-            'Sosta su tre punti: placchette su bullone',
-            'Punti collegati con una corda annodata',
-            'Slinga viola e carrucola bloccante',
-            'Linea vita con la corda azzurra',
-            'Una sosta backup anche qui — com’è fatta, ' + DC,
+            'Sosta su più punti fissi',
+            'Punti collegati fra loro',
+            'Linea vita per chi lavora in sosta',
+            'Sosta backup — com’è fatta, ' + DC,
         ], C_ANC)))
-    S.append(SP(12))
-    S.append(callout('Quale lato è quale',
-                     'Sulla 53 m la tensione si fa dove stanno sosta main e sosta backup, ed è '
-                     'il lato dell’A-frame; la sosta su tre punti è sul lato statico. È '
-                     'ricostruito dall’ordine delle operazioni, e va confermato: ' + DC + '.',
-                     C_TEN))
+    S.append(SP(10))
+    S.append(P('Com’è fatto ciascun lato su una linea precisa — quanti punti, quale materiale, '
+               'dove si trova — lo dice la sua scheda, nella parte 3.', small))
     S.append(SP(26))
 
-    # ============================================================ 2 · materiale
-    # Tabella da NOTE_RIGGING, «Materiale nominato», con la colonna «Dove si usa».
-    # E' anche la lista prima di uscire che CLAUDE.md chiede fra gli apparati.
+    # ============================================================ 2 · prima di uscire
+    # Le voci sono quelle del materiale nominato (NOTE_RIGGING), raggruppate per
+    # funzione con la colonna «dove si usa». Quantita' e misure stanno nella
+    # scheda della linea: qui sarebbero quelle di una linea sola.
     sec(LINEA, 'Materiale', 'materiale')
     S.append(_apre(
-        _testata(2, 'Prima di uscire: il materiale', 'il materiale per una linea', LINEA),
-        P('Il materiale con cui è stata montata la 53 m dell’Anfiteatro: è la lista da '
-          'preparare prima di uscire. Le quantità note sono indicate; le misure, per ora, '
-          'quasi mai.', lead)))
-    S.append(SP(14))
-    S.append(data_table(
-        ['Qtà', 'Articolo', 'Dove si usa', 'Misura'],
-        [['n.d.', 'Slinghe viola — brache ad anello industriali', 'sosta main', DCC],
-         ['n.d.', 'Corde rosa', 'sosta backup', DCC],
-         ['1', 'BFK, moschettone d’acciaio grande', 'sulla corda rosa del backup', DCC],
-         ['4', 'Maglie rapide delta', DCC, DCC],
-         ['1', '«Mighty Lock», «quello quadratino» — nome incerto', 'backup', DCC],
-         ['1', 'Slinga verde lunga, «la più grossa che c’è»', DCC, DCC],
-         ['1', 'Slinga piccola viola', DCC, DCC],
-         ['≥1', 'Slinga verde e nera', DCC, DCC],
-         ['1', 'Corda azzurra', 'tagline, poi linea vita', DCC],
-         ['1', 'Corda verde acqua', 'collegamento fra i punti', DCC],
-         ['≥1', 'Carrucola bloccante · EN 567:2013 · Ø 7,8-11 mm', 'sull’ancoraggio',
-          'marca ' + DCC],
-         ['1', 'Weblock azzurro anodizzato, detto «banana»', 'lato tensione',
-          'modello ' + DCC],
-         ['≥1', 'Grillo a lira in acciaio', 'collegamento della sosta', DCC],
-         ['1', 'Paranchino', 'tensionamento della base', DCC],
-         ['1', 'Softrelease', DCC, 'modello ' + DCC],
-         ['≥2', 'Grigri', 'backup e calata', '—'],
-         ['1', 'Corda di backup', 'per chi lavora in sosta', DCC],
-         ['n.d.', 'Nastro della highline', '—', DCC],
-         ['n.d.', 'Backup della linea', '—', DCC],
-         ['n.d.', 'Leash', '—', DCC]],
-        [36, 222, 142, 91], LINEA))
-    S.append(SP(10))
-    S.append(foto('IMG_1360.jpg', FW, 'Slinghe viola, corde rosa, fettuccia verde, grilli e '
-                  'maglie rapide, stesi prima del montaggio', LINEA, ratio=0.42, focus=0.42))
+        _testata(2, 'Prima di uscire: il materiale', 'che cosa serve', LINEA),
+        P('Che cosa serve per montare una linea, voce per voce, nell’ordine del metodo. '
+          'Quantità e misure dipendono dalla linea: le dà la sua scheda.', lead)))
     S.append(SP(12))
-    S.append(callout('Ancora da documentare',
-                     'Nastro della linea, backup della linea e leash sono gli elementi centrali '
-                     'di una highline: marca, larghezza e tipo sono ' + DC + '.',
-                     WARN, '!', FW, True))
+    S.append(data_table(
+        ['Per', 'Che cosa serve'],
+        [['La sosta main', 'Brache ad anello industriali («slinghe»)'],
+         ['La sosta backup', 'Corde, con un connettore d’acciaio (BFK)'],
+         ['Collegare i punti', 'Una corda, annodata fra i punti'],
+         ['L’ancoraggio', 'Carrucola bloccante'],
+         ['I collegamenti della sosta', 'Grilli a lira; maglie rapide — dove si usano, ' + DC],
+         ['La tensione', 'Weblock e paranchino; softrelease — dove si usa, ' + DC],
+         ['Portare la linea', 'Tagline, e una corda che poi fa da linea vita'],
+         ['Chi lavora in sosta', 'Corda di backup e Grigri'],
+         ['La linea', 'Nastro, backup della linea, leash — ' + DC],
+         ['Il bordo', 'A-frame, se la linea lo prevede']],
+        [150, FW - 150], LINEA))
+    S.append(SP(8))
+    S.append(P('L’elenco completo della 53 m dell’Anfiteatro, con le quantità, è a '
+               + rif('materiale53', 'pagina [rimando]') + '.', small))
     S.append(SP(26))
 
     # ============================================================ 3 · sequenza
-    # Ordine dai metadati dei file, NOTE_RIGGING A-G. Gli orari stanno li'.
-    # Steps disegna testo semplice: niente markup nelle descrizioni.
+    # Ordine dai metadati dei file, NOTE_RIGGING A-G. Steps disegna testo
+    # semplice: niente markup nelle descrizioni.
     sec(LINEA, 'Sequenza', 'sequenza')
     S.append(_apre(
         _testata(3, 'La sequenza di montaggio', 'in ordine', LINEA),
-        P('Le fasi nell’ordine in cui si eseguono, come sulla 53 m dell’Anfiteatro. Ognuna '
-          'ha il suo capitolo nelle pagine che seguono.', lead),
+        P('Le fasi nell’ordine in cui si eseguono. Ognuna ha il suo capitolo nelle pagine '
+          'che seguono.', lead),
         SP(12),
         Steps([
-            ('Dividere il materiale', 'Viola alla sosta main, rosa alla backup'),
+            ('Dividere il materiale', 'Un colore per la sosta main, uno per la backup'),
             ('Due soste in parallelo', 'Main e backup sul lato tensione; intanto una '
              'persona raggiunge il lato statico'),
             ('Instradare le slinghe', 'Nell’anello d’acciaio, con il nodo che le forza'),
             ('Orientare e ingrillare', 'Slinghe nel verso di lavoro, senza torsioni'),
-            ('Sosta sul lato statico', 'Su tre punti, collegati con una corda annodata'),
-            ('Portare la linea', 'La corda azzurra porta la tagline, poi fa da linea vita'),
+            ('Sosta sul lato statico', 'Su più punti, collegati con una corda annodata'),
+            ('Portare la linea', 'La tagline passa da un lato all’altro; la corda fa poi '
+             'da linea vita'),
             ('Pretensionare', 'Paranchino di base, tensione provvisoria'),
             ('Bloccare il backup', 'Un collegamento che prende sosta main e sosta backup'),
             ('Tensionare', 'Tensionamento finale — come e quanto: [DA CONFERMARE]'),
@@ -152,51 +130,30 @@ def parte_metodo():
             ('Verificare', 'Si va sulla linea per vedere se va ritensionata'),
         ], LINEA, FW, 2),
         SP(12),
-        # IMG_1370 @ 0:00-0:15 e IMG_1380 @ 0:54-0:57: dubbi 29 e 30. Legate alla
-        # sequenza: da sole finivano su una pagina vuota.
+        # IMG_1370 @ 0:00-0:15 e IMG_1380 @ 0:54-0:57: dubbi 29 e 30
         callout('Due avvertenze da chiarire',
-                'Durante il montaggio è stato detto che un componente «ruotando può '
-                'cadere» e che un’operazione «andrebbe fatta dopo, quando c’è del peso». '
+                'Durante il montaggio documentato è stato detto che un componente «ruotando '
+                'può cadere» e che un’operazione «andrebbe fatta dopo, quando c’è del peso». '
                 'Quale componente e quale operazione: ' + DC + ', da chiedere a chi ha '
                 'montato.', WARN, '!', FW, True)))
     S.append(SP(26))
 
     # ============================================================ 4 · ancoraggi
-    # IMG_1371, IMG_1372, IMG_1374 @ 0:29; roccia dalla scheda di settore i-pietra
+    # Roccia dalla scheda di settore i-pietra; placchette in IMG_1371, IMG_1372 e
+    # nelle foto del 22/08; punti collegati con corda annodata in entrambi i montaggi
     sec(C_ANC, 'Ancoraggi', 'ancoraggi')
     S.append(KeepTogether([
-        _testata(4, 'Gli ancoraggi su roccia', 'lato statico', C_ANC),
+        _testata(4, 'Gli ancoraggi su roccia', 'i punti fissi', C_ANC),
         SP(10),
         P('La roccia della Pietra è <b>arenaria</b>, meno tenace del calcare: va valutata '
           'attorno a ogni foro. I punti sono <b>placchette metalliche fissate con un dado '
           'esagonale su bullone</b> — un tassello meccanico, non uno spit a vite né un '
-          'resinato con occhiello. Sulla 53 m la sosta del lato statico usa <b>tre punti</b>, '
-          'collegati con una corda annodata.', lead),
-        SP(10),
-        ChipRow([('Punti', '3'), ('Tipo', 'Placchetta su bullone'),
-                 ('Collegamento', 'Corda annodata'), ('Angolo', DCC)], C_ANC),
+          'resinato con occhiello. La sosta si costruisce su <b>più punti</b>, collegati fra '
+          'loro con una corda annodata.', lead),
         SP(12),
-        foto('D1_ancoraggio.jpg', FW, 'Sosta su tre punti — placchetta, cordino di '
-             'collegamento, carrucola bloccante e slinga viola', C_ANC,
+        foto('D1_ancoraggio.jpg', FW, 'Esempio dalla 53 m: sosta su tre punti — placchetta, '
+             'cordino di collegamento, carrucola bloccante, slinga', C_ANC,
              ratio=0.80, focus=0.78)]))
-    S.append(SP(14))
-    S.append(two_cols(
-        gear_block('Com’è fatta', [
-            'Placchetta metallica su bullone con dado esagonale',
-            'Connettore d’acciaio a ghiera',
-            'Maglia rapida in acciaio',
-            'Corda verde acqua annodata fra i punti',
-            'Slinga viola (braca ad anello industriale)',
-            'Carrucola bloccante · EN 567:2013 · Ø 7,8-11 mm',
-        ], C_ANC),
-        gear_block('Ancora da rilevare', [
-            'Diametro e marca del bullone — ' + DCC,
-            'Angolo di apertura fra i punti — ' + DCC,
-            'Punti sul lato tensione: quanti e quali — ' + DCC,
-            'Marca della carrucola bloccante — ' + DCC,
-            'Protezione veloce accanto ai punti fissi — ' + DCC,
-            'Una fotografia d’insieme dei tre punti',
-        ], WARN)))
     S.append(SP(14))
     S.append(_apre(
         P('<b>Il punto da vicino</b>', h3),
@@ -223,21 +180,18 @@ def parte_metodo():
     S.append(SP(26))
 
     # ============================================================ 5 · soste
-    # IMG_1349 @ 0:00, IMG_1350 @ 0:00 e 0:53; foto IMG_1357, IMG_1359 delle 13:07
+    # IMG_1349 @ 0:00, IMG_1350 @ 0:00. Il codice colore e' un principio, non una
+    # convenzione fissa: il 22/08, sulla stessa linea, la corda era verde.
     sec(C_SOS, 'Soste', 'soste')
     S.append(_apre(
         _testata(5, 'Le soste: main e backup', 'lato tensione', C_SOS),
-        P('Sul lato tensione si allestiscono <b>due soste indipendenti</b>, distinte a colpo '
-          'd’occhio dal materiale: la <b>sosta main</b> con le slinghe viola, la <b>sosta '
-          'backup</b> con le corde rosa. Il codice colore serve a non confondere i due '
-          'sistemi mentre si lavora in parete.', lead),
-        SP(10),
-        ChipRow([('Sosta main', 'Slinghe viola'), ('Sosta backup', 'Corde rosa'),
-                 ('Connettore', 'BFK'), ('Maglie', '4 delta')], C_SOS)))
+        P('Sul lato tensione si allestiscono <b>due soste indipendenti</b>, main e backup, con '
+          'materiale di <b>colore diverso</b>: il colore serve a non confondere i due sistemi '
+          'mentre si lavora in parete.', lead)))
     S.append(SP(12))
     S.append(photo_pair(
         str(FOTO / 'IMG_1357.jpg'), str(FOTO / 'IMG_1359.jpg'),
-        'Slinghe e corde stese, pronte per le due soste', 'Il materiale disposto sulla roccia',
+        'Esempio dalla 53 m: viola la main, rosa la backup', 'Il materiale disposto sulla roccia',
         *dim(FOTO / 'IMG_1357.jpg'), color=C_SOS, ratio=0.95, focus=0.5,
         ow2=dim(FOTO / 'IMG_1359.jpg')[0], oh2=dim(FOTO / 'IMG_1359.jpg')[1]))
     S.append(SP(14))
@@ -247,28 +201,21 @@ def parte_metodo():
         BU('Le due soste si allestiscono <b>in parallelo</b>: mentre una persona lavora sul '
            'lato tensione, un’altra raggiunge il lato statico per costruire la sosta di là.',
            C_SOS),
-        BU('La corda rosa del backup si collega con un <b>BFK</b>, il moschettone '
-           'd’acciaio grande.', C_SOS),
-        BU('Sulla 53 m sono servite <b>quattro maglie rapide delta</b>.', C_SOS),
-        SP(8),
-        P('Lunghezze e diametri di slinghe e corde: ' + DC + '.', small)]))
+        BU('La backup si collega con un <b>connettore d’acciaio</b> — il BFK, il moschettone '
+           'grande.', C_SOS)]))
     S.append(SP(18))
-    # IMG_1360 e il suo ritaglio: dubbio 37, il piu' pericoloso del documento
-    S.append(_apre(
-        P('<b>La portata delle slinghe</b>', h3),
-        P('Le slinghe della sosta main sono brache ad anello industriali, con un’etichetta '
-          'cucita sulla calza. La portata è quella stampata sull’etichetta: ' + DC + '. '
-          'Nelle fotografie disponibili l’etichetta è rivoltata e non si legge.', body),
+    # dubbio 37: la portata delle brache, il dato piu' pericoloso da sbagliare
+    S.append(KeepTogether([
+        P('<b>La portata delle brache</b>', h3),
+        SP(4),
+        P('La portata di una braca ad anello è quella stampata sull’etichetta cucita sulla '
+          'calza. Se l’etichetta non si legge, la portata non è nota.', body),
         SP(10),
-        foto('IMG_1360_etichetta.jpg', FW, 'L’etichetta cucita sulla calza, rivoltata',
-             C_SOS, ratio=0.40, focus=0.5)))
-    S.append(SP(12))
-    S.append(callout('Il colore non è una portata',
-                     'Una calza viola con una riga scura sembra una portata dichiarata, ma non lo '
-                     'è: il colore sbiadisce al sole, le codifiche cambiano fra costruttori, e una '
-                     'riga cucita non è un’indicazione di portata. <b>Vale solo l’etichetta</b>: '
-                     'per leggerla serve una fotografia ravvicinata dell’etichetta distesa.',
-                     WARN, '!', FW, True))
+        callout('Il colore non è una portata',
+                'Una calza viola con una riga scura sembra una portata dichiarata, ma non lo '
+                'è: il colore sbiadisce al sole, le codifiche cambiano fra costruttori, e una '
+                'riga cucita non è un’indicazione di portata. <b>Vale solo l’etichetta</b>.',
+                WARN, '!', FW, True)]))
     S.append(SP(26))
 
     # ============================================================ 6 · slinga
@@ -282,13 +229,13 @@ def parte_metodo():
           'senza torsioni, e si ingrillano.', lead)))
     S.append(SP(12))
     S.append(photo_row([
-            (str(ANN / 'B1_slinga_aperta.jpg'),) + dim(ANN / 'B1_slinga_aperta.jpg')
-            + ('1 · slinga aperta',),
-            (str(ANN / 'B2_passaggio_anello.jpg'),) + dim(ANN / 'B2_passaggio_anello.jpg')
-            + ('2 · nell’anello',),
-            (str(ANN / 'B3_giro_chiuso.jpg'),) + dim(ANN / 'B3_giro_chiuso.jpg')
-            + ('3 · giro chiuso',),
-        ], C_SOS))
+        (str(ANN / 'B1_slinga_aperta.jpg'),) + dim(ANN / 'B1_slinga_aperta.jpg')
+        + ('1 · slinga aperta',),
+        (str(ANN / 'B2_passaggio_anello.jpg'),) + dim(ANN / 'B2_passaggio_anello.jpg')
+        + ('2 · nell’anello',),
+        (str(ANN / 'B3_giro_chiuso.jpg'),) + dim(ANN / 'B3_giro_chiuso.jpg')
+        + ('3 · giro chiuso',),
+    ], C_SOS))
     S.append(SP(12))
     S.append(callout('Il nome del nodo',
                      'Come si chiama il nodo e quali alternative sono accettabili: ' + DC +
@@ -296,12 +243,13 @@ def parte_metodo():
     S.append(SP(26))
 
     # ============================================================ 7 · linea e linea vita
-    # IMG_1350 @ 0:33-0:41 (corda azzurra), IMG_1378 @ 0:42 (backup e Grigri)
+    # IMG_1350 @ 0:33-0:41 (la stessa corda per tagline e linea vita),
+    # IMG_1378 @ 0:42 (backup e Grigri per chi lavora in sosta)
     sec(C_SOS, 'Linea vita', 'lineavita')
     S.append(_apre(
         _testata(7, 'Portare la linea, la linea vita', 'fra i due lati', C_SOS),
-        P('La <b>corda azzurra</b> ha due usi: prima porta la tagline da un lato all’altro, '
-          'poi diventa <b>linea vita</b> sulla sosta del lato statico. Per chi lavora in '
+        P('Una corda porta la <b>tagline</b> da un lato all’altro, e poi resta come <b>linea '
+          'vita</b> sulla sosta del lato statico: la stessa corda, due usi. Per chi lavora in '
           'sosta servono una <b>corda di backup</b> e un <b>Grigri</b>.', lead),
         SP(8),
         P('Come si porta la tagline da un lato all’altro: ' + DC + '.', small)))
@@ -340,42 +288,20 @@ def parte_metodo():
     S.append(SP(26))
 
     # ============================================================ 9 · A-frame
-    # IMG_1396 e IMG_1416; posizione sul lato main dalla risposta del 20/08
+    # IMG_1396. L'A-frame della 53 m, con le sue misure, sta nella sua scheda.
     sec(C_TEN, 'A-frame', 'aframe')
     S.append(_apre(
-        _testata(9, 'L’A-frame', 'lato tensione', C_TEN),
-        P('Sul lato tensione la linea passa sopra un <b>A-frame</b>: due pali di legno tondo '
-          'incrociati e legati in testa, con i piedi appoggiati sulla roccia del bordo. '
-          'Solleva la linea sopra il bordo, cambia l’angolo con cui la linea carica la sosta '
-          'e tiene il nastro lontano dalla roccia: non è un accessorio.', lead),
-        SP(10),
-        ChipRow([('Pali', '2 · legno tondo'), ('Testa', 'Incrociata e legata'),
-                 ('Piede', 'Appoggiato su roccia'), ('Altezza', DCC)], C_TEN)))
-    S.append(SP(12))
-    S.append(photo_pair(
-        # Le didascalie di photo_pair vanno su una riga sola: meta' colonna regge
-        # circa cinquanta battute a corpo 7,4.
-        str(FOTO / 'IMG_1416.jpg'), str(FOTO / 'IMG_1396.jpg'),
-        'Il palo visto dall’ancoraggio main', 'Testa dei pali, con la fettuccia viola',
-        *dim(FOTO / 'IMG_1416.jpg'), color=C_TEN, ratio=1.20, focus=0.62,
-        ow2=dim(FOTO / 'IMG_1396.jpg')[0], oh2=dim(FOTO / 'IMG_1396.jpg')[1]))
-    S.append(SP(14))
-    S.append(two_cols(
-        gear_block('Com’è fatto', [
-            'Due pali di legno tondo, incrociati e legati in testa',
-            'Fettuccia viola avvolta sulla testa dei pali',
-            'Corda verde fluo, fettuccia blu e corda rosa in testa',
-            'Piedi appoggiati sulla roccia del bordo',
-            'Giri di filo metallico attorno al piede di un palo',
-        ], C_TEN),
-        gear_block('Ancora da rilevare', [
-            'Altezza dei pali — ' + DCC,
-            'Diametro e tipo del legno — ' + DCC,
-            'Come sono legati in testa — ' + DCC,
-            'Se i piedi sono fermati o solo appoggiati — ' + DCC,
-            'Se il filo metallico tiene il palo o è un recinto — ' + DCC,
-            'Di quanto solleva la linea sopra il bordo — ' + DCC,
-        ], WARN)))
+        _testata(9, 'L’A-frame', 'sul bordo', C_TEN),
+        P('L’<b>A-frame</b> è un cavalletto di due pali incrociati e legati in testa, '
+          'appoggiato sul bordo: la linea passa sopra la testa. Solleva la linea sopra il '
+          'bordo, cambia l’angolo con cui carica la sosta e tiene il nastro lontano dalla '
+          'roccia: non è un accessorio.', lead),
+        SP(12),
+        foto('IMG_1396.jpg', FW, 'Esempio dalla 53 m: la testa dei pali, con la fettuccia',
+             C_TEN, ratio=0.56, focus=0.40)))
+    S.append(SP(8))
+    S.append(P('L’A-frame della 53 m — com’è fatto e che cosa manca — è descritto nella sua '
+               'scheda.', small))
     S.append(SP(26))
 
     # ============================================================ 10 · smontaggio

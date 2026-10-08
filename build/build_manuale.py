@@ -329,13 +329,13 @@ def costruisci():
             ('ancoraggi', 'Gli ancoraggi su roccia', 'Placchette, punti, controlli'),
             ('soste', 'Le soste: main e backup', 'Il codice colore, la portata'),
             ('slinga', 'Instradamento della slinga', 'Il nodo che forza la slinga'),
-            ('lineavita', 'Portare la linea, la linea vita', 'Tagline e corda azzurra'),
+            ('lineavita', 'Portare la linea, la linea vita', 'La stessa corda, due usi'),
             ('tensione', 'Il lato tensione', 'Weblock, blocco del backup, anti-slip'),
             ('aframe', 'L’A-frame', 'I due pali sul bordo'),
             ('smontaggio', 'Lo smontaggio', 'Da documentare')]),
         ('3', 'Le linee', LINEA, '1 linea su %d' % _c['totale'], [
             ('cap53', 'Anfiteatro 53 m, «la 50»',
-             'Dati, posizione, fotografie in opera')]),
+             'Ancoraggi, materiale, A-frame, variante con i bungee')]),
         ('4', 'Apparato', LINEA, 'completo', [
             ('glossario', 'Il gergo del gruppo', 'Come si chiamano le cose sul campo'),
             ('fonti', 'Da dove viene ogni dato',
