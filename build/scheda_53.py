@@ -26,6 +26,7 @@ from PIL import Image as _PILImage                                  # noqa: E402
 ANN = RADICE / 'lavorazione' / 'frame_annotati'
 FOTO = RADICE / 'lavorazione' / 'foto_dritte'
 DETT = RADICE / 'lavorazione' / 'dettagli'
+ANCO = RADICE / 'lavorazione' / 'ancoraggi' / 'anfiteatro-53'
 
 LINEA = HexColor(0xF97316)
 C_ANC = LC[1]                   # ancoraggio      (rosso)
@@ -51,7 +52,8 @@ def dim(p):
 def foto(nome, w, cap, color=None, ratio=None, focus=0.5):
     # tre cartelle, un nome solo: foto raddrizzate, frame annotati, ritagli di
     # dettaglio. Cosi' chi scrive una pagina non deve sapere dove sta il file.
-    p = next((c / nome for c in (FOTO, ANN, DETT) if (c / nome).exists()), FOTO / nome)
+    p = next((c / nome for c in (FOTO, ANN, DETT, ANCO) if (c / nome).exists()),
+             FOTO / nome)
     ow, oh = dim(p)
     return PhotoStrip(str(p), w, ow, oh, cap, color, ratio, focus)
 
@@ -117,6 +119,8 @@ def figura_posizione():
 # ---------------------------------------------------------------- la scheda
 C_SETTORE = LC[2]                       # Anfiteatro, come nel catalogo
 MAPPA = 'https://www.google.com/maps?q=44.419869,10.412353'
+# L'altro capo: dieci letture del 22/08/2026 entro 3 m, a 51,5 m dal main.
+MAPPA_S = 'https://www.google.com/maps?q=44.419453,10.412072'
 
 
 def parte_53():
@@ -160,17 +164,17 @@ def parte_53():
             'A-frame: 2 pali di legno tondo sul bordo',
         ], C_TEN, coord='44.419869 · 10.412353 · 1025 m', url=MAPPA),
         gear_block('S · Ancoraggio statico', [
-            'Posizione: ' + DC,
             '3 placchette su bullone',
             '1 corda verde acqua fra i punti',
             'Slinga viola e carrucola bloccante',
             '1 corda azzurra: linea vita',
             'Sosta backup — com’è fatta ' + DC,
-        ], C_ANC)))
+        ], C_ANC, coord='44.419453 · 10.412072 · 1025 m', url=MAPPA_S)))
     S.append(SP(10))
-    S.append(P('La coordinata del lato tensione è quella registrata dal telefono stando '
-               'all’ancoraggio main: serve ad avvicinarsi, non a ritrovare il singolo punto, '
-               'che va cercato a vista.', small))
+    S.append(P('Le coordinate sono quelle registrate dal telefono stando agli ancoraggi: '
+               'servono ad avvicinarsi, non a ritrovare il singolo punto, che va cercato a vista. '
+               'Le due posizioni distano circa 51 m, coerente con i 53 m della linea: non è una '
+               'misura.', small))
     S.append(SP(16))
 
     S.append(KeepTogether([
@@ -194,10 +198,27 @@ def parte_53():
         BU('Quale dei due estremi è l’ancoraggio di tensione.', C_SETTORE),
         BU('La lunghezza, misurata sui punti, e il dislivello.', C_SETTORE),
         BU('I punti dell’ancoraggio di tensione: quanti e di che tipo.', C_SETTORE),
-        BU('La posizione dell’ancoraggio statico.', C_SETTORE),
         BU('Una fotografia d’insieme dei tre punti, per l’angolo di apertura.', C_SETTORE),
         BU('L’etichetta delle slinghe, distesa e leggibile.', C_SETTORE)]))
-    S.append(SP(12))
+    S.append(PageBreak())
+    # IMG_3323-3332, 22/08/2026, all'altro capo della linea (51,5 m dal main).
+    # L'utente: «il montaggio fatto quel giorno era della 53 ma con i bungee».
+    # Le placchette sono fisse e valgono per ogni montaggio; slinghe, corda verde,
+    # fettucce rosse e bungee sono di quel giorno.
+    S.append(KeepTogether([
+        P('<b>La stessa linea, montata con i bungee</b>', h3),
+        SP(5),
+        P('Il 22 agosto 2026 la 53 m è stata montata con i <b>bungee</b>. Le fotografie sono '
+          'state scattate all’ancoraggio statico: si vedono le placchette su bullone, le '
+          'slinghe viola che portano al masterpoint e la corda annodata fra i punti. Il '
+          'materiale di questa variante è ' + DC + '.', body),
+        SP(10),
+        photo_pair(
+            str(ANCO / 'IMG_3324.jpg'), str(ANCO / 'IMG_3325.jpg'),
+            'Placchette, slinghe viola e corda annodata', 'Dal masterpoint ai bungee',
+            *dim(ANCO / 'IMG_3324.jpg'), color=C_SETTORE, ratio=0.95, focus=0.45,
+            ow2=dim(ANCO / 'IMG_3325.jpg')[0], oh2=dim(ANCO / 'IMG_3325.jpg')[1])]))
+    S.append(SP(18))
     # Le due fotografie in opera affiancate a mezza colonna: una sola a tutta
     # larghezza scivolava su una pagina in piu', e tagliata a striscia perdeva la
     # persona sulla linea, che sta al centro di una foto verticale.

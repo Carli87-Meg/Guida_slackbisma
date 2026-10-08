@@ -287,6 +287,30 @@ def _bilancia(blocchi, altezza=None):
     return fuori
 
 
+# Vedute di un settore prese da terra, quando ci sono. La didascalia dice che
+# cosa si sa e che cosa no: IMG_3311, 22/08/2026, dubbio 57.
+VEDUTE = {
+    'Despedida': ('IMG_3311.jpg',
+                  'La Despedida dal bordo della cresta, 22 agosto 2026.',
+                  'La roccia sullo sfondo dovrebbe essere quella della linea da 165 m: '
+                  '<font color="#B3261E">[DA CONFERMARE]</font>.'),
+}
+FOTO_DRITTE = RADICE / 'lavorazione' / 'foto_dritte'
+
+
+def veduta(area, col):
+    """Foto da terra a mezza colonna, con accanto che cosa mostra."""
+    if area not in VEDUTE or not (FOTO_DRITTE / VEDUTE[area][0]).exists():
+        return None
+    nome, didascalia, nota = VEDUTE[area]
+    f = FOTO_DRITTE / nome
+    with _PILImage.open(f) as im:
+        ow, oh = im.size
+    lato = (FW - 14) / 2
+    testo = [P('<b>Da terra</b>', h3), SP(4), P(didascalia, small), SP(4), P(nota, small)]
+    return two_cols(PhotoStrip(str(f), lato, ow, oh, None, col, 0.50, 0.33), testo)
+
+
 def pagina_settore(area, k):
     """Una pagina per settore: la vista i-pietra sopra, le sue linee sotto.
 
@@ -320,6 +344,9 @@ def pagina_settore(area, k):
     nota = nota_nome(area)
     if nota:
         blocco += [SP(10), P(nota, small)]
+    vista = veduta(area, col)
+    if vista is not None:
+        blocco += [SP(14), vista]
     S.append(KeepTogether(blocco))
     return S
 
