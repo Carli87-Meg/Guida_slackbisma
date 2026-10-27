@@ -3,7 +3,7 @@
 Elenco di tutto ciò che nel manuale sarebbe marcato `[DA CONFERMARE]`.
 Nessuna di queste voci va risolta per deduzione: servono risposte da chi ha montato la linea.
 
-Stato al 27/10/2026: pipeline conclusa per la 53 m (fasi 1-6), guida all'edizione dell'08/10.
+Stato al 27/10/2026: pipeline conclusa per la 53 m (fasi 1-6), guida all'edizione del 27/10.
 Bloccanti risolti il 19/08/2026. Le voci aperte qui sotto sono anche nella scheda da campo
 `output/Bismantova_Dubbi_Scheda_Campo.pdf` (`python build/build_scheda_dubbi.py`).
 
@@ -18,6 +18,12 @@ Esito:
 - **chiuso il dubbio 56**;
 - **aggiornati** i dubbi 1, 3, 28, 37, 38, 39, 45, 50, 54;
 - **nuova** la voce 58.
+
+**27/10/2026 — le foto di Carlo.** Le 31 fotografie di `LineeBisma.xlsx` (Drive, 20/10/2026)
+sono state lette una per una, con ingrandimenti, in `lavorazione/foto_linee/<id>/LETTURA.md`
+e confrontate con le parole di Carlo nel Foglio «Linee». Ne nascono le voci **59-69**, nella
+sezione «Aperti dalle foto di Carlo». Nessuna chiude un dubbio della 53 m: la sola foto di
+quella linea è di una terza uscita, in autunno, e non mostra il cavalletto.
 
 Su SlackMap la scheda della 53 m («GAS-OH», `nym-s4g`) non ha nessun testo. Fra le 24 linee
 l'unica con una descrizione di ancoraggi e materiale è la **Brifing** (113 m, `t2qJAK8`),
@@ -132,6 +138,28 @@ Fotogrammi (Fase 4), locandina, materiale iCloud, render i-pietra, foto del 22/0
 | 56 | A, D, E, F | **Quale lato è quale sulla 53 m.** La guida è organizzata per lati: *lato tensione* = dove stanno sosta main e sosta backup, dove si tensiona e dove sta l'A-frame; *lato statico* = la sosta su tre punti con le placchette e la linea vita. È **ricostruito** dall'ordine delle operazioni (sezione D «sosta sull'altro lato, su 3 punti»; il blocco del backup che prende sia main sia backup) e dalla risposta del 20/08 sull'A-frame, non dichiarato | Un lato scambiato in una guida di montaggio manda a costruire la sosta sbagliata dalla parte sbagliata | NOTE_RIGGING A-F, risposta utente 20/08/2026 | ✅ **chiuso il 27/10/2026.** L'utente: «il lato di tensione è quello della parte sopra Cocoa». Alla domanda di verifica ha confermato che Cocoa è il settore di falesia che sta al main: OSM `node/11925326320`; theCrag area `7751514930`; in i-pietra «Cocoa» (falesia.it lo chiama «Cocoa - Anfiteatro Alto»). È il terrazzo sopra la Pincelli-Brianti, 10 m sotto il bordo della sommità. Il punto OSM di Cocoa sta a 10,9 m dal main e a 46,5 m dall'altro capo; il main sta a nord-nord-est dell'altro capo. **Tensione al main** (44.419869, 10.412353): sosta main, sosta backup, A-frame. **Statico all'altro capo** (44.419453, 10.412072): la sosta su tre punti. La ricostruzione era giusta, e anche il GPS delle riprese è coerente. `IMG_1373`-`1375` sono a 6-8 m dall'altro capo, i video del tensionamento `IMG_1378`-`1395` a 5-13 m dal main. Le posizioni dei video sono registrate con quattro decimali, cioè su una griglia di circa 11 × 8 m: le distanze valgono a meno di qualche metro, ma i due capi distano 51 m. Fa eccezione `IMG_1384`, con un'accuratezza di 63,8 m: inutilizzabile. Vedi anche la voce 58 |
 | 57 | — | **Le foto del 22/08 sulla cresta (IMG_3308-3322)**: quali sono della Despedida e quali del Settore Giallo; e se la roccia sullo sfondo di `IMG_3311` è davvero quella della **Despedida 165 m** («dovrebbe essere», utente 08/10/2026) | Una vista del settore entra nella guida solo con la linea giusta in didascalia | `IMG_3308`-`IMG_3322` | aperto — **da chiedere a chi ha accompagnato il sopralluogo**; possibile fonte anche i video delle linee montate pubblicati online |
 | 58 | A–F | **Il GPS dei video sposta un'attribuzione di fase.** `IMG_1376` sta in `NOTE_RIGGING.md` nella fase D, «sosta sull'altro lato», ma è stato girato **al main**: 5,4 m, accuratezza 13,3 m. Le fasi A e B (`IMG_1349`, `1351`, `1363`, `1366`, `1367`) sono girate al main, a 5-15 m; `IMG_1368` sta a metà strada (29 m dal main, 39 m dall'altro capo) e non si attribuisce a nessuno dei due capi; `IMG_1369` (fase C) sta vicino all'altro capo. Le posizioni dei video sono su una griglia di circa 11 × 8 m (quattro decimali). Alcuni GPS non sono usabili: `IMG_1384` (63,8 m), `IMG_1370` (69,8 m), `IMG_1377` (186 m), `IMG_1350` (36,5 m) | Una manovra attribuita al lato sbagliato finisce nella sosta sbagliata | metadati QuickTime `com.apple.quicktime.location` dei video, letti il 27/10/2026 | aperto — rivedere la fase D in `NOTE_RIGGING.md` e chiedere che cosa si faceva al main in `IMG_1376` |
+
+## Aperti dalle foto di Carlo (27/10/2026)
+
+Le fotografie stanno in `lavorazione/foto_linee/<id>/`, con `ORIGINE.md` (scheda, cella,
+lato di Carlo) e `LETTURA.md` (che cosa si vede, che cosa manca). «Vicino» e «lontano» sono
+i lati di Carlo, non tensione e statico. Tutto ciò che Carlo scrive è segnato da lui «da
+controllare». Nessuna foto ha EXIF. Le voci vanno chieste **a Carlo**, che ha messo le foto
+nel file, e a chi era sul posto.
+
+| # | Linea | Cosa manca | Perché serve | Fonte del dubbio | Stato |
+|---|---|---|---|---|---|
+| 59 | 108 / 113 | **Di quale linea è la sosta con il tronco.** Le stesse foto (tronco chiaro scortecciato legato con cordino viola, slinghe verdi che lo scavalcano, moschettone su anello fisso, corda in calza grigia e rossa, braca viola) stanno sia sulla riga della 108 (D7, U7) sia su quella della 113 (D8). Sono su una terrazza di roccia **senza alberi**: corrispondono al lato lontano che Carlo dà alla 113 («Bisma standard senza cavalletto + tronco»), non a quello della 108 («alberi e uno spit») | Una sosta attribuita alla linea sbagliata manda a cercarla sul capo sbagliato | `anfiteatro-108_01`, `_02`, `_03`; `anfiteatro-113_05`, `_06`, `_07` | aperto — da chiedere a Carlo |
+| 60 | 46, 97, 108, 113, 60, 70 | **Il lato di tensione di ogni linea fotografata.** Nessuna foto lo mostra con certezza. Indizi, non prove: sul lato lontano della 46 un dispositivo bianco/argento della forma di un weblock (`46_03`, `_04`); sul lato vicino di 46 e 53 due fettucce con calza che convergono su grillo e softshackle (`46_01`, `53_01`); un cavalletto sul lato vicino di 46, 113, 70 e sul lato lontano di 70 | La guida è organizzata per lati: senza questo dato le foto restano foto, non documentazione degli ancoraggi (vedi `lavorazione/ancoraggi/LEGGIMI.md`) | tutte le cartelle | aperto — lo deve dichiarare chi c'era |
+| 61 | tutte | **Data e autore di ogni foto.** Excel ha tolto gli EXIF. Si legge solo la stagione: il cavalletto della 113 compare in tre configurazioni (pali tondi con corda verde d'estate, pali tondi con fascia viola d'autunno, assi squadrate di notte), quello della 46 in due (corda canapa d'autunno, corda rosa d'estate): sono almeno tre e due uscite | Senza data non si sa quale montaggio sia e se il materiale sia ancora quello | `113_01`-`_04`, `_08`; `46_01`, `_05` | aperto — da chiedere a Carlo |
+| 62 | 97 | **La «91» di Carlo è la 97 m del registro?** Le sue righe (schema, note, foto) sono state messe sulla 97 per posizione: Anfiteatro 46, 53, 91, 108, 113 nel suo file contro 46, 53, 97, 108, 113 nel registro | Un dato attribuito alla linea sbagliata | `LineeBisma.xlsx`, scheda «Elenco» | aperto — anche nel Foglio «Da chiarire» |
+| 63 | 108 | **Dove sono «alberi e uno spit» del lato lontano.** Carlo descrive il montaggio («Montaggio con alberi e uno spit. Sosta molto lunga, portare corde lunghe anche per fare un deviatore»), ma nessuna foto sulla sua riga mostra alberi. Se la sosta con il tronco è della 113 (voce 59), della 108 non resta nessuna foto | La descrizione è l'unico dato sul lato lontano della 108 e non ha riscontro | `anfiteatro-108/LETTURA.md` | aperto |
+| 64 | 46, 53 | **Che cosa sono le due fettucce nere con calza marcate Spider** (`46_02`, etichetta leggibile) che convergono su grillo e softshackle arancione (`46_01`, `53_01`), e che cosa fa il piccolo elemento su cui convergono. Stesso materiale, stessa stagione (autunno), stesso parcheggio sotto in 46 e 53: se siano la stessa giornata, o la stessa sosta messa da Carlo su due righe | Se fossero la stessa sosta, una delle due linee non avrebbe foto del lato vicino | `46_01`, `46_02`, `53_01` | aperto — da chiedere a Carlo |
+| 65 | 46 | **Il dispositivo bianco/argento del lato lontano**, con fettuccia nera avvolta, da cui parte la fettuccia con calza: weblock? Marca e modello non leggibili. Se fosse un weblock, il lato di tensione sarebbe il lontano, quello senza cavalletto | Decide la voce 60 per la 46 | `46_03`, `46_04` | aperto |
+| 66 | 70 | **Un cavalletto a tutti e due i capi?** Il lato vicino (`70_01`, estate) e il lato lontano (`70_02`, autunno) di Carlo mostrano tutti e due un cavalletto di due pali. E sul lato lontano: a che cosa è ancorata la corda doppia su cui si annodano le slinghe verdi (`70_03`), e che cos'è la calza bianca che gira attorno a un masso sul bordo (`70_04`) | Un capo senza punti fissi cambia tutto il metodo | `despedida-70/LETTURA.md` | aperto |
+| 67 | 60 | **Il lato lontano su alberi**: funzione della fettuccia nera Gibbon (dal tronco sottile a tre moschettoni a ghiera) e della corda arancione annodata al tronco grosso; se i due pali sottili incrociati siano un cavalletto. **Del lato vicino non c'è nessuna foto** | Unico dato sulla 60 m: il Foglio di Carlo è vuoto | `despedida-60_01`-`_06` | aperto |
+| 68 | 113 (o 108) | **Le etichette alla sosta con il tronco.** Sulla calza di una slinga verde una scritta scura (sembra «2 t», non leggibile con certezza); sulla braca viola un'etichetta azzurra cucita, illeggibile. Vanno fotografate distese, come per il dubbio 37 | La portata delle brache è il dato più pericoloso da sbagliare | `113_05`, `113_06` | aperto — foto da fare sul campo |
+| 69 | 97 | **Quale delle due linee parallele è la 97.** La foto del lato vicino mostra due linee (rosa e bianca) che partono dalla stessa cima, con un highliner su ciascuna | La miniatura della 97 nella guida mostra due linee senza dire quale sia | `anfiteatro-97_01` | aperto |
 
 ## Note da riportare nel manuale
 

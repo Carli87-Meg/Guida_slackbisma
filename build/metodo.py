@@ -31,6 +31,30 @@ from scheda_53 import (foto, dim, ANN, FOTO, LINEA, C_ANC, C_SOS,   # noqa: E402
                        C_TEN, C_ASL, DC)
 
 
+# Esempio dalle foto del file LineeBisma (lette il 27/10/2026, lavorazione/foto_linee/*/LETTURA.md)
+# nel capitolo degli ancoraggi: quale foto usare lo decide Carlos, non il codice.
+# Finche' non decide resta None e non si stampa nulla. Le due candidate leggibili:
+#   ('anfiteatro-46', 'anfiteatro-46_04_lontano_ancoraggio-placchetta-dettaglio.jpg',
+#    'Esempio dalla 46 m, lato «lontano» del file: placchetta con dado esagonale e '
+#    'grillo a lira. Quale sia il lato di tensione non è noto')
+#   ('anfiteatro-113', 'anfiteatro-113_05_lontano_sosta-con-tronco-dettaglio.jpg',
+#    'Esempio dalla 113 m (o 108: da chiarire), lato «lontano» del file: sosta con '
+#    'tronco. Quale sia il lato di tensione non è noto')
+ESEMPIO_CARLO = None
+FOTO_LINEE = RADICE / 'lavorazione' / 'foto_linee'
+
+
+def esempio_carlo(colore):
+    """La foto scelta dall'autore come esempio, con la didascalia che dichiara i limiti."""
+    if not ESEMPIO_CARLO:
+        return []
+    id_linea, nome_file, didascalia = ESEMPIO_CARLO
+    p = FOTO_LINEE / id_linea / nome_file
+    if not p.exists():
+        return []
+    return [SP(12), PhotoStrip(str(p), FW, *dim(p), didascalia, colore, 0.55, 0.5)]
+
+
 def _apre(testata, *seguito):
     """Testata legata al suo primo blocco: non resta mai sola in fondo pagina."""
     return KeepTogether([testata, SP(10)] + list(seguito))
@@ -159,7 +183,8 @@ def parte_metodo():
     S.append(_apre(
         P('<b>Il punto da vicino</b>', h3),
         foto('D2_placchetta_dettaglio.jpg', FW, 'Placchetta e dado esagonale', C_ANC,
-             ratio=0.50, focus=0.55)))
+             ratio=0.50, focus=0.55),
+        *esempio_carlo(C_ANC)))
     S.append(SP(12))
     S.append(callout('Perché la distinzione conta',
                      'Spit, tasselli a espansione e resinati hanno comportamenti, durate e '

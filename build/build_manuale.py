@@ -28,7 +28,8 @@ sys.path.insert(0, str(RADICE / 'build'))
 sys.path.insert(0, str(RADICE / 'dati'))
 
 from design import *                                                # noqa: E402,F403
-from schede_linee import parte_catalogo, nota_copertura             # noqa: E402
+from schede_linee import (parte_catalogo, nota_copertura,           # noqa: E402
+                          parte_fotografate, fotografate)
 from scheda_53 import parte_53                                      # noqa: E402
 from metodo import parte_metodo                                     # noqa: E402
 import linee as REG                                                 # noqa: E402
@@ -191,6 +192,8 @@ def FONTI():
          'letta il 27/10/2026'],
         ['Conferma del lato di tensione', 'Il capo sopra il settore di falesia Cocoa',
          '27/10/2026'],
+        ['LineeBisma.xlsx (file del gruppo)', 'Schemi proposti e 31 fotografie delle soste di sei '
+         'linee, tutto «da controllare»', '20/10/2026'],
     ]
 
 
@@ -345,7 +348,10 @@ def costruisci():
             ('smontaggio', 'Lo smontaggio', 'Da documentare')]),
         ('3', 'Le linee', LINEA, '1 linea su %d' % _c['totale'], [
             ('cap53', 'Anfiteatro 53 m, «la 50»',
-             'Ancoraggi, materiale, A-frame, variante con i bungee')]),
+             'Ancoraggi, materiale, A-frame, variante con i bungee')]
+            + ([('fotografate', 'Le linee fotografate',
+                 '%d linee viste nelle foto del gruppo: che cosa si vede, che cosa manca'
+                 % len(fotografate()))] if fotografate() else [])),
         ('4', 'Apparato', LINEA, 'completo', [
             ('glossario', 'Il gergo del gruppo', 'Come si chiamano le cose sul campo'),
             ('fonti', 'Da dove viene ogni dato',
@@ -424,12 +430,17 @@ def costruisci():
     S.extend(parte_metodo())
 
     # ================================================================ PARTE 3
+    _n_foto = len(fotografate())
     parte(S, '3', 'Le linee', 'Una scheda per linea: dove sta, quanto è lunga, com’è '
           'ancorata, che cosa manca. Per ora è completa quella della 53 m dell’Anfiteatro; '
-          'le altre %d hanno una scheda di rilievo da compilare, nel fascicolo a parte.'
-          % _da_fare, LINEA, voci=_voci('3'))
+          'le altre %d hanno una scheda di rilievo da compilare, nel fascicolo a parte%s.'
+          % (_da_fare, (', e di %d esistono fotografie delle soste, lette qui' % _n_foto)
+             if _n_foto else ''), LINEA, voci=_voci('3'))
 
     S.extend(parte_53())
+    # le linee fotografate dal gruppo: dopo la 53 m, con la stessa regola — la
+    # foto dice che cosa c'e', non come si monta
+    S.extend(parte_fotografate())
 
     # ================================================================ PARTE 4
     # Anche la Parte 4 non ha frontespizio: e' una pagina sola, e un titolo

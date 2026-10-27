@@ -28,9 +28,12 @@ from reportlab.platypus import (PageBreak, Table, TableStyle,       # noqa: E402
 from PIL import Image as _PILImage                                  # noqa: E402
 
 import linee as REG                                                 # noqa: E402
+import foto_carlo as FC                                             # noqa: E402
 
 # Una cartella per linea, chiamata con l'id della linea. Vedi il LEGGIMI li'
 # dentro: basta creare la cartella e metterci i file, nessun codice da toccare.
+# Che cosa mostrino le foto, e che cosa ne dica il file LineeBisma, sta in dati/foto_carlo.py
+# (riassunto dei LETTURA.md di ogni cartella).
 FOTO_LINEE = RADICE / 'lavorazione' / 'foto_linee'
 
 # Viste 3D del catalogo i-pietra, un file per settore. Vedi il LEGGIMI li'
@@ -170,6 +173,12 @@ def tabella_settore(area):
             lung = '<b>%d m</b>' % l['lunghezza']
             doc = 'sì — è «la 50», scheda in questa guida'
             dove = rif('cap53')
+        elif stato_effettivo(l) == REG.FOTOGRAFATA:
+            # le foto del file mostrano la sosta, non il montaggio: la linea
+            # resta da documentare, ma ha un posto nella parte 3
+            lung = '%d m' % l['lunghezza']
+            doc = 'no — fotografata, %s' % rif('fotografate')
+            dove = 'scheda %d' % numero_scheda(l)
         else:
             lung = '%d m' % l['lunghezza']
             doc = '—'
@@ -435,28 +444,78 @@ def segnaposto(l):
     return t
 
 
+def _virgolette(t):
+    return '«%s»' % t if t else '—'
+
+
+def _righe_carlo(l, ds):
+    """Che cosa dice il file e che cosa mostrano le foto, lato per lato.
+
+    Le due fonti restano distinte in ogni riga: lo schema del file fra
+    virgolette, la lettura della foto dopo «foto:». Dove una delle due manca,
+    la riga lo dice con un trattino invece di tacere.
+    """
+    c = FC.di(l['id'])
+    if c is None:
+        return []
+    righe = []
+    for lato, chiave in (('vicino', 'vicino'), ('lontano', 'lontano')):
+        schema = c[chiave]
+        # lo schema del file e' un nome fra quelli della sua scheda, oppure una
+        # frase sua: la frase si stampa com'e', il nome con la glossa «schema»
+        detto = (('schema %s' % _virgolette(schema)) if schema in FC.SCHEMI
+                 else _virgolette(schema))
+        visto = c['foto_' + chiave]
+        righe.append(Paragraph(
+            '<b>Lato %s</b> · file: %s · foto: %s' % (lato, detto, visto or '—'), ds))
+    if c['note']:
+        d_v, d_l = c['difficolta']
+        p_v, p_l = c['persone']
+        righe.append(Paragraph(
+            '<b>Note del file</b> · %s · difficoltà %s / %s · persone %s / %s'
+            % (_virgolette(c['note']), d_v or '—', d_l or '—',
+               _virgolette(p_v), _virgolette(p_l)), ds))
+    if c['confronto']:
+        righe.append(Paragraph('<b>Confronto</b> · %s.' % c['confronto'], ds))
+    righe.append(Paragraph(
+        '<b>Manca</b> · <font color="#%s">%s</font>.' % (WARN.hexval()[2:], c['manca']), ds))
+    return righe
+
+
 def scheda_fotografata(l):
-    """Linea montata e fotografata, ma senza documentazione di rigging."""
+    """Linea montata e fotografata, ma senza documentazione di rigging.
+
+    Oltre alla miniatura, la scheda dice che cosa il file dice di ciascun
+    lato e che cosa la foto mostra davvero: due fonti, due diciture. Tutto cio'
+    che il file dice e' «da controllare», e lo dice l'introduzione del capitolo.
+    """
     col = C_AREA[l['settore']]
     fs = foto_di(l)
     ts = ParagraphStyle('fn', fontName='Pop-B', fontSize=11, leading=14)
-    ds = ParagraphStyle('fd', fontName='Lora', fontSize=8.6, leading=12,
-                        textColor=INK2)
+    fs_ = ParagraphStyle('ff', fontName='Pop-M', fontSize=7, leading=10,
+                         textColor=MUT)
+    ds = ParagraphStyle('fd', fontName='Lora', fontSize=8.2, leading=11.4,
+                        textColor=INK2, spaceBefore=3)
     with _PILImage.open(fs[0]) as im:
         ow, oh = im.size
     conta = '%d fotografie' % len(fs) if len(fs) > 1 else '1 fotografia'
-    inner = [[PhotoStrip(str(fs[0]), COL - 22, ow, oh, None, col, 0.62, 0.5)],
-             [SP(7)],
+    # ratio 0.54: a 0.62 l'introduzione del capitolo e la prima riga di schede
+    # non stavano nella stessa pagina, e la pagina d'apertura restava vuota
+    inner = [[PhotoStrip(str(fs[0]), COL - 22, ow, oh, None, col, 0.54, 0.5)],
+             [SP(6)],
              [Paragraph(nome(l), ts)],
-             [Paragraph('Montata e fotografata · %s. <b>Rigging non documentato</b>: '
-                        'la fotografia mostra che la linea esiste, non come è stata '
-                        'ancorata.' % conta, ds)]]
+             [Paragraph('%s · LINEEBISMA.XLSX, 20/10/2026 · DA CONTROLLARE'
+                        % conta.upper(), fs_)]]
+    inner += [[r] for r in _righe_carlo(l, ds)]
+    inner.append([Paragraph('<b>Rigging non documentato</b>: le foto mostrano la sosta, '
+                            'non come è stata montata.', ds)])
     it = Table(inner, colWidths=[COL - 22])
     it.setStyle(TableStyle([('LEFTPADDING', (0, 0), (-1, -1), 0),
                             ('RIGHTPADDING', (0, 0), (-1, -1), 0),
                             ('TOPPADDING', (0, 0), (-1, -1), 0),
                             ('BOTTOMPADDING', (0, 0), (-1, -1), 0),
-                            ('BOTTOMPADDING', (0, 2), (0, 2), 3)]))
+                            ('BOTTOMPADDING', (0, 2), (0, 2), 3),
+                            ('BOTTOMPADDING', (0, 3), (0, 3), 4)]))
     t = Table([[it]], colWidths=[COL])
     t.setStyle(TableStyle([('BACKGROUND', (0, 0), (-1, -1), tint(col, 0.07)),
                            ('LINEBEFORE', (0, 0), (0, 0), 3, col),
@@ -525,6 +584,12 @@ def scheda_rilievo(l, primo_di_area=False):
     if l['id'] in REG.COLLISIONE_NOME:
         note.append('<b>Attenzione al nome:</b> anche l’Anfiteatro ha una linea '
                     'chiamata «la 50». Citare sempre il settore.')
+    if stato_effettivo(l) == REG.FOTOGRAFATA:
+        # chi va a rilevare deve sapere che le soste sono gia' state fotografate:
+        # la foto non compila la scheda, ma dice che cosa aspettarsi
+        note.append('Esistono <b>%d fotografie</b> delle soste (file LineeBisma, 20/10/2026), lette '
+                    'nella guida al capitolo «Le linee fotografate»: non documentano il '
+                    'montaggio, e il lato di tensione resta da dichiarare.' % len(foto_di(l)))
 
     testa = [[Paragraph(nome(l), ts)], [Paragraph(fonte, fs)]]
     if note:
@@ -717,6 +782,77 @@ def parte_segnaposti():
         S.append(KeepTogether([testa, SP(8), righe[0]]))
         S.extend(righe[1:])
         S.append(SP(6))
+    return S
+
+
+def fotografate():
+    """Le linee da documentare di cui esistono fotografie, nell'ordine della cresta."""
+    return [l for area in REG.AREE for l in REG.da_documentare()
+            if l['settore'] == area and stato_effettivo(l) == REG.FOTOGRAFATA]
+
+
+def parte_fotografate():
+    """Capitolo della parte 3: le linee fotografate dal gruppo, una scheda ciascuna.
+
+    Prima queste schede non uscivano in nessun PDF: parte_segnaposti() non e'
+    richiamata dal manuale dalla revisione su Figma. Le foto del file LineeBisma
+    (27/10/2026) mostrano le soste di sei linee: troppo per tacerle, troppo poco
+    per una scheda come quella della 53 m. Stanno qui, dopo la 53 m, con la
+    stessa regola: la foto dice che cosa c'e', non come si monta.
+    """
+    ls = fotografate()
+    if not ls:
+        return []
+    n = len(ls)
+    S = [Accent(LINEA, 'Linee fotografate'),
+         Segna('fotografate'),
+         LineHeader('', 'Le linee fotografate', 'Le linee · %d schede dalle foto del gruppo'
+                    % n, LINEA),
+         SP(10),
+         P('Di <b>%d linee</b> esistono fotografie delle soste, raccolte nel file del gruppo '
+           '<b>LineeBisma.xlsx</b> (20/10/2026), una riga per linea e una colonna per lato. '
+           'Il file è segnato tutto <b>«da controllare»</b>: schemi, difficoltà, persone e '
+           'note sono proposte, non rilievi. Le foto sono state lette una per una il '
+           '%s: in ogni scheda la riga «foto» dice solo ciò che si vede.'
+           % (n, FC.DATA_LETTURA), lead),
+         SP(8),
+         callout('«Vicino» e «lontano» sono i lati del file',
+                 'Non sono il lato tensione e il lato statico della guida: quale sia quale '
+                 'non lo dice nessuna foto, ed è il primo dato da chiedere a chi ha '
+                 'montato. Nessuna misura è letta a occhio; la data delle foto non è nota.',
+                 WARN, '!', FW, True),
+         SP(8),
+         P('<b>Gli schemi del file.</b> «Bisma standard»: %s. «Bisma standard senza '
+           'cavalletto»: %s. Il file scrive «omega» per il grillo, «delta» per la maglia '
+           'rapida, «slinga» per la braca ad anello; che cosa siano gli «spit» è il '
+           'dubbio 39.'
+           % (FC.SCHEMI['Bisma standard'], FC.SCHEMI['Bisma standard senza cavalletto']),
+           small),
+         SP(12)]
+    for area in REG.AREE:
+        la = [l for l in ls if l['settore'] == area]
+        if not la:
+            continue
+        righe = []
+        for i in range(0, len(la), 2):
+            coppia = la[i:i + 2]
+            righe.append(two_cols(scheda(coppia[0]), scheda(coppia[1]))
+                         if len(coppia) == 2 else
+                         two_cols(scheda(coppia[0]), SP(1)))
+            righe.append(SP(10))
+        testa = Paragraph('<font name="Pop-B" size="10.5" color="#%s">%s</font>'
+                          % (C_AREA[area].hexval()[2:], area.upper()),
+                          ParagraphStyle('ah', fontName='Pop', leading=14))
+        # l'intestazione dell'area non resta mai sola in fondo alla pagina:
+        # viaggia insieme alla prima riga di schede
+        S.append(KeepTogether([testa, SP(8), righe[0]]))
+        S.extend(righe[1:])
+        S.append(SP(6))
+    S.append(P('Le letture complete, foto per foto, sono in '
+               '<font name="Pop">lavorazione/foto_linee/&lt;linea&gt;/LETTURA.md</font>; i '
+               'dubbi che aprono sono in DUBBI.md. Per usare queste foto come documentazione '
+               'degli ancoraggi serve che chi c’era dichiari il lato di tensione.', small))
+    S.append(PageBreak())
     return S
 
 
