@@ -61,3 +61,6 @@ si vede è un gruppo di connettori su cui convergono due elementi in calza nera.
 - `anfiteatro-53_04_vicino_cavalletto-di-due-pali-estate.jpg`: era `despedida-70_01_vicino_cavalletto-e-linea.jpg`, letta in `../despedida-70/LETTURA.md`.
 
 La lettura sta nella cartella d'origine e non si ripete; vale con il nome nuovo.
+- `anfiteatro-53_05_lontano_placchetta-e-grillo.jpg`: era `anfiteatro-46_03_lontano_ancoraggio-placchetta.jpg`, letta in `../anfiteatro-46/LETTURA.md` (28/10/2026).
+- `anfiteatro-53_06_lontano_placchetta-dettaglio.jpg`: era `anfiteatro-46_04_lontano_ancoraggio-placchetta-dettaglio.jpg`, letta in `../anfiteatro-46/LETTURA.md` (28/10/2026).
+- `anfiteatro-53_07_vicino_cavalletto-lavori-in-corso-estate.jpg`: era `anfiteatro-46_05_vicino_cavalletto-lavori-in-corso.jpg`, letta in `../anfiteatro-46/LETTURA.md` (28/10/2026).

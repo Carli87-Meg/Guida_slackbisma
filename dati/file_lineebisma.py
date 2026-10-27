@@ -102,15 +102,12 @@ LINEE = {
         # calza, dalle calze escono anelli lilla e giallo-verde; prima qui stava «due
         # fettucce nere», che non si vede (DUBBI 64). «SPIDER» e' sull'etichetta di una
         # protezione. Dietro la sosta di 03-04 due elementi verticali: legno solo uno.
-        # 27/10/2026: la 01 e la 02 erano il montaggio con i bungee su GAS-OH (DUBBI 64),
-        # ora anfiteatro-53_02 e _03. Resta la 05, d'estate.
-        'foto_vicino': ('cavalletto di due pali di legno legati con una fettuccia azzurra '
-                        '(estate); brache viola e lilla, slinghe verdi; due elementi neri con '
-                        'calza verso la parete [DA CONFERMARE: che cosa siano]'),
-        'foto_lontano': ('un punto fisso su roccia: placchetta con dado e grillo a lira, brache '
-                         'lilla; il nastro bianco avvolto su un elemento metallico [DA '
-                         'CONFERMARE: che cosa sia]; dietro, due elementi verticali, uno di '
-                         'legno [DA CONFERMARE: se siano un cavalletto]'),
+        # 27 e 28/10/2026: tutte e cinque le foto della riga erano di GAS-OH (DUBBI 64, 65),
+        # ora anfiteatro-53_02-07. Della 46 non resta nessuna foto, e la linea e' censita.
+        'foto_vicino': None,
+        'foto_lontano': None,
+        'nota_rilievo': ('Le cinque foto che il file mette su questa riga sono della 53 m, '
+                         'GAS-OH: della 46 non c’è nessuna foto.'),
         'da_confermare': 'lato di tensione; numero e tipo dei punti; misure; data delle foto',
     },
     'anfiteatro-53': {
@@ -262,9 +259,6 @@ def di(id_linea):
 # questa, con la fotografia; le righe complete del file vanno nel fascicolo di
 # rilievo, dove servono a chi va a rilevare (edizione 0.4, decisione E).
 SINTESI = {
-    'anfiteatro-46': (
-        'A un capo un cavalletto di due pali di legno, d’estate; all’altro un punto fisso su '
-        'roccia: placchetta con dado e grillo a lira, brache lilla.'),
     'anfiteatro-97': (
         'Linee in controluce verso la torre di fronte. A un capo brache viola fra gli alberi, '
         'riunite da un grillo, un moschettone su un elemento metallico nella roccia e un palo '

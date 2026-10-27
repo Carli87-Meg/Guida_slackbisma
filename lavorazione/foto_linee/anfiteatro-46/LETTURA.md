@@ -116,3 +116,11 @@ vale per la protezione; che cosa ci sia dentro la calza `[DA CONFERMARE]` (voce 
 |---|---|
 | `anfiteatro-46_01_vicino_cavalletto-e-due-elementi-in-calza.jpg` | `anfiteatro-53/anfiteatro-53_02_vicino_bungee-e-cavalletto.jpg` |
 | `anfiteatro-46_02_vicino_elementi-in-calza-dall-alto.jpg` | `anfiteatro-53/anfiteatro-53_03_vicino_bungee-dall-alto.jpg` |
+
+**28/10/2026 — anche le altre tre foto sono della 53 m.** L'utente: le foto della scheda di Double Rainbow sono «della 50 dell'anfiteatro», e la 46_05 anche. Della 46 non resta nessuna foto:
+
+| Era | Ora |
+|---|---|
+| `anfiteatro-46_03_lontano_ancoraggio-placchetta.jpg` | `anfiteatro-53/anfiteatro-53_05_lontano_placchetta-e-grillo.jpg` |
+| `anfiteatro-46_04_lontano_ancoraggio-placchetta-dettaglio.jpg` | `anfiteatro-53/anfiteatro-53_06_lontano_placchetta-dettaglio.jpg` |
+| `anfiteatro-46_05_vicino_cavalletto-lavori-in-corso.jpg` | `anfiteatro-53/anfiteatro-53_07_vicino_cavalletto-lavori-in-corso-estate.jpg` |

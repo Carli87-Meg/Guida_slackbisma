@@ -345,9 +345,8 @@ sezione('6', 'Le linee fotografate', 'Sezione 6 · il file del gruppo e le sue f
         'e il lato statico. Si chiedono a chi ha compilato il file e a chi era sul posto.',
         # 59 chiusa il 27/10/2026: la sosta con il tronco e' della 113 (utente); le
         # foto della riga della 108 sono ora anfiteatro-113_09-12
-        [(60, 'Il <b>lato di tensione</b> di ogni linea fotografata: 46, 97, 108, 113, '
-              'Despedida 60 e 70. Nessuna foto lo mostra. Indizio: sul lato lontano della 46 '
-              'un elemento metallico con il nastro avvolto; cavalletti su più lati.',
+        [(60, 'Il <b>lato di tensione</b> di ogni linea fotografata: 97, 113, Despedida 60 '
+              'e 70. Nessuna foto lo mostra. Indizio: cavalletti su più lati.',
           'tutte le cartelle delle foto', 4),
          (61, '<b>Data e autore</b> di ogni foto: Excel ha tolto gli EXIF. Il cavalletto '
               'della 113 compare in tre forme (due pali tondi d\'estate, tre pali d\'autunno, '
@@ -367,11 +366,12 @@ sezione('6', 'Le linee fotografate', 'Sezione 6 · il file del gruppo e le sue f
               'le slinghe? Che cos\'è l\'anello arancione dove convergono? E in che giorno, '
               'con quale materiale?',
           '53_01 · 53_02 · 53_03', 3),
-         (65, 'Sul lato lontano della 46, l\'<b>elemento metallico</b> con il nastro '
-              'bianco avvolto, da cui parte un elemento in calza nera, è un weblock? E i '
-              'due elementi verticali dietro le brache (uno di legno) sono un cavalletto? Il file '
-              'chiama quel lato «senza cavalletto».',
-          '46_03 · 46_04 · decide la voce 60 per la 46'),
+         # 65: le foto erano di GAS-OH, non della 46 (utente, 28/10/2026)
+         (65, 'GAS-OH, foto del file d\'autunno (53_05, 53_06): accanto alla placchetta un '
+              '<b>elemento metallico</b> con il nastro bianco avvolto, da cui parte un '
+              'elemento in calza nera. È un weblock, un anello di bloccaggio, altro? Ed è lo '
+              'stesso montaggio con i bungee delle 53_01-03?',
+          '53_05 · 53_06 (erano 46_03 e 46_04)'),
          # 66: la foto del lato vicino era della 53 m (utente, 27/10/2026)
          (66, 'Despedida 70, lato lontano: a che cosa è ancorata la corda chiara doppia '
               '(70_03)? La protezione bianca attorno al masso (70_04) è chiusa sul masso, '

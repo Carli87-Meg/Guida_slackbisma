@@ -192,17 +192,21 @@ SCHEDA = {
                  'IMG_3325.jpg', 'Dal grillo a lira ai bungee', 0.72, 0.45),
     }, {
         # Foto del file LineeBisma messe sulla riga di altre linee e riconosciute
-        # dall'utente il 27/10/2026: 53_02 e 53_03 erano 46_01 e 46_02 (dubbio 64), 53_04
-        # era 70_01 (dubbio 66); la 53_01 e' sulla riga della 53. Il rigger dei bungee e'
-        # nominato nelle risposte dell'artefatto, non qui: il repository e' pubblico.
+        # dall'utente: 53_02 e 53_03 erano 46_01 e 46_02 (dubbio 64), 53_04 era 70_01
+        # (dubbio 66), il 27/10/2026; 53_05-07 erano 46_03-05, il 28/10/2026 (dubbio 65).
+        # La 53_01 e' sulla riga della 53. La 53_07 mostra una persona riconoscibile e non
+        # si stampa. Il rigger dei bungee e' nominato nelle risposte dell'artefatto, non
+        # qui: il repository e' pubblico.
         'titolo': 'Dal file del gruppo: i bungee d’autunno, l’A-frame d’estate',
-        'testo': ('Il file del gruppo ha quattro foto del lato tensione di GAS-OH, con l’A-frame '
-                  'del gruppo; tre stavano sulla riga di altre linee. Tre sono di un '
-                  '<b>montaggio con i bungee</b>, d’autunno, fatto da un rigger esterno al '
-                  'gruppo con la sua attrezzatura: neri i bungee, lilla le slinghe '
-                  '[DA CONFERMARE]. La quarta è d’estate: l’A-frame di due pali, legato in cima '
-                  'con corda color canapa e più in basso con una fettuccia bianca e rossa. Le '
-                  'date non sono note, e il materiale non è stato rilevato.'),
+        'testo': ('Il file del gruppo ha sette foto di GAS-OH; sei stavano sulla riga di altre '
+                  'linee. Tre sono di un <b>montaggio con i bungee</b>, d’autunno, fatto da un '
+                  'rigger esterno al gruppo con l’A-frame del gruppo e la sua attrezzatura: neri '
+                  'i bungee, lilla le slinghe [DA CONFERMARE]. Due, anche loro d’autunno, '
+                  'mostrano una placchetta con dado e grillo a lira e un elemento metallico con '
+                  'il nastro avvolto, da cui parte un elemento in calza nera: se siano dello '
+                  'stesso montaggio, e che cosa sia l’elemento, [DA CONFERMARE]. Le ultime due '
+                  'sono d’estate, con l’A-frame di due pali legato in due modi diversi. Le date '
+                  'non sono note, e il materiale non è stato rilevato.'),
         'foto': [('anfiteatro-53_02_vicino_bungee-e-cavalletto.jpg',
                   'I bungee in calza nera verso la linea (autunno)',
                   'anfiteatro-53_03_vicino_bungee-dall-alto.jpg',
@@ -210,7 +214,11 @@ SCHEDA = {
                  ('anfiteatro-53_01_vicino_due-elementi-in-calza-e-pali.jpg',
                   'Lo stesso montaggio: bungee, brache lilla, A-frame',
                   'anfiteatro-53_04_vicino_cavalletto-di-due-pali-estate.jpg',
-                  'L’A-frame di due pali, d’estate', 0.66, 0.5)],
+                  'L’A-frame di due pali, d’estate', 0.66, 0.5),
+                 ('anfiteatro-53_05_lontano_placchetta-e-grillo.jpg',
+                  'La placchetta con il grillo a lira (autunno)',
+                  'anfiteatro-53_06_lontano_placchetta-dettaglio.jpg',
+                  'Il punto da vicino: placchetta, dado, grillo', 0.66, 0.5)],
     }],
 
     # che cosa resta da rilevare su questa linea (dubbi 1, 2, 28, 37, 38, 39)

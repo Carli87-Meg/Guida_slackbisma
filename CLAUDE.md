@@ -57,7 +57,8 @@ Non colmare i buchi con conoscenza generica di highlining. Se la trascrizione di
    settori sulla vista d'insieme (`panoramica_settori.py`).
 2. **Le linee** — la tavola di stato delle 24 linee, poi una pagina per settore
    nell'ordine della cresta, seguita dalle schede complete delle sue linee che hanno un
-   file di dati: oggi GAS-OH e le cinque fotografate dal gruppo (la 108 è censita dal 27/10: le foto del file erano della 113). Nessuna scheda per le
+   file di dati: oggi GAS-OH e le quattro fotografate dal gruppo (la 108 e la 46 sono censite: le foto del file
+   erano della 113 e di GAS-OH). Nessuna scheda per le
    censite (`schede_linee.py`, `scheda_linea.py`, `dati/linee.py`, `dati/schede/<id>.py`).
    Una scheda mostra solo le sezioni con dati: dove corre sul render i-pietra con i capi
    cerchiati, i due lati con il materiale che si vede (con i nomi del file, «vicino» e
@@ -115,7 +116,7 @@ video/  video_icloud/     # riprese del 16/05/2026: sola lettura, fuori da git
 foto/                     # foto originali (16/05 e 22/08/2026), fuori da git
 fonti/                    # locandina, render i-pietra: fonti esterne con i loro limiti
 dati/linee.py             # registro delle 24 linee: codici, nomi, livelli, campi di rilievo
-dati/schede/<id>.py       # i dati propri di una linea (oggi: la 53 m e le cinque fotografate)
+dati/schede/<id>.py       # i dati propri di una linea (oggi: la 53 m e le quattro fotografate)
 dati/slackmap.py          # generato da tools/06_slackmap.py: nomi e capi di SlackMap
 dati/file_lineebisma.py   # il file del gruppo, con le sue parole, «da controllare»
 lavorazione/

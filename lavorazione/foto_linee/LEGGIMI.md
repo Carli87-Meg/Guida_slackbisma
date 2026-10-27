@@ -56,7 +56,7 @@ finché l'utente non decide se e quali versionare. Prima di decidere, contano ot
 
 | Foto | Persona | Stato |
 |---|---|---|
-| `46_05`, `113_08` | volto riconoscibile | copiate in locale su decisione dell'utente; se versionarle: da decidere |
+| `53_07` (era `46_05`), `113_08` | volto riconoscibile | copiate in locale su decisione dell'utente; se versionarle: da decidere |
 | `97_03` | volto riconoscibile | non dichiarata alla copia; da decidere |
 | `113_03`, `113_06`, `113_10` (era `108_02`), `113_12` (era `108_04`) | volto non visibile, ma riconoscibile da chi la conosce | da decidere |
 | `113_02` | in parte coperta dal palo: riconoscibilità al limite | da decidere |
