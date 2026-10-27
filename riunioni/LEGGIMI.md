@@ -9,8 +9,11 @@ riunioni/
 ```
 
 **Restano fuori da git.** Il repository è pubblico e le riunioni contengono nomi, soldi
-e questioni interne del gruppo. Su questo disco ci
-sono; su GitHub c'è solo questo file.
+e questioni interne del gruppo. Su questo disco ci sono; su GitHub c'è solo questo file.
+Per il gruppo, i riepiloghi delle riunioni stanno sul Drive dei Bismaliners.
+
+La trascrizione automatica storpia i nomi (Hermann, Lars, Code, Daisy...): nei documenti si
+usano quelli giusti, elencati in `CLAUDE.md`.
 
 ## Come si usano per il manuale
 

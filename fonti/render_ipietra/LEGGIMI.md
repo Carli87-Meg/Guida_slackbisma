@@ -56,7 +56,8 @@ Per convertirli:
     [Image.open(f).convert('RGB').save(f[:-4]+'.jpg','JPEG',quality=90, \
     optimize=True,progressive=True) for f in glob.glob('*.png')]"
 
-Il build li impagina da solo nel capitolo 7. Non serve toccare il codice: basta
+Il build li impagina da solo nella Parte 1, nel catalogo delle linee: ogni settore ha il
+suo render seguito dalle sue linee. Non serve toccare il codice: basta
 mettere i file qui e rilanciare `python build/build_manuale.py`. I settori senza
 render vengono semplicemente saltati, e il manuale lo dichiara.
 

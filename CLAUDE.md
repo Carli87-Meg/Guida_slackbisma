@@ -33,13 +33,39 @@ Non colmare i buchi con conoscenza generica di highlining. Se la trascrizione di
 
 ## Cosa esiste già
 
-- `design/design.py` — sistema grafico completo e funzionante (ReportLab). Font, palette,
-  componenti: `LineHeader`, `ChipRow`, `gear_block`, `callout`, `data_table`, `PhotoStrip`,
-  `photo_row`, `Steps`, `Bars`, `ColorKey`, `two_cols`. **Riusalo, non riscriverlo.**
+- `build/design.py` — sistema grafico (ReportLab): font, palette, componenti
+  `LineHeader`, `ChipRow`, `gear_block`, `callout`, `data_table`, `PhotoStrip`,
+  `photo_row`, `Steps`, `Bars`, `ColorKey`, `two_cols`. È partito da `design/design.py`
+  (quello della Sillschlucht) ed è stato esteso per questa guida: **si modifica
+  `build/design.py`**, `design/design.py` resta com'era come riferimento. Riusare i
+  componenti, non riscriverli.
 - `riferimento/build_guida_sillschlucht_it.py` — guida di 16 pagine costruita con quel
-  sistema. È il modello di riferimento per struttura e tono.
+  sistema. È il modello di riferimento per struttura e tono; la scheda della 53 m segue il
+  suo modello di scheda di linea.
 - `riferimento/build_scheda_campo_it.py` — scheda da campo su una pagina A4.
-- `tools/` — script di partenza per la pipeline video (vedi sotto).
+- `tools/` — pipeline video e foto: inventario, trascrizione, ricerca nelle trascrizioni,
+  fotogrammi, provini, annotazione, importazione delle foto con EXIF.
+
+## Com'è fatta la guida
+
+`build/build_manuale.py` assembla quattro parti:
+
+1. **La Pietra** — lo spot, la panoramica dei settori, il catalogo delle 24 linee
+   (`schede_linee.py`, `panoramica_settori.py`, `dati/linee.py`).
+2. **Come si monta una linea** — il metodo, valido per ogni linea (`metodo.py`).
+3. **Le linee** — la scheda della 53 m (`scheda_53.py`), modello per le altre.
+4. **Apparato** — glossario, fonti con le loro date, disclaimer.
+
+Ogni informazione al suo posto: il **metodo** dice come si fa (funzioni, tipi di
+materiale, principi; le foto di una linea solo come esempi dichiarati); la **scheda** dice
+com'è fatta quella linea (quantità, colori, punti, coordinate, varianti, cosa manca).
+Niente racconto del montaggio nel testo: minuti dei video e cronologia stanno nei commenti
+del codice e nell'apparato. Le schede di rilievo delle 23 linee non documentate escono in
+un fascicolo a parte (`build_schede_rilievo.py`), i dubbi da chiedere sul campo in
+`build_scheda_dubbi.py`.
+
+L'impaginazione si rivede su Figma insieme all'utente; Figma è il tavolo di revisione, la
+fonte resta il codice: le modifiche fatte là vanno rilette e riportate qui.
 
 ## Vincoli tecnici
 
@@ -52,22 +78,44 @@ Non colmare i buchi con conoscenza generica di highlining. Se la trascrizione di
 ## Struttura di lavoro
 
 ```
-video/                    # input, non toccare, sola lettura
+video/  video_icloud/     # riprese del 16/05/2026: sola lettura, fuori da git
+foto/                     # foto originali (16/05 e 22/08/2026), fuori da git
+fonti/                    # locandina, render i-pietra: fonti esterne con i loro limiti
+dati/linee.py             # registro delle 24 linee
 lavorazione/
   audio/                  # wav 16 kHz mono estratti
   trascrizioni/           # .json con timestamp + .md leggibili
   frame_grezzi/           # fotogrammi candidati
   frame_annotati/         # fotogrammi con frecce e etichette
+  foto_dritte/            # foto raddrizzate e ridotte: quelle che usa il build
+  ancoraggi/  foto_linee/ # foto nuove dal campo, una cartella per linea (vedi i LEGGIMI)
+  metadati_foto.md        # data e GPS letti dagli originali, prima che si perdano
 build/
-  design.py               # copiato da design/
-  build_manuale.py        # script di assemblaggio PDF
-output/
-  Pietra_Bismantova_Highline.pdf
+  design.py               # sistema grafico
+  build_manuale.py        # assemblaggio della guida
+  metodo.py  scheda_53.py  schede_linee.py  ...
+output/                   # i tre PDF, fuori da git
 NOTE_RIGGING.md           # sintesi strutturata estratta dai video
 DUBBI.md                  # elenco di tutto ciò che va confermato
+riunioni/                 # riunioni del gruppo: fuori da git, solo il LEGGIMI
+inventario/               # catalogo del materiale e sito: fuori da git, solo il LEGGIMI
 ```
 
+**Il repository GitHub è pubblico.** Prima di versionare materiale del gruppo (nomi,
+prezzi, soldi, trascrizioni delle riunioni, foto in cui si riconosce una persona) va
+chiesto all'utente; per default resta fuori, come `riunioni/` e `inventario/`.
+
+## Nomi delle persone
+
+La trascrizione automatica storpia i nomi del gruppo. Nei documenti si usano: **Ermy**
+(non Erman, Herman, Hermann), **Matte Kode** (non Code, Malte), **Lasa** (non Lars),
+**Desi** (non Daisy), **Carlos** (l'utente, «Carlitos») che **non** è Carlo. In una
+citazione si lascia il testo trascritto e si mette il nome giusto fuori dalle virgolette.
+
 ## Pipeline
+
+Per la 53 m è stata percorsa tutta nell'agosto 2026; resta lo schema da seguire
+per ogni linea nuova di cui arrivino riprese con audio.
 
 1. **Inventario** — `tools/01_inventario.sh`: durata, risoluzione, fps di ogni video.
    Produrre una tabella e chiedere all'utente quale video copre quale fase.
@@ -78,7 +126,7 @@ DUBBI.md                  # elenco di tutto ciò che va confermato
    parlato è confuso. Ogni voce con il timestamp `[video.mp4 @ 12:34]` da cui proviene.
    **Fermarsi qui e far validare le note all'utente prima di andare avanti.**
 4. **Selezione fotogrammi** — `tools/03_estrai_frame.py`: estrarre i frame ai timestamp
-   scelti. Guardarli davvero (tool `view`), scartare i mossi e i fuori fuoco, tenere quelli
+   scelti. Guardarli davvero (tool Read sull'immagine), scartare i mossi e i fuori fuoco, tenere quelli
    in cui la manovra è leggibile.
 5. **Annotazione** — `tools/annota.py`: frecce, cerchi, etichette numerate sui frame.
 6. **Impaginazione** — adattare lo script di riferimento e produrre il PDF.

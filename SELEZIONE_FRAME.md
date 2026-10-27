@@ -1,5 +1,8 @@
 # Selezione fotogrammi — Fase 4
 
+> Documento della Fase 4 (agosto 2026), validato e passato nella guida. Le correzioni
+> arrivate dopo sono segnate con «poi:»; lo stato aggiornato dei dubbi è in `DUBBI.md`.
+
 85 fotogrammi estratti da 20 dei 28 video, tutti raddrizzati (i MOV da iPhone sono
 verticali, la rotazione sta nella matrice `tkhd`). Provini a contatto in
 `lavorazione/provini/`, originali a 1600 px in `lavorazione/frame_grezzi/`.
@@ -35,7 +38,7 @@ Il passaggio che l'audio rende incomprensibile. Sequenza leggibile.
 | Frame | Nitid. | Cosa si vede | Uso |
 |---|---|---|---|
 | ⭐ `IMG_1374 @ 0:33` | 400+ | Maglia rapida acciaio, moschettone HMS bianco, fettuccia viola, cordino rosso annodato, moschettone arancio, fettuccia blu, un dispositivo non identificato | Figura dell'ancoraggio. **Mosso: è però l'unico scatto che inquadra l'insieme** |
-| ⭐ `IMG_1374 @ 0:44` | ok | Dispositivo marcato `EN 892:2013 · Ø7,8-11 mm`, ghiera rossa, maglia rapida, corda verde acqua con nodo | Dettaglio ferramenta, marcature leggibili |
+| ⭐ `IMG_1374 @ 0:44` | ok | Dispositivo marcato `EN 892:2013 · Ø7,8-11 mm`, ghiera rossa, maglia rapida, corda verde acqua con nodo. Poi: **la lettura era sbagliata**, la foto `IMG_1371` dà `EN 567:2013` — è una carrucola bloccante (dubbio 40) | Dettaglio ferramenta |
 | `IMG_1374 @ 0:39` `0:41` `0:46` | 2800+ | Corda verde acqua su roccia | Contesto |
 | ~~`IMG_1374 @ 0:28`~~ | **49** | obiettivo contro un indumento | **scartato** |
 | ~~`IMG_1374 @ 0:52` `0:56`~~ | 3660 / 3159 | solo roccia, nessuna manovra | **scartati** |
@@ -114,11 +117,16 @@ stesso video, quindi non si perde nulla.
    colore *è* la portata (viola = 1 t, verde = 2 t, e così via). Se me lo confermi, i dubbi
    8, 14, 15 e 16 si chiudono da soli. **Non lo do per scontato: le brache da highline non
    seguono sempre quella norma, e sbagliare qui significa scrivere una portata falsa.**
+   Poi: la guida ha fissato la regola opposta, **«il colore non è una portata: vale solo
+   l'etichetta»** (Parte 2, «La portata delle brache»). I dubbi 8, 14, 15 e 16 restano aperti.
 2. **In `IMG_1374 @ 0:33` c'è un dispositivo che potrebbe essere un friend.** Se
    nell'ancoraggio ci fosse protezione veloce accanto ai punti fissi, cambierebbe la sezione
    ancoraggi. Il fotogramma è mosso e non ho trovato uno scatto fermo che inquadri i 3 punti.
+   Poi: rimandato al campo, dubbio 38.
 3. **Non ho ancora visto le placchette.** In nessun fotogramma si vede con chiarezza cosa
    siano i «punti»: spit, fix, resinati. Serve o un tuo chiarimento o una ricerca mirata su
-   altri video.
+   altri video. Poi: le foto `IMG_1371` e `IMG_1372` mostrano **placchette su bullone con
+   dado esagonale** (dubbio 39); restano marca e diametro del bullone.
 4. **Il dispositivo `EN 892:2013 · Ø7,8-11 mm`** di `IMG_1374 @ 0:44` va identificato per
-   marca e modello.
+   marca e modello. Poi: la marcatura giusta è `EN 567:2013`, è una carrucola bloccante;
+   la marca resta da identificare (dubbio 40).

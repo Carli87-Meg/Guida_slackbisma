@@ -41,11 +41,13 @@ __pycache__/
 .venv/
 fonti/render_originali_png/
 
-# Inventario: l'Excel si rigenera da inventario/materiale.csv
-inventario/export/
-
 # Riunioni dei Bismaliners: restano sul disco locale. Il repository e' pubblico,
 # e le trascrizioni contengono nomi, soldi e questioni interne del gruppo.
 # Entra in git solo il LEGGIMI che spiega come sono organizzate.
 riunioni/*
 !riunioni/LEGGIMI.md
+
+# Inventario materiale: nomi, prezzi e foto delle persone del gruppo.
+# Entra in git solo il LEGGIMI che spiega come funziona.
+inventario/*
+!inventario/LEGGIMI.md
