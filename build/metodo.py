@@ -31,15 +31,19 @@ from scheda_53 import (foto, dim, ANN, FOTO, LINEA, C_ANC, C_SOS,   # noqa: E402
                        C_TEN, C_ASL, DC)
 
 
-# Esempio dalle foto del file LineeBisma (lette il 27/10/2026, lavorazione/foto_linee/*/LETTURA.md)
-# nel capitolo degli ancoraggi: quale foto usare lo decide Carlos, non il codice.
-# Finche' non decide resta None e non si stampa nulla. Le due candidate leggibili:
+# Esempio dalle foto del file LineeBisma (lavorazione/foto_linee/*/LETTURA.md) nel
+# capitolo degli ancoraggi: quale foto usare lo decide l'utente, non il codice.
+# Finche' non decide resta None e non si stampa nulla. Le due candidate leggibili,
+# ricontrollate il 27/10/2026 dopo averle raddrizzate (erano tutte e due coricate:
+# ora sono verticali e senza persone). Il quarto valore e' il fuoco del ritaglio:
+# in tutte e due il punto sta nella parte bassa, e a 0.5 la fascia lo tagliava fuori.
 #   ('anfiteatro-46', 'anfiteatro-46_04_lontano_ancoraggio-placchetta-dettaglio.jpg',
 #    'Esempio dalla 46 m, lato «lontano» del file: placchetta con dado esagonale e '
-#    'grillo a lira. Quale sia il lato di tensione non è noto')
+#    'grillo a lira. Quale sia il lato di tensione non è noto', 0.85)
 #   ('anfiteatro-113', 'anfiteatro-113_05_lontano_sosta-con-tronco-dettaglio.jpg',
-#    'Esempio dalla 113 m (o 108: da chiarire), lato «lontano» del file: sosta con '
-#    'tronco. Quale sia il lato di tensione non è noto')
+#    'Esempio dalla sosta con il tronco, che il file mette sulle righe della 113 m e '
+#    'della 108 m (di quale sia non è noto), colonna «lontano»: moschettone a ghiera '
+#    'su placchetta con dado. Quale sia il lato di tensione non è noto', 0.85)
 ESEMPIO_CARLO = None
 FOTO_LINEE = RADICE / 'lavorazione' / 'foto_linee'
 
@@ -48,16 +52,28 @@ def esempio_carlo(colore):
     """La foto scelta dall'autore come esempio, con la didascalia che dichiara i limiti."""
     if not ESEMPIO_CARLO:
         return []
-    id_linea, nome_file, didascalia = ESEMPIO_CARLO
+    id_linea, nome_file, didascalia = ESEMPIO_CARLO[:3]
+    fuoco = ESEMPIO_CARLO[3] if len(ESEMPIO_CARLO) > 3 else 0.5
     p = FOTO_LINEE / id_linea / nome_file
     if not p.exists():
         return []
-    return [SP(12), PhotoStrip(str(p), FW, *dim(p), didascalia, colore, 0.55, 0.5)]
+    return [SP(12), PhotoStrip(str(p), FW, *dim(p), didascalia, colore, 0.55, fuoco)]
 
 
-def _apre(testata, *seguito):
+def _apre(testata, *seguito, marcatori=()):
     """Testata legata al suo primo blocco: non resta mai sola in fondo pagina."""
-    return KeepTogether([testata, SP(10)] + list(seguito))
+    return KeepTogether(list(marcatori) + [testata, SP(10)] + list(seguito))
+
+
+def _marcatori(colore, etichetta, chiave):
+    """Accento e rimando di una sezione.
+
+    Quando il blocco che apre la sezione puo' saltare alla pagina dopo, vanno
+    dentro il blocco: lasciati fuori restano in fondo alla pagina prima, e
+    l'indice stampava «Gli ancoraggi su roccia» a p. 12 e «Il lato tensione» a
+    p. 16, una pagina prima di dove cominciano (visto il 27/10/2026).
+    """
+    return [Accent(colore, etichetta), Segna(chiave)]
 
 
 def _testata(n, titolo, occhiello, colore):
@@ -68,8 +84,7 @@ def parte_metodo():
     S = []
 
     def sec(colore, etichetta, chiave):
-        S.append(Accent(colore, etichetta))
-        S.append(Segna(chiave))
+        S.extend(_marcatori(colore, etichetta, chiave))
 
     # ============================================================ 1 · i due lati
     # Ruoli dei due lati dall'ordine delle operazioni (NOTE_RIGGING A, D, E, F).
@@ -113,7 +128,11 @@ def parte_metodo():
     S.append(SP(12))
     S.append(data_table(
         ['Per', 'Che cosa serve'],
-        [['La sosta main', 'Brache ad anello industriali («slinghe»)'],
+        # placchette: il file LineeBisma le mette «da portare» («piastrine»), la
+        # scheda della 53 m le vede sui punti; restino o no sul posto, nessuna fonte
+        # lo dice (dubbio 70). Prima la lista non le nominava.
+        [['I punti', 'Placchette — in loco o da portare, ' + DC],
+         ['La sosta main', 'Brache ad anello industriali («slinghe»)'],
          ['La sosta backup', 'Corde, con un connettore d’acciaio (BFK)'],
          ['Collegare i punti', 'Una corda, annodata fra i punti'],
          ['L’ancoraggio', 'Carrucola bloccante'],
@@ -125,7 +144,8 @@ def parte_metodo():
          ['Il bordo', 'A-frame, se la linea lo prevede']],
         [150, FW - 150], LINEA))
     S.append(SP(8))
-    S.append(P('L’elenco completo della 53 m dell’Anfiteatro, con le quantità, è a '
+    # «completo» tolto: l'elenco ha ancora voci [DA CONFERMARE] (placchette comprese)
+    S.append(P('L’elenco della 53 m dell’Anfiteatro, con le quantità, è a '
                + rif('materiale53', 'pagina [rimando]') + '.', small))
     S.append(SP(26))
 
@@ -149,7 +169,7 @@ def parte_metodo():
              'da linea vita'),
             ('Pretensionare', 'Paranchino di base, tensione provvisoria'),
             ('Bloccare il backup', 'Un collegamento che prende sosta main e sosta backup'),
-            ('Tensionare', 'Tensionamento finale — come e quanto: [DA CONFERMARE]'),
+            ('Tensionare', 'Tensionamento finale — come e quanto: [DA\u00a0CONFERMARE]'),
             ('Anti-slip', 'Sulla linea, a tensione fatta'),
             ('Verificare', 'Si va sulla linea per vedere se va ritensionata'),
         ], LINEA, FW, 2),
@@ -165,8 +185,7 @@ def parte_metodo():
     # ============================================================ 4 · ancoraggi
     # Roccia dalla scheda di settore i-pietra; placchette in IMG_1371, IMG_1372 e
     # nelle foto del 22/08; punti collegati con corda annodata in entrambi i montaggi
-    sec(C_ANC, 'Ancoraggi', 'ancoraggi')
-    S.append(KeepTogether([
+    S.append(KeepTogether(_marcatori(C_ANC, 'Ancoraggi', 'ancoraggi') + [
         _testata(4, 'Gli ancoraggi su roccia', 'i punti fissi', C_ANC),
         SP(10),
         P('La roccia della Pietra è <b>arenaria</b>, meno tenace del calcare: va valutata '
@@ -284,7 +303,6 @@ def parte_metodo():
     # ============================================================ 8 · tensione
     # IMG_1380, 1381, 1383 (pretensione), IMG_1384 @ 0:00-0:55 (blocco backup),
     # IMG_1392 (tensione finale), IMG_1394 (softrelease), IMG_1395 (anti-slip)
-    sec(C_TEN, 'Tensione', 'tensione')
     S.append(_apre(
         _testata(8, 'Il lato tensione', 'tensione e anti-slip', C_TEN),
         P('La linea passa nel <b>weblock</b> — in gergo «banana» — collegato con un grillo '
@@ -295,7 +313,8 @@ def parte_metodo():
           lead),
         SP(10),
         ChipRow([('Bloccante', 'Weblock'), ('Collegamento', 'Grillo a lira'),
-                 ('Tensione', 'Paranchino'), ('Sicura', 'Anti-slip')], C_TEN)))
+                 ('Tensione', 'Paranchino'), ('Sicura', 'Anti-slip')], C_TEN),
+        marcatori=_marcatori(C_TEN, 'Tensione', 'tensione')))
     S.append(SP(12))
     S.append(photo_pair(
         str(ANN / 'F1_weblock_grillo.jpg'), str(ANN / 'G1_antislip.jpg'),

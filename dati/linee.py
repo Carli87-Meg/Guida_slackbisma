@@ -27,9 +27,17 @@ FONTI — e solo queste:
     invece della cache. Vale il dato piu' recente, ma va sempre stampato con la
     sua data. Dubbio 53 di DUBBI.md.
 
-  Esito: i-pietra copre **22 linee su 24**. Mancano solo la 20 m e la 108 m
-  dell'Anfiteatro. Il conteggio di dodici che si legge in NOTE_RIGGING.md e'
-  superato: dubbio 53, chiuso.
+  Esito al 20/08/2026: i-pietra copre **22 linee su 24**. Mancano solo la 20 m e
+  la 108 m dell'Anfiteatro. Il conteggio di dodici che si legge in NOTE_RIGGING.md
+  e' superato: dubbio 53, chiuso.
+
+  **Al 21/10/2026 le linee sono 24 su 24** (letto il 27/10/2026): l'export
+  Firestore di i-pietra del 21/10 e il lotto 31 (data/catalog/riscrittura/
+  31-highline.md, applicato il 21/10) contengono anche la 20 m e la 108 m
+  dell'Anfiteatro, create il 21/08/2026 (campo createdAt), il giorno dopo i
+  render. I render del 20/08 restano le figure del catalogo e mostrano 22 linee:
+  per questo il registro tiene due campi, `in_ipietra` (al 21/10) e `sul_render`
+  (al 20/08). Dubbio 53, aggiornato.
 
 Il confronto fra le due fonti sta in NOTE_RIGGING.md, sezione «La locandina non
 coincide con i-pietra», ed e' gia' stato validato dall'utente.
@@ -72,7 +80,23 @@ SETTORE_IPIETRA = {
 # Qui cambia soltanto l'ordine in cui vengono presentate.
 AREE = ['Rookie', 'Anfiteatro', 'Anfite-altro', 'Settore Giallo', 'Despedida']
 
-# (settore locandina, lunghezza m, presente in i-pietra, stato)
+# La copertura di i-pietra cambia nel tempo: si stampa sempre con la sua data.
+# Ogni riga: (data, linee censite, fonte). L'ultima e' quella che vale per
+# `in_ipietra`; le altre sono la storia, e la guida la dichiara.
+IPIETRA_STORIA = [
+    ('05/08/2026', 12, 'snapshot di catalog-admin, senza Despedida e Settore Giallo'),
+    ('20/08/2026', 22, 'render 3D dei cinque settori'),
+    ('21/10/2026', 24, 'export di i-pietra e lotto 31'),
+]
+IPIETRA_DATA = IPIETRA_STORIA[-1][0]
+RENDER_DATA = '20/08/2026'
+
+# Linee che i render del 20/08/2026 non mostrano perche' in i-pietra sono state
+# create il 21/08/2026 (createdAt nell'export del 21/10/2026): sono censite, ma
+# non tracciate sulle figure che la guida stampa.
+DOPO_I_RENDER = {'anfiteatro-20', 'anfiteatro-108'}
+
+# (settore locandina, lunghezza m, presente in i-pietra al 21/10/2026, stato)
 _GREZZO = [
     ('Rookie',         18,  True,  NON_DOCUMENTATA),
     ('Rookie',         27,  True,  NON_DOCUMENTATA),
@@ -84,12 +108,13 @@ _GREZZO = [
     ('Settore Giallo', 50,  True, NON_DOCUMENTATA),
     ('Settore Giallo', 55,  True, NON_DOCUMENTATA),
 
-    ('Anfiteatro',     20,  False, NON_DOCUMENTATA),
+    # 20 e 108: assenti dai render del 20/08, censite dal 21/08 (DOPO_I_RENDER)
+    ('Anfiteatro',     20,  True,  NON_DOCUMENTATA),
     ('Anfiteatro',     27,  True,  NON_DOCUMENTATA),
     ('Anfiteatro',     46,  True,  NON_DOCUMENTATA),
-    ('Anfiteatro',     53,  True,  DOCUMENTATA),      # la linea del manuale
+    ('Anfiteatro',     53,  True,  DOCUMENTATA),      # la linea del manuale: GAS-OH
     ('Anfiteatro',     97,  True,  NON_DOCUMENTATA),
-    ('Anfiteatro',    108,  False, NON_DOCUMENTATA),
+    ('Anfiteatro',    108,  True,  NON_DOCUMENTATA),
     ('Anfiteatro',    113,  True,  NON_DOCUMENTATA),
 
     ('Anfite-altro',   22,  True,  NON_DOCUMENTATA),
@@ -117,6 +142,8 @@ LINEE = [
         'settore_ipietra': SETTORE_IPIETRA[settore] if in_ipietra else None,
         'lunghezza': lung,
         'in_ipietra': in_ipietra,
+        # tracciata sui render del 20/08/2026, quelli che la guida stampa
+        'sul_render': in_ipietra and _slug(settore, lung) not in DOPO_I_RENDER,
         'stato': stato,
     }
     for settore, lung, in_ipietra, stato in _GREZZO
@@ -139,19 +166,24 @@ def conteggi():
     return {
         'totale': len(LINEE),
         'in_ipietra': sum(1 for l in LINEE if l['in_ipietra']),
+        'sul_render': sum(1 for l in LINEE if l['sul_render']),
         'documentate': len(documentate()),
     }
 
 
-# Discrepanza fra le due fonti sul nome del settore: i-pietra chiama
-# «Anfiteatro» anche le tre linee che la locandina mette sotto «Anfite-altro».
-# Va dichiarata nel manuale, non risolta d'ufficio: e' lo stesso tipo di
-# ambiguita' del dubbio 45.
+# Discrepanza fra le due fonti sul nome del settore: nei render i-pietra del
+# 20/08/2026 le tre linee che la locandina mette sotto «Anfite-altro» sono
+# etichettate «Anfiteatro», e nel catalogo stanno nel settore anfiteatro.
+# Decisione D4 dell'utente (27/10/2026, dubbio 52 chiuso): il manuale usa il nome
+# della locandina, «Anfite-altro», e dove cita i-pietra dice come le etichetta.
+# (Dal 21/10 i-pietra ha anche un campo area «anfite-altro», ma lo ha preso dalla
+# bozza della guida dell'8/10: non e' una seconda fonte.)
 SETTORI_IN_CONFLITTO = ['Anfite-altro']
 
-# La 50 m del Settore Giallo e' la linea reale con cui collide il nome di lavoro
-# «la 50» dato alla 53 m dell'Anfiteatro: dubbio 45, il punto in cui un lettore
-# potrebbe attrezzare la linea sbagliata. Va evidenziata ovunque compaia.
+# La 50 m del Settore Giallo e' l'altra «50» della Pietra. «La 50» e' il soprannome
+# che il gruppo da' alla 53 m dell'Anfiteatro, che nel titolo della guida si chiama
+# GAS-OH (decisione D3 dell'utente, 27/10/2026, dubbio 45 chiuso). La nota
+# sull'altra 50 m resta, ovunque compaia (nota N3 di DUBBI.md).
 COLLISIONE_NOME = ['settore-giallo-50']
 
 # Settori la cui presenza in i-pietra non e' stata verificata su un render.
@@ -211,7 +243,7 @@ if __name__ == '__main__':
         raise SystemExit(0)
     c = conteggi()
     print('linee totali: %(totale)d · in i-pietra: %(in_ipietra)d · '
-          'documentate: %(documentate)d' % c)
+          'sui render: %(sul_render)d · documentate: %(documentate)d' % c)
     for a in AREE:
         ls = per_area(a)
         print('  %-15s %d linee: %s' % (

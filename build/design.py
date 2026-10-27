@@ -110,7 +110,8 @@ def A(url, text, c=None):
     return '<link href="%s"><font color="#%s">%s</font></link>' % (url, col, text)
 
 
-_re_dc = re.compile(r'<font color="#B3261E">(\[DA CONF[^<]*\])</font>')
+# anche con lo spazio non separabile, che tiene il segno su una riga sola
+_re_dc = re.compile('<font color="#B3261E">(\\[DA(?: |\u00a0|&nbsp;)CONF[^<]*\\])</font>')
 _UNITA = re.compile(r'(\d) (m|mm|cm|kN|kg|t|L)\b')
 
 
@@ -546,9 +547,13 @@ def photo_row(items, color=None, w=FW, gap=12):
 
 
 def _a_capo(testo, font, corpo, larghezza):
-    """Spezza un testo in righe che stanno nella larghezza data."""
+    """Spezza un testo in righe che stanno nella larghezza data.
+
+    Solo sugli spazi normali: lo spazio non separabile (U+00A0) tiene insieme
+    «[DA CONFERMARE]», che str.split() senza argomenti spezzerebbe.
+    """
     righe, riga = [], ''
-    for parola in testo.split():
+    for parola in re.split(r'[ \t\r\n]+', testo.strip()):
         prova = (riga + ' ' + parola).strip()
         if riga and stringWidth(prova, font, corpo) > larghezza:
             righe.append(riga)

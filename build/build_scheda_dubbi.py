@@ -28,6 +28,7 @@ C_ANC = LC[1]                   # ancoraggio      (rosso)
 C_SOS = LC[7]                   # sosta / slinga  (azzurro)
 C_TEN = LC[3]                   # lato tensione   (ambra)
 C_ASL = LC[5]                   # anti-slip       (verde)
+C_FOT = LC[6]                   # file LineeBisma e sue foto (verde acqua)
 
 
 # ---------------------------------------------------------------- componenti
@@ -84,7 +85,7 @@ def page_end(cv, doc):
     sect = getattr(cv, '_sect', '')
     cv.setFont('Pop-M', 7)
     cv.setFillColor(MUT)
-    cv.drawString(LM, H - 44, 'BISMANTOVA · ANFITEATRO · SCHEDA DI VERIFICA SUL CAMPO')
+    cv.drawString(LM, H - 44, 'PIETRA DI BISMANTOVA · SCHEDA DI VERIFICA SUL CAMPO')
     cv.drawRightString(W - RM, H - 44, sect.upper())
     cv.setStrokeColor(HAIR)
     cv.setLineWidth(0.6)
@@ -139,10 +140,13 @@ S.append(callout('La regola di questo progetto',
                  'ma sbagliato, in un documento che descrive una linea sospesa nel vuoto, '
                  'è un rischio reale.', WARN, icon='!', strong=True))
 S.append(SP(16))
-S.append(P('<b>Le sette voci segnate PRIORITARIO</b> sono le più gravi: la portata delle '
-           'brache, il nome della linea e quello del settore, la '
-           'fotografia dell\'ancoraggio, la lunghezza della campata, il nastro e il suo '
-           'backup. Se il tempo con i ragazzi '
+# Erano sette: il nome della linea (45) e quello del settore (52) sono chiusi il
+# 27/10/2026 dalle decisioni D3 e D4 dell'utente. La 70 (placchette) e' diventata
+# PRIORITARIO nella seconda verifica del 27/10: il rischio e' arrivare
+# all'ancoraggio senza placchette.
+S.append(P('<b>Le sei voci segnate PRIORITARIO</b> sono le più gravi: la portata delle '
+           'brache, la fotografia dell\'ancoraggio, le placchette (sul posto o da portare), '
+           'la lunghezza della campata, il nastro e il suo backup. Se il tempo con i ragazzi '
            'è poco, si parte da lì.', body))
 S.append(SP(14))
 S.append(data_table(
@@ -150,8 +154,9 @@ S.append(data_table(
     [['1 · Quadro generale', '1-2, 4-7', 'Misure e dati della linea e della giornata'],
      ['2 · Materiale', '8-24', 'Lunghezze, diametri, modelli, quantità'],
      ['3 · Manovre', '25-36', 'Nomi di nodi, sequenze, esecuzione'],
-     ['4 · Ancoraggio', '37-41, 50, 51, 54', 'Verifiche a immagine e scatti da fare'],
-     ['5 · Nome e fonti', '42-46, 49, 52, 57-58', 'Denominazione, locandina, foto, buchi di ripresa']],
+     ['4 · Ancoraggio', '37-41, 50, 51, 54, 70', 'Verifiche a immagine e scatti da fare'],
+     ['5 · Fonti', '42-44, 46, 49, 57-58', 'Locandina, foto, buchi di ripresa'],
+     ['6 · Linee fotografate', '59-69, 71-74', 'Foto e schede del file del gruppo']],
     [118, 78, FW - 196], color=LINEA))
 S.append(PageBreak())
 
@@ -191,9 +196,9 @@ sezione('2', 'Materiale', 'Sezione 2 · tabella materiale', C_TEN,
          (12, 'Le <b>4 maglie delta</b>: misura e materiale. La quantità è l\'unico numero '
               'certo di tutto il corpus.', '[IMG_1350 @ 0:53]'),
          (13, 'Cos\'è il «<b>Mighty Lock</b>», descritto come «quello quadratino»? Nella '
-              'lista della cernita di Matte Kode c\'è un <b>MightyLock di Balance '
-              'Community</b>, un anello quadrato: era quello? E come lavorava nel backup?',
-          '[IMG_1351 @ 0:19-0:28] · inventario KOD-009'),
+              'lista della cernita del gruppo c\'è un <b>anello quadrato MightyLock</b> '
+              '(Balance Community): era quello? E come lavorava nel backup?',
+          '[IMG_1351 @ 0:19-0:28] · lista della cernita del gruppo'),
          (14, 'Fettuccia <b>verde lunga</b>, «la più grossa che c\'è»: che misura?',
           '[IMG_1369 @ 0:31]'),
          (15, 'Fettuccia <b>piccola viola</b> dell\'ancoraggio: che misura?',
@@ -273,6 +278,14 @@ sezione('4', 'Ancoraggio e verifiche a immagine', 'Sezione 4 · da guardare e fo
               'SlackMap la Brifing ha barre resinate. Su una placchetta si legge «FOR 1 '
               'PERSON», logo e codice incerti. Restano <b>marca e diametro del bullone</b>, '
               'e <b>chi li ha posati</b>.', 'IMG_1371.JPEG · IMG_1372.JPEG · IMG_3324'),
+         (70, '<b>Placchette: in loco o da portare?</b> Il file del gruppo, nella scheda '
+              '«Sosta Bisma Standard», mette in loco «Spit e Dadi» e da portare «3 '
+              'piastrine da 10 mm»; la scheda della 53 m elenca 3 placchette su bullone '
+              'all\'ancoraggio statico, e il 22/08 più in basso c\'era un bullone senza '
+              'placchetta. Le «piastrine» del file sono le placchette? Restano sul posto o '
+              'vanno portate a ogni montaggio?',
+          'file LineeBisma, «Sosta Bisma Standard» · IMG_3331 · cfr. voci 28 e 72', 2,
+          True),
          (40, '<b>Marca</b> della carrucola bloccante nera con puleggia arancio. Le marcature '
               'lette sono CE 0082, UK CA 20, EN 567:2013, Ø 7,8-11 mm; il logo non è '
               'leggibile.', 'IMG_1371.JPEG · dettaglio in lavorazione/dettagli/'),
@@ -295,19 +308,12 @@ sezione('4', 'Ancoraggio e verifiche a immagine', 'Sezione 4 · da guardare e fo
           'foto/IMG_1401.JPG')])
 
 # ================================================================ 5 · nome e fonti
-sezione('5', 'Nome della linea, fonti, buchi di ripresa', 'Sezione 5 · apparato', C_ASL,
-        'Questioni editoriali, ma una di queste è il rischio più concreto dell\'intero '
-        'documento.',
-        [(45, '<b>Titolo definitivo del manuale.</b> «La 50» collide con la <b>50 M del '
-              'Settore Giallo</b>, che esiste davvero: un lettore potrebbe attrezzare la '
-              'linea sbagliata. Su SlackMap si chiama <b>«GAS-OH»</b> (i-pietra ha ripreso '
-              'quel nome): è il nome da usare nel titolo?',
-          'locandina · l\'ambiguità più pericolosa del documento', 3, True),
-         (52, '<b>I due cataloghi non concordano sul nome del settore.</b> i-pietra '
-              'etichetta «Anfiteatro» anche le tre linee che la locandina mette sotto '
-              '<b>Anfite-altro</b> — 22, 30 e 135 m. Qual è il nome che usate voi?',
-          'render 3D i-pietra · stesso rischio del dubbio 45', 3, True),
-         (42, 'Dati presi da i-pietra da validare: settore <b>Anfiteatro</b>, roccia '
+# 45 (titolo) e 52 (settore) chiuse il 27/10/2026 dalle decisioni D3 e D4
+# dell'utente: GAS-OH nel titolo, «Anfite-altro» come la locandina.
+sezione('5', 'Fonti e buchi di ripresa', 'Sezione 5 · apparato', C_ASL,
+        'Che cosa dicono le fonti esterne, da dove vengono le immagini, dove le riprese '
+        'si interrompono.',
+        [(42, 'Dati presi da i-pietra da validare: settore <b>Anfiteatro</b>, roccia '
               '<b>arenaria</b>, colore linea <b>#F97316</b>. Se il manuale li stampa devono '
               'essere corretti anche fuori dall\'app.', 'catalogo i-pietra'),
          (43, 'La <b>locandina</b> «La Pietra — Yeah Vez!» è stata letta, ma il file '
@@ -330,6 +336,92 @@ sezione('5', 'Nome della linea, fonti, buchi di ripresa', 'Sezione 5 · apparato
               'si stava facendo lì?',
           'GPS dei video · fase D di NOTE_RIGGING', 2)])
 
+# ================================================================ 6 · linee fotografate
+# Voci 59-69 e 71-74 di DUBBI.md, riscritte il 27/10/2026 sulle copie raddrizzate e
+# corrette nella seconda verifica dello stesso giorno (74 nuova).
+# La 70 (placchette) sta nella sezione 4, con gli ancoraggi.
+sezione('6', 'Le linee fotografate', 'Sezione 6 · il file del gruppo e le sue foto', C_FOT,
+        'Voci aperte dalle fotografie e dalle schede del file LineeBisma del gruppo '
+        '(20/10/2026). «Vicino» e «lontano» sono le colonne del file, non il lato tensione '
+        'e il lato statico. Si chiedono a chi ha compilato il file e a chi era sul posto.',
+        [(59, 'Di quale linea è la <b>sosta con il tronco</b>, 108 o 113? Il file mette '
+              'foto diverse della stessa sosta su tutte e due le righe. Si vedono un tronco con la corteccia, '
+              'coperto in parte da un\'imbottitura bianca, slinghe verdi che lo scavalcano, '
+              'una placchetta con dado e, subito accanto, un albero: non escludono né «Bisma '
+              'standard senza cavalletto + tronco» (113) né «alberi e uno spit» (108).',
+          'anfiteatro-108_01-04 · anfiteatro-113_05-07', 3),
+         (60, 'Il <b>lato di tensione</b> di ogni linea fotografata: 46, 97, 108, 113, '
+              'Despedida 60 e 70; e se il «vicino» della 53 sia il main. Nessuna foto lo '
+              'mostra. Indizi: sul lato lontano della 46 un elemento metallico con il nastro '
+              'avvolto; su 46 e 53 due elementi in calza nera che convergono su un anello '
+              'arancione; '
+              'in 53_01 due pali di legno; cavalletti su più lati.',
+          'tutte le cartelle delle foto', 4),
+         (61, '<b>Data e autore</b> di ogni foto: Excel ha tolto gli EXIF. Il cavalletto '
+              'della 113 compare in tre forme (due pali tondi d\'estate, tre pali d\'autunno, '
+              'due assi squadrate di notte), quello della 46 in due (corda color canapa '
+              'd\'autunno, forse con tre pali; fettuccia azzurra d\'estate, con due).',
+          '113_01-04, 113_08 · 46_01, 46_05', 3),
+         (62, 'La «<b>91</b>» del file è la 97 m del registro? Le sue righe sono state messe '
+              'sulla 97 per posizione.', 'LineeBisma, scheda «Elenco»'),
+         (63, 'Dove sono gli «<b>alberi e uno spit</b>» del lato lontano della 108? Le foto '
+              'della sua riga mostrano la sosta con il tronco con un albero accanto, ma né '
+              'lo spit né una braca legata all\'albero. La calza grigia e rossa che va verso '
+              'l\'interno è la «sosta molto lunga»?',
+          'anfiteatro-108 · cfr. voce 59', 3),
+         (64, 'Che cosa sono i <b>due elementi in calza nera</b> che convergono su un '
+              'anello arancione (46_01, 53_01), e che cos\'è l\'anello? Di nero si vede solo '
+              'la calza; ne escono anelli lilla e giallo-verde. Fettucce, bungee (come quelli '
+              'della 53 m del 22/08), altro? L\'etichetta «SPIDER» sta sulla protezione '
+              'infilata su uno dei due, non su ciò che è dentro la calza. '
+              'Stesso materiale, stessa stagione, stesso parcheggio sotto, e in 53_01 due '
+              'pali come il cavalletto della 46: è la stessa giornata, o la stessa sosta '
+              'messa su due righe?',
+          '46_01 · 46_02 · 53_01', 3),
+         (65, 'Sul lato lontano della 46, l\'<b>elemento metallico</b> con il nastro '
+              'bianco avvolto, da cui parte un elemento in calza nera, è un weblock? E i '
+              'due elementi verticali dietro le brache (uno di legno) sono un cavalletto? Il file '
+              'chiama quel lato «senza cavalletto».',
+          '46_03 · 46_04 · decide la voce 60 per la 46'),
+         (66, 'Despedida 70: <b>un cavalletto a tutti e due i capi?</b> Due pali sul lato '
+              'vicino (estate), tre sul lontano (autunno). Sul lontano, a che cosa è '
+              'ancorata la corda chiara doppia (70_03)? La protezione bianca attorno al masso '
+              '(70_04) è chiusa sul masso, sull\'alberello o su tutti e due?',
+          'despedida-70_01-04', 3),
+         (67, 'Despedida 60, lato lontano: che funzione ha la <b>fettuccia Gibbon</b> (una '
+              'sola o più?), che gira attorno alla base di un albero e passa accanto a tre '
+              'moschettoni sul bordo, '
+              'e la corda arancione annodata all\'albero? I bastoni incrociati accanto al '
+              'tronco sottile sono un cavalletto? Del lato vicino non c\'è nessuna foto; '
+              'l\'highliner di 60_01 è sulla 60 o sulla 70?',
+          'despedida-60_01-06 · despedida-70_02', 3),
+         (68, 'Le <b>etichette</b> alla sosta con il tronco: sulla calza di una slinga verde '
+              'una scritta che sembra «2 t», non leggibile con certezza; sulla braca viola '
+              'un\'etichetta azzurra illeggibile. <b>Foto da fare sul campo</b>, con le '
+              'etichette distese.',
+          '113_05 · 113_06 · come la voce 37'),
+         (69, 'Quale linea della foto del lato vicino della 97 è la 97? Per il ritaglio del '
+              'file è la <b>terza linea</b>, quella che parte dall\'ancoraggio in basso a '
+              'destra, non una delle due con gli highliner. E il lato lontano è sugli alberi, '
+              'sulla roccia (un moschettone su un elemento metallico, forse una placchetta) '
+              'o su tutti e due?',
+          'anfiteatro-97_03 · ritaglio del file · 97_01', 3),
+         (71, 'Gli <b>omega</b> sono elencati due volte, in «Materiale da portare» e in '
+              '«Sosta Main»: sono gli stessi pezzi o pezzi in più?',
+          'LineeBisma, «Sosta Bisma Standard», B9-B10 e B14-B15'),
+         (72, 'Le <b>parole del file</b>: a quali pezzi corrispondono «spit», «piastrine», '
+              '«delta», «omega», «slinga», «sliding x» e «BFK»? E «Bisma standard senza '
+              'cavalletto» è la stessa sosta senza il blocco «Cavalletto»? Lo schema «Bisma '
+              'standard» delle righe è la scheda «Sosta Bisma Standard»?',
+          'LineeBisma, «Sosta Bisma Standard» ed «Elenco»', 3),
+         (73, 'Che cosa misura «<b>Schetchy</b>» (colonne «Schetchy» e «Schetchy2», valori '
+              '«No» e da 2 a 5)? Che scala è, e in che verso? E le due colonne valgono per il '
+              '«vicino» e il «lontano», come dice la loro posizione?',
+          'LineeBisma, scheda «Elenco», D3 e G3'),
+         (74, 'Anfiteatro 113, lato vicino: sotto la linea c\'è una <b>seconda '
+              'linea appesa a festoni</b> (113_01, 113_03, 113_08): è il backup della linea?',
+          '113_01 · 113_03 · 113_08 · cfr. voce 55')])
+
 # ================================================================ chiusura
 sec(LINEA, 'Dopo la compilazione')
 S.append(LineHeader('', 'Riportare le risposte', 'Chiusura', LINEA))
@@ -339,10 +431,11 @@ S.append(P('Le risposte raccolte vanno riportate in <b>DUBBI.md</b>, sulla riga 
            'i tre bloccanti chiusi il 19/08/2026. Solo dopo si rigenera il manuale.', body))
 S.append(SP(14))
 S.append(callout('Le fotografie che mancano',
-                 'Due voci non si chiudono a parole: l\'etichetta di una braca (voce 37) e '
+                 'Tre voci non si chiudono a parole: l\'etichetta di una braca (voce 37), '
                  'l\'insieme dei tre punti dell\'ancoraggio, con il dispositivo di '
-                 'protezione veloce se c\'è (voce 38). Sono due scatti. Vale la pena farli '
-                 'nella stessa uscita in cui si rimisura la campata.', C_ANC))
+                 'protezione veloce se c\'è (voce 38), e le etichette alla sosta con il '
+                 'tronco (voce 68). Sono scatti. I primi due vale la pena farli nella stessa '
+                 'uscita in cui si rimisura la campata della 53 m.', C_ANC))
 S.append(SP(20))
 S.append(two_cols(campo('Compilata il', COL), campo('Compilata da', COL)))
 S.append(SP(16))
@@ -352,14 +445,14 @@ S.append(campo('Note libere', FW))
 S.append(Righe(5))
 S.append(SP(14))
 S.append(P('Scheda generata da build/build_scheda_dubbi.py sulle voci aperte di DUBBI.md. '
-           'Le voci già chiuse — B1, B2, B3, 3, 47, 48, 53, 56, M2 — non compaiono; la 55 è '
-           'dentro la 54.', small))
+           'Le voci già chiuse — B1, B2, B3, 3, 45, 47, 48, 52, 53, 56, M2 — non compaiono; '
+           'la 55 è dentro la 54.', small))
 
 # ---------------------------------------------------------------- build
 OUT.parent.mkdir(parents=True, exist_ok=True)
 doc = BaseDocTemplate(str(OUT), pagesize=A4, leftMargin=LM, rightMargin=RM,
                       topMargin=TM, bottomMargin=BM,
-                      title='Bismantova · Anfiteatro · Scheda di verifica sul campo',
+                      title='Bismantova · Scheda di verifica sul campo',
                       author='Dubbi aperti del manuale di rigging')
 frame = Frame(LM, BM, FW, H - TM - BM, id='n',
               leftPadding=0, rightPadding=0, topPadding=0, bottomPadding=0)

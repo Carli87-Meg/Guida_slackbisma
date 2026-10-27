@@ -1,7 +1,7 @@
 # Guida alle highline della Pietra di Bismantova
 
 Guida in PDF alle ventiquattro highline della Pietra di Bismantova (Castelnovo ne' Monti,
-RE), fatta per i Bismaliners. Una sola linea, l'**Anfiteatro 53 m** (sul campo «la 50»), ha
+RE), fatta per i Bismaliners. Una sola linea, **GAS-OH**, l'Anfiteatro 53 m (sul campo «la 50»), ha
 il rigging documentato da riprese e fotografie; le altre ventitré hanno una scheda di
 rilievo da compilare in parete.
 
@@ -48,9 +48,9 @@ PDF lo genera sempre il codice.
 | `build/` | Gli script che generano i PDF | sì |
 | `dati/linee.py` | Registro delle 24 linee: area, lunghezza, stato, campi del rilievo | sì |
 | `tools/` | Pipeline video e foto (vedi sotto) | sì |
-| `fonti/` | Locandina, render i-pietra: fonti esterne con i loro limiti | sì, tranne i PNG originali |
+| `fonti/` | Locandina, render i-pietra, file LineeBisma del gruppo: fonti esterne con i loro limiti | sì, tranne i PNG originali e `fonti/lineebisma/` |
 | `foto/` | Fotografie originali del 16/05 e del 22/08/2026 | no: in git vanno le copie raddrizzate di `lavorazione/foto_dritte/` |
-| `lavorazione/` | Trascrizioni, fotogrammi, foto raddrizzate e annotate, metadati | in parte: audio, frame grezzi e provini no |
+| `lavorazione/` | Trascrizioni, fotogrammi, foto raddrizzate e annotate, metadati | in parte: audio, frame grezzi e provini no; di `foto_linee/` solo i LEGGIMI, `ORIGINE.md` e `LETTURA.md`, non le immagini |
 | `output/` | I PDF | no: si rigenerano |
 | `video/`, `video_icloud/` | Le riprese del montaggio del 16/05/2026: sola lettura | no |
 | `riunioni/` | Trascrizioni delle riunioni del gruppo | **no**: solo il LEGGIMI |
@@ -58,7 +58,11 @@ PDF lo genera sempre il codice.
 | `riferimento/` | La guida della Sillschlucht e la sua scheda da campo, come modello | sì |
 
 **Il repository è pubblico.** Nomi, soldi, prezzi e questioni interne del gruppo restano
-sul disco locale: per questo `riunioni/` e `inventario/` sono esclusi in `.gitignore`.
+sul disco locale: per questo `riunioni/` e `inventario/` sono esclusi in `.gitignore`. Restano
+fuori anche il file LineeBisma del gruppo (`fonti/lineebisma/`) e le fotografie che ne
+vengono (le immagini di `lavorazione/foto_linee/`, alcune con persone riconoscibili), finché
+l'utente non decide se e quali versionare: senza di esse il build avvisa e la guida esce
+senza il capitolo «Le linee fotografate».
 
 ## Strumenti
 

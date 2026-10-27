@@ -1,5 +1,10 @@
 # -*- coding: utf-8 -*-
-"""Scheda della linea documentata: Anfiteatro, 53 m — «la 50».
+"""Scheda della linea documentata: GAS-OH, Anfiteatro 53 m, detta «la 50».
+
+Il titolo e' GAS-OH, il nome che la linea ha su SlackMap (nym-s4g): decisione D3
+dell'utente del 27/10/2026, che chiude il dubbio 45. «La 50» resta il soprannome
+del gruppo e sta nell'occhiello, con la nota sull'altra 50 m della Pietra, al
+Settore Giallo (nota N3 di DUBBI.md).
 
 Fino all'edizione dell'8 ottobre questo modulo era un capitolo intitolato alla
 giornata del 16 maggio, che raccontava il montaggio in ordine di ripresa. Il
@@ -34,8 +39,10 @@ C_SOS = LC[7]                   # sosta / slinga  (azzurro)
 C_TEN = LC[3]                   # lato tensione   (ambra)
 C_ASL = LC[5]                   # anti-slip       (verde)
 
-DC = '<font color="#B3261E">[DA CONFERMARE]</font>'
-DCC = '[DA CONF.]'
+# Spazio non separabile (U+00A0): il segno non va a capo a meta', «[DA» in fondo
+# a una riga e «CONF.]» all'inizio della dopo (p. 22, visto il 27/10/2026)
+DC = '<font color="#B3261E">[DA\u00a0CONFERMARE]</font>'
+DCC = '[DA\u00a0CONF.]'
 
 # occhiello ripetuto su ogni testata: la linea e il giorno, sempre
 GIORNO = '16/05/2026'
@@ -132,15 +139,18 @@ def parte_53():
     completo del materiale con le quantita', l'A-frame con le sue misure, quale
     lato e' quale, che cosa manca, la variante con i bungee.
     """
-    S = [Accent(C_SETTORE, 'Anfiteatro 53 m'),
+    # D3 (27/10/2026, dubbio 45 chiuso): titolo GAS-OH, «la 50» nell'occhiello;
+    # la nota sulla 50 m del Settore Giallo resta (N3).
+    S = [Accent(C_SETTORE, 'GAS-OH · Anfiteatro 53 m'),
          Segna('cap53'),
          KeepTogether([
-             TestataLinea('AN', 'Anfiteatro 53 m', 'Detta «la 50» · A-frame sul lato tensione',
-                          53, C_SETTORE),
+             TestataLinea('AN', 'GAS-OH', 'Anfiteatro 53 m · detta «la 50» · A-frame sul '
+                          'lato tensione', 53, C_SETTORE),
              SP(10),
-             P('La linea che sul campo chiamano <b>«la 50»</b>: da non confondere con la 50 m '
-               'del Settore Giallo. Come si monta una linea è descritto nella parte 2; qui c’è '
-               'com’è fatta questa.', lead)]),
+             P('<b>GAS-OH</b> è il nome che la linea ha su SlackMap; sul campo la chiamano '
+               '<b>«la 50»</b>: da non confondere con la 50 m del Settore Giallo. Come si '
+               'monta una linea è descritto nella parte 2; qui c’è com’è fatta questa.',
+               lead)]),
          SP(12)]
 
     # ------------------------------------------------ dove corre
@@ -152,7 +162,7 @@ def parte_53():
             PhotoStrip(str(fig), FW, _ow, _oh,
                        'Dove corre la 53 m nella vista i-pietra dell’Anfiteatro: '
                        'i due cerchi sono gli ancoraggi', C_SETTORE),
-            SP(4),
+            SP(8),
             # dubbio 56, chiuso il 27/10/2026: la tensione sta sopra il settore Cocoa.
             # Il render non dice quale cerchio sia quale, e la didascalia non lo inventa.
             P('L’ancoraggio di tensione è il capo nord, sopra il settore di falesia Cocoa; '
@@ -173,8 +183,11 @@ def parte_53():
             'Blocco del backup su sosta main e sosta backup',
             'A-frame: 2 pali di legno tondo sul bordo',
         ], C_TEN, coord='44.419869 · 10.412353 · 1025 m', url=MAPPA),
+        # se le placchette restino sul posto nessuna fonte lo dice: dubbio 70
         gear_block('S · Ancoraggio statico', [
-            '3 placchette su bullone',
+            # &nbsp;: «DA CONFERMARE» andava a capo a meta'
+            '3 placchette su bullone: in loco o da portare '
+            + DC.replace('DA CONFERMARE', 'DA&nbsp;CONFERMARE'),
             '1 corda verde acqua fra i punti',
             'Slinga viola e carrucola bloccante',
             '1 corda azzurra: linea vita',
@@ -196,7 +209,11 @@ def parte_53():
         SP(6),
         data_table(
             ['Qtà', 'Articolo', 'Dove si usa', 'Misura'],
-            [['n.d.', 'Slinghe viola — brache ad anello industriali', 'sosta main', DCC],
+            # placchette: viste sui tre punti il 16/05 e il 22/08; se restino sul
+            # posto o vadano portate, nessuna fonte lo dice (dubbio 70)
+            [['3', 'Placchette su bullone — in loco o da portare ' + DCC,
+              'ancoraggio statico', DCC],
+             ['n.d.', 'Slinghe viola — brache ad anello industriali', 'sosta main', DCC],
              ['n.d.', 'Corde rosa', 'sosta backup', DCC],
              ['1', 'BFK, moschettone d’acciaio grande', 'sulla corda rosa del backup', DCC],
              ['4', 'Maglie rapide delta', DCC, DCC],
@@ -218,8 +235,10 @@ def parte_53():
              ['n.d.', 'Nastro, backup della linea, leash', '—', DCC]],
             [36, 222, 142, 91], C_SETTORE)]))
     S.append(SP(14))
+    # ratio 0.28 (era 0.34): con la riga delle placchette nella tabella la foto
+    # scivolava da sola sulla pagina dopo
     S.append(foto('IMG_1360.jpg', FW, 'Il materiale steso prima del montaggio, 16 maggio 2026',
-                  C_SETTORE, ratio=0.34, focus=0.42))
+                  C_SETTORE, ratio=0.28, focus=0.42))
     S.append(PageBreak())
 
     # ------------------------------------------------ fotografie dei due lati
@@ -269,12 +288,12 @@ def parte_53():
     S.append(SP(16))
     # Dubbio 56, chiuso il 27/10/2026: risposta dell'utente («la parte sopra Cocoa»),
     # coerente con il GPS delle riprese (sosta su tre punti a 6-8 m dall'altro capo,
-    # tensionamento a 5-13 m dal main).
+    # tensionamento a 5-13 m dal main). La data della conferma sta nelle fonti
+    # (apparato), non nel testo: era cronologia (verifica «coerenza» del 27/10, punto 6).
     S.append(callout('Quale lato è quale',
                      'La tensione sta sul capo nord, sopra il settore di falesia Cocoa: '
                      'lì ci sono sosta main, sosta backup e A-frame. La sosta su tre punti è '
-                     'sul lato statico, all’altro capo. Confermato il 27 ottobre 2026, e '
-                     'coerente con il luogo in cui sono state girate le riprese del 16 maggio.',
+                     'sul lato statico, all’altro capo.',
                      C_TEN))
     S.append(SP(16))
     S.append(data_table(
@@ -309,8 +328,11 @@ def parte_53():
     # In IMG_3324-3326 una slinga viola entra nel grillo a lira (dubbio 28); se ci
     # arrivino tutte e due quelle di IMG_3329 non si vede.
     # L'utente: «il montaggio fatto quel giorno era della 53 ma con i bungee».
-    # Le placchette sono fisse e valgono per ogni montaggio; slinghe, corda verde,
-    # fettucce rosse e bungee sono di quel giorno.
+    # Slinghe, corda verde, fettucce rosse e bungee sono di quel giorno. Se le
+    # placchette restino sul posto e valgano per ogni montaggio [DA CONFERMARE]:
+    # qui prima stava scritto che sono fisse, senza fonte, mentre il file
+    # LineeBisma mette in loco «Spit e Dadi» e da portare «3 piastrine da 10 mm»
+    # (verifica del 27/10/2026, punto 10; dubbio 70).
     S.append(KeepTogether([
         P('<b>La stessa linea, montata con i bungee</b>', h3),
         SP(5),

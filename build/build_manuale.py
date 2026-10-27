@@ -162,7 +162,7 @@ def page_end(cv, doc):
 
 
 NUMERI = {5: 'cinque', 6: 'sei', 7: 'sette', 8: 'otto', 9: 'nove', 10: 'dieci',
-          11: 'undici', 12: 'dodici'}
+          11: 'undici', 12: 'dodici', 13: 'tredici', 14: 'quattordici', 15: 'quindici'}
 
 
 def FONTI():
@@ -173,27 +173,41 @@ def FONTI():
     mano, e aggiungere una fonte lo avrebbe smentito.
     """
     return [
-        ['42 video del montaggio', 'Sequenza delle operazioni e manovre viste a mano, '
-         'per la sola 53 m', '16/05/2026'],
-        ['19 fotografie', 'Ancoraggio, ferramenta con marcature leggibili, linea montata',
+        # descrizioni su una riga: con le fonti del 27/10 la pagina traboccava
+        ['42 video del montaggio', 'Sequenza e manovre viste a mano, sulla sola 53 m',
+         '16/05/2026'],
+        ['19 fotografie', 'Ancoraggio, ferramenta e marcature, linea montata',
          '16/05/2026'],
         ['Locandina «La Pietra»', 'Le cinque aree e le ventiquattro linee', 'non datata'],
         ['Catalogo i-pietra (snapshot)', 'Settore, tipo di roccia, prima ricognizione',
          '05/08/2026'],
-        ['Render 3D i-pietra', 'Viste dei cinque settori, copertura reale del catalogo',
+        # render del 20/08: 22 linee; la 20 m e la 108 m entrano in i-pietra il 21/08
+        ['Render 3D i-pietra', 'Viste dei cinque settori, con 22 linee tracciate',
          '20/08/2026'],
         ['Risposte di chi ha montato', 'Luogo, tipo di ancoraggio, nome di lavoro',
          '19/08/2026'],
-        ['Panoramica i-pietra, settori segnati a mano', 'Posizione e ordine dei cinque '
-         'settori lungo la cresta', '21/08/2026'],
+        ['Panoramica i-pietra annotata', 'Posizione e ordine dei settori, segnati a mano',
+         '21/08/2026'],
         ['Fotografie del 22 agosto', 'L’altro capo della 53 m, montata con i bungee',
          '22/08/2026'],
         ['Posizione GPS di foto e video', 'Su quale capo è stata girata ogni ripresa',
          'letta il 27/10/2026'],
-        ['Conferma del lato di tensione', 'Il capo sopra il settore di falesia Cocoa',
+        # lato di tensione: dubbio 56; GAS-OH: decisione D3, dubbio 45; Anfite-altro:
+        # decisione D4, dubbio 52
+        ['Risposte e scelte dell’utente', 'Lato di tensione; titolo GAS-OH; «Anfite-altro»',
          '27/10/2026'],
-        ['LineeBisma.xlsx (file del gruppo)', 'Schemi proposti e 31 fotografie delle soste di sei '
-         'linee, tutto «da controllare»', '20/10/2026'],
+        # SlackMap: la mappa delle slackline dell'International Slackline Association.
+        # La 113 m: la scheda della «Brifing» descrive gli ancoraggi (dubbio 39).
+        ['SlackMap', 'Il nome della 53 m, GAS-OH; gli ancoraggi della 113 m',
+         'letta il 27/10/2026'],
+        # catalogo i-pietra al 21/10/2026, letto il 27/10: dubbio 53
+        ['Catalogo i-pietra', 'Le linee censite: tutte e 24', '21/10/2026'],
+        # 31 foto: 46 (5), 53 (1), 97 (3), 108 (4), 113 (8), Despedida 60 (6) e 70 (4),
+        # lette il 27/10/2026 (lavorazione/foto_linee/<id>/LETTURA.md). A quale linea
+        # vada ogni foto lo dice la sua riga nel file: «sulle righe di», non «di».
+        # D6: e' una fonte dopo un controllo con chi l'ha compilato, non ancora fatto.
+        ['LineeBisma.xlsx (file del gruppo)', 'Schemi proposti e 31 fotografie sulle righe '
+         'di sette linee, soste e linee montate: tutto «da controllare»', '20/10/2026'],
     ]
 
 
@@ -347,8 +361,9 @@ def costruisci():
             ('aframe', 'L’A-frame', 'I due pali sul bordo'),
             ('smontaggio', 'Lo smontaggio', 'Da documentare')]),
         ('3', 'Le linee', LINEA, '1 linea su %d' % _c['totale'], [
-            ('cap53', 'Anfiteatro 53 m, «la 50»',
-             'Ancoraggi, materiale, A-frame, variante con i bungee')]
+            # D3 (27/10/2026): titolo GAS-OH, «la 50» resta il soprannome
+            ('cap53', 'GAS-OH · Anfiteatro 53 m',
+             'Detta «la 50». Ancoraggi, materiale, A-frame, variante con i bungee')]
             + ([('fotografate', 'Le linee fotografate',
                  '%d linee viste nelle foto del gruppo: che cosa si vede, che cosa manca'
                  % len(fotografate()))] if fotografate() else [])),
@@ -402,7 +417,7 @@ def costruisci():
          ['Roccia', 'Arenaria', 'i-pietra, scheda di settore'],
          ['Aree con highline', '%d' % len(REG.AREE), 'locandina'],
          ['Linee censite', '%d' % _c['totale'], 'locandina'],
-         ['Di cui in i-pietra', '%d' % _c['in_ipietra'], 'render 20/08/2026'],
+         ['Di cui in i-pietra', '%d' % _c['in_ipietra'], 'i-pietra, %s' % REG.IPIETRA_DATA],
          ['Rigging documentato', '%d' % _c['documentate'], 'questa guida'],
          ['Accesso e avvicinamento', '[DA CONFERMARE]', '—'],
          ['Autorizzazioni, divieti stagionali', '[DA CONFERMARE]', '—']],
@@ -432,9 +447,10 @@ def costruisci():
     # ================================================================ PARTE 3
     _n_foto = len(fotografate())
     parte(S, '3', 'Le linee', 'Una scheda per linea: dove sta, quanto è lunga, com’è '
-          'ancorata, che cosa manca. Per ora è completa quella della 53 m dell’Anfiteatro; '
+          'ancorata, che cosa manca. Per ora c’è quella di GAS-OH, la 53 m dell’Anfiteatro; '
           'le altre %d hanno una scheda di rilievo da compilare, nel fascicolo a parte%s.'
-          % (_da_fare, (', e di %d esistono fotografie delle soste, lette qui' % _n_foto)
+          % (_da_fare, (', e di %s esistono fotografie del gruppo, descritte dopo la '
+                        'scheda di GAS-OH' % NUMERI.get(_n_foto, str(_n_foto)))
              if _n_foto else ''), LINEA, voci=_voci('3'))
 
     S.extend(parte_53())
@@ -482,7 +498,9 @@ def costruisci():
                         [150, 246, 95], LINEA))
     S.append(SP(10))
     S.append(P(nota_copertura(), small))
-    S.append(SP(16))
+    # 10 e 8 invece di 16 e 12: con le fonti del 27/10 la data dell'edizione
+    # scivolava da sola su una pagina in piu'
+    S.append(SP(10))
     S.append(Rule(FW, 0.6, HAIR, 8))
     S.append(SP(10))
     S.append(P('<b>Avvertenza</b>', h3))
@@ -491,13 +509,20 @@ def costruisci():
                'già realizzato da persone esperte: non sostituisce formazione, esperienza '
                'diretta e verifica autonoma di ogni ancoraggio prima di ogni utilizzo.', lead))
     S.append(SP(10))
+    # Prima: «Le altre hanno soltanto una scheda di rilievo vuota». Dal 27/10/2026
+    # sei di quelle linee hanno anche una scheda dalle foto del gruppo (verifica, punto 8).
+    _n_ft = len(fotografate())
+    altre = ('Le altre hanno una scheda di rilievo da compilare, e %s anche fotografie '
+             'del gruppo, che non documentano il montaggio.'
+             % NUMERI.get(_n_ft, str(_n_ft)) if _n_ft else
+             'Le altre hanno soltanto una scheda di rilievo vuota.')
     S.append(P('A ciò si aggiunge un limite specifico di questa edizione. Di ventiquattro linee '
                'una sola è documentata, e lo è a partire da riprese non didattiche: contiene '
-               'numerosi dati non verificati, marcati [DA CONFERMARE]. Le altre hanno soltanto '
-               'una scheda di rilievo vuota. <b>Nessuna parte di questo documento va usata '
+               'numerosi dati non verificati, marcati [DA CONFERMARE]. ' + altre +
+               ' <b>Nessuna parte di questo documento va usata '
                'come riferimento operativo</b> finché quei campi non sono stati riempiti da '
                'chi ha eseguito il montaggio.', body))
-    S.append(SP(12))
+    S.append(SP(8))
     S.append(P('Edizione di lavoro del 27 ottobre 2026, ricostruita dalle riprese del montaggio '
                'del 16 maggio 2026. Sistema grafico ripreso dalla guida Sillschlucht.', small))
 

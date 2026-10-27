@@ -13,6 +13,7 @@ il resto del documento.
 Questo modulo non contiene dati: se una lunghezza va corretta, si corregge in
 dati/linee.py.
 """
+import re
 import sys
 from pathlib import Path
 
@@ -126,18 +127,58 @@ def _etichetta(area):
 
 
 def foto_di(l):
-    """Fotografie della linea montata, se qualcuno ne ha messe."""
+    """Fotografie della linea montata, se qualcuno ne ha messe.
+
+    La prima in ordine di nome e' la miniatura stampata: per convenzione la 01, che
+    non deve mostrare volti riconoscibili (vedi lavorazione/foto_linee/LEGGIMI.md).
+    """
     d = FOTO_LINEE / l['id']
     if not d.is_dir():
         return []
     return sorted(f for f in d.iterdir() if f.suffix in _ESTENSIONI)
 
 
+# Le jpg di lavorazione/foto_linee/ non sono in git. Un build fatto da un clone
+# pulito (la verifica del 27/10 l'ha fatto da `git archive`) le trova mancanti: le
+# linee tornano «non documentate» e il capitolo «Le linee fotografate» sparisce.
+# Prima succedeva in silenzio; ora il build lo dice, una volta sola.
+_AVVISO_DATO = False
+
+
+def foto_mancanti():
+    """Linee che dati/foto_carlo.py descrive come fotografate ma senza foto su disco."""
+    return [l['id'] for l in REG.LINEE
+            if l['stato'] != REG.DOCUMENTATA and FC.di(l['id']) is not None
+            and not foto_di(l)]
+
+
+def _avvisa_foto_mancanti():
+    global _AVVISO_DATO
+    if _AVVISO_DATO:
+        return
+    _AVVISO_DATO = True
+    mancano = foto_mancanti()
+    if not mancano:
+        return
+    print('\n*** AVVISO: mancano le fotografie di %d linee descritte in '
+          'dati/foto_carlo.py: %s.\n'
+          '*** Le jpg di lavorazione/foto_linee/ non sono in git. Senza di esse queste '
+          'linee escono come "non documentate"\n'
+          '*** e il capitolo "Le linee fotografate" NON viene stampato. Copiare le foto '
+          '(vedi lavorazione/foto_linee/LEGGIMI.md)\n'
+          '*** e rifare il build prima di diffondere il PDF.\n'
+          % (len(mancano), ', '.join(mancano)), file=sys.stderr)
+
+
 def stato_effettivo(l):
     """Stato reale: il registro dice il rigging, il disco dice le foto."""
     if l['stato'] == REG.DOCUMENTATA:
         return REG.DOCUMENTATA
-    return REG.FOTOGRAFATA if foto_di(l) else REG.NON_DOCUMENTATA
+    if foto_di(l):
+        return REG.FOTOGRAFATA
+    if FC.di(l['id']) is not None:
+        _avvisa_foto_mancanti()
+    return REG.NON_DOCUMENTATA
 
 
 def nome(l):
@@ -171,13 +212,15 @@ def tabella_settore(area):
     for l in REG.per_area(area):
         if l['stato'] == REG.DOCUMENTATA:
             lung = '<b>%d m</b>' % l['lunghezza']
-            doc = 'sì — è «la 50», scheda in questa guida'
+            # D3 (27/10/2026): nel titolo GAS-OH, «la 50» resta il soprannome
+            doc = 'sì — GAS-OH, detta «la 50»: scheda in questa guida'
             dove = rif('cap53')
         elif stato_effettivo(l) == REG.FOTOGRAFATA:
             # le foto del file mostrano la sosta, non il montaggio: la linea
             # resta da documentare, ma ha un posto nella parte 3
             lung = '%d m' % l['lunghezza']
-            doc = 'no — fotografata, %s' % rif('fotografate')
+            doc = 'no — fotografata, %s' % rif('fotografata:%s' % l['id'],
+                                                rif('fotografate'))
             dove = 'scheda %d' % numero_scheda(l)
         else:
             lung = '%d m' % l['lunghezza']
@@ -201,13 +244,17 @@ def nota_nome(area):
     il dubbio 45 la chiama l'ambiguita' piu' pericolosa del documento, perche'
     un lettore potrebbe attrezzare la linea sbagliata. Resta qui, accanto alle
     due linee che riguarda.
+
+    Decisione D3 del 27/10/2026 (dubbio 45): nel titolo la 53 m si chiama GAS-OH,
+    il nome che ha su SlackMap; «la 50» resta il soprannome del gruppo, e resta la
+    nota sull'altra 50 m della Pietra, al Settore Giallo.
     """
     if area == 'Anfiteatro':
-        return ('La 53 m è la linea che sul campo chiamano <b>«la 50»</b>: non va confusa '
-                'con la 50 m del Settore Giallo.')
+        return ('La 53 m è <b>GAS-OH</b>, la linea che sul campo chiamano <b>«la 50»</b>: '
+                'non va confusa con la 50 m del Settore Giallo.')
     if any(l['id'] in REG.COLLISIONE_NOME for l in REG.per_area(area)):
         return ('La 50 m di questo settore <b>non è «la 50»</b> documentata in questa guida: '
-                'quel nome indica la 53 m dell’Anfiteatro, a %s.' % rif('cap53'))
+                'quel nome indica GAS-OH, la 53 m dell’Anfiteatro, a %s.' % rif('cap53'))
     return None
 
 
@@ -221,22 +268,34 @@ def nota_settori():
     for area in REG.SETTORI_IN_CONFLITTO:
         ip = REG.SETTORE_IPIETRA[area]
         ls = REG.per_area(area)
-        pezzi.append('chiama «%s» anche le %d linee che la locandina mette '
-                     'sotto «%s» — %s m'
-                     % (ip, len(ls), area,
+        # D4 (27/10/2026). L'etichetta «Anfiteatro» e' quella dei render del 20/08:
+        # nel catalogo, al 21/10, le tre linee hanno nomi propri e stanno nel settore
+        # anfiteatro (verifica «fonti» del 27/10, punto 4). Prima la frase diceva
+        # «il catalogo etichetta», al presente.
+        pezzi.append('nei render i-pietra del %s le %d linee che la locandina mette '
+                     'sotto «%s» — %s m — sono etichettate «%s», e nel catalogo stanno nel '
+                     'settore %s'
+                     % (REG.RENDER_DATA, len(ls), area,
                         ', '.join(str(l['lunghezza']) for l in ls[:-1])
-                        + ' e ' + str(ls[-1]['lunghezza'])))
+                        + ' e ' + str(ls[-1]['lunghezza']), ip, ip))
     assenti = REG.aree_assenti_da_ipietra()
     if assenti:
-        pezzi.append('non registra %s' % ' né '.join('<b>%s</b>' % a for a in assenti))
-    # il nome del catalogo e' minuscolo per convenzione: la frase parte da
-    # «Il catalogo» cosi' nessuna maiuscola automatica lo storpia
-    testo = ('Il catalogo i-pietra ' + ', e '.join(pezzi) if pezzi
-             else 'Le due fonti coincidono')
+        pezzi.append('il catalogo i-pietra non registra %s'
+                     % ' né '.join('<b>%s</b>' % a for a in assenti))
+    # i-pietra e' minuscolo per convenzione: la frase comincia con un'altra parola,
+    # cosi' nessuna maiuscola automatica lo storpia
+    testo = ('; '.join(pezzi) if pezzi else 'le due fonti coincidono')
+    testo = testo[0].upper() + testo[1:]
+    # Decisione D4 del 27/10/2026 (dubbio 52): vale il nome della locandina.
+    scelta = ''
+    if REG.SETTORI_IN_CONFLITTO:
+        scelta = (' In questo manuale vale il nome della locandina: %s.'
+                  % ', '.join('<b>«%s»</b>' % a for a in REG.SETTORI_IN_CONFLITTO))
+    # D3 (27/10/2026): la 53 m ha anche un nome proprio, GAS-OH, nel titolo
     return (testo + '. Chi cerca una linea partendo dall\'app e '
-            'chi parte dalla locandina può quindi finire in due posti diversi. Finché non '
-            'è chiarito, in questo manuale ogni linea è nominata <b>settore più '
-            'lunghezza</b>, mai con la lunghezza da sola.')
+            'chi parte dalla locandina può quindi finire in due posti diversi.' + scelta +
+            ' Ogni linea è nominata con <b>settore e lunghezza</b> — la 53 m anche con il '
+            'suo nome, GAS-OH — mai con la lunghezza da sola.')
 
 
 ALTEZZA_PAGINA = H - TM - BM
@@ -341,12 +400,25 @@ def pagina_settore(area, k):
     if f:
         with _PILImage.open(f) as im:
             ow, oh = im.size
-        censite = sum(1 for l in ls if l['in_ipietra'])
+        # sul render, non in i-pietra: la 20 m e la 108 m sono entrate nel catalogo
+        # il giorno dopo i render (dubbio 53, aggiornato il 27/10/2026)
+        tracciate = sum(1 for l in ls if l['sul_render'])
         cap = ('%s · %d linee tracciate sul render, %d censite sulla locandina'
-               % (_etichetta(area), censite, len(ls)))
+               % (_etichetta(area), tracciate, len(ls)))
         if area in REG.SETTORI_IN_CONFLITTO:
-            cap += ' · etichettate «%s» in i-pietra' % REG.SETTORE_IPIETRA[area]
-        blocco += [PhotoStrip(str(f), FW, ow, oh, cap, col), SP(16)]
+            # l'etichetta e' quella del render (D4), non il nome nel catalogo
+            cap += ' · con l’etichetta «%s»' % REG.SETTORE_IPIETRA[area]
+        blocco.append(PhotoStrip(str(f), FW, ow, oh, cap, col))
+        dopo = [l['lunghezza'] for l in ls if l['in_ipietra'] and not l['sul_render']]
+        if dopo:
+            # Sotto la foto, non nella didascalia: PhotoStrip la scrive su una riga
+            # sola, e con questa frase in coda usciva dal margine destro (p. 6,
+            # visto il 27/10/2026).
+            frase = ('%s %s in i-pietra dopo il render.'
+                     % (' e '.join('la %d m' % m for m in dopo),
+                        'sono entrate' if len(dopo) > 1 else 'è entrata'))
+            blocco += [SP(5), P(frase[0].upper() + frase[1:], small)]
+        blocco.append(SP(16))
     else:
         blocco += [P('Di questo settore non c’è un render i-pietra.', small), SP(10)]
     blocco.append(tabella_settore(area))
@@ -372,11 +444,11 @@ def parte_catalogo():
          LineHeader('', 'Le linee della Pietra', 'Catalogo · cinque aree', LINEA),
          SP(10),
          P('La locandina «La Pietra — Yeah Vez!» censisce <b>%d linee</b> distribuite su '
-           'cinque aree, e il catalogo i-pietra ne registra <b>%d</b>. Una sola — la %d m '
-           'dell’Anfiteatro — è documentata: la sua scheda è a %s, e il metodo con cui è '
-           'montata è nella parte 2.'
-           % (c['totale'], c['in_ipietra'], REG.documentate()[0]['lunghezza'],
-              rif('cap53')), lead),
+           'cinque aree, e il catalogo i-pietra ne registra <b>%d</b> al %s. Una sola — la '
+           '%d m dell’Anfiteatro, GAS-OH — è documentata: la sua scheda è a %s, e il metodo '
+           'con cui è montata è nella parte 2.'
+           % (c['totale'], c['in_ipietra'], REG.IPIETRA_DATA,
+              REG.documentate()[0]['lunghezza'], rif('cap53')), lead),
          SP(12)]
 
     # la vista d'insieme apre il capitolo: i render per settore mostrano una
@@ -448,38 +520,82 @@ def _virgolette(t):
     return '«%s»' % t if t else '—'
 
 
-def _righe_carlo(l, ds):
-    """Che cosa dice il file e che cosa mostrano le foto, lato per lato.
+# «[DA CONFERMARE]» e «[DA CONFERMARE: …]» in rosso, come nel resto della guida
+_DC = re.compile(r'\[DA CONFERMARE[^\]]*\]')
 
-    Le due fonti restano distinte in ogni riga: lo schema del file fra
-    virgolette, la lettura della foto dopo «foto:». Dove una delle due manca,
-    la riga lo dice con un trattino invece di tacere.
+
+def _dc(t):
+    # «DA CONFERMARE» non va a capo a meta'
+    return _DC.sub(lambda m: '<font color="#%s">%s</font>'
+                   % (WARN.hexval()[2:],
+                      m.group(0).replace('DA CONFERMARE', 'DA&nbsp;CONFERMARE')), t)
+
+
+def _righe_file(l, ds, miniatura=None):
+    """Che cosa dice il file e che cosa si vede nelle sue foto, colonna per colonna.
+
+    Le due fonti restano distinte in ogni riga: le parole del file fra virgolette,
+    la descrizione delle foto dopo «nelle foto». Dove una delle due manca, la riga
+    lo dice invece di tacere. Niente numeri di dubbio, niente percorsi: i rimandi
+    stanno nei commenti di dati/foto_carlo.py. `miniatura` e' la colonna da cui
+    viene la foto stampata ('vicino', 'lontano', 'fuori'): quella riga lo dice.
     """
     c = FC.di(l['id'])
     if c is None:
         return []
+    qui = ' (in miniatura)'
     righe = []
-    for lato, chiave in (('vicino', 'vicino'), ('lontano', 'lontano')):
-        schema = c[chiave]
-        # lo schema del file e' un nome fra quelli della sua scheda, oppure una
-        # frase sua: la frase si stampa com'e', il nome con la glossa «schema»
-        detto = (('schema %s' % _virgolette(schema)) if schema in FC.SCHEMI
+    for lato in ('vicino', 'lontano'):
+        schema = c[lato]
+        # le parole del file sono un nome di schema oppure una frase sua: la frase
+        # si stampa com'e', il nome con la glossa «schema»
+        detto = (('schema %s' % _virgolette(schema)) if schema in FC.NOMI_SCHEMA
                  else _virgolette(schema))
-        visto = c['foto_' + chiave]
-        righe.append(Paragraph(
-            '<b>Lato %s</b> · file: %s · foto: %s' % (lato, detto, visto or '—'), ds))
+        visto = c['foto_' + lato] or 'nessuna foto'
+        righe.append(Paragraph(_dc('<b>Lato «%s»</b>%s · nel file: %s · nelle foto: %s.'
+                                   % (lato, qui if miniatura == lato else '', detto,
+                                      visto)), ds))
+    # foto sulla riga della linea ma fuori dalle colonne dei lati (la 108): prima
+    # finivano tutte sotto «lontano» senza dirlo
+    if c.get('foto_fuori'):
+        righe.append(Paragraph(_dc('<b>Fuori dalle colonne dei lati</b>%s · nelle foto: %s.'
+                                   % (qui if miniatura == 'fuori' else '',
+                                      c['foto_fuori'])), ds))
+    # Prima difficolta' e persone uscivano solo se c'erano note: una riga con
+    # Schetchy ma senza note (nel file, la despedida-165) le avrebbe perse.
+    s_v, s_l = c['schetchy']
+    p_v, p_l = c['persone']
+    pezzi = []
     if c['note']:
-        d_v, d_l = c['difficolta']
-        p_v, p_l = c['persone']
-        righe.append(Paragraph(
-            '<b>Note del file</b> · %s · difficoltà %s / %s · persone %s / %s'
-            % (_virgolette(c['note']), d_v or '—', d_l or '—',
-               _virgolette(p_v), _virgolette(p_l)), ds))
-    if c['confronto']:
-        righe.append(Paragraph('<b>Confronto</b> · %s.' % c['confronto'], ds))
-    righe.append(Paragraph(
-        '<b>Manca</b> · <font color="#%s">%s</font>.' % (WARN.hexval()[2:], c['manca']), ds))
+        pezzi.append('note %s' % _virgolette(c['note']))
+    if s_v or s_l:
+        pezzi.append('Schetchy&nbsp;(dal&nbsp;file) %s / %s' % (s_v or '—', s_l or '—'))
+    if p_v or p_l:
+        pezzi.append('persone %s / %s' % (_virgolette(p_v), _virgolette(p_l)))
+    if pezzi:
+        righe.append(Paragraph('<b>Dal file</b> · %s.' % ' · '.join(pezzi), ds))
+    righe.append(Paragraph(_dc('<b>%s</b> · %s.' % (FC.DC, c['da_confermare'])), ds))
     return righe
+
+
+def _lato_miniatura(f):
+    """Di quale colonna del file e' una foto, dal nome <linea>_<NN>_<lato>_<soggetto>:
+    'vicino', 'lontano', 'fuori' (lato-nd) o None."""
+    parti = f.stem.split('_')
+    lato = parti[2] if len(parti) > 2 else ''
+    if lato in ('vicino', 'lontano'):
+        return lato
+    return 'fuori' if lato == 'lato-nd' else None
+
+
+# Altezza della miniatura rispetto alla larghezza, nelle schede delle linee
+# fotografate: basta a riconoscere la sosta, e lascia stare due righe di schede
+# in una pagina. 0.34 e interlinea 10.5 (erano 0.40 e 11.0) dalla seconda verifica del
+# 27/10: con le letture corrette le schede della 108 e della 113 non stavano piu'
+# sotto quelle della 46 e della 97, e il capitolo passava da tre a quattro pagine
+# semivuote.
+RAPPORTO_MINIATURA = 0.34
+INTERLINEA_SCHEDA = 10.5
 
 
 def scheda_fotografata(l):
@@ -494,21 +610,28 @@ def scheda_fotografata(l):
     ts = ParagraphStyle('fn', fontName='Pop-B', fontSize=11, leading=14)
     fs_ = ParagraphStyle('ff', fontName='Pop-M', fontSize=7, leading=10,
                          textColor=MUT)
-    ds = ParagraphStyle('fd', fontName='Lora', fontSize=8.2, leading=11.4,
-                        textColor=INK2, spaceBefore=3)
+    ds = ParagraphStyle('fd', fontName='Lora', fontSize=8.2, leading=INTERLINEA_SCHEDA,
+                        textColor=INK2, spaceBefore=2.5)
     with _PILImage.open(fs[0]) as im:
         ow, oh = im.size
     conta = '%d fotografie' % len(fs) if len(fs) > 1 else '1 fotografia'
-    # ratio 0.54: a 0.62 l'introduzione del capitolo e la prima riga di schede
-    # non stavano nella stessa pagina, e la pagina d'apertura restava vuota
-    inner = [[PhotoStrip(str(fs[0]), COL - 22, ow, oh, None, col, 0.54, 0.5)],
+    # ratio: a 0.62 l'introduzione del capitolo e la prima riga di schede non
+    # stavano nella stessa pagina; a 0.54 due righe di schede non stavano in una
+    # pagina, e le pagine del capitolo restavano vuote per il 40% (verifica del
+    # 27/10, punto 24). Vedi RAPPORTO_MINIATURA.
+    inner = [[PhotoStrip(str(fs[0]), COL - 22, ow, oh, None, col,
+                         RAPPORTO_MINIATURA, 0.5)],
              [SP(6)],
              [Paragraph(nome(l), ts)],
-             [Paragraph('%s · LINEEBISMA.XLSX, 20/10/2026 · DA CONTROLLARE'
-                        % conta.upper(), fs_)]]
-    inner += [[r] for r in _righe_carlo(l, ds)]
-    inner.append([Paragraph('<b>Rigging non documentato</b>: le foto mostrano la sosta, '
-                            'non come è stata montata.', ds)])
+             # spazi indivisibili: «DA CONTROLLARE» andava a capo spezzato
+             [Paragraph('%s · FILE&nbsp;LINEEBISMA · DA&nbsp;CONTROLLARE'
+                        % conta.upper().replace(' ', '&nbsp;'), fs_)]]
+    # la riga del lato da cui viene la miniatura lo dice: il testo parte sempre dal
+    # «vicino», e tre miniature su sei sono del «lontano» (verifica «coerenza» del
+    # 27/10, punto 4)
+    inner += [[r] for r in _righe_file(l, ds, _lato_miniatura(fs[0]))]
+    # «Rigging non documentato» vale per tutte: lo dice una volta l'introduzione
+    # del capitolo, e la scheda guadagna due righe
     it = Table(inner, colWidths=[COL - 22])
     it.setStyle(TableStyle([('LEFTPADDING', (0, 0), (-1, -1), 0),
                             ('RIGHTPADDING', (0, 0), (-1, -1), 0),
@@ -521,8 +644,8 @@ def scheda_fotografata(l):
                            ('LINEBEFORE', (0, 0), (0, 0), 3, col),
                            ('LEFTPADDING', (0, 0), (-1, -1), 12),
                            ('RIGHTPADDING', (0, 0), (-1, -1), 10),
-                           ('TOPPADDING', (0, 0), (-1, -1), 10),
-                           ('BOTTOMPADDING', (0, 0), (-1, -1), 11),
+                           ('TOPPADDING', (0, 0), (-1, -1), 9),
+                           ('BOTTOMPADDING', (0, 0), (-1, -1), 9),
                            ('VALIGN', (0, 0), (-1, -1), 'TOP')]))
     t.hAlign = 'LEFT'
     return t
@@ -579,17 +702,26 @@ def scheda_rilievo(l, primo_di_area=False):
         note.append('Non compare nel catalogo i-pietra: esiste sulla locandina, '
                     'ma nell’app non c’è.')
     if l['settore'] in REG.SETTORI_IN_CONFLITTO:
-        note.append('i-pietra la etichetta <b>Anfiteatro</b>, la locandina '
-                    '<b>Anfite-altro</b>: due nomi per lo stesso posto.')
+        # D4: l'etichetta e' quella dei render del 20/08, non del catalogo di oggi
+        note.append('Nei render i-pietra del %s è etichettata <b>%s</b>, sulla locandina '
+                    'sta sotto <b>%s</b>: due nomi per lo stesso posto. Qui vale quello '
+                    'della locandina.'
+                    % (REG.RENDER_DATA, REG.SETTORE_IPIETRA[l['settore']], l['settore']))
     if l['id'] in REG.COLLISIONE_NOME:
         note.append('<b>Attenzione al nome:</b> anche l’Anfiteatro ha una linea '
-                    'chiamata «la 50». Citare sempre il settore.')
+                    'chiamata «la 50» (GAS-OH, 53 m). Citare sempre il settore.')
     if stato_effettivo(l) == REG.FOTOGRAFATA:
         # chi va a rilevare deve sapere che le soste sono gia' state fotografate:
         # la foto non compila la scheda, ma dice che cosa aspettarsi
-        note.append('Esistono <b>%d fotografie</b> delle soste (file LineeBisma, 20/10/2026), lette '
-                    'nella guida al capitolo «Le linee fotografate»: non documentano il '
-                    'montaggio, e il lato di tensione resta da dichiarare.' % len(foto_di(l)))
+        note.append('Esistono <b>%d fotografie</b> della linea montata (file LineeBisma del '
+                    'gruppo), descritte nella guida al capitolo «Le linee fotografate»: non '
+                    'documentano il montaggio, e il lato di tensione resta da dichiarare.'
+                    % len(foto_di(l)))
+        # la sosta con il tronco sta sulle righe di 108 e 113: chi va a rilevare la
+        # cercherebbe sul capo sbagliato (DUBBI 59)
+        c = FC.di(l['id'])
+        if c and c.get('nota_rilievo'):
+            note.append(_dc(c['nota_rilievo']))
 
     testa = [[Paragraph(nome(l), ts)], [Paragraph(fonte, fs)]]
     if note:
@@ -699,13 +831,26 @@ def parte_rilievi():
     (build/build_schede_rilievo.py). La guida le cita per numero.
     """
     da = REG.da_documentare()
+    # Prima: «Di queste linee si conoscono soltanto settore e lunghezza… nessun
+    # fotogramma», smentito dalle schede con le foto dello stesso fascicolo
+    # (verifiche «fonti» e «coerenza» del 27/10).
+    fot = sorted(numero_scheda(l) for l in da if stato_effettivo(l) == REG.FOTOGRAFATA)
+    if fot:
+        conosciuto = ('Di %d di queste linee si conoscono soltanto settore e lunghezza di '
+                      'catalogo: nessuna ripresa, nessuna trascrizione, nessun fotogramma. '
+                      'Di %d (schede %s) esistono anche fotografie del gruppo, che mostrano '
+                      'la linea montata ma non documentano il montaggio.'
+                      % (len(da) - len(fot), len(fot),
+                         ', '.join(str(n) for n in fot[:-1]) + ' e ' + str(fot[-1])))
+    else:
+        conosciuto = ('Di queste linee si conoscono soltanto settore e lunghezza di '
+                      'catalogo: nessuna ripresa, nessuna trascrizione, nessun fotogramma.')
     S = [Accent(LINEA, 'Introduzione'),
          Segna('rilievi'),
          LineHeader('', 'Schede di rilievo', 'Le %d linee ancora da documentare'
                     % len(da), LINEA),
          SP(10),
-         P('Di queste linee si conoscono soltanto settore e lunghezza di catalogo: '
-           'nessuna ripresa, nessuna trascrizione, nessun fotogramma. Ogni scheda è un '
+         P(conosciuto + ' Ogni scheda è un '
            '<b>modulo da compilare sul posto</b>, con i campi che per la 53 m '
            'dell’Anfiteatro sono stati ricavati dalle riprese e quelli che anche per '
            'quella linea restano aperti.', lead),
@@ -791,14 +936,42 @@ def fotografate():
             if l['settore'] == area and stato_effettivo(l) == REG.FOTOGRAFATA]
 
 
+def tabella_scheda_sosta():
+    """La scheda «Sosta Bisma Standard» del file, blocco per blocco, con le sue parole.
+
+    Prima la guida ne stampava un riassunto: gli omega elencati due volte erano
+    contati una volta sola, «Dadi» e «Cavalletto» sparivano, «senza cavalletto»
+    era definito per deduzione e i termini del file erano tradotti in quelli della
+    guida. Ora si stampano le celle; cio' che la scheda lascia aperto si dice sotto,
+    con [DA CONFERMARE].
+    """
+    righe = []
+    for blocco, celle in FC.SCHEDA_SOSTA:
+        # una cella per voce; due celle sulla stessa riga del file (B20, C20)
+        # restano due virgolettati affiancati
+        voci = [' '.join(_virgolette(x) for x in riga) for riga in celle]
+        righe.append([Paragraph('<b>%s</b>' % blocco, td),
+                      Paragraph(' · '.join(voci), td)])
+    return data_table(['Blocco del file', 'Celle, con le parole del file'],
+                      righe, [118, FW - 118], color=LINEA)
+
+
 def parte_fotografate():
     """Capitolo della parte 3: le linee fotografate dal gruppo, una scheda ciascuna.
 
     Prima queste schede non uscivano in nessun PDF: parte_segnaposti() non e'
     richiamata dal manuale dalla revisione su Figma. Le foto del file LineeBisma
-    (27/10/2026) mostrano le soste di sei linee: troppo per tacerle, troppo poco
-    per una scheda come quella della 53 m. Stanno qui, dopo la 53 m, con la
-    stessa regola: la foto dice che cosa c'e', non come si monta.
+    sono di sette linee, soste e linee montate; sei non hanno altra
+    documentazione (la settima e' la 53 m, che ha la sua scheda e il build qui
+    non la mostra): troppo per tacerle, troppo poco per una scheda
+    come quella della 53 m. Stanno qui, dopo la 53 m, con la stessa regola: la
+    foto dice che cosa c'e', non come si monta.
+
+    Correzioni del 27/10/2026 (verifica, punti 10-19, 24): niente cronologia,
+    percorsi del repository o numeri di dubbio nel testo stampato; [DA CONFERMARE]
+    al posto di «Manca»; la provenienza in una riga; la scheda del file trascritta
+    cella per cella. La provenienza nel dettaglio sta nell'apparato (fonti) e nei
+    LETTURA.md di ogni cartella.
     """
     ls = fotografate()
     if not ls:
@@ -809,26 +982,41 @@ def parte_fotografate():
          LineHeader('', 'Le linee fotografate', 'Le linee · %d schede dalle foto del gruppo'
                     % n, LINEA),
          SP(10),
-         P('Di <b>%d linee</b> esistono fotografie delle soste, raccolte nel file del gruppo '
-           '<b>LineeBisma.xlsx</b> (20/10/2026), una riga per linea e una colonna per lato. '
-           'Il file è segnato tutto <b>«da controllare»</b>: schemi, difficoltà, persone e '
-           'note sono proposte, non rilievi. Le foto sono state lette una per una il '
-           '%s: in ogni scheda la riga «foto» dice solo ciò che si vede.'
-           % (n, FC.DATA_LETTURA), lead),
+         P('Di <b>%d linee</b> esistono fotografie delle soste e della linea montata, '
+           'raccolte in un file del gruppo con una riga per linea e una colonna per lato, '
+           'insieme a schemi, note e valori che il file stesso segna <b>«da '
+           'controllare»</b>: sono proposte, non rilievi. Nessuna di queste linee ha il '
+           '<b>rigging documentato</b>: le foto mostrano la sosta, non come è stata montata. '
+           'Ogni scheda tiene distinte le due cose, che cosa dice il file e che cosa si vede '
+           'nelle foto; ciò che le foto non mostrano senza dubbi è marcato %s.'
+           % (n, _dc(FC.DC)), lead),
+         SP(6),
+         # la data di lettura (FC.DATA_LETTURA) sta nei LETTURA.md e nell'apparato:
+         # qui era cronologia (verifica «coerenza» del 27/10, punto 6)
+         P('Fonte: file LineeBisma del gruppo (20/10/2026) e le sue fotografie, senza '
+           'data.', small),
          SP(8),
-         callout('«Vicino» e «lontano» sono i lati del file',
+         callout('«Vicino» e «lontano» sono le colonne del file',
                  'Non sono il lato tensione e il lato statico della guida: quale sia quale '
                  'non lo dice nessuna foto, ed è il primo dato da chiedere a chi ha '
-                 'montato. Nessuna misura è letta a occhio; la data delle foto non è nota.',
+                 'montato. Le coppie di valori stanno nell’ordine delle colonne, prima '
+                 'quella accanto a «vicino», poi quella accanto a «lontano»: che valgano per '
+                 'quel lato lo dice solo la posizione. Che cosa misuri «Schetchy» il file '
+                 'non lo dice. Nessuna misura è letta a occhio.',
                  WARN, '!', FW, True),
-         SP(8),
-         P('<b>Gli schemi del file.</b> «Bisma standard»: %s. «Bisma standard senza '
-           'cavalletto»: %s. Il file scrive «omega» per il grillo, «delta» per la maglia '
-           'rapida, «slinga» per la braca ad anello; che cosa siano gli «spit» è il '
-           'dubbio 39.'
-           % (FC.SCHEMI['Bisma standard'], FC.SCHEMI['Bisma standard senza cavalletto']),
-           small),
-         SP(12)]
+         SP(10),
+         # che lo schema «Bisma standard» delle righe sia questa scheda lo dice solo il
+         # nome (verifica «fonti» del 27/10, punto 9; DUBBI 72)
+         P(_dc('<b>La scheda «Sosta Bisma Standard» del file</b> («%s»); che sia lo schema '
+               '«Bisma standard» delle righe lo dice il nome [DA CONFERMARE]:'
+               % FC.SCHEDA_SOSTA_TITOLO), small),
+         SP(5),
+         tabella_scheda_sosta(),
+         SP(5)]
+    # allineate a sinistra: giustificate, le righe corte si allargavano a vuoto
+    sx = ParagraphStyle('dcs', parent=small, alignment=0)
+    S += [P(_dc(t), sx) for t in FC.SCHEDA_SOSTA_DA_CONFERMARE]
+    S.append(SP(12))
     for area in REG.AREE:
         la = [l for l in ls if l['settore'] == area]
         if not la:
@@ -836,22 +1024,30 @@ def parte_fotografate():
         righe = []
         for i in range(0, len(la), 2):
             coppia = la[i:i + 2]
-            righe.append(two_cols(scheda(coppia[0]), scheda(coppia[1]))
-                         if len(coppia) == 2 else
-                         two_cols(scheda(coppia[0]), SP(1)))
-            righe.append(SP(10))
+            riga = (two_cols(scheda(coppia[0]), scheda(coppia[1]))
+                    if len(coppia) == 2 else
+                    two_cols(scheda(coppia[0]), SP(1)))
+            # il rimando di ogni linea viaggia con la sua riga di schede: le tabelle
+            # dei settori rimandano alla pagina della scheda, non all'inizio del
+            # capitolo (la 60 m e la 70 m stavano a p. 26, il rimando diceva p. 24).
+            # Una lista, non un KeepTogether: annidato in quello dell'intestazione
+            # ne gonfia l'altezza e lascia una pagina bianca.
+            righe.append([Segna('fotografata:%s' % l['id']) for l in coppia] + [riga])
         testa = Paragraph('<font name="Pop-B" size="10.5" color="#%s">%s</font>'
                           % (C_AREA[area].hexval()[2:], area.upper()),
                           ParagraphStyle('ah', fontName='Pop', leading=14))
         # l'intestazione dell'area non resta mai sola in fondo alla pagina:
         # viaggia insieme alla prima riga di schede
-        S.append(KeepTogether([testa, SP(8), righe[0]]))
-        S.extend(righe[1:])
+        S.append(KeepTogether([testa, SP(8)] + righe[0]))
+        for r in righe[1:]:
+            S.append(SP(10))
+            S.append(KeepTogether(r))
+        S.append(SP(10))
         S.append(SP(6))
-    S.append(P('Le letture complete, foto per foto, sono in '
-               '<font name="Pop">lavorazione/foto_linee/&lt;linea&gt;/LETTURA.md</font>; i '
-               'dubbi che aprono sono in DUBBI.md. Per usare queste foto come documentazione '
-               'degli ancoraggi serve che chi c’era dichiari il lato di tensione.', small))
+    # Le letture complete stanno in lavorazione/foto_linee/<linea>/LETTURA.md, i
+    # dubbi che aprono in DUBBI.md (voci 59-74): nel testo stampato non si citano.
+    S.append(P('Per usare queste foto come documentazione degli ancoraggi serve che chi '
+               'c’era dichiari il lato di tensione.', small))
     S.append(PageBreak())
     return S
 
@@ -881,7 +1077,12 @@ def tabella_aree():
 
 
 def nota_copertura():
-    """Frase sulla copertura di i-pietra, calcolata invece che trascritta."""
+    """Frase sulla copertura di i-pietra, calcolata invece che trascritta.
+
+    La copertura cambia nel tempo (dubbio 53): la frase dice a che data vale il
+    numero e quali erano i numeri prima (REG.IPIETRA_STORIA), e quante linee
+    mostrano i render che la guida stampa.
+    """
     c = REG.conteggi()
     pezzi = []
     assenti = REG.aree_assenti_da_ipietra()
@@ -901,9 +1102,23 @@ def nota_copertura():
                    'render: è segnata assente sulla fede di una ricognizione più vecchia '
                    '(dubbio 53).'
                    % ' e '.join(REG.NON_VERIFICATI))
-    return ('Delle %d linee della locandina, il catalogo i-pietra ne registra <b>%d</b>: '
-            '%s. La differenza è segnalata ma non risolta.%s'
-            % (c['totale'], c['in_ipietra'], dettaglio, incerto))
+    # La storia sta in una frase sola: quali linee siano entrate dopo i render lo
+    # dice la didascalia del render del settore, nel catalogo.
+    prima = REG.IPIETRA_STORIA[:-1]
+    storia = ''
+    if prima:
+        storia = ('; ne aveva %s' % ' e '.join(
+            '%d al %s' % (n, d) for d, n, _f in prima))
+        if any(d == REG.RENDER_DATA for d, _n, _f in prima):
+            storia += ', la data dei render stampati nel catalogo'
+    if c['in_ipietra'] == c['totale']:
+        oggi = ('Al %s il catalogo i-pietra registra <b>tutte le %d linee</b> della '
+                'locandina%s.' % (REG.IPIETRA_DATA, c['totale'], storia))
+    else:
+        oggi = ('Al %s, delle %d linee della locandina, il catalogo i-pietra ne registra '
+                '<b>%d</b>%s: %s. La differenza è segnalata ma non risolta.'
+                % (REG.IPIETRA_DATA, c['totale'], c['in_ipietra'], storia, dettaglio))
+    return oggi + incerto
 
 
 if __name__ == '__main__':

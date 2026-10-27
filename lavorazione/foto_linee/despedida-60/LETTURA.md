@@ -1,65 +1,78 @@
 # Lettura delle fotografie — despedida-60
 
 Letta il 27/10/2026 guardando le sei immagini di questa cartella (vedi `ORIGINE.md`), con
-ingrandimenti dei dettagli. Qui sta solo ciò che si vede in modo inequivocabile; il resto è
-`[DA CONFERMARE]`. Tutte le foto stanno nella colonna «Far Side» di Carlo: «lontano» è il suo
-lato, **non** il lato statico della guida. Nessuna misura è letta a occhio. Carlo chiama il
-settore «Despedita».
+ingrandimenti dei dettagli, e riletta lo stesso giorno dopo aver raddrizzato la 04, la 05 e
+la 06, che erano ancora coricate. Qui sta solo ciò che si vede in modo inequivocabile; il
+resto è `[DA CONFERMARE]`. Tutte le foto stanno nella colonna «Far Side» del file:
+«lontano» è la sua colonna, **non** il lato statico della guida. Nessuna misura è letta a
+occhio. Il file chiama il settore «Despedita». Le persone non si descrivono.
 
 ## Che cosa si vede, foto per foto
 
-**01 · linea nella nebbia** (raddrizzata il 27/10; autunno). La sosta sul bordo: una fettuccia piatta nera
-con scritta gialla, una slinga verde lime, una corda arancione con nodi, una corda
-verde-azzurra con moschettoni arancione e argento, un cordino verde annodato. La linea parte
-nella nebbia con un highliner e un backup chiaro che pende; un gruppo di persone sul prato in
-basso. Il nome del file del 27/10 dice «lato tensione»: è un'interpretazione, non un dato.
+**01 · linea nella nebbia** (raddrizzata; autunno). In primo piano, sul bordo, una sosta:
+una fettuccia piatta nera con scritta gialla, una slinga verde lime, una corda arancione con
+nodi, una corda verde-azzurra con moschettoni arancione e argento, un cordino verde
+annodato. Dalla sosta il materiale va verso la parete a sinistra, dove c'è una persona.
+Nella nebbia un highliner su una linea, con un backup che pende: **che quella linea parta da
+questa sosta non si vede**. Persone sulla cima in alto. La scena (persone sulla cima, la
+persona sulla parete) è la stessa della foto 70_02 di `despedida-70/`, forse dello stesso
+momento: l'highliner potrebbe essere sulla linea della 70 `[DA CONFERMARE]`.
 
-**02 · ancoraggio su alberi** (autunno: valle gialla, foglie a terra). Un **tronco sottile**
-scuro, con muschio, in piedi sul bordo; attorno al tronco una **protezione in tessuto azzurro
-a fantasia** con una scritta in parte leggibile — probabilmente «GIBBON» — e sopra una
-slinga verde lime; una corda arancione annodata attorno al tronco. Dalla base del tronco una
-**fettuccia piatta nera marcata «GIBBON»** in giallo scende verso destra fino a un gruppo di
-**tre moschettoni a ghiera** (azzurro, arancione, argento) e una fettuccia rosa; la corda
-arancione e una corda verde-azzurra doppia passano di lì. A destra **due pali sottili
-incrociati in alto**, uno chiaro con adesivi o nastro, uno scuro: sembrano un cavalletto
-leggero. A terra una corda grigia a matassa e slinghe verdi. Il nastro bianco parte a sinistra
-verso la nebbia.
+**02 · tronco con corde e fettuccia** (autunno: valle gialla, foglie a terra). Un **tronco
+sottile** scuro in piedi sul bordo. In alto, attorno al tronco, una protezione in tessuto
+azzurro a fantasia con una scritta in parte leggibile («…INB…», non abbastanza per una
+marca), una slinga verde lime sopra, una corda arancione annodata. Accanto, **un secondo
+tronco inclinato** e **due o tre bastoni sottili** (uno chiaro con adesivi o nastro, uno
+scuro) incrociati in alto: che cosa siano, e se formino un cavalletto, `[DA CONFERMARE]`.
+Una **fettuccia piatta nera marcata «GIBBON»** in giallo passa accanto al tronco e scende
+verso destra, **accanto a** un gruppo di **tre moschettoni a ghiera** (azzurro, arancione,
+argento) e una fettuccia rosa, e prosegue fino al bordo destro dell'immagine (si legge
+«G…»): che arrivi ai moschettoni non si vede. La corda arancione e una corda verde-azzurra
+doppia passano di lì. A
+sinistra corde arancioni e verdi e un elemento nero vanno verso la parete; un cordino
+bianco esce a sinistra. A terra una corda grigia a matassa e slinghe verdi.
 
-**03 · stretto.** Come la 02, inquadratura più stretta.
+**03 · come la 02**, quasi la stessa inquadratura.
 
-**04 · corda al tronco** (sfocata). Una corda arancione annodata attorno a un **tronco
-grosso**, orizzontale (a terra o abbattuto: non si capisce); fettuccia nera Gibbon, una calza
-verde, uno zaino.
+**04 · corda all'albero** (raddrizzata; piccola e un po' sfocata). Un **albero in piedi**,
+con la corteccia: una corda arancione annodata attorno al tronco, uno zaino appeso; alla
+base del tronco la **fettuccia nera Gibbon** con una protezione verde. A destra un
+cuscinetto grigio e oggetti rossi; a sinistra sacche. (Letta coricata, sembrava un tronco a
+terra: è un albero in piedi.)
 
-**05 · fettuccia a terra.** Fettuccia nera Gibbon con una calza rossa e un anello chiaro
-attraverso cui passa; corda arancione; un cordino bianco con tratti verdi; le gambe di due
-persone.
+**05 · fettuccia a terra** (raddrizzata). La fettuccia nera Gibbon a terra, con una
+**protezione rossa** legata con un laccio verde; accanto una corda arancione e un cordino
+bianco con tratti verdi. Le gambe di tre persone in piedi.
 
-**06 · zaini e corda a terra.** Zaini con copertura gialla e verde; la fettuccia nera Gibbon
-ancorata alla base di un tronco; una corda arancione con un nodo collegata a una corda
-bianco-arancione; un tessuto rosso.
+**06 · fettuccia alla base dell'albero** (raddrizzata). Zaini con coperture gialla e verde
+alla base di un albero; **la fettuccia nera Gibbon gira attorno alla base del tronco** e
+scende verso il basso; una corda arancione con un nodo, collegata a una corda bianca e
+arancione; un oggetto rosso.
 
 ## Riepilogo
 
-| Lato (Carlo) | Visto nelle foto | Non visibile |
+| Lato (file) | Visto nelle foto | Non visibile |
 |---|---|---|
-| lontano | **Alberi**: un tronco sottile in piedi con protezione, slinga e corda; un tronco grosso con la corda arancione; fettuccia Gibbon dal tronco ai moschettoni; forse due pali a cavalletto | Come la fettuccia Gibbon sia chiusa; se i pali siano un cavalletto; punti su roccia; il lato vicino (nessuna foto) |
+| lontano | Un tronco sottile in piedi con protezione, slinga e corda arancione; accanto un tronco inclinato e bastoni incrociati (02, 03). Fettuccia nera Gibbon (una o più): in 02 passa accanto a tre moschettoni sul bordo, in 04 e 06 gira attorno alla base di un albero grosso; una corda arancione annodata all'albero (04) | Se la fettuccia Gibbon sia una sola; che funzione abbiano fettuccia e corde; se bastoni e tronco inclinato siano un cavalletto; punti su roccia; quale linea parta dalla sosta della 01 |
 
-Materiale riconoscibile per marca: la **fettuccia piatta nera è Gibbon** (scritta leggibile in
-02, 05, 06); la protezione azzurra probabilmente anche. Il resto per forma: moschettoni a
-ghiera, slinga, corde.
+Marca leggibile: la **fettuccia piatta nera è Gibbon** (scritta leggibile in 02, 05, 06).
+Sulla protezione azzurra si legge solo «…INB…»: marca non leggibile. Il resto si riconosce
+per forma: moschettoni a ghiera, slinga, corde.
 
-## Confronto con il Foglio «Linee» (Carlo)
+## Confronto con il file (LineeBisma, 20/10/2026)
 
-Per la 60 m Carlo non ha compilato nulla oltre alla tipologia («Freestyle»): nessuno schema,
-nessuna nota. Le foto danno un dato che il Foglio non ha: **il lato lontano è su alberi**,
-con materiale Gibbon. Nessun confronto possibile.
+Per la 60 m il file ha solo la tipologia («Freestyle»): nessuno schema, nessuna nota. Le
+foto mostrano alberi, una fettuccia Gibbon e corde; che l'ancoraggio della linea sia sugli
+alberi `[DA CONFERMARE]`.
 
 ## Da confermare
 
 - `[DA CONFERMARE]` Lato di tensione.
-- `[DA CONFERMARE]` Che cosa fa la fettuccia Gibbon (collegamento? backup?) e che cosa fa la
-  corda arancione sul tronco grosso.
-- `[DA CONFERMARE]` Se i due pali sottili siano un cavalletto e di che materiale.
+- `[DA CONFERMARE]` Se l'ancoraggio sia sugli alberi; se la fettuccia Gibbon sia una sola o
+  più di una, e che cosa faccia (dall'albero grosso verso il bordo?); che cosa faccia la
+  corda arancione annodata all'albero.
+- `[DA CONFERMARE]` Se il tronco inclinato e i bastoni sottili siano un cavalletto, e di che
+  materiale.
+- `[DA CONFERMARE]` Se la linea con l'highliner della 01 sia la 60 m o la 70 m.
 - `[DA CONFERMARE]` Lato vicino: nessuna foto. Numero di alberi, misure, nodi.
 - `[DA CONFERMARE]` Data e persone (nessun EXIF; autunno).

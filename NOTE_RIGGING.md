@@ -1,4 +1,4 @@
-# Note di rigging — Highline «la 50», settore Anfiteatro, Pietra di Bismantova
+# Note di rigging — Highline «la 50» (nel titolo della guida: GAS-OH), settore Anfiteatro, Pietra di Bismantova
 
 > Documento intermedio, estratto **solo** dalle trascrizioni audio dei 28 video.
 > Ogni voce riporta la fonte `[file @ mm:ss]`. Nessun dato qui sotto è dedotto: se non è
@@ -62,7 +62,7 @@ confermi le misure. Vedi «Come proseguire» in fondo.
 
 | Voce | Valore | Fonte |
 |---|---|---|
-| Nome di lavoro | **«la 50»** — deciso dall'utente, è come la chiamano sul campo | utente 19/08/2026 |
+| Nome di lavoro | **«la 50»** — deciso dall'utente, è come la chiamano sul campo. Poi: nel titolo della guida la linea si chiama **«GAS-OH»**, il nome che ha su SlackMap; «la 50» resta il soprannome (decisione dell'utente del 27/10/2026, dubbio 45 chiuso) | utente 19/08/2026 e 27/10/2026 |
 | Settore | **Anfiteatro** ✅ | utente + locandina + i-pietra |
 | Lunghezza | `[DA CONFERMARE]` — i-pietra la registra come **53 m**, la locandina conferma una 53 M all'Anfiteatro, ma l'utente rimisurerà sui punti | i-pietra `6Y8RO09OmxOxhEZ8SKTg` + locandina |
 | Località | **Pietra di Bismantova** (Castelnovo ne' Monti, RE), settore **Anfiteatro** ✅ | utente + i-pietra |
@@ -105,6 +105,10 @@ crea un'ambiguità con una linea reale di un altro settore. Nel manuale la tengo
 come titolo nudo. Prima della pubblicazione va deciso il titolo definitivo: è l'unico punto
 in cui un lettore potrebbe attrezzare la linea sbagliata.
 
+> Poi: deciso dall'utente il 27/10/2026 (dubbio 45, chiuso). Nel titolo la linea si chiama
+> **«GAS-OH»**, il nome che ha su SlackMap; «la 50» resta il soprannome del gruppo, sempre
+> con la nota sulla 50 m del Settore Giallo.
+
 ### La locandina non coincide con i-pietra
 
 Da segnalare per quando lavoreremo sul catalogo — **qui non tocco nulla**.
@@ -125,7 +129,10 @@ Da segnalare per quando lavoreremo sul catalogo — **qui non tocco nulla**.
 
 > Poi: questo confronto vale per lo **snapshot di i-pietra del 5 agosto 2026**. I render
 > del 20/08/2026 mostrano censiti anche Settore Giallo e Despedida: **22 linee su 24**,
-> mancano solo la 20 m e la 108 m dell'Anfiteatro. Dubbio 53, chiuso.
+> mancano solo la 20 m e la 108 m dell'Anfiteatro. Dubbio 53, chiuso. E ancora dopo:
+> all'export di i-pietra del 21/10/2026 le linee sono **24 su 24**; la 20 m e la 108 m
+> risultano create il 21/08/2026. Sul nome del settore Anfite-altro ha deciso l'utente il
+> 27/10/2026: la guida usa quello della locandina (dubbio 52, chiuso).
 
 ### E scioglie i riferimenti dell'audio
 
