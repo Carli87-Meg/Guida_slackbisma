@@ -329,9 +329,13 @@ class ChipRow(Flowable):
             c.setFont('Pop-M', 6.5)
             c.drawString(x + 10, self.h - 13, lab.upper())
             c.setFillColor(INK)
-            c.setFont('Pop-M', 9)
+            # il valore si rimpicciolisce fino a 7 pt prima di essere troncato
+            corpo = 9.0
+            while stringWidth(val, 'Pop-M', corpo) > cw - 18 and corpo > 7.0:
+                corpo -= 0.5
+            c.setFont('Pop-M', corpo)
             t = val
-            while stringWidth(t, 'Pop-M', 9) > cw - 18 and len(t) > 4:
+            while stringWidth(t, 'Pop-M', corpo) > cw - 18 and len(t) > 4:
                 t = t[:-2]
             c.drawString(x + 10, 9, t)
 
@@ -402,7 +406,12 @@ class PhotoStrip(Flowable):
             c.rect(0, self.h - self.ih - 11, 16, 2, stroke=0, fill=1)
             c.setFillColor(MUT)
             c.setFont('Pop', 7.4)
-            c.drawString(22, self.h - self.ih - 13.5, self.cap)
+            # la didascalia sta su una riga: se e' piu' larga della foto si tronca
+            # con i puntini, invece di finire sopra la didascalia accanto
+            cap = self.cap
+            while stringWidth(cap, 'Pop', 7.4) > self.w - 24 and len(cap) > 4:
+                cap = cap[:-2].rstrip() + '…' if not cap.endswith('…') else cap[:-2] + '…'
+            c.drawString(22, self.h - self.ih - 13.5, cap)
 
 
 def photo_pair(p1, p2, c1, c2, ow=600, oh=900, color=None, w=FW,
@@ -643,3 +652,53 @@ class Bars(Flowable):
             cv.setFillColor(INK)
             cv.setFont('Pop-M', 8.2)
             cv.drawRightString(self.w, y + 6, '%d %s' % (v, self.unit))
+
+
+# ---------------------------------------------------------------- aggiunte 0.4
+class Checklist(Flowable):
+    """Caselle da spuntare, su una o piu' colonne.
+
+    Ripresa dalla guida Sillschlucht: serve alle schede di rilievo per le foto da
+    fare. Il testo va a capo invece di essere accorciato.
+    """
+
+    def __init__(self, items, color, w=FW, cols=2, corpo=8.4):
+        self.items, self.c, self.w, self.cols, self.corpo = items, color, w, cols, corpo
+        cw = w / cols
+        self.righe = [_a_capo(t, 'Lora', corpo, cw - 24) for t in items]
+        n_righe = (len(items) + cols - 1) // cols
+        self.alt = []
+        for r in range(n_righe):
+            gruppo = self.righe[r * cols:(r + 1) * cols]
+            self.alt.append(6 + (corpo + 3) * max(len(g) for g in gruppo))
+        self.h = sum(self.alt)
+
+    def wrap(self, aw, ah):
+        return (self.w, self.h)
+
+    def draw(self):
+        cv = self.canv
+        cw = self.w / self.cols
+        cima = self.h
+        for r, alt in enumerate(self.alt):
+            for k in range(self.cols):
+                i = r * self.cols + k
+                if i >= len(self.items):
+                    break
+                x = k * cw
+                y = cima - self.corpo - 3
+                cv.setStrokeColor(self.c)
+                cv.setLineWidth(1)
+                cv.rect(x, y - 1, 8, 8, stroke=1, fill=0)
+                cv.setFillColor(INK2)
+                cv.setFont('Lora', self.corpo)
+                for k2, riga in enumerate(self.righe[i]):
+                    cv.drawString(x + 15, y - k2 * (self.corpo + 3), riga)
+            cima -= alt
+
+
+def livello_chip(testo, colore):
+    """Etichetta piccola e colorata, per lo stato di una linea nelle tabelle."""
+    return Paragraph('<font name="Pop-M" size="7.2" color="#%s">%s</font>'
+                     % (colore.hexval()[2:], testo.upper()),
+                     ParagraphStyle('lv', fontName='Pop', leading=10))

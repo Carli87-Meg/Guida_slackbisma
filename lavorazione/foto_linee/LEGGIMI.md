@@ -21,8 +21,8 @@ python dati/linee.py --id
 ## Che cosa cambia nel manuale
 
 Una linea con almeno una fotografia passa dallo stato `non documentata` a
-**`fotografata`**: la sua scheda segnaposto mostra la miniatura e dichiara
-«montata e fotografata, rigging non documentato». Non serve toccare il codice —
+**`fotografata`**: nella pagina del suo settore compare una scheda a mezza
+colonna con la miniatura, e la tavola di stato la segna «fotografata». Non serve toccare il codice —
 basta creare la cartella e metterci dentro i file.
 
 Resta `non documentata` finché non arrivano riprese del montaggio con audio,
@@ -83,12 +83,13 @@ forma, stagione), il confronto con le parole del file, e l'elenco di ciò che re
 `[DA CONFERMARE]`. Nessuna misura è letta a occhio; il tipo di ancoraggio (alberi,
 roccia, cavalletto) si scrive solo dove la foto lo mostra senza dubbi. Le letture sono
 state rifatte il 27/10/2026 sulle copie dritte. Il riassunto che il build stampa sta
-in `dati/foto_carlo.py`: la guida mostra le sei linee fotografate nella parte 3,
-capitolo «Le linee fotografate» (una scheda per linea: che cosa dice il file e che
-cosa si vede per ciascuna colonna, e ciò che resta `[DA CONFERMARE]`), e la scheda di
-rilievo di ciascuna dice che le foto esistono. I dubbi che le foto aprono sono le voci
+in `dati/file_lineebisma.py`: ogni linea fotografata ha la sua scheda completa nella guida,
+scritta in `dati/schede/<id>.py` dalle letture di questa cartella (render con i capi,
+lati «vicino» e «lontano» del file, capi secondo SlackMap, parole del file, materiale che
+si vede, fotografie, che cosa manca); `SINTESI` resta per le linee che avranno foto ma non
+ancora una scheda. I dubbi che le foto aprono sono le voci
 59-74 di `DUBBI.md`. Chi aggiunge foto nuove a una di queste cartelle aggiorna la
-lettura e la riga in `dati/foto_carlo.py`.
+lettura e la riga in `dati/file_lineebisma.py`.
 
 ## Formato
 

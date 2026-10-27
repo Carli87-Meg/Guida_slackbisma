@@ -24,7 +24,7 @@ Il testo che finisce stampato non contiene numeri di dubbio né percorsi: i rima
 a DUBBI.md stanno in questi commenti. Il build colora di rosso ogni
 «[DA CONFERMARE…]».
 
-    import foto_carlo as FC
+    import file_lineebisma as FC
     FC.LINEE['anfiteatro-46']['vicino']        # la colonna «Near Side» del file
     FC.LINEE['anfiteatro-46']['foto_vicino']   # che cosa mostrano le sue foto
 """
@@ -113,7 +113,7 @@ LINEE = {
         'da_confermare': 'lato di tensione; numero e tipo dei punti; misure; data delle foto',
     },
     'anfiteatro-53': {
-        # Documentata: la sua scheda e' scheda_53.py, e il build non stampa questa riga.
+        # Documentata: la sua scheda e' dati/schede/anfiteatro-53.py, e il build non stampa questa riga.
         # Serve a non perdere cio' che dice il file e l'unica foto (autunno: ne' 16/05
         # ne' 22/08). I pali in basso a sinistra toccano DUBBI 64 e, senza chiuderla, 56.
         'vicino': 'Bisma standard',
@@ -261,3 +261,45 @@ LINEE = {
 def di(id_linea):
     """La voce di una linea, o None se il file non la compila e non la fotografa."""
     return LINEE.get(id_linea)
+
+
+# Sintesi per la guida: tre righe per linea su cio' che le foto mostrano, senza
+# fatti nuovi rispetto a 'foto_vicino' e 'foto_lontano' qui sopra. La guida stampa
+# questa, con la fotografia; le righe complete del file vanno nel fascicolo di
+# rilievo, dove servono a chi va a rilevare (edizione 0.4, decisione E).
+SINTESI = {
+    'anfiteatro-46': (
+        'A un capo un cavalletto di pali di legno (forse tre d’autunno [DA CONFERMARE], due '
+        'd’estate); all’altro un punto fisso su roccia: placchetta con dado e grillo a lira, '
+        'brache lilla. Due elementi in calza nera convergono su connettori e un anello '
+        'arancione: che cosa siano [DA CONFERMARE].'),
+    'anfiteatro-97': (
+        'Linee in controluce verso la torre di fronte. A un capo brache viola fra gli alberi, '
+        'riunite da un grillo, un moschettone su un elemento metallico nella roccia e un palo '
+        'legato a un tronco: se l’ancoraggio sia sugli alberi, sulla roccia o su entrambi '
+        '[DA CONFERMARE]. Il file la chiama «91»: che sia questa linea [DA CONFERMARE].'),
+    'anfiteatro-108': (
+        'La sosta con il tronco: un tronco con la corteccia, in parte imbottito e legato con '
+        'cordino viola, un albero accanto, corde e brache verso l’interno. Il file mette la '
+        'stessa sosta anche sulla riga della 113 m: di quale linea sia [DA CONFERMARE]. '
+        'D’autunno, la linea dal bordo nella nebbia.'),
+    'anfiteatro-113': (
+        'Cavalletti di legno in tre forme (due pali tondi, tre pali, due assi squadrate); la '
+        'linea verso una torre di roccia e, sotto, una seconda linea a festoni '
+        '[DA CONFERMARE: se sia il backup]. All’altro capo la sosta con il tronco, una '
+        'slinga su moschettone a ghiera e placchetta con dado.'),
+    'despedida-60': (
+        'Un tronco sottile in piedi con protezione, slinga e corda arancione; accanto un '
+        'tronco inclinato e bastoni incrociati [DA CONFERMARE: se siano un cavalletto]. Una '
+        'fettuccia «GIBBON» passa accanto a tre moschettoni sul bordo e gira attorno alla '
+        'base di un albero: se l’ancoraggio sia sugli alberi [DA CONFERMARE].'),
+    'despedida-70': (
+        'A un capo un cavalletto di due pali legati in cima; all’altro uno di tre pali, '
+        'slinghe verdi annodate a una corda doppia e una protezione bianca attorno a un '
+        'masso, fino a un alberello: a che cosa sia chiusa [DA CONFERMARE]. Le foto dei due '
+        'capi sono di stagioni diverse.'),
+}
+
+
+def sintesi(id_linea):
+    return SINTESI.get(id_linea)

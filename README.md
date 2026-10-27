@@ -15,7 +15,7 @@ finisce in [`DUBBI.md`](DUBBI.md).
 | File in `output/` | Che cos'è | Come si rifà |
 |---|---|---|
 | `Pietra_Bismantova_Highline.pdf` | La guida | `python build/build_manuale.py` |
-| `Pietra_Bismantova_Schede_Rilievo.pdf` | Le schede di rilievo delle 23 linee non documentate, da stampare | esce insieme alla guida, oppure `python build/build_schede_rilievo.py` |
+| `Pietra_Bismantova_Schede_Rilievo.pdf` | Il protocollo di rilievo, il foglio dello spot, le schede di rilievo delle 23 linee non documentate e le parole del file del gruppo sulle sei fotografate, da stampare | esce insieme alla guida, oppure `python build/build_schede_rilievo.py` |
 | `Bismantova_Dubbi_Scheda_Campo.pdf` | I dubbi aperti di `DUBBI.md`, da compilare con chi ha montato | `python build/build_scheda_dubbi.py` |
 
 Requisiti: `pip install -r requirements.txt`, e `ffmpeg` nel PATH solo per lavorare sui
@@ -25,10 +25,11 @@ video. I font (Poppins, Lora) li trova o li scarica `build/font.py`.
 
 | Parte | Contenuto | Dove sta nel codice |
 |---|---|---|
-| 1 · La Pietra | Lo spot, la panoramica dei cinque settori, il catalogo delle 24 linee | `build/build_manuale.py`, `build/schede_linee.py`, `build/panoramica_settori.py`, `dati/linee.py` |
-| 2 · Come si monta una linea | Il metodo, valido per ogni linea | `build/metodo.py` |
-| 3 · Le linee | La scheda della 53 m, modello per le altre | `build/scheda_53.py` |
-| 4 · Apparato | Glossario, fonti con le loro date, avvertenza finale | `build/build_manuale.py` |
+| Come leggere · Indice | I quattro livelli di documentazione, i marcatori, i codici delle linee, l'avvertenza, le edizioni | `build/build_manuale.py` |
+| 1 · La Pietra | Lo spot; accesso e regole, ancora vuoti; i cinque settori | `build/build_manuale.py`, `build/panoramica_settori.py` |
+| 2 · Le linee | La tavola di stato delle 24 linee; una pagina per settore con le schede complete delle sue linee (GAS-OH e le sei fotografate dal gruppo) | `build/schede_linee.py`, `build/scheda_linea.py`, `dati/linee.py`, `dati/schede/` |
+| 3 · Come si monta: il metodo Bisma | Il metodo in sei capitoli, valido per ogni linea | `build/metodo.py` |
+| 4 · Apparato | Glossario e terminologia, protocollo di rilievo, fonti con le loro date, avvertenza, colophon | `build/build_manuale.py` |
 
 Il **metodo** dice come si fa; la **scheda** dice com'è fatta quella linea (quantità,
 colori, punti, coordinate, cosa manca). Un dato che vale per una linea sola va nella sua

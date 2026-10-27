@@ -38,7 +38,7 @@ SORG = RADICE / 'fonti' / 'render_ipietra'
 DEST = RADICE / 'lavorazione' / 'panoramiche'
 _ESTENSIONI = ('.jpg', '.jpeg', '.png', '.JPG', '.JPEG', '.PNG')
 
-# colore di ogni settore, gli stessi del manuale (schede_linee.C_AREA)
+# colore di ogni settore, gli stessi del manuale (scheda_linea.C_AREA)
 COLORE_AREA = {
     'Rookie':         (31, 190, 136),
     'Settore Giallo': (163, 167, 54),

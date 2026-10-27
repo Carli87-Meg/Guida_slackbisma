@@ -35,7 +35,7 @@ Non colmare i buchi con conoscenza generica di highlining. Se la trascrizione di
 
 - `build/design.py` — sistema grafico (ReportLab): font, palette, componenti
   `LineHeader`, `ChipRow`, `gear_block`, `callout`, `data_table`, `PhotoStrip`,
-  `photo_row`, `Steps`, `Bars`, `ColorKey`, `two_cols`. È partito da `design/design.py`
+  `photo_row`, `Steps`, `Bars`, `ColorKey`, `two_cols`, `Checklist`, `livello_chip`. È partito da `design/design.py`
   (quello della Sillschlucht) ed è stato esteso per questa guida: **si modifica
   `build/design.py`**, `design/design.py` resta com'era come riferimento. Riusare i
   componenti, non riscriverli.
@@ -48,20 +48,51 @@ Non colmare i buchi con conoscenza generica di highlining. Se la trascrizione di
 
 ## Com'è fatta la guida
 
-`build/build_manuale.py` assembla quattro parti:
+`build/build_manuale.py` assembla la guida (edizione 0.4, 27/10/2026):
 
-1. **La Pietra** — lo spot, la panoramica dei settori, il catalogo delle 24 linee
-   (`schede_linee.py`, `panoramica_settori.py`, `dati/linee.py`).
-2. **Come si monta una linea** — il metodo, valido per ogni linea (`metodo.py`).
-3. **Le linee** — la scheda della 53 m (`scheda_53.py`), modello per le altre.
-4. **Apparato** — glossario, fonti con le loro date, disclaimer.
+0. **Come leggere questa guida** — i quattro livelli di documentazione (censita,
+   fotografata, rilevata, documentata), i due marcatori, i codici delle linee,
+   l'avvertenza, le edizioni. Poi l'indice.
+1. **La Pietra** — lo spot; accesso e regole, presenti e dichiaratamente vuoti; i cinque
+   settori sulla vista d'insieme (`panoramica_settori.py`).
+2. **Le linee** — la tavola di stato delle 24 linee, poi una pagina per settore
+   nell'ordine della cresta, seguita dalle schede complete delle sue linee che hanno un
+   file di dati: oggi GAS-OH e le sei fotografate dal gruppo. Nessuna scheda per le
+   censite (`schede_linee.py`, `scheda_linea.py`, `dati/linee.py`, `dati/schede/<id>.py`).
+   Una scheda mostra solo le sezioni con dati: dove corre sul render i-pietra con i capi
+   cerchiati, i due lati (con i nomi del file, «vicino» e «lontano», finché nessuno
+   dichiara quale sia quello di tensione), i capi secondo SlackMap, le parole del file
+   del gruppo, il materiale che si vede, le fotografie, che cosa manca.
+3. **Come si monta: il metodo Bisma** — sei capitoli, validi per ogni linea
+   (`metodo.py`). Niente regole generiche di highlining a colmare i vuoti: ciò che il
+   gruppo non ha detto sta nel capitolo 6, come domanda.
+4. **Apparato** — glossario e terminologia, protocollo di rilievo, fonti con le loro
+   date, avvertenza, colophon.
+
+**I dati stanno in un posto solo.** Il registro `dati/linee.py` ha settore, codice
+(`AN-4`: sigla del settore e numero d'ordine sulla locandina), nome SlackMap, lunghezza
+di catalogo; il **livello** di una linea non si dichiara, si calcola da ciò che esiste.
+`dati/slackmap.py` è generato da `tools/06_slackmap.py` dall'API pubblica di SlackMap
+(nome, lunghezza del segmento disegnato, coordinate dei due capi, per tutte e 24 le
+linee): le coordinate **non sono misurate**, sulla 53 m scartano di 10-19 m dal GPS del
+telefono, e la guida lo dichiara ogni volta che le stampa. Tutto ciò che è proprio di una linea (coordinate, ancoraggi,
+materiale, A-frame, varianti, che cosa manca) sta in `dati/schede/<id>.py`, e
+`build/scheda_linea.py` lo impagina mostrando solo le sezioni con dati: documentare una
+linea nuova significa scrivere il suo file di dati, non toccare il build. Il file del
+gruppo LineeBisma è trascritto in `dati/file_lineebisma.py`.
+
+**Due marcatori**, spiegati in «Come leggere»: `[DA CONFERMARE]` in rosso per un dato
+incerto o contraddetto da un'altra fonte; «da rilevare» in grigio, o la cella vuota in
+tabella, per un dato che nessuno ha raccolto. Il rosso non si usa per i dati
+semplicemente assenti.
 
 Ogni informazione al suo posto: il **metodo** dice come si fa (funzioni, tipi di
 materiale, principi; le foto di una linea solo come esempi dichiarati); la **scheda** dice
 com'è fatta quella linea (quantità, colori, punti, coordinate, varianti, cosa manca).
 Niente racconto del montaggio nel testo: minuti dei video e cronologia stanno nei commenti
-del codice e nell'apparato. Le schede di rilievo delle 23 linee non documentate escono in
-un fascicolo a parte (`build_schede_rilievo.py`), i dubbi da chiedere sul campo in
+del codice e nell'apparato. Le schede di rilievo delle linee non documentate, il foglio
+dello spot e le parole del file del gruppo sulle linee fotografate escono in un fascicolo
+a parte (`build_schede_rilievo.py`); i dubbi da chiedere sul campo in
 `build_scheda_dubbi.py`.
 
 L'impaginazione si rivede su Figma insieme all'utente; Figma è il tavolo di revisione, la
@@ -81,7 +112,10 @@ fonte resta il codice: le modifiche fatte là vanno rilette e riportate qui.
 video/  video_icloud/     # riprese del 16/05/2026: sola lettura, fuori da git
 foto/                     # foto originali (16/05 e 22/08/2026), fuori da git
 fonti/                    # locandina, render i-pietra: fonti esterne con i loro limiti
-dati/linee.py             # registro delle 24 linee
+dati/linee.py             # registro delle 24 linee: codici, nomi, livelli, campi di rilievo
+dati/schede/<id>.py       # i dati propri di una linea (oggi: la 53 m e le sei fotografate)
+dati/slackmap.py          # generato da tools/06_slackmap.py: nomi e capi di SlackMap
+dati/file_lineebisma.py   # il file del gruppo, con le sue parole, «da controllare»
 lavorazione/
   audio/                  # wav 16 kHz mono estratti
   trascrizioni/           # .json con timestamp + .md leggibili
@@ -93,7 +127,8 @@ lavorazione/
 build/
   design.py               # sistema grafico
   build_manuale.py        # assemblaggio della guida
-  metodo.py  scheda_53.py  schede_linee.py  ...
+  scheda_linea.py         # la scheda di qualunque linea, dal suo file di dati
+  metodo.py  schede_linee.py  build_schede_rilievo.py  build_scheda_dubbi.py
 output/                   # i tre PDF, fuori da git
 NOTE_RIGGING.md           # sintesi strutturata estratta dai video
 DUBBI.md                  # elenco di tutto ciò che va confermato

@@ -2,20 +2,23 @@
 """Guida alle highline della Pietra di Bismantova.
 
 Assemblatore: qui c'e' solo l'ordine delle parti e l'apparato. Il contenuto sta
-nei moduli, cosi' aggiungere una linea documentata non significa mettere le mani
-in questo file.
+nei moduli e nei dati, cosi' aggiungere una linea documentata non significa
+mettere le mani in questo file.
 
-    Parte 1  La Pietra          lo spot, la panoramica, il catalogo delle 24 linee
-    Parte 2  Come si monta      il metodo, valido per ogni linea (metodo.py)
-    Parte 3  Le linee           la scheda della 53 m (scheda_53.py)
-    Parte 4  Apparato           glossario, fonti con le loro date, avvertenza finale
+    Come leggere     i livelli di documentazione, i marcatori, i nomi, l'avvertenza
+    Indice
+    Parte 1  La Pietra          lo spot, accesso e regole (dichiarati vuoti), i settori
+    Parte 2  Le linee           la tavola di stato, una pagina per settore con le schede
+                                delle sue linee (schede_linee.py, scheda_linea.py)
+    Parte 3  Come si monta      il metodo Bisma, sei capitoli (metodo.py)
+    Parte 4  Apparato           glossario, protocollo di rilievo, fonti, avvertenza, edizioni
 
-Le schede di rilievo delle altre 23 linee escono in un fascicolo a parte
-(build_schede_rilievo.py), costruito anche da qui alla fine.
+Le schede di rilievo delle linee non documentate e il foglio dello spot escono in
+un fascicolo a parte (build_schede_rilievo.py), costruito anche da qui alla fine.
 
 Regola del documento: **niente dati dedotti**. Ogni numero viene da una fonte
 dichiarata — riprese, fotogrammi, catalogo i-pietra, locandina, risposte dirette
-di chi ha montato. Il resto e' marcato [DA CONFERMARE] e raccolto in DUBBI.md.
+di chi ha montato. Il resto e' marcato e raccolto in DUBBI.md.
 
     python build/build_manuale.py
 """
@@ -28,46 +31,39 @@ sys.path.insert(0, str(RADICE / 'build'))
 sys.path.insert(0, str(RADICE / 'dati'))
 
 from design import *                                                # noqa: E402,F403
-from schede_linee import (parte_catalogo, nota_copertura,           # noqa: E402
-                          parte_fotografate, fotografate)
-from scheda_53 import parte_53                                      # noqa: E402
+from schede_linee import (parte_linee, nota_copertura, nota_settori,   # noqa: E402
+                          vista_insieme, pagina_protocollo)
+from scheda_linea import (LINEA, C_MET, C_AREA, C_LIVELLO, T, marca,   # noqa: E402
+                          dim, ha_scheda)
 from metodo import parte_metodo                                     # noqa: E402
 import linee as REG                                                 # noqa: E402
 from reportlab.platypus import (BaseDocTemplate, PageTemplate, Frame,   # noqa: E402
                                 PageBreak, NextPageTemplate, Spacer,
-                                KeepTogether)
+                                KeepTogether, Paragraph)
 from reportlab.pdfbase.pdfmetrics import stringWidth                # noqa: E402
-from PIL import Image as _PILImage                                  # noqa: E402
 
 OUT = RADICE / 'output' / 'Pietra_Bismantova_Highline.pdf'
 FOTO = RADICE / 'lavorazione' / 'foto_dritte'
-ANN = RADICE / 'lavorazione' / 'frame_annotati'
 
-LINEA = HexColor(0xF97316)
-C_ANC = LC[1]
-C_SOS = LC[7]
-C_TEN = LC[3]
-
-DC = '<font color="#B3261E">[DA CONFERMARE]</font>'
-
-
-def dim(p):
-    with _PILImage.open(p) as im:
-        return im.size
-
-
-def foto(nome, w, cap, color=None, ratio=None, focus=0.5):
-    p = FOTO / nome if (FOTO / nome).exists() else ANN / nome
-    ow, oh = dim(p)
-    return PhotoStrip(str(p), w, ow, oh, cap, color, ratio, focus)
+# Le edizioni della guida: numero, data, che cosa e' cambiato. L'ultima e' quella
+# stampata in copertina e nel colophon.
+EDIZIONI = [
+    ('0.1', 'agosto 2026', 'Prima bozza: la 53 m dalle riprese del 16 maggio, il catalogo '
+                           'dalla locandina e dai render i-pietra'),
+    ('0.2', '8 ottobre 2026', 'Revisione su Figma: il metodo separato dalla scheda, le schede '
+                              'di rilievo in un fascicolo a parte'),
+    ('0.3', '27 ottobre 2026', 'Verifica delle fonti: GAS-OH e «Anfite-altro», il lato di '
+                               'tensione, le fotografie del gruppo'),
+    ('0.4', '27 ottobre 2026', 'Ristrutturazione: livelli di documentazione, codici delle '
+                               'linee, una scheda per linea nel suo settore, metodo in sei '
+                               'capitoli, protocollo di rilievo'),
+]
+EDIZIONE, DATA_EDIZIONE, _ = EDIZIONI[-1]
+A_CURA = 'Bismaliners'
 
 
 def spaziato(cv, x, y, testo, font, corpo, sp=1.9):
-    """Testo spaziato sul canvas.
-
-    `track()` di design.py serve ai Paragraph: produce entita' &nbsp; che dentro
-    un drawString finirebbero stampate alla lettera.
-    """
+    """Testo spaziato sul canvas (track() di design.py serve ai Paragraph)."""
     cv.setFont(font, corpo)
     for ch in testo:
         cv.drawString(x, y, ch)
@@ -108,34 +104,29 @@ def cover(cv, doc):
     cv.setFont('Lora', 10.4)
     cv.setFillColor(HexColor(0xE8E5E0))
     for i, r in enumerate([
-            'Ventiquattro linee su cinque aree:',
-            'dove sono, e come si monta una linea.',
+            'Ventiquattro linee su cinque settori:',
+            'dove sono, che cosa se ne sa, come si monta una linea.',
             'I dati che mancano sono dichiarati, e si aggiungono man mano.']):
         cv.drawString(LM, H - 324 - i * 15, r)
+    cv.setFillColor(WHITE)
+    spaziato(cv, LM, H - 384, 'A CURA DEI %s' % A_CURA.upper(), 'Pop-M', 8.6)
 
     cv.setFillColor(WHITE)
-    spaziato(cv, LM, 92, 'EDIZIONE DI LAVORO', 'Pop-M', 7.6)
+    spaziato(cv, LM, 92, 'EDIZIONE DI LAVORO %s · %s' % (EDIZIONE, DATA_EDIZIONE.upper()),
+             'Pop-M', 7.6)
     cv.setFont('Lora', 8.6)
     cv.setFillColor(HexColor(0xD8D4CE))
-    cv.drawString(LM, 74, '%d linee censite · %d con rigging documentato · '
-                  'i dati non verificati sono marcati [DA CONFERMARE].'
-                  % (c['totale'], c['documentate']))
+    cv.drawString(LM, 74, '%d linee censite · %d documentata · %d fotografate · '
+                  'i dati non verificati sono marcati.'
+                  % (c['totale'], c['documentata'], c['fotografata']))
     cv.drawString(LM, 60, 'Da completare con chi le ha montate.')
 
 
 def page_begin(cv, doc):
-    """Colore e sezione correnti.
-
-    Prima qui si azzerava a ogni pagina: una sezione che proseguiva oltre la
-    prima pagina perdeva l'etichetta in testatina e il filetto del piede tornava
-    arancione anche dentro un capitolo blu. Il valore ora persiste finche' un
-    Accent non lo cambia.
-    """
+    """Colore e sezione correnti: persistono finche' un Accent non li cambia."""
     if not hasattr(cv, '_accent'):
         cv._accent = LINEA
         cv._sect = ''
-    # La pagina comincia nella sezione in corso. Solo un Accent disegnato in
-    # cima alla cornice la cambia (vedi Accent.drawOn in design.py).
     cv._sect_pagina = cv._sect
     cv._accent_pagina = cv._accent
     cv._cima_cornice = H - TM
@@ -161,27 +152,22 @@ def page_end(cv, doc):
     cv.drawRightString(W - RM, 30, str(n))
 
 
-NUMERI = {5: 'cinque', 6: 'sei', 7: 'sette', 8: 'otto', 9: 'nove', 10: 'dieci',
-          11: 'undici', 12: 'dodici', 13: 'tredici', 14: 'quattordici', 15: 'quindici'}
+NUMERI = {1: 'una', 2: 'due', 3: 'tre', 4: 'quattro', 5: 'cinque', 6: 'sei', 7: 'sette',
+          8: 'otto', 9: 'nove', 10: 'dieci', 11: 'undici', 12: 'dodici', 13: 'tredici',
+          14: 'quattordici', 15: 'quindici'}
 
 
 def FONTI():
-    """Le fonti della guida, una riga per fonte.
-
-    Sono una lista sola perche' le usano due posti: la tabella dell'apparato e
-    la riga dell'indice che dice quante sono. Prima l'indice diceva «sei» a
-    mano, e aggiungere una fonte lo avrebbe smentito.
-    """
+    """Le fonti della guida, una riga per fonte, con la data."""
     return [
-        # descrizioni su una riga: con le fonti del 27/10 la pagina traboccava
         ['42 video del montaggio', 'Sequenza e manovre viste a mano, sulla sola 53 m',
          '16/05/2026'],
         ['19 fotografie', 'Ancoraggio, ferramenta e marcature, linea montata',
          '16/05/2026'],
-        ['Locandina «La Pietra»', 'Le cinque aree e le ventiquattro linee', 'non datata'],
+        ['Locandina «La Pietra»', 'Le cinque aree e le ventiquattro linee; la cima a 1047 m',
+         'non datata'],
         ['Catalogo i-pietra (snapshot)', 'Settore, tipo di roccia, prima ricognizione',
          '05/08/2026'],
-        # render del 20/08: 22 linee; la 20 m e la 108 m entrano in i-pietra il 21/08
         ['Render 3D i-pietra', 'Viste dei cinque settori, con 22 linee tracciate',
          '20/08/2026'],
         ['Risposte di chi ha montato', 'Luogo, tipo di ancoraggio, nome di lavoro',
@@ -192,53 +178,24 @@ def FONTI():
          '22/08/2026'],
         ['Posizione GPS di foto e video', 'Su quale capo è stata girata ogni ripresa',
          'letta il 27/10/2026'],
-        # lato di tensione: dubbio 56; GAS-OH: decisione D3, dubbio 45; Anfite-altro:
-        # decisione D4, dubbio 52
-        ['Risposte e scelte dell’utente', 'Lato di tensione; titolo GAS-OH; «Anfite-altro»',
-         '27/10/2026'],
-        # SlackMap: la mappa delle slackline dell'International Slackline Association.
-        # La 113 m: la scheda della «Brifing» descrive gli ancoraggi (dubbio 39).
-        ['SlackMap', 'Il nome della 53 m, GAS-OH; gli ancoraggi della 113 m',
+        ['Risposte e scelte dell’utente', 'Lato di tensione; titolo GAS-OH; «Anfite-altro»; '
+         'la struttura di questa edizione', '27/10/2026'],
+        ['SlackMap (API)', 'Nome, lunghezza del segmento e coordinate dei capi di tutte e '
+         '24 le linee, con gli id abbinati nel catalogo i-pietra; gli ancoraggi della 113 m',
          'letta il 27/10/2026'],
-        # catalogo i-pietra al 21/10/2026, letto il 27/10: dubbio 53
         ['Catalogo i-pietra', 'Le linee censite: tutte e 24', '21/10/2026'],
-        # 31 foto: 46 (5), 53 (1), 97 (3), 108 (4), 113 (8), Despedida 60 (6) e 70 (4),
-        # lette il 27/10/2026 (lavorazione/foto_linee/<id>/LETTURA.md). A quale linea
-        # vada ogni foto lo dice la sua riga nel file: «sulle righe di», non «di».
-        # D6: e' una fonte dopo un controllo con chi l'ha compilato, non ancora fatto.
-        ['LineeBisma.xlsx (file del gruppo)', 'Schemi proposti e 31 fotografie sulle righe '
-         'di sette linee, soste e linee montate: tutto «da controllare»', '20/10/2026'],
+        ['File LineeBisma del gruppo', 'Lo schema «Ancoraggio standard Bisma» e 31 fotografie '
+         'sulle righe di sette linee: tutto «da controllare»', '20/10/2026'],
     ]
 
 
-# Capitoli di ogni parte: li usano sia l'indice sia i frontespizi di parte,
-# cosi' i due elenchi non possono andare fuori sincrono.
+# Capitoli di ogni parte: li usano l'indice e i rimandi, cosi' non vanno fuori sincrono.
 CAPITOLI = []
-
-
-def _voci(num):
-    for n, _t, _col, _st, voci in CAPITOLI:
-        if n == num:
-            return voci
-    return ()
-
-
 ALTEZZA_PAGINA = H - TM - BM
 
 
-def _pag(chiave):
-    """Cella con il numero di pagina, allineata a destra."""
-    return Paragraph('<font name="Pop-B" size="8.6">%s</font>' % rif(chiave),
-                     ParagraphStyle('pg', fontName='Pop', leading=11,
-                                    textColor=LINEA, alignment=TA_RIGHT))
-
-
 def elenco_capitoli():
-    """Indice a due livelli: le quattro parti e, sotto ognuna, i suoi capitoli.
-
-    Ogni parte e' un blocco a se': cosi' una testata di parte non puo' restare
-    in fondo alla pagina con i suoi capitoli voltati.
-    """
+    """Indice a due livelli: le quattro parti e, sotto ognuna, i suoi capitoli."""
     fuori = []
     for num, titolo_parte, col, stato, voci in CAPITOLI:
         righe = [[
@@ -255,11 +212,13 @@ def elenco_capitoli():
         stile = [
             ('LEFTPADDING', (0, 0), (-1, -1), 0),
             ('RIGHTPADDING', (0, 0), (-1, -1), 0),
-            ('TOPPADDING', (0, 0), (-1, -1), 5),
-            ('BOTTOMPADDING', (0, 0), (-1, -1), 5),
+            # aria fra il titolo e la nota: «anti-slip» toccava «E l'A-frame»
+            ('RIGHTPADDING', (0, 0), (0, -1), 10),
+            ('TOPPADDING', (0, 0), (-1, -1), 4),
+            ('BOTTOMPADDING', (0, 0), (-1, -1), 4),
             ('VALIGN', (0, 0), (-1, -1), 'TOP'),
             ('LINEBELOW', (0, 0), (-1, 0), 1.2, col),
-            ('BOTTOMPADDING', (0, 0), (-1, 0), 7)]
+            ('BOTTOMPADDING', (0, 0), (-1, 0), 6)]
         for r, (chiave, titolo, nota) in enumerate(voci, start=1):
             righe.append([
                 Paragraph('<font name="Pop-M" size="9">%s</font>' % titolo,
@@ -269,12 +228,12 @@ def elenco_capitoli():
                           % (col.hexval()[2:], rif(chiave)),
                           ParagraphStyle('cn', fontName='Pop', leading=12.5,
                                          alignment=TA_RIGHT))])
-            stile.append(('TOPPADDING', (0, r), (-1, r), 6))
+            stile.append(('TOPPADDING', (0, r), (-1, r), 5))
             if r < len(voci):
                 stile.append(('LINEBELOW', (0, r), (-1, r), 0.4, HAIR))
-        t = Table(righe, colWidths=[152, FW - 152 - 46, 46])
+        t = Table(righe, colWidths=[172, FW - 172 - 46, 46])
         t.setStyle(TableStyle(stile))
-        fuori.append(KeepTogether([t, SP(13)]))
+        fuori.append(KeepTogether([t, SP(12)]))
     return fuori
 
 
@@ -282,95 +241,63 @@ def sec(S, color, label):
     S.append(Accent(color, label))
 
 
-def sommario_parte(voci, color):
-    """Elenco dei capitoli di una parte, con il numero di pagina.
-
-    Il frontespizio di parte era una pagina quasi bianca. Ora dice che cosa
-    contiene la parte e a che pagina, e diventa il secondo livello dell'indice.
-    """
-    righe = []
-    for chiave, titolo, nota in voci:
-        righe.append([Paragraph('<font name="Pop-M" size="9.4">%s</font>' % titolo,
-                                ParagraphStyle('vt', fontName='Pop', leading=13)),
-                      Paragraph(nota, small),
-                      Paragraph('<font name="Pop-B" size="9.4" color="#%s">%s</font>'
-                                % (color.hexval()[2:], rif(chiave)),
-                                ParagraphStyle('vp', fontName='Pop', leading=13,
-                                               alignment=TA_RIGHT))])
-    t = Table(righe, colWidths=[150, FW - 150 - 54, 54])
-    t.setStyle(TableStyle([
-        ('LEFTPADDING', (0, 0), (-1, -1), 0),
-        ('RIGHTPADDING', (0, 0), (-1, -1), 0),
-        ('TOPPADDING', (0, 0), (-1, -1), 7),
-        ('BOTTOMPADDING', (0, 0), (-1, -1), 7),
-        ('LINEBELOW', (0, 0), (-1, -2), 0.5, HAIR),
-        ('VALIGN', (0, 0), (-1, -1), 'TOP')]))
-    return t
+def _h3(t):
+    return P('<b>%s</b>' % t, h3)
 
 
-def parte(S, num, titolo, sommario, color=LINEA, voci=()):
-    """Frontespizio di parte: separa le quattro sezioni della guida.
+AVVERTENZA = ('Highlining e slacklining comportano rischi. Questa guida documenta un '
+              'montaggio già realizzato da persone esperte: non sostituisce formazione, '
+              'esperienza diretta e verifica autonoma di ogni ancoraggio prima di ogni '
+              'utilizzo.')
 
-    Il blocco viene centrato verticalmente. Prima partiva da un rientro fisso e
-    finiva a un terzo dell'altezza, con il resto della pagina vuoto sotto: non
-    era una pagina di apertura, era una pagina interrotta.
-    """
-    blocco = [LineHeader(num, titolo, 'Parte %s' % num, color),
-              SP(16),
-              P(sommario, lead)]
-    if voci:
-        blocco += [SP(26),
-                   P('<font name="Pop-M" size="7.4" color="#%s">IN QUESTA PARTE</font>'
-                     % MUT.hexval()[2:],
-                     ParagraphStyle('ip', fontName='Pop', leading=11)),
-                   SP(6),
-                   sommario_parte(voci, color)]
-    alto = sum(f.wrap(FW, ALTEZZA_PAGINA)[1] for f in blocco)
-    S.append(Accent(color, titolo))
-    S.append(Segna('parte%s' % num))
-    S.append(SP(max(24, (ALTEZZA_PAGINA - alto) / 2)))
-    S.extend(blocco)
-    S.append(PageBreak())
+
+def _voci_parte2(c):
+    voci = [('stato', 'Tavola di stato', 'Le %d linee: livello di documentazione e dove '
+                                         'trovarle' % c['totale'])]
+    for area in REG.AREE:
+        ls = REG.per_area(area)
+        n_doc = sum(1 for l in ls if REG.livello(l) >= REG.RILEVATA)
+        n_fot = sum(1 for l in ls if REG.livello(l) == REG.FOTOGRAFATA)
+        nota = '%d linee' % len(ls)
+        if n_doc:
+            nota += ' · %d documentata' % n_doc if n_doc == 1 else ' · %d documentate' % n_doc
+        if n_fot:
+            nota += ' · %d fotografate' % n_fot if n_fot > 1 else ' · 1 fotografata'
+        voci.append(('settore:%s' % area, area, nota))
+        for l in ls:
+            if ha_scheda(l):
+                liv = REG.livello(l)
+                nota = ('Scheda completa: ancoraggi, materiale, A-frame, varianti'
+                        if liv == REG.DOCUMENTATA else
+                        'Dalle fotografie del gruppo: dove corre, i capi, che cosa si vede')
+                voci.append(('linea:%s' % l['id'], '%s · %s · %d m'
+                             % (REG.titolo(l), l['codice'], l['lunghezza']), nota))
+    return voci
 
 
 def costruisci():
-    """La storia completa del manuale.
-
-    E' una funzione e non codice a livello di modulo perche' il documento viene
-    impaginato piu' volte: la prima passata scopre a che pagina cade ogni
-    capitolo, le successive stampano quei numeri nell'indice e nei rimandi.
-    """
+    """La storia completa della guida, impaginata piu' volte per i rimandi."""
     S = []
-    _c = REG.conteggi()
-    _da_fare = _c['totale'] - _c['documentate']
+    c = REG.conteggi()
     fonti = FONTI()
     CAPITOLI[:] = [
-        ('1', 'Lo spot', LINEA, 'completo', [
-            ('spot', 'La Pietra di Bismantova', 'Il massiccio e i numeri dello spot'),
-            ('catalogo', 'Le linee della Pietra',
-             'I cinque settori sulla cresta, con le loro linee')]),
-        ('2', 'Come si monta una linea', C_SOS, 'parziale', [
-            ('lati', 'Una linea, due lati', 'Lato tensione e lato statico'),
-            ('materiale', 'Prima di uscire: il materiale', 'La lista per una linea'),
-            ('sequenza', 'La sequenza di montaggio', 'Le fasi in ordine'),
-            ('ancoraggi', 'Gli ancoraggi su roccia', 'Placchette, punti, controlli'),
-            ('soste', 'Le soste: main e backup', 'Il codice colore, la portata'),
-            ('slinga', 'Instradamento della slinga', 'Il nodo che forza la slinga'),
-            ('lineavita', 'Portare la linea, la linea vita', 'La stessa corda, due usi'),
-            ('tensione', 'Il lato tensione', 'Weblock, blocco del backup, anti-slip'),
-            ('aframe', 'L’A-frame', 'I due pali sul bordo'),
-            ('smontaggio', 'Lo smontaggio', 'Da documentare')]),
-        ('3', 'Le linee', LINEA, '1 linea su %d' % _c['totale'], [
-            # D3 (27/10/2026): titolo GAS-OH, «la 50» resta il soprannome
-            ('cap53', 'GAS-OH · Anfiteatro 53 m',
-             'Detta «la 50». Ancoraggi, materiale, A-frame, variante con i bungee')]
-            + ([('fotografate', 'Le linee fotografate',
-                 '%d linee viste nelle foto del gruppo: che cosa si vede, che cosa manca'
-                 % len(fotografate()))] if fotografate() else [])),
+        ('1', 'La Pietra', LINEA, 'accesso e regole da compilare', [
+            ('spot', 'La Pietra di Bismantova', 'Lo spot; accesso e regole, ancora vuoti'),
+            ('settori', 'I cinque settori', 'La vista d’insieme, nell’ordine della cresta')]),
+        ('2', 'Le linee', LINEA, '%d documentata · %d fotografate · %d censite'
+         % (c['documentata'], c['fotografata'], c['censita']), _voci_parte2(c)),
+        ('3', 'Come si monta: il metodo Bisma', C_MET, 'parziale', [
+            ('m1', 'Lo schema e la sequenza', 'Due lati, dodici passi, tagline e linea vita'),
+            ('m2', 'Il materiale', 'La lista per una linea; lo schema del gruppo'),
+            ('m3', 'I punti su roccia', 'Placchette su bullone, la sosta su più punti'),
+            ('m4', 'Le due soste del lato tensione', 'Main e backup, la slinga, la portata'),
+            ('m5', 'Tensione, blocco del backup, anti-slip', 'E l’A-frame'),
+            ('m6', 'Che cosa il metodo non copre ancora', 'Le domande per chi monta')]),
         ('4', 'Apparato', LINEA, 'completo', [
-            ('glossario', 'Il gergo del gruppo', 'Come si chiamano le cose sul campo'),
+            ('glossario', 'Il gergo del gruppo', 'I termini del campo e quelli della guida'),
+            ('protocollo', 'Protocollo di rilievo', 'Che cosa misurare e fotografare'),
             ('fonti', 'Da dove viene ogni dato',
-             'Le %s fonti con la loro data, e l’avvertenza finale'
+             'Le %s fonti con la loro data, l’avvertenza, le edizioni'
              % NUMERI.get(len(fonti), str(len(fonti))))]),
     ]
 
@@ -379,94 +306,165 @@ def costruisci():
     S.append(NextPageTemplate('main'))
     S.append(PageBreak())
 
+    # ================================================================ come leggere
+    sec(S, LINEA, 'Come leggere')
+    S.append(Segna('leggere'))
+    S.append(LineHeader('', 'Come leggere questa guida', 'Prima di tutto', LINEA))
+    S.append(SP(10))
+    S.append(P('Questa guida descrive le <b>ventiquattro highline</b> della Pietra di '
+               'Bismantova e il <b>metodo</b> con cui i %s le montano. È un documento che si '
+               'compila: ogni linea ha un livello di documentazione dichiarato, e ciò che '
+               'nessuno ha visto o detto non c’è.' % A_CURA, lead))
+    S.append(SP(14))
+    S.append(_h3('I quattro livelli di documentazione'))
+    S.append(SP(6))
+    S.append(data_table(
+        ['Livello', 'Che cosa si sa', 'Oggi'],
+        [[livello_chip(REG.LIVELLI[k][0], C_LIVELLO[k]), Paragraph(REG.LIVELLI[k][1], td),
+          Paragraph('%d' % c[REG.LIVELLI[k][0]], td)]
+         for k in sorted(REG.LIVELLI, reverse=True)],
+        [96, FW - 96 - 54, 54], LINEA))
+    S.append(SP(14))
+    S.append(_h3('I marcatori'))
+    S.append(SP(5))
+    S.append(BU('<font color="#%s">[DA CONFERMARE]</font>: un dato incerto, o contraddetto da '
+                'un’altra fonte. Si chiede a chi ha montato.' % WARN.hexval()[2:], LINEA))
+    S.append(BU('<font color="#%s">da rilevare</font>, o una cella vuota in tabella: un dato '
+                'che nessuno ha ancora raccolto. Si compila sul posto, con il protocollo di '
+                'rilievo a %s.' % (MUT.hexval()[2:], rif('protocollo')), LINEA))
+    S.append(BU('Niente è dedotto. Una misura plausibile ma sbagliata, in un documento di '
+                'rigging, è un rischio reale: un campo vuoto dichiarato vale di più.', LINEA))
+    S.append(SP(14))
+    S.append(_h3('I nomi delle linee'))
+    S.append(SP(5))
+    S.append(P('Ogni linea ha un <b>codice</b>: la sigla del settore e il numero d’ordine '
+               'sulla locandina, per lunghezza crescente (%s). Accanto al codice c’è il nome '
+               'che la linea ha su <b>SlackMap</b>, la mappa mondiale delle slackline, dove '
+               'chi l’ha censita gliene ha dato uno; la lunghezza è sempre quella di '
+               'catalogo. I soprannomi del gruppo stanno fra virgolette e mai da soli: '
+               '<b>«la 50»</b> è GAS-OH, AN-4, e la Pietra ha anche una 50 m al Settore Giallo.'
+               % ', '.join('%s %s' % (REG.CODICE_SETTORE[a], a) for a in REG.AREE), body))
+    S.append(SP(16))
+    S.append(callout('Avvertenza',
+                     AVVERTENZA + ' <b>Nessuna parte di questo documento va usata come '
+                     'riferimento operativo</b> finché i dati marcati non sono stati '
+                     'confermati da chi ha eseguito il montaggio.', WARN, '!', FW, True))
+    S.append(SP(16))
+    # le edizioni stanno qui, dove si capisce quale si sta leggendo: in coda alle
+    # fonti facevano da sole una pagina in piu'
+    S.append(KeepTogether([_h3('Le edizioni'), SP(4)]
+                          + [P('<b>%s</b> · %s — %s' % e, small) for e in EDIZIONI]))
+    S.append(PageBreak())
+
     # ================================================================ indice
     sec(S, LINEA, 'Indice')
     S.append(Segna('indice'))
     S.append(LineHeader('', 'Che cosa c’è in questa guida', 'Indice', LINEA))
     S.append(SP(12))
-    _c = REG.conteggi()
-    # Un indice solo, a due livelli. Prima c'erano due elenchi sulla stessa
-    # pagina — le quattro parti qui e gli stessi titoli piu' sotto — e il
-    # secondo faceva traboccare l'indice su una pagina in piu'.
     S.extend(elenco_capitoli())
-    S.append(SP(16))
-    S.append(callout('Una guida che si compila',
-                     'Ciò che manca è marcato %s: si completa sul campo, con chi monta, e '
-                     'non si deduce. Per le %d linee non ancora documentate c’è un fascicolo '
-                     'a parte di schede di rilievo, da compilare sul posto.' % (DC, _da_fare),
-                     LINEA))
     S.append(PageBreak())
 
     # ================================================================ PARTE 1
-    # La Parte 1 non ha frontespizio: viene subito dopo l'indice, che ne mostra
-    # gia' il contenuto, e una pagina con il solo titolo era una pagina in piu'.
-    sec(S, LINEA, 'Lo spot')
+    sec(S, LINEA, 'La Pietra')
     S.append(Segna('parte1'))
     S.append(Segna('spot'))
-    S.append(LineHeader('', 'La Pietra di Bismantova', 'Castelnovo ne’ Monti, Reggio Emilia',
-                        LINEA))
+    S.append(LineHeader('', 'La Pietra di Bismantova',
+                        'Parte 1 · Castelnovo ne’ Monti, Reggio Emilia', LINEA))
     S.append(SP(10))
     S.append(P('La Pietra è un massiccio isolato dell’Appennino reggiano, a pareti verticali. '
-               'Le highline sono raccolte in <b>cinque aree</b> e contate in <b>%d linee</b>, dai '
-               'diciotto metri della Rookie ai centosessantacinque della Despedida.'
-               % _c['totale'], lead))
+               'Le highline sono raccolte in <b>cinque settori</b> e contate in <b>%d '
+               'linee</b>, dai diciotto metri della Rookie ai centosessantacinque della '
+               'Despedida.' % c['totale'], lead))
     S.append(SP(10))
     S.append(data_table(
         ['Voce', 'Valore', 'Fonte'],
         [['Località', 'Pietra di Bismantova, Castelnovo ne’ Monti (RE)', 'chi ha montato'],
+         ['Cima', '1047 m', 'locandina'],
          ['Roccia', 'Arenaria', 'i-pietra, scheda di settore'],
-         ['Aree con highline', '%d' % len(REG.AREE), 'locandina'],
-         ['Linee censite', '%d' % _c['totale'], 'locandina'],
-         ['Di cui in i-pietra', '%d' % _c['in_ipietra'], 'i-pietra, %s' % REG.IPIETRA_DATA],
-         ['Rigging documentato', '%d' % _c['documentate'], 'questa guida'],
-         ['Accesso e avvicinamento', '[DA CONFERMARE]', '—'],
-         ['Autorizzazioni, divieti stagionali', '[DA CONFERMARE]', '—']],
+         ['Settori con highline', '%d' % len(REG.AREE), 'locandina'],
+         ['Linee censite', '%d' % c['totale'], 'locandina; i-pietra al %s' % REG.IPIETRA_DATA],
+         ['Ancoraggi', 'Su roccia (la 53 m); su alberi o misti dove le fotografie del '
+                       'gruppo lo mostrano', 'chi ha montato; foto del gruppo']],
         [140, 256, 95], LINEA))
-    S.append(SP(8))
-    S.append(P('Accesso e autorizzazioni restano vuoti di proposito. La Pietra è area '
-               'protetta e falesia storica: vincoli, divieti stagionali e accordi entrano '
-               'qui solo quando li fornisce chi frequenta lo spot, mai per deduzione.', small))
-    # il catalogo prosegue sulla stessa pagina, aperto dalla sua testata
-    S.append(SP(26))
+    S.append(SP(18))
+    S.append(KeepTogether([
+        _h3('Accesso e regole'),
+        SP(5),
+        P('Le voci che seguono sono quelle che chi arriva da fuori cerca per prime, e sono '
+          'vuote. La Pietra è area protetta e falesia storica: vincoli, divieti stagionali e '
+          'accordi entrano qui solo quando li fornisce chi frequenta lo spot, mai per '
+          'deduzione. Il foglio «Rilievo dello spot» del fascicolo raccoglie le domande.',
+          body),
+        SP(10),
+        two_cols(
+            gear_block('Accesso', [marca(x) for x in [
+                'Avvicinamento a ciascun settore: da rilevare',
+                'Parcheggio e punto di partenza: da rilevare',
+                'Tempi di avvicinamento: da rilevare',
+                'Rifugio, acqua, punti di appoggio: da rilevare']], LINEA),
+            gear_block('Regole e contatti', [marca(x) for x in [
+                'Autorizzazioni e accordi con il gestore: da rilevare',
+                'Divieti stagionali, nidificazione: da rilevare',
+                'Linee lasciate montate, notte, permarig: da rilevare',
+                'Emergenze: numeri e punto di raccolta: da rilevare',
+                'Chi tiene la guida nel gruppo: da rilevare']], LINEA))]))
+    S.append(SP(10))
+    S.append(P('Una planimetria con sentieri e settori non c’è ancora: la vista d’insieme '
+               'della pagina seguente serve a riconoscere la parete, non a muoversi.', small))
+    S.append(PageBreak())
 
-    # parte_catalogo() include gia' la planimetria: chiamarle entrambe la stampava due volte
-    S.extend(parte_catalogo())
+    sec(S, LINEA, 'I settori')
+    S.append(Segna('settori'))
+    S.append(LineHeader('', 'I cinque settori', 'Da sinistra a destra, come stanno sulla '
+                        'cresta', LINEA))
+    S.append(SP(10))
+    S.append(P('I settori seguono l’ordine in cui stanno sulla cresta, ed è l’ordine di tutta '
+               'la guida: %s.' % ', '.join(REG.AREE), lead))
+    S.append(SP(12))
+    vista = vista_insieme()
+    if vista is not None:
+        ow, oh = dim(vista)
+        S.append(PhotoStrip(str(vista), FW, ow, oh,
+                            'I cinque settori sulla vista d’insieme i-pietra', LINEA))
+        S.append(SP(8))
+        S.append(P('Le pastiglie segnano <b>un tratto di parete, non un ancoraggio</b>: '
+                   'servono a orientarsi, non a trovare un punto; l’altezza a cui cadono è '
+                   'prospettiva, non quota. Le viste i-pietra delle pagine seguenti '
+                   '<b>non sono planimetrie</b>: sono prospettive di un modello '
+                   'fotogrammetrico, e servono a riconoscere dove corre una linea sulla '
+                   'parete, non a misurarla.', small))
+    else:
+        S.append(P('La vista d’insieme dei settori non è disponibile.', small))
+    S.append(SP(14))
+    righe = []
+    for area in REG.AREE:
+        ls = REG.per_area(area)
+        righe.append([livello_chip(REG.CODICE_SETTORE[area], C_AREA[area]),
+                      Paragraph(area, td), Paragraph('%d' % len(ls), td),
+                      Paragraph(' · '.join(str(l['lunghezza']) for l in ls), td),
+                      Paragraph('<font name="Pop-M" size="8.2" color="#%s">%s</font>'
+                                % (C_AREA[area].hexval()[2:], rif('settore:%s' % area)),
+                                ParagraphStyle('sp', fontName='Pop', leading=11))])
+    S.append(data_table(['Sigla', 'Settore', 'Linee', 'Lunghezze di catalogo (m)', 'Pagina'],
+                        righe, [50, 120, 50, FW - 50 - 120 - 50 - 60, 60], LINEA))
+    S.append(PageBreak())
 
     # ================================================================ PARTE 2
-    # parte_catalogo() non chiude con un'interruzione: senza questa, il frontespizio
-    # della parte finiva in coda alla pagina precedente invece di aprirne una nuova.
-    # La parte «Tecnica» non c'e' piu': roccia e ancoraggi stanno nel metodo, il
-    # glossario nell'apparato.
+    S.extend(parte_linee())
     S.append(PageBreak())
-    parte(S, '2', 'Come si monta una linea', 'Il metodo con cui il gruppo monta una linea '
-          'alla Pietra, dagli ancoraggi all’anti-slip, documentato sulla 53 m '
-          'dell’Anfiteatro. Ciò che manca è marcato [DA CONFERMARE] e si aggiunge man mano.',
-          C_SOS, voci=_voci('2'))
-    S.extend(parte_metodo())
 
     # ================================================================ PARTE 3
-    _n_foto = len(fotografate())
-    parte(S, '3', 'Le linee', 'Una scheda per linea: dove sta, quanto è lunga, com’è '
-          'ancorata, che cosa manca. Per ora c’è quella di GAS-OH, la 53 m dell’Anfiteatro; '
-          'le altre %d hanno una scheda di rilievo da compilare, nel fascicolo a parte%s.'
-          % (_da_fare, (', e di %s esistono fotografie del gruppo, descritte dopo la '
-                        'scheda di GAS-OH' % NUMERI.get(_n_foto, str(_n_foto)))
-             if _n_foto else ''), LINEA, voci=_voci('3'))
-
-    S.extend(parte_53())
-    # le linee fotografate dal gruppo: dopo la 53 m, con la stessa regola — la
-    # foto dice che cosa c'e', non come si monta
-    S.extend(parte_fotografate())
+    S.append(Segna('parte3'))
+    S.extend(parte_metodo())
 
     # ================================================================ PARTE 4
-    # Anche la Parte 4 non ha frontespizio: e' una pagina sola, e un titolo
-    # davanti a una pagina sola raddoppia l'apparato senza aggiungere niente.
     sec(S, LINEA, 'Glossario')
     S.append(Segna('parte4'))
     S.append(Segna('glossario'))
-    S.append(LineHeader('', 'Il gergo del gruppo', 'Glossario', LINEA))
+    S.append(LineHeader('', 'Il gergo del gruppo', 'Parte 4 · Glossario e terminologia', LINEA))
     S.append(SP(10))
-    S.append(P('I termini come si dicono sul campo, con accanto il nome corrente.', lead))
+    S.append(P('I termini come si dicono sul campo, con accanto il nome corrente; poi i '
+               'termini con cui questa guida descrive una linea.', lead))
     S.append(SP(10))
     S.append(data_table(
         ['Come lo chiamano', 'Che cos’è'],
@@ -482,55 +480,81 @@ def costruisci():
          ['linea vita', 'Corda di sicurezza per chi si muove sull’ancoraggio'],
          ['ingrillare', 'Collegare con un grillo'],
          ['paranchino', 'Piccolo paranco di tensionamento'],
+         ['cavalletto', 'L’A-frame, nel file del gruppo'],
+         ['«la 50»', 'GAS-OH, la 53 m dell’Anfiteatro (AN-4). La 50 m del Settore Giallo '
+                     'è SG-3, un’altra linea'],
          ['«slide next»', 'Termine non identificato, forma incerta: [DA CONFERMARE]']],
         [150, 341], LINEA))
+    # righe strette in tutte e due le tabelle: cosi' stanno in una pagina sola
+    S[-1].setStyle(TableStyle([('TOPPADDING', (0, 1), (-1, -1), 4),
+                               ('BOTTOMPADDING', (0, 1), (-1, -1), 4)]))
+    S.append(SP(14))
+    S.append(KeepTogether([
+        _h3('I termini di questa guida'),
+        SP(6),
+        data_table(
+            ['Termine', 'In questa guida'],
+            [['linea', 'La highline: nastro, backup e leash, fra due ancoraggi'],
+             ['lato', 'Uno dei due capi: il lato tensione, dove si tensiona; il lato statico, '
+                      'l’altro'],
+             ['ancoraggio', 'Tutto ciò che tiene un lato: le soste e i punti'],
+             ['sosta', 'Un sistema di ancoraggio completo: sulla 53 m, la main e la backup '
+                       'del lato tensione'],
+             ['punto', 'Il singolo elemento fisso nella roccia: una placchetta su bullone'],
+             ['codice', 'Sigla del settore e numero d’ordine sulla locandina: AN-4 è la '
+                        'quarta linea dell’Anfiteatro'],
+             ['lato A, lato B', 'Nelle schede di rilievo, i due capi finché non si sa quale '
+                                'sia quello di tensione'],
+             ['livello', 'Quanto si sa di una linea: censita, fotografata, rilevata, '
+                         'documentata (%s)' % rif('leggere')]],
+            [150, 341], LINEA)]))
+    S[-1]._content[-1].setStyle(TableStyle([('TOPPADDING', (0, 1), (-1, -1), 4),
+                                            ('BOTTOMPADDING', (0, 1), (-1, -1), 4)]))
+    S.append(PageBreak())
+
+    sec(S, LINEA, 'Protocollo')
+    S.append(Segna('protocollo'))
+    S.extend(pagina_protocollo(LINEA))
     S.append(PageBreak())
 
     sec(S, LINEA, 'Fonti')
     S.append(Segna('fonti'))
     S.append(LineHeader('', 'Da dove viene ogni dato', 'Fonti e date', LINEA))
-    S.append(SP(10))
-    S.append(P('Le fonti non hanno tutte lo stesso peso, e una di esse cambia nel tempo: '
-               'il catalogo i-pietra compare con la data della lettura, non come un fatto '
-               'fisso.', lead))
-    S.append(SP(12))
-    S.append(data_table(['Fonte', 'Che cosa fornisce', 'Data'], fonti,
-                        [150, 246, 95], LINEA))
-    S.append(SP(10))
-    S.append(P(nota_copertura(), small))
-    # 10 e 8 invece di 16 e 12: con le fonti del 27/10 la data dell'edizione
-    # scivolava da sola su una pagina in piu'
-    S.append(SP(10))
-    S.append(Rule(FW, 0.6, HAIR, 8))
-    S.append(SP(10))
-    S.append(P('<b>Avvertenza</b>', h3))
-    S.append(SP(4))
-    S.append(P('Highlining e slacklining comportano rischi. Questa guida documenta un montaggio '
-               'già realizzato da persone esperte: non sostituisce formazione, esperienza '
-               'diretta e verifica autonoma di ogni ancoraggio prima di ogni utilizzo.', lead))
-    S.append(SP(10))
-    # Prima: «Le altre hanno soltanto una scheda di rilievo vuota». Dal 27/10/2026
-    # sei di quelle linee hanno anche una scheda dalle foto del gruppo (verifica, punto 8).
-    _n_ft = len(fotografate())
-    altre = ('Le altre hanno una scheda di rilievo da compilare, e %s anche fotografie '
-             'del gruppo, che non documentano il montaggio.'
-             % NUMERI.get(_n_ft, str(_n_ft)) if _n_ft else
-             'Le altre hanno soltanto una scheda di rilievo vuota.')
-    S.append(P('A ciò si aggiunge un limite specifico di questa edizione. Di ventiquattro linee '
-               'una sola è documentata, e lo è a partire da riprese non didattiche: contiene '
-               'numerosi dati non verificati, marcati [DA CONFERMARE]. ' + altre +
-               ' <b>Nessuna parte di questo documento va usata '
-               'come riferimento operativo</b> finché quei campi non sono stati riempiti da '
-               'chi ha eseguito il montaggio.', body))
     S.append(SP(8))
-    S.append(P('Edizione di lavoro del 27 ottobre 2026, ricostruita dalle riprese del montaggio '
-               'del 16 maggio 2026. Sistema grafico ripreso dalla guida Sillschlucht.', small))
+    S.append(P('Le fonti non hanno tutte lo stesso peso, e una di esse cambia nel tempo: il '
+               'catalogo i-pietra compare con la data della lettura, non come un fatto fisso.',
+               lead))
+    S.append(SP(10))
+    tab = data_table(['Fonte', 'Che cosa fornisce', 'Data'], fonti, [150, 246, 95], LINEA)
+    # righe strette: con tredici fonti il colophon scivolava da solo su una pagina
+    tab.setStyle(TableStyle([('TOPPADDING', (0, 1), (-1, -1), 4),
+                             ('BOTTOMPADDING', (0, 1), (-1, -1), 4)]))
+    S.append(tab)
+    S.append(SP(8))
+    S.append(P(nota_copertura() + ' ' + nota_settori(), small))
+    S.append(SP(8))
+    S.append(Rule(FW, 0.6, HAIR, 8))
+    S.append(SP(8))
+    S.append(_h3('Avvertenza'))
+    S.append(SP(4))
+    S.append(P(AVVERTENZA, lead))
+    S.append(SP(6))
+    S.append(P('A ciò si aggiunge un limite specifico di questa edizione. Di %d linee una '
+               'sola è documentata, e lo è a partire da riprese non didattiche: contiene '
+               'numerosi dati non verificati, marcati come tali. %s hanno fotografie del '
+               'gruppo, che non documentano il montaggio; le altre hanno una scheda di '
+               'rilievo da compilare. <b>Nessuna parte di questo documento va usata come '
+               'riferimento operativo</b> finché quei campi non sono stati riempiti da chi '
+               'ha eseguito il montaggio.'
+               % (c['totale'], NUMERI.get(c['fotografata'], str(c['fotografata'])).capitalize()),
+               body))
+    S.append(SP(8))
+    S.append(P('Edizione di lavoro %s del %s, a cura dei %s; le edizioni precedenti sono a %s. '
+               'Le correzioni si segnalano a chi tiene la guida nel gruppo. Sistema grafico '
+               'ripreso dalla guida Sillschlucht.'
+               % (EDIZIONE, DATA_EDIZIONE, A_CURA, rif('leggere')), small))
 
     return lega_testate(S)
-
-
-# capitoli di ogni parte, per il sommario dei frontespizi
-VOCI = {}
 
 
 # ---------------------------------------------------------------- build
@@ -539,7 +563,7 @@ def impagina(destinazione):
     doc = BaseDocTemplate(destinazione, pagesize=A4, leftMargin=LM, rightMargin=RM,
                           topMargin=TM, bottomMargin=BM,
                           title='Guida alle highline della Pietra di Bismantova',
-                          author='Ricostruzione dalle riprese del 16/05/2026')
+                          author=A_CURA)
     frame = Frame(LM, BM, FW, H - TM - BM, id='n',
                   leftPadding=0, rightPadding=0, topPadding=0, bottomPadding=0)
     doc.addPageTemplates([
@@ -555,12 +579,7 @@ def impagina(destinazione):
 
 
 def main():
-    """Impagina piu' volte, finche' i rimandi di pagina non si assestano.
-
-    La prima passata non conosce ancora i numeri di pagina: li scopre mentre
-    impagina. La seconda li stampa, e cosi' facendo puo' spostare qualcosa; si
-    ripete finche' la mappa non cambia piu', poi si scrive il file vero.
-    """
+    """Impagina piu' volte, finche' i rimandi di pagina non si assestano."""
     OUT.parent.mkdir(parents=True, exist_ok=True)
     for passata in range(1, 5):
         prima = dict(PAGINE)

@@ -47,6 +47,28 @@ Esito:
 - **D6**: il file LineeBisma diventa una fonte dopo un controllo con chi l'ha compilato, che
   non è ancora avvenuto: nella guida resta «da controllare».
 
+**27/10/2026 — decisioni dell'utente per l'edizione 0.4** (da `ANALISI_GUIDA.md`, scelte A-E,
+accolte come proposte): **A** le linee vengono prima del metodo; **B** ogni linea ha un codice
+(`AN-4`) e, dove raccolto, il nome SlackMap; **C** i principi generici di highlining escono dal
+metodo (checklist dei punti, spit/tasselli/resinati, funzione dell'A-frame) e restano come
+domande nel capitolo 6; **D** niente frontespizi di parte; **E** le parole del file LineeBisma
+stanno nel fascicolo di rilievo, nella guida solo foto e sintesi. Nuovo marcatore «da
+rilevare» per i dati assenti: il rosso resta ai dati incerti o contraddetti. Il riquadro «Due
+avvertenze da chiarire» (voci 29 e 30) non è più stampato: le due voci stanno nel capitolo 6
+del metodo, senza oggetto.
+
+**27/10/2026, sera — le sei linee fotografate hanno la scheda completa** (richiesta
+dell'utente): `dati/schede/anfiteatro-46.py`, `-97`, `-108`, `-113`, `despedida-60.py`,
+`-70`, scritte dalle letture delle foto e dalle parole del file; le foto sono state
+riguardate una per una per il materiale. **SlackMap letta dall'API per tutte e 24 le
+linee** (`tools/06_slackmap.py` → `dati/slackmap.py`, id dal lotto 31 di i-pietra): i nomi
+entrano nel registro (Double Rainbow, 420, Brifing, Il saso, La lenza, ...); le coordinate
+dei capi sono quelle del segmento disegnato, non misurate (sulla 53 m scartano di 10,8 m dal
+main e di 19,2 m dall'altro capo), e la guida le stampa con questa avvertenza. Voce 62: il
+nome SlackMap «420» con 96,9 m sostiene la 97 m contro la «91» del file, ma la conferma resta
+di chi ha compilato il file. Voce 39: che la «Brifing» di SlackMap sia la 113 m lo dice
+l'abbinamento del lotto 31, non una fonte indipendente. Nessun dubbio chiuso.
+
 **27/10/2026 — verifica del lavoro sulle foto del file.** Dieci copie erano ancora coricate:
 raddrizzate e rilette. Riscritte le voci 59, 60, 61, 63, 64, 65, 66, 67 e 69; nuove le voci
 70-73; aggiornata la 53 (i-pietra al 21/10: 24 linee su 24).
