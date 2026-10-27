@@ -36,7 +36,7 @@ SCHEDA = {
         'didascalia': 'Dove corre la 97 m nella vista i-pietra dell’Anfiteatro: i due cerchi '
                       'sono i capi',
         'nota': 'La 97 m corre accanto alla 113 m, sulla stessa parete. Quale capo sia il '
-                '«vicino» del file, e quale il lato di tensione, non è noto.',
+                '«vicino» del file non è noto.',
     },
 
     'lato_a': {
@@ -46,43 +46,28 @@ SCHEDA = {
     },
     'lato_b': {
         'titolo': 'Lato «lontano» del file',
-        'voci': ['Due brache viola, una larga e una stretta, fra i tronchi, riunite da un '
-                 'grillo a lira',
+        'voci': ['Due brache ad anello viola, una larga con cuciture in vista e una stretta, '
+                 'fra i tronchi, riunite da un grillo a lira',
                  'Un moschettone su un elemento metallico nella roccia, forse una placchetta '
                  + DC,
                  'Una corda arancione con un nodo ad anello su un moschettone a ghiera, allo '
                  'stesso elemento',
-                 'Un palo di legno orizzontale legato a un tronco con molti giri di cordino: '
-                 'parte di un cavalletto? ' + DC,
+                 'Un palo di legno orizzontale con fascia nera, legato a un tronco con molti '
+                 'giri di cordino verde-blu: parte di un cavalletto? ' + DC,
                  'Braca viola con protezione nera (scritta bianca, non leggibile)',
                  'Se le brache girino attorno agli alberi non si vede: ancoraggio su alberi, '
                  'su roccia o su entrambi ' + DC],
     },
     'lati_nota': ('Per il lato «lontano» il file non scrive uno schema. Le sue note: «Tag da '
                   'passare calandosi · Difficoltà a trovare gli ancoraggi · Cavalletto fra '
-                  'alberi in loco».'),
+                  'alberi in loco».'
+                  ' Il 16 maggio 2026 la 420 era montata: si vede sullo sfondo di due foto '
+                  'della 53 m. Chi c’era ricorda come main una «Lemon» (nel catalogo c’è una '
+                  'Lemon Haze 100 m) ' + DC + '; il backup, appeso a festoni, non lo ricorda.'),
 
     'slackmap': True,
-    'foto_in_coda': True,        # avvertenza e «da rilevare» prima delle foto
+    'foto_dopo_lati': True,      # le foto subito sotto i lati che descrivono
     'file_gruppo': True,
-
-    'materiale': {
-        'titolo': 'Il materiale che si vede nelle foto',
-        'colonne': ['Lato', 'Che cosa si vede', 'Marca leggibile'],
-        'larghezze': [70, 331, 90],
-        'righe': [
-            ['lontano', 'Due brache ad anello viola, una larga con cuciture in vista e una '
-                        'stretta', ''],
-            ['lontano', 'Grillo a lira che riunisce le brache', ''],
-            ['lontano', 'Moschettone su un elemento metallico nella roccia ' + DC, ''],
-            ['lontano', 'Corda arancione con nodo ad anello, su moschettone a ghiera', ''],
-            ['lontano', 'Palo di legno con fascia nera, legato a un tronco con cordino '
-                        'verde-blu', ''],
-            ['lontano', 'Protezione nera su una braca viola, scritta bianca', 'non leggibile'],
-        ],
-        'nota': ('Riconosciuto per forma. Nessuna quantità e nessuna misura. Del lato «vicino» '
-                 'non si vede il materiale.'),
-    },
 
     'foto': [
         ('anfiteatro-97_01_lontano_brache-fra-gli-alberi.jpg',

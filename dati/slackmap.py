@@ -240,4 +240,4 @@ def di(id_linea):
 
 
 def mappa(lat, lon):
-    return 'https://www.google.com/maps?q=%.6f,%.6f' % (lat, lon)
+    return 'https://i-pietra.vercel.app/?pos=%.6f,%.6f' % (lat, lon)

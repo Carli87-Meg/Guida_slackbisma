@@ -17,3 +17,10 @@ Le foto segnate «raddrizzata» sono salvate nel file ruotate di 90°: Excel le 
 Le due foto con una persona riconoscibile della 46 e della 113 (`C4_image6`, `C8_image21`) sono state copiate in locale il 27/10/2026 su decisione dell'utente; come tutte le jpg di questa cartella restano fuori da git (`.gitignore`) finché non decide se versionarle. Anche la `C6_image7` della 97 mostra un volto riconoscibile, che alla copia non era stato dichiarato: per lei la decisione manca. Nessuna delle tre è stampata nella guida. Non copiate perché non sono di una linea: le panoramiche AG2/AG3 («Visione complessiva» dell'Anfiteatro), AJ2/BD2 della Despedida e la foto d'archivio della scheda «Anfitealtro».
 
 La 01 si chiamava `anfiteatro-46_01_vicino_cavalletto-e-pulegge.jpg` (le pulegge non si vedono) e poi `…_cavalletto-e-due-fettucce-nere.jpg`; la 02 `…_fettucce-al-nastro-dall-alto.jpg`. Rinominate il 27/10/2026: di nero si vede solo la calza, increspata, e dalle calze escono anelli tubolari colorati; che siano fettucce non si vede.
+
+**27/10/2026, notte — foto spostate** (voce 64: il montaggio con i bungee di un rigger esterno al gruppo, su GAS-OH). Le righe della tabella qui sopra restano come storia; i file ora stanno qui:
+
+| Era | Ora |
+|---|---|
+| `anfiteatro-46_01_vicino_cavalletto-e-due-elementi-in-calza.jpg` | `anfiteatro-53/anfiteatro-53_02_vicino_bungee-e-cavalletto.jpg` |
+| `anfiteatro-46_02_vicino_elementi-in-calza-dall-alto.jpg` | `anfiteatro-53/anfiteatro-53_03_vicino_bungee-dall-alto.jpg` |

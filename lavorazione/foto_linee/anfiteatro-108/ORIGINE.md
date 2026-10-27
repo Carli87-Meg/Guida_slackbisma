@@ -16,3 +16,12 @@ Foto diverse della stessa sosta con il tronco compaiono sia sulla riga della 108
 La 02 e la 04 mostrano una persona riconoscibile da chi la conosce: come tutte le jpg di questa cartella restano fuori da git (`.gitignore`) finché l'utente non decide se versionarle.
 
 Le foto segnate «raddrizzata» sono salvate nel file ruotate di 90°: Excel le mostra dritte perché nel disegno hanno `rot="5400000"`. Le copie sono state ruotate di 90° in senso orario, come le mostra Excel: la 01 al momento della copia, la 02, la 03 e la 04 dopo la verifica del 27/10/2026, rigenerandole dall'originale. Gli originali in `fonti/lineebisma/immagini/` restano come sono.
+
+**27/10/2026, notte — foto spostate** (voci 59 e 63: «in queste foto abbiamo montato la 113»). Le righe della tabella qui sopra restano come storia; i file ora stanno qui:
+
+| Era | Ora |
+|---|---|
+| `anfiteatro-108_01_lontano_sosta-con-tronco.jpg` | `anfiteatro-113/anfiteatro-113_09_lontano_sosta-con-tronco-verso-la-torre.jpg` |
+| `anfiteatro-108_02_lontano_sosta-con-tronco-dall-alto.jpg` | `anfiteatro-113/anfiteatro-113_10_lontano_sosta-con-tronco-dall-alto.jpg` |
+| `anfiteatro-108_03_lato-nd_sosta-con-tronco-altra-vista.jpg` | `anfiteatro-113/anfiteatro-113_11_lontano_sosta-con-tronco-altra-vista.jpg` |
+| `anfiteatro-108_04_lato-nd_linea-dal-bordo-nella-nebbia.jpg` | `anfiteatro-113/anfiteatro-113_12_lato-nd_linea-dal-bordo-nella-nebbia.jpg` |

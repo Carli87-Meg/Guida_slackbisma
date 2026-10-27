@@ -119,3 +119,12 @@ dado, brache ad anello, slinghe tubolari, corda in calza.
   vanno fotografate distese e leggibili, come per la voce 37 della 53 m (voce 68).
 - `[DA CONFERMARE]` Date e persone di ogni foto (nessun EXIF): almeno tre giornate diverse
   per il cavalletto.
+
+## Foto arrivate da altre righe del file (27/10/2026, notte)
+
+- `anfiteatro-113_09_lontano_sosta-con-tronco-verso-la-torre.jpg`: era `anfiteatro-108_01_lontano_sosta-con-tronco.jpg`, letta in `../anfiteatro-108/LETTURA.md`.
+- `anfiteatro-113_10_lontano_sosta-con-tronco-dall-alto.jpg`: era `anfiteatro-108_02_lontano_sosta-con-tronco-dall-alto.jpg`, letta in `../anfiteatro-108/LETTURA.md`.
+- `anfiteatro-113_11_lontano_sosta-con-tronco-altra-vista.jpg`: era `anfiteatro-108_03_lato-nd_sosta-con-tronco-altra-vista.jpg`, letta in `../anfiteatro-108/LETTURA.md`.
+- `anfiteatro-113_12_lato-nd_linea-dal-bordo-nella-nebbia.jpg`: era `anfiteatro-108_04_lato-nd_linea-dal-bordo-nella-nebbia.jpg`, letta in `../anfiteatro-108/LETTURA.md`.
+
+La lettura sta nella cartella d'origine e non si ripete; vale con il nome nuovo.

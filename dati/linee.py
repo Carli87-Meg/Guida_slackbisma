@@ -51,8 +51,8 @@ LIVELLI = {
                'La scheda di rilievo è stata compilata sul posto da chi ha montato: punti, '
                'materiale, coordinate.'),
     DOCUMENTATA: ('documentata',
-                  'Il montaggio è documentato da riprese e fotogrammi, con i dubbi chiusi da '
-                  'chi ha montato.'),
+                  'Il montaggio è documentato da riprese e fotogrammi. Ciò che resta incerto '
+                  'è marcato nella scheda e raccolto nella scheda dei dubbi.'),
 }
 
 # settore secondo la locandina -> settore secondo i-pietra

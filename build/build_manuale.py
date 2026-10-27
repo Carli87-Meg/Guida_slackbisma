@@ -34,7 +34,7 @@ from design import *                                                # noqa: E402
 from schede_linee import (parte_linee, nota_copertura, nota_settori,   # noqa: E402
                           vista_insieme, pagina_protocollo)
 from scheda_linea import (LINEA, C_MET, C_AREA, C_LIVELLO, T, marca,   # noqa: E402
-                          dim, ha_scheda)
+                          dim, ha_scheda, nota_slackmap, NOTA_FILE, NOTA_FOTO)
 from metodo import parte_metodo                                     # noqa: E402
 import linee as REG                                                 # noqa: E402
 from reportlab.platypus import (BaseDocTemplate, PageTemplate, Frame,   # noqa: E402
@@ -152,6 +152,7 @@ def page_end(cv, doc):
     cv.drawRightString(W - RM, 30, str(n))
 
 
+NUMERI_LINEE = {24: 'ventiquattro'}
 NUMERI = {1: 'una', 2: 'due', 3: 'tre', 4: 'quattro', 5: 'cinque', 6: 'sei', 7: 'sette',
           8: 'otto', 9: 'nove', 10: 'dieci', 11: 'undici', 12: 'dodici', 13: 'tredici',
           14: 'quattordici', 15: 'quindici'}
@@ -184,6 +185,8 @@ def FONTI():
          '24 le linee, con gli id abbinati nel catalogo i-pietra; gli ancoraggi della 113 m',
          'letta il 27/10/2026'],
         ['Catalogo i-pietra', 'Le linee censite: tutte e 24', '21/10/2026'],
+        ['i-pietra (app)', 'Regole con le loro fonti, parcheggio; i capi della 53 m messi '
+         'dall’utente: 50 m, 3 m di dislivello', '21/10 e 27/10/2026'],
         ['File LineeBisma del gruppo', 'Lo schema «Ancoraggio standard Bisma» e 31 fotografie '
          'sulle righe di sette linee: tutto «da controllare»', '20/10/2026'],
     ]
@@ -228,7 +231,8 @@ def elenco_capitoli():
                           % (col.hexval()[2:], rif(chiave)),
                           ParagraphStyle('cn', fontName='Pop', leading=12.5,
                                          alignment=TA_RIGHT))])
-            stile.append(('TOPPADDING', (0, r), (-1, r), 5))
+            # righe strette: la parte 4 scivolava da sola su una pagina
+            stile += [('TOPPADDING', (0, r), (-1, r), 3), ('BOTTOMPADDING', (0, r), (-1, r), 3)]
             if r < len(voci):
                 stile.append(('LINEBELOW', (0, r), (-1, r), 0.4, HAIR))
         t = Table(righe, colWidths=[172, FW - 172 - 46, 46])
@@ -270,8 +274,11 @@ def _voci_parte2(c):
                 nota = ('Scheda completa: ancoraggi, materiale, A-frame, varianti'
                         if liv == REG.DOCUMENTATA else
                         'Dalle fotografie del gruppo: dove corre, i capi, che cosa si vede')
+                # senza nome proprio il titolo e' gia' «Anfiteatro · 108 m»: la lunghezza
+                # non si ripete
                 voci.append(('linea:%s' % l['id'], '%s · %s · %d m'
-                             % (REG.titolo(l), l['codice'], l['lunghezza']), nota))
+                             % (l['nome'] or l['settore'], l['codice'], l['lunghezza']),
+                             nota))
     return voci
 
 
@@ -281,8 +288,8 @@ def costruisci():
     c = REG.conteggi()
     fonti = FONTI()
     CAPITOLI[:] = [
-        ('1', 'La Pietra', LINEA, 'accesso e regole da compilare', [
-            ('spot', 'La Pietra di Bismantova', 'Lo spot; accesso e regole, ancora vuoti'),
+        ('1', 'La Pietra', LINEA, 'regole da i-pietra, linee da compilare', [
+            ('spot', 'La Pietra di Bismantova', 'Lo spot; accesso e regole da i-pietra'),
             ('settori', 'I cinque settori', 'La vista d’insieme, nell’ordine della cresta')]),
         ('2', 'Le linee', LINEA, '%d documentata · %d fotografate · %d censite'
          % (c['documentata'], c['fotografata'], c['censita']), _voci_parte2(c)),
@@ -315,7 +322,7 @@ def costruisci():
                'Bismantova e il <b>metodo</b> con cui i %s le montano. È un documento che si '
                'compila: ogni linea ha un livello di documentazione dichiarato, e ciò che '
                'nessuno ha visto o detto non c’è.' % A_CURA, lead))
-    S.append(SP(14))
+    S.append(SP(11))
     S.append(_h3('I quattro livelli di documentazione'))
     S.append(SP(6))
     S.append(data_table(
@@ -324,7 +331,9 @@ def costruisci():
           Paragraph('%d' % c[REG.LIVELLI[k][0]], td)]
          for k in sorted(REG.LIVELLI, reverse=True)],
         [96, FW - 96 - 54, 54], LINEA))
-    S.append(SP(14))
+    S[-1].setStyle(TableStyle([('TOPPADDING', (0, 1), (-1, -1), 4),
+                               ('BOTTOMPADDING', (0, 1), (-1, -1), 4)]))
+    S.append(SP(11))
     S.append(_h3('I marcatori'))
     S.append(SP(5))
     S.append(BU('<font color="#%s">[DA CONFERMARE]</font>: un dato incerto, o contraddetto da '
@@ -334,7 +343,7 @@ def costruisci():
                 'rilievo a %s.' % (MUT.hexval()[2:], rif('protocollo')), LINEA))
     S.append(BU('Niente è dedotto. Una misura plausibile ma sbagliata, in un documento di '
                 'rigging, è un rischio reale: un campo vuoto dichiarato vale di più.', LINEA))
-    S.append(SP(14))
+    S.append(SP(11))
     S.append(_h3('I nomi delle linee'))
     S.append(SP(5))
     S.append(P('Ogni linea ha un <b>codice</b>: la sigla del settore e il numero d’ordine '
@@ -344,17 +353,33 @@ def costruisci():
                'catalogo. I soprannomi del gruppo stanno fra virgolette e mai da soli: '
                '<b>«la 50»</b> è GAS-OH, AN-4, e la Pietra ha anche una 50 m al Settore Giallo.'
                % ', '.join('%s %s' % (REG.CODICE_SETTORE[a], a) for a in REG.AREE), body))
-    S.append(SP(16))
+    S.append(SP(11))
+    # tre note che fino all'edizione 0.4 si ripetevano in ognuna delle sei schede
+    # dalle fotografie: qui una volta, nelle schede il rimando
+    S.append(_h3('Le schede dalle fotografie'))
+    S.append(SP(5))
+    for nota in (nota_slackmap(), NOTA_FILE, NOTA_FOTO):
+        S.append(Paragraph(unito(nota), ParagraphStyle('nota_foto', parent=item, fontSize=8.4,
+                                                       leading=11.6, bulletColor=LINEA),
+                           bulletText='—'))
+    S.append(SP(12))
+    # la frase sul perimetro: il testo obbligatorio parla di «un montaggio», la guida di
+    # ventiquattro linee (proposta approvata il 27/10/2026)
     S.append(callout('Avvertenza',
-                     AVVERTENZA + ' <b>Nessuna parte di questo documento va usata come '
+                     AVVERTENZA + ' Delle %s linee una sola è documentata: per le altre '
+                     'questa guida dice dove sono e che cosa se ne sa, non come montarle.'
+                     % NUMERI_LINEE.get(c['totale'], str(c['totale'])) +
+                     ' <b>Nessuna parte di questo documento va usata come '
                      'riferimento operativo</b> finché i dati marcati non sono stati '
                      'confermati da chi ha eseguito il montaggio.', WARN, '!', FW, True))
-    S.append(SP(16))
+    S.append(SP(12))
     # le edizioni stanno qui, dove si capisce quale si sta leggendo: in coda alle
     # fonti facevano da sole una pagina in piu'
     S.append(KeepTogether([_h3('Le edizioni'), SP(4)]
                           + [P('<b>%s</b> · %s — %s' % e, small) for e in EDIZIONI]))
-    S.append(PageBreak())
+    # niente salto pagina: con le note sulle schede dalle fotografie le edizioni
+    # finiscono sulla pagina dopo, e l'indice le segue invece di lasciarla quasi vuota
+    S.append(SP(24))
 
     # ================================================================ indice
     sec(S, LINEA, 'Indice')
@@ -390,27 +415,38 @@ def costruisci():
     S.append(KeepTogether([
         _h3('Accesso e regole'),
         SP(5),
-        P('Le voci che seguono sono quelle che chi arriva da fuori cerca per prime, e sono '
-          'vuote. La Pietra è area protetta e falesia storica: vincoli, divieti stagionali e '
-          'accordi entrano qui solo quando li fornisce chi frequenta lo spot, mai per '
-          'deduzione. Il foglio «Rilievo dello spot» del fascicolo raccoglie le domande.',
+        # Dal 27/10/2026 le voci vengono da i-pietra, indicata dall'utente come fonte
+        # (dubbi 4 e 5): sezioni «Regole della Pietra» e «Come arrivare», luogo «Parcheggio»,
+        # con le fonti che l'app cita e la data del suo controllo (21/10/2026).
+        P('Accesso e regole vengono da <b>i-pietra</b>, l’app della Pietra, che per ogni voce '
+          'cita la sua fonte: il Comune di Castelnovo ne’ Monti, il Parco nazionale, la '
+          'Regione per il sito Natura 2000. Nessuna di queste voci è scritta per le '
+          'highline: ciò che riguarda le linee resta da rilevare, e il foglio «Rilievo dello '
+          'spot» del fascicolo raccoglie le domande. Una planimetria con i sentieri non c’è '
+          'ancora: la vista d’insieme della pagina seguente serve a riconoscere la parete.',
           body),
         SP(10),
         two_cols(
             gear_block('Accesso', [marca(x) for x in [
-                'Avvicinamento a ciascun settore: da rilevare',
-                'Parcheggio e punto di partenza: da rilevare',
-                'Tempi di avvicinamento: da rilevare',
-                'Rifugio, acqua, punti di appoggio: da rilevare']], LINEA),
+                'Parcheggio al Piazzale Dante, circa 880 m: 47 posti auto e 14 moto. A '
+                'pagamento dalle 8 alle 20, ogni giorno dal 1° giugno al 30 settembre e il '
+                'sabato e la domenica il resto dell’anno; gratis in banchina lungo la strada',
+                'Navetta «Bismantino» dal centro di Castelnovo: giorni e orari non ancora '
+                'pubblicati dal Comune',
+                'Al piazzale bagni pubblici e fontanella; poco sopra il Rifugio della Pietra',
+                'Fino a ciascuna linea: i-pietra porta al punto, dal link nella scheda',
+                'Tempi di avvicinamento alle linee: da rilevare']], LINEA),
             gear_block('Regole e contatti', [marca(x) for x in [
-                'Autorizzazioni e accordi con il gestore: da rilevare',
-                'Divieti stagionali, nidificazione: da rilevare',
-                'Linee lasciate montate, notte, permarig: da rilevare',
-                'Emergenze: numeri e punto di raccolta: da rilevare',
+                'La Pietra è sito Natura 2000 (IT4030008): piante, animali e habitat protetti',
+                'Uccelli che nidificano in parete: da febbraio ad aprile è vietato sorvolare '
+                'la Pietra. Se valga anche per le highline: da rilevare',
+                'Droni: serve l’autorizzazione del Parco; entro 500 m dalle pareti anche la '
+                'valutazione d’incidenza',
+                'Zone e vie sotto la parete chiuse per ordinanza; in vetta solo a piedi',
+                'Emergenze: 112',
+                'Accordi con il gestore per le highline; linee lasciate montate, notte, '
+                'permarig: da rilevare',
                 'Chi tiene la guida nel gruppo: da rilevare']], LINEA))]))
-    S.append(SP(10))
-    S.append(P('Una planimetria con sentieri e settori non c’è ancora: la vista d’insieme '
-               'della pagina seguente serve a riconoscere la parete, non a muoversi.', small))
     S.append(PageBreak())
 
     sec(S, LINEA, 'I settori')
@@ -470,8 +506,12 @@ def costruisci():
         ['Come lo chiamano', 'Che cos’è'],
         [['slinga, slinghe', 'Braca ad anello industriale, calza tubolare'],
          ['banana', 'Weblock, il bloccante del lato tensione'],
-         ['BFK', 'Moschettone d’acciaio di grandi dimensioni'],
+         ['BFK', Paragraph(marca('Il nodo fatto con il backup, secondo chi ha montato («se non '
+                                 'sbaglio»); la sigla sta per «big f*cking knot». Nell’audio, '
+                                 '«corda rosa del backup con BFK» [DA CONFERMARE]'), td)],
          ['delta', 'Maglia rapida a forma di delta'],
+         ['main, backup', 'Nel file del gruppo, la linea che si cammina e la sua linea '
+                          'di backup'],
          ['sosta main', 'Ancoraggio principale'],
          ['sosta backup', 'Ancoraggio di sicurezza, indipendente'],
          ['blocco del backup', 'Collegamento che prende sosta main e sosta backup'],
@@ -482,8 +522,7 @@ def costruisci():
          ['paranchino', 'Piccolo paranco di tensionamento'],
          ['cavalletto', 'L’A-frame, nel file del gruppo'],
          ['«la 50»', 'GAS-OH, la 53 m dell’Anfiteatro (AN-4). La 50 m del Settore Giallo '
-                     'è SG-3, un’altra linea'],
-         ['«slide next»', 'Termine non identificato, forma incerta: [DA CONFERMARE]']],
+                     'è SG-3, un’altra linea']],
         [150, 341], LINEA))
     # righe strette in tutte e due le tabelle: cosi' stanno in una pagina sola
     S[-1].setStyle(TableStyle([('TOPPADDING', (0, 1), (-1, -1), 4),
@@ -526,9 +565,10 @@ def costruisci():
                lead))
     S.append(SP(10))
     tab = data_table(['Fonte', 'Che cosa fornisce', 'Data'], fonti, [150, 246, 95], LINEA)
-    # righe strette: con tredici fonti il colophon scivolava da solo su una pagina
-    tab.setStyle(TableStyle([('TOPPADDING', (0, 1), (-1, -1), 4),
-                             ('BOTTOMPADDING', (0, 1), (-1, -1), 4)]))
+    # righe strette: con tredici fonti il colophon scivolava da solo su una pagina, e
+    # con quattordici di nuovo (27/10/2026)
+    tab.setStyle(TableStyle([('TOPPADDING', (0, 1), (-1, -1), 3),
+                             ('BOTTOMPADDING', (0, 1), (-1, -1), 3)]))
     S.append(tab)
     S.append(SP(8))
     S.append(P(nota_copertura() + ' ' + nota_settori(), small))

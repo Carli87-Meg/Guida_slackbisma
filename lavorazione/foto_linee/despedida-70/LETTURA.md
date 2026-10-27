@@ -64,3 +64,9 @@ un alberello; il tipo di ancoraggio è `[DA CONFERMARE]`.
 - `[DA CONFERMARE]` Se l'highliner della 60_01 sia sulla linea della 70 (stessa scena della
   02).
 - `[DA CONFERMARE]` Date e persone (nessun EXIF; estate in 01, autunno in 02-04).
+
+**27/10/2026, notte — foto spostate** (voce 66: «questa foto non è di despedida ma della 50 di anfiteatro»). Le righe della tabella qui sopra restano come storia; i file ora stanno qui:
+
+| Era | Ora |
+|---|---|
+| `despedida-70_01_vicino_cavalletto-e-linea.jpg` | `anfiteatro-53/anfiteatro-53_04_vicino_cavalletto-di-due-pali-estate.jpg` |

@@ -476,6 +476,67 @@ def two_cols(a, b, gap=14, w=FW):
     return t
 
 
+class DueColonne(Flowable):
+    """Due blocchi affiancati (gear_block) che, se non entrano, continuano sulla pagina dopo.
+
+    two_cols e' una tabella di una riga sola, e una riga non si spezza: i due lati di una
+    linea, quando non entravano sotto la figura, saltavano interi alla pagina dopo e
+    lasciavano un terzo di pagina bianco. Qui ogni colonna si spezza per conto suo, e la
+    testata colorata si ripete in cima alla continuazione.
+    """
+
+    def __init__(self, a, b, gap=14, w=FW, minimo=70):
+        self.a, self.b, self.gap, self.w, self.minimo = a, b, gap, w, minimo
+        self.cw = (w - gap) / 2
+        for t in (a, b):
+            if isinstance(t, Table):
+                t.repeatRows = 1
+        self._t = two_cols(a, b, gap, w)
+
+    def wrap(self, aw, ah):
+        self.width, self.height = self._t.wrap(aw, ah)
+        return self.width, self.height
+
+    def draw(self):
+        self._t.drawOn(self.canv, 0, 0)
+
+    @staticmethod
+    def _voci(t):
+        """Le voci di una parte di colonna, senza la testata."""
+        return len(t._cellvalues) - 1
+
+    def _spezza(self, t, ah):
+        """Spezza una colonna lasciando almeno due voci per parte: una voce sola in
+        cima alla pagina dopo sembrava un errore (Brifing, edizione 0.4)."""
+        h = ah
+        while h >= self.minimo:
+            pezzi = t.split(self.cw, h)
+            if len(pezzi) < 2:
+                return None
+            if self._voci(pezzi[0]) >= 2 and self._voci(pezzi[1]) >= 2:
+                return pezzi[0], pezzi[1]
+            if self._voci(pezzi[0]) < 2:
+                return None
+            h -= 8
+        return None
+
+    def split(self, aw, ah):
+        if ah < self.minimo:
+            return []
+        parti = []
+        for t in (self.a, self.b):
+            if t.wrap(self.cw, ah)[1] <= ah:
+                parti.append((t, Spacer(1, 0)))
+                continue
+            pezzi = self._spezza(t, ah)
+            if pezzi is None:
+                return []
+            parti.append(pezzi)
+        (a1, a2), (b1, b2) = parti
+        return [two_cols(a1, b1, self.gap, self.w),
+                DueColonne(a2, b2, self.gap, self.w, self.minimo)]
+
+
 def callout(title, text, color=BRAND, icon='!', w=FW, strong=False):
     """Riquadro di avviso / nota."""
     tc = WHITE if strong else INK

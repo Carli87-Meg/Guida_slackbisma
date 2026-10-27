@@ -102,10 +102,11 @@ LINEE = {
         # calza, dalle calze escono anelli lilla e giallo-verde; prima qui stava «due
         # fettucce nere», che non si vede (DUBBI 64). «SPIDER» e' sull'etichetta di una
         # protezione. Dietro la sosta di 03-04 due elementi verticali: legno solo uno.
-        'foto_vicino': ('cavalletto di pali di legno (forse tre d’autunno [DA CONFERMARE], due '
-                        'd’estate); due elementi in calza nera con anelli lilla e giallo-verde '
-                        'ai capi (su uno, una protezione «SPIDER») che convergono su connettori '
-                        'e un anello arancione [DA CONFERMARE: che cosa siano]'),
+        # 27/10/2026: la 01 e la 02 erano il montaggio con i bungee su GAS-OH (DUBBI 64),
+        # ora anfiteatro-53_02 e _03. Resta la 05, d'estate.
+        'foto_vicino': ('cavalletto di due pali di legno legati con una fettuccia azzurra '
+                        '(estate); brache viola e lilla, slinghe verdi; due elementi neri con '
+                        'calza verso la parete [DA CONFERMARE: che cosa siano]'),
         'foto_lontano': ('un punto fisso su roccia: placchetta con dado e grillo a lira, brache '
                          'lilla; il nastro bianco avvolto su un elemento metallico [DA '
                          'CONFERMARE: che cosa sia]; dietro, due elementi verticali, uno di '
@@ -142,9 +143,9 @@ LINEE = {
         'note': 'Tag da passare calandosi + Difficolta a trovare gli ancoraggi - '
                 'Cavalletto fra alberi in loco',
         'tipologia': 'Highline',
-        'foto_vicino': ('linee controluce verso la torre di fronte; il file ritaglia la foto su un '
-                        'ancoraggio, non leggibile, da cui parte una linea [DA CONFERMARE: se '
-                        'sia la 97]'),
+        # dubbio 69, utente 27/10/2026: da sinistra la 113, la 108 e la 97
+        'foto_vicino': ('linee controluce verso la torre di fronte: da sinistra la 113, la 108 '
+                        'e la 97, che parte dall’ancoraggio su cui il file ritaglia la foto'),
         'foto_lontano': ('brache viola fra gli alberi, riunite da un grillo; un moschettone su un '
                          'elemento metallico sulla roccia, forse una placchetta; una corda '
                          'arancione annodata; un palo legato a un tronco '
@@ -166,20 +167,13 @@ LINEE = {
         'note': 'Tag da passare calandosi + Difficolta a trovare gli ancoraggi',
         'tipologia': 'Highline',
         'foto_vicino': None,
-        'foto_lontano': ('la sosta con il tronco che il file mette anche sulla riga della 113 [DA '
-                         'CONFERMARE: di quale linea sia]: un tronco con la corteccia, coperto '
-                         'in parte da un’imbottitura bianca e legato con cordino viola; un '
-                         'albero subito accanto; corde e brache che escono verso l’interno [DA '
-                         'CONFERMARE: ancorate a che cosa]'),
-        # U7 e L7: sulla riga della 108 ma fuori dalle colonne dei lati. U7 (108_03) e'
-        # un'altra vista della sosta; L7 (108_04) e' d'autunno (LETTURA 108).
-        'foto_fuori': ('un’altra vista della sosta; d’autunno, la linea dal bordo nella '
-                       'nebbia [DA CONFERMARE: se sia la stessa sosta]'),
-        # per la scheda di rilievo: chi va a rilevare puo' cercarla sul capo sbagliato
-        'nota_rilievo': ('Fra queste c’è la sosta con il tronco, che il file mette anche sulla '
-                         'riga della 113 m: di quale linea sia [DA CONFERMARE].'),
-        'da_confermare': 'dove siano gli alberi e lo spit del file; lato di tensione; data delle '
-                         'foto',
+        # 27/10/2026: le quattro foto della riga (D7, U7, L7) sono della 113 (DUBBI 59 e
+        # 63, «in queste foto abbiamo montato la 113»): ora anfiteatro-113_09-12. Della
+        # 108 non resta nessuna foto, e la linea e' censita.
+        'foto_lontano': None,
+        'nota_rilievo': ('Le quattro foto che il file mette su questa riga, con la sosta con il '
+                         'tronco, sono della 113 m: della 108 non c’è nessuna foto.'),
+        'da_confermare': 'dove siano gli alberi e lo spit del file; lato di tensione',
     },
     'anfiteatro-113': {
         # Cavalletto: due pali tondi (02, 03, 08), tre pali (01), due assi squadrate di
@@ -197,15 +191,15 @@ LINEE = {
         # La seconda linea a festoni sotto la linea (01, 03, 08): che sia il backup e'
         # una lettura, come per la 53 m (DUBBI 55 e 74).
         'foto_vicino': ('cavalletti di legno in tre forme (due pali tondi, tre pali, due assi '
-                        'squadrate); la linea verso una torre di roccia e, sotto, una seconda '
-                        'linea a festoni [DA CONFERMARE: se sia il backup]'),
-        'foto_lontano': ('la sosta con il tronco che il file mette anche sulla riga della 108 [DA '
-                         'CONFERMARE: di quale linea sia]: un tronco con la corteccia, coperto '
+                        'squadrate); la linea verso una torre di roccia e, sotto, il backup '
+                        'appeso a festoni'),
+        'foto_lontano': ('la sosta con il tronco (anche nelle quattro foto che il file metteva '
+                         'sulla riga della 108): un tronco con la corteccia, coperto '
                          'in parte da un’imbottitura bianca, sotto le slinghe verdi; un albero '
                          'accanto; una slinga su moschettone a ghiera e placchetta con dado; '
                          'elementi metallici nella roccia [DA CONFERMARE: numero e tipo]'),
-        'nota_rilievo': ('Fra queste c’è la sosta con il tronco, che il file mette anche sulla '
-                         'riga della 108 m: di quale linea sia [DA CONFERMARE].'),
+        'nota_rilievo': ('La sosta con il tronco è di questa linea: il file la metteva anche '
+                         'sulla riga della 108 m.'),
         # SlackMap e' una terza fonte, non il file ne' le foto: sta fra le cose da
         # confermare, non nella riga «nelle foto» (DUBBI 39)
         'da_confermare': ('che cosa faccia il tronco; numero e tipo dei punti (su SlackMap la '
@@ -246,13 +240,13 @@ LINEE = {
         'persone': (None, None),
         'note': None,
         'tipologia': 'Freestyle / Highline',
-        'foto_vicino': 'cavalletto di due pali di legno legati in cima; la linea verso una '
-                       'cima boscosa',
+        # 27/10/2026: la foto del vicino (70_01) era della 53 m, ora anfiteatro-53_04
+        'foto_vicino': None,
         'foto_lontano': ('cavalletto di tre pali; slinghe verdi annodate a una corda doppia che '
                          'esce dall’inquadratura; una slinga su una protezione bianca attorno '
                          'a un masso, fino a un alberello [DA CONFERMARE: a che cosa sia '
                          'chiusa]'),
-        'da_confermare': 'se il cavalletto stia ai due capi; a che cosa sia ancorata la corda '
+        'da_confermare': 'il lato «vicino», senza foto; a che cosa sia ancorata la corda '
                          'doppia; lato di tensione; data delle foto',
     },
 }
@@ -269,24 +263,17 @@ def di(id_linea):
 # rilievo, dove servono a chi va a rilevare (edizione 0.4, decisione E).
 SINTESI = {
     'anfiteatro-46': (
-        'A un capo un cavalletto di pali di legno (forse tre d’autunno [DA CONFERMARE], due '
-        'd’estate); all’altro un punto fisso su roccia: placchetta con dado e grillo a lira, '
-        'brache lilla. Due elementi in calza nera convergono su connettori e un anello '
-        'arancione: che cosa siano [DA CONFERMARE].'),
+        'A un capo un cavalletto di due pali di legno, d’estate; all’altro un punto fisso su '
+        'roccia: placchetta con dado e grillo a lira, brache lilla.'),
     'anfiteatro-97': (
         'Linee in controluce verso la torre di fronte. A un capo brache viola fra gli alberi, '
         'riunite da un grillo, un moschettone su un elemento metallico nella roccia e un palo '
         'legato a un tronco: se l’ancoraggio sia sugli alberi, sulla roccia o su entrambi '
         '[DA CONFERMARE]. Il file la chiama «91»: che sia questa linea [DA CONFERMARE].'),
-    'anfiteatro-108': (
-        'La sosta con il tronco: un tronco con la corteccia, in parte imbottito e legato con '
-        'cordino viola, un albero accanto, corde e brache verso l’interno. Il file mette la '
-        'stessa sosta anche sulla riga della 113 m: di quale linea sia [DA CONFERMARE]. '
-        'D’autunno, la linea dal bordo nella nebbia.'),
     'anfiteatro-113': (
         'Cavalletti di legno in tre forme (due pali tondi, tre pali, due assi squadrate); la '
-        'linea verso una torre di roccia e, sotto, una seconda linea a festoni '
-        '[DA CONFERMARE: se sia il backup]. All’altro capo la sosta con il tronco, una '
+        'linea verso una torre di roccia e, sotto, il backup a festoni. All’altro capo la '
+        'sosta con il tronco, una '
         'slinga su moschettone a ghiera e placchetta con dado.'),
     'despedida-60': (
         'Un tronco sottile in piedi con protezione, slinga e corda arancione; accanto un '
@@ -294,10 +281,9 @@ SINTESI = {
         'fettuccia «GIBBON» passa accanto a tre moschettoni sul bordo e gira attorno alla '
         'base di un albero: se l’ancoraggio sia sugli alberi [DA CONFERMARE].'),
     'despedida-70': (
-        'A un capo un cavalletto di due pali legati in cima; all’altro uno di tre pali, '
-        'slinghe verdi annodate a una corda doppia e una protezione bianca attorno a un '
-        'masso, fino a un alberello: a che cosa sia chiusa [DA CONFERMARE]. Le foto dei due '
-        'capi sono di stagioni diverse.'),
+        'A un capo un cavalletto di tre pali, slinghe verdi annodate a una corda doppia e '
+        'una protezione bianca attorno a un masso, fino a un alberello: a che cosa sia chiusa '
+        '[DA CONFERMARE]. Dell’altro capo nessuna foto.'),
 }
 
 

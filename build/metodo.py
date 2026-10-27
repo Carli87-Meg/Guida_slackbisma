@@ -81,8 +81,13 @@ def tabella_scheda_sosta():
         voci = [' '.join(_virgolette(x) for x in riga) for riga in celle]
         righe.append([Paragraph('<b>%s</b>' % blocco, td),
                       Paragraph(' · '.join(voci), td)])
-    return data_table(['Blocco del file', 'Celle, con le parole del file'],
-                      righe, [118, FW - 118], color=C_MET)
+    t = data_table(['Blocco del file', 'Celle, con le parole del file'],
+                   righe, [118, FW - 118], color=C_MET)
+    # righe strette: cosi' lo schema sta sotto la tabella del materiale, e il capitolo 3
+    # tiene sulla sua pagina la fotografia della sosta
+    t.setStyle(TableStyle([('TOPPADDING', (0, 1), (-1, -1), 4),
+                           ('BOTTOMPADDING', (0, 1), (-1, -1), 4)]))
+    return t
 
 
 def parte_metodo():
@@ -166,9 +171,9 @@ def parte_metodo():
         marcatori=_marcatori('Il materiale', 'm2')))
     S.append(SP(12))
     righe = [
-        ['I punti', 'Placchette — in loco o da portare [DA CONFERMARE]'],
+        ['I punti', 'Placchette: sulla 53 m oggi montate in loco; sulle altre linee da rilevare'],
         ['La sosta main', 'Brache ad anello industriali («slinghe»)'],
-        ['La sosta backup', 'Corde, con un connettore d’acciaio (BFK)'],
+        ['La sosta backup', 'Corde, chiuse con un nodo, il «BFK» [DA CONFERMARE]'],
         ['Collegare i punti', 'Una corda, annodata fra i punti'],
         ['Sull’ancoraggio', 'Carrucola bloccante — vista sull’ancoraggio statico della 53 m; '
                             'funzione [DA CONFERMARE]'],
@@ -185,7 +190,7 @@ def parte_metodo():
     S.append(SP(8))
     S.append(P('L’elenco di GAS-OH, la 53 m dell’Anfiteatro, con le quantità, è a '
                + rif('materiale:anfiteatro-53', 'pagina [rimando]') + '.', small))
-    S.append(SP(18))
+    S.append(SP(12))
     # Lo schema del gruppo: la scheda «Sosta Bisma Standard» del file LineeBisma
     # (20/10/2026). Decisione D6: diventa una fonte dopo il controllo con chi l'ha
     # compilato, non ancora avvenuto. Le ambiguita': dubbi 70, 71, 72.
@@ -253,8 +258,8 @@ def parte_metodo():
         BU('Le due soste si allestiscono <b>in parallelo</b>: mentre una persona lavora sul '
            'lato tensione, un’altra raggiunge il lato statico per costruire la sosta di là.',
            C_MET),
-        BU('La backup si collega con un <b>connettore d’acciaio</b> — il BFK, il moschettone '
-           'grande.', C_MET),
+        BU(marca('La backup si chiude con il <b>BFK</b>, il nodo fatto con la corda di backup '
+                 '[DA CONFERMARE].'), C_MET),
         BU('Il colore è un principio, non una convenzione fissa: il 22 agosto, sulla stessa '
            'linea, la corda fra i punti era verde.', C_MET)]))
     S.append(SP(18))
@@ -265,9 +270,10 @@ def parte_metodo():
           'calza. Se l’etichetta non si legge, la portata non è nota.', body),
         SP(10),
         callout('Il colore non è una portata',
+                # le due ragioni di prima (colore che sbiadisce, codifiche dei costruttori)
+                # erano conoscenza generica, senza fonte: tolte il 27/10/2026
                 'Una calza viola con una riga scura sembra una portata dichiarata, ma non lo '
-                'è: il colore sbiadisce al sole, le codifiche cambiano fra costruttori, e una '
-                'riga cucita non è un’indicazione di portata. <b>Vale solo l’etichetta</b>.',
+                'è. <b>Vale solo l’etichetta</b> cucita sulla calza.',
                 WARN, '!', FW, True)]))
     S.append(SP(18))
     S.append(_apre(

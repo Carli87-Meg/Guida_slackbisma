@@ -44,14 +44,19 @@ SCHEDA = {
     },
     'lato_b': {
         'titolo': 'Lato «lontano» del file',
-        'voci': ['Una fettuccia piatta nera «GIBBON» che gira attorno alla base di un albero '
+        'voci': ['Una fettuccia piatta nera, scritta gialla «GIBBON», che gira attorno alla '
+                 'base di un albero '
                  'grosso e, al bordo, passa accanto a tre moschettoni a ghiera: se sia una '
                  'sola, e dove finisca ' + DC,
+                 'Sulla fettuccia due protezioni: una verde alla base dell’albero, una rossa '
+                 'legata con laccio verde',
                  'Una corda arancione annodata attorno allo stesso albero',
-                 'Sul bordo un tronco sottile in piedi, con una protezione azzurra a fantasia, '
+                 'Una corda verde-azzurra doppia; un cordino bianco con tratti verdi',
+                 'Sul bordo un tronco sottile in piedi, con una protezione azzurra a fantasia '
+                 '(si legge solo «…INB…»), '
                  'una slinga verde lime e la corda arancione',
-                 'Accanto, un tronco inclinato e due o tre bastoni sottili incrociati in alto: '
-                 'un cavalletto? ' + DC,
+                 'Accanto, un tronco inclinato e due o tre bastoni sottili incrociati in alto, '
+                 'uno chiaro con adesivi: un cavalletto? ' + DC,
                  'Tre moschettoni a ghiera (azzurro, arancione, argento) e una fettuccia rosa',
                  'Punti su roccia: nessuno visibile'],
     },
@@ -60,27 +65,8 @@ SCHEDA = {
                   'è la stessa scena della foto d’autunno di quella linea.'),
 
     'slackmap': True,
-    'foto_in_coda': True,        # avvertenza e «da rilevare» prima delle foto
+    'foto_dopo_lati': True,      # le foto subito sotto i lati che descrivono
     'file_gruppo': True,
-
-    'materiale': {
-        'titolo': 'Il materiale che si vede nelle foto',
-        'colonne': ['Lato', 'Che cosa si vede', 'Marca leggibile'],
-        'larghezze': [70, 331, 90],
-        'righe': [
-            ['lontano', 'Fettuccia piatta nera con scritta gialla', 'GIBBON'],
-            ['lontano', 'Protezioni sulla fettuccia: una verde alla base dell’albero, una rossa '
-                        'legata con laccio verde', ''],
-            ['lontano', 'Corda arancione annodata all’albero e al tronco in piedi', ''],
-            ['lontano', 'Corda verde-azzurra doppia; cordino bianco con tratti verdi', ''],
-            ['lontano', 'Slinga verde lime sul tronco in piedi', ''],
-            ['lontano', 'Protezione azzurra a fantasia sul tronco in piedi', 'solo «…INB…»'],
-            ['lontano', 'Tre moschettoni a ghiera: azzurro, arancione, argento; fettuccia rosa', ''],
-            ['lontano', 'Tronco inclinato e bastoni sottili incrociati, uno chiaro con adesivi '
-                        + DC, ''],
-        ],
-        'nota': 'Riconosciuto per forma, salvo la fettuccia. Nessuna quantità e nessuna misura.',
-    },
 
     'foto': [
         ('despedida-60_02_lontano_tronco-con-corde-e-fettuccia.jpg',

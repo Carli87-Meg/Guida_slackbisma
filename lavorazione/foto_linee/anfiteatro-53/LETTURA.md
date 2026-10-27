@@ -53,3 +53,11 @@ si vede è un gruppo di connettori su cui convergono due elementi in calza nera.
   con l'anello arancione su cui convergono: stesso materiale delle foto 01 e 02 della 46 m,
   stessa stagione, stesso parcheggio sotto. Se siano la stessa giornata, o addirittura la
   stessa sosta, non lo dice nessuna fonte (voce 64).
+
+## Foto arrivate da altre righe del file (27/10/2026, notte)
+
+- `anfiteatro-53_02_vicino_bungee-e-cavalletto.jpg`: era `anfiteatro-46_01_vicino_cavalletto-e-due-elementi-in-calza.jpg`, letta in `../anfiteatro-46/LETTURA.md`.
+- `anfiteatro-53_03_vicino_bungee-dall-alto.jpg`: era `anfiteatro-46_02_vicino_elementi-in-calza-dall-alto.jpg`, letta in `../anfiteatro-46/LETTURA.md`.
+- `anfiteatro-53_04_vicino_cavalletto-di-due-pali-estate.jpg`: era `despedida-70_01_vicino_cavalletto-e-linea.jpg`, letta in `../despedida-70/LETTURA.md`.
+
+La lettura sta nella cartella d'origine e non si ripete; vale con il nome nuovo.

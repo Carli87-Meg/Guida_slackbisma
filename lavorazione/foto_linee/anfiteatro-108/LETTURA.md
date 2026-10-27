@@ -78,3 +78,12 @@ stagione**; che tronco e torre siano gli stessi `[DA CONFERMARE]`.
 - `[DA CONFERMARE]` Se la foto 04 (autunno) mostri la stessa sosta e lo stesso tronco delle
   foto estive, e se il tronco resti sul posto.
 - `[DA CONFERMARE]` Lato di tensione; date e persone (nessun EXIF).
+
+**27/10/2026, notte — foto spostate** (voci 59 e 63: «in queste foto abbiamo montato la 113»). Le righe della tabella qui sopra restano come storia; i file ora stanno qui:
+
+| Era | Ora |
+|---|---|
+| `anfiteatro-108_01_lontano_sosta-con-tronco.jpg` | `anfiteatro-113/anfiteatro-113_09_lontano_sosta-con-tronco-verso-la-torre.jpg` |
+| `anfiteatro-108_02_lontano_sosta-con-tronco-dall-alto.jpg` | `anfiteatro-113/anfiteatro-113_10_lontano_sosta-con-tronco-dall-alto.jpg` |
+| `anfiteatro-108_03_lato-nd_sosta-con-tronco-altra-vista.jpg` | `anfiteatro-113/anfiteatro-113_11_lontano_sosta-con-tronco-altra-vista.jpg` |
+| `anfiteatro-108_04_lato-nd_linea-dal-bordo-nella-nebbia.jpg` | `anfiteatro-113/anfiteatro-113_12_lato-nd_linea-dal-bordo-nella-nebbia.jpg` |

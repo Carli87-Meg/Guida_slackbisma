@@ -109,3 +109,10 @@ vale per la protezione; che cosa ci sia dentro la calza `[DA CONFERMARE]` (voce 
   della stessa sosta: stesso materiale (elementi in calza nera con anelli lilla e
   giallo-verde, braca lilla), stessa stagione, stesso parcheggio sotto. Anche nella 53 m si vedono
   pali di legno con brache avvolte.
+
+**27/10/2026, notte — foto spostate** (voce 64: il montaggio con i bungee di un rigger esterno al gruppo, su GAS-OH). Le righe della tabella qui sopra restano come storia; i file ora stanno qui:
+
+| Era | Ora |
+|---|---|
+| `anfiteatro-46_01_vicino_cavalletto-e-due-elementi-in-calza.jpg` | `anfiteatro-53/anfiteatro-53_02_vicino_bungee-e-cavalletto.jpg` |
+| `anfiteatro-46_02_vicino_elementi-in-calza-dall-alto.jpg` | `anfiteatro-53/anfiteatro-53_03_vicino_bungee-dall-alto.jpg` |

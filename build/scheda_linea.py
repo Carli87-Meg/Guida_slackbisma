@@ -31,7 +31,7 @@ sys.path.insert(0, str(RADICE / 'dati'))
 
 from design import *                                                # noqa: E402,F403
 from reportlab.platypus import (PageBreak, KeepTogether, Table,     # noqa: E402
-                                TableStyle, Paragraph, Spacer)
+                                TableStyle, Paragraph, Spacer, CondPageBreak)
 from PIL import Image as _PILImage                                  # noqa: E402
 
 import linee as REG                                                 # noqa: E402
@@ -244,13 +244,54 @@ def figura_posizione(s, l):
 
 
 # ---------------------------------------------------------------- la scheda completa
+# Spazio fra due sezioni della scheda. Era 16 pt: la Brifing finiva con due righe
+# sole su una pagina nuova.
+STACCO = 12
+
+
 def _h3(t):
     return P('<b>%s</b>' % t, h3)
+
+
+# Titoletto di una sezione che puo' spezzarsi fra due pagine (il materiale, l'elenco
+# di cio' che manca). Il titoletto h3 normale e' legato a cio' che segue
+# (lega_testate) e trascinava con se' la tabella intera: con la tabella del materiale
+# delle linee fotografate restava mezza pagina bianca. Questo va a capo solo se sotto
+# non c'e' posto per qualche riga, poi lascia scorrere.
+h3_flusso = ParagraphStyle('h3_flusso', parent=h3)
+
+
+def _h3_flusso(t, almeno=110):
+    return [CondPageBreak(almeno), P('<b>%s</b>' % t, h3_flusso), SP(5)]
 
 
 def _blocco_lato(d, titolo_default, colore):
     return gear_block(d.get('titolo', titolo_default), [marca(v) for v in d.get('voci', [])],
                       colore, coord=d.get('coord'), url=d.get('url'))
+
+
+# Le note che valgono per tutte le schede dalle fotografie. Fino all'edizione 0.4 si
+# ripetevano in ognuna delle sei; ora stanno una volta in «Come leggere questa guida»
+# (build_manuale.py), e la scheda rimanda li'.
+def nota_slackmap():
+    import slackmap as SM
+    return ('Le coordinate dei capi sono quelle del segmento disegnato sulla mappa di '
+            '<b>SlackMap</b>, letta il %s: <b>non sono misure</b>. Sulla 53 m risultano '
+            'spostate di 10-19 m verso ovest rispetto alle letture del telefono fatte agli '
+            'ancoraggi. Servono ad avvicinarsi, non a trovare un punto; l’ordine dei capi è '
+            'quello di SlackMap e non dice quale sia il lato di tensione. Ogni coordinata '
+            'stampata è un link che apre il punto in i-pietra.' % SM.LETTO_IL)
+
+
+NOTA_FILE = ('Le parole del <b>file del gruppo</b> vengono dal file LineeBisma (20/10/2026), '
+             'che segna tutto «da controllare»: sono proposte, non rilievi. «Vicino» e '
+             '«lontano» sono le sue colonne, non il lato tensione e il lato statico; che cosa '
+             'misuri «Schetchy» il file non lo dice: forse quanto è complicato montare gli '
+             'ancoraggi, o quanto fa paura camminare la linea [DA CONFERMARE].')
+
+NOTA_FOTO = ('Il <b>materiale</b> di una linea fotografata è riconosciuto per forma, non per '
+             'marca, salvo dove la marca si legge, e senza quantità né misure: le foto non le '
+             'danno.')
 
 
 def tabella_slackmap(l, col):
@@ -259,6 +300,8 @@ def tabella_slackmap(l, col):
     Non sono misure: sulla 53 m scartano di 10-19 m verso ovest dalle letture del
     telefono fatte stando agli ancoraggi. Servono ad avvicinarsi, non a trovare un
     punto, e non dicono quale capo sia il «vicino» del file o il lato di tensione.
+    La nota per esteso sta in «Come leggere»; qui resta il rimando, perche' la guida
+    dichiara che non sono misure ogni volta che le stampa.
     """
     import slackmap as SM
     v = l.get('slackmap')
@@ -278,11 +321,8 @@ def tabella_slackmap(l, col):
         SP(5),
         data_table(['Capo', 'Coordinate', 'Che cosa sono'], righe, [60, 130, FW - 190], col),
         SP(5),
-        T('Le coordinate sono quelle del segmento disegnato sulla mappa di SlackMap, letto il '
-          '%s: sulla 53 m risultano spostate di 10-19 m verso ovest rispetto alle letture del '
-          'telefono fatte agli ancoraggi. Servono ad avvicinarsi, non a trovare un punto; '
-          'l’ordine dei capi è quello di SlackMap e non dice quale sia il lato di tensione.'
-          % SM.LETTO_IL, small)])]
+        T('Non sono misure: servono ad avvicinarsi, non a trovare un punto (%s).'
+          % rif('leggere'), small)])]
 
 
 def tabella_file_gruppo(l, col):
@@ -312,16 +352,12 @@ def tabella_file_gruppo(l, col):
     p_v, p_l = c['persone']
     if p_v or p_l:
         righe.append(['Persone (vicino / lontano)', '%s / %s' % (virg(p_v), virg(p_l))])
-    return [KeepTogether([
-        _h3('Che cosa dice il file del gruppo'),
-        SP(5),
+    # a flusso: tenuta intera lasciava un quinto di pagina bianco sopra di se' (Brifing).
+    # Che cosa sia il file, e che cosa valga, lo dice «Come leggere» (NOTA_FILE).
+    return _h3_flusso('Che cosa dice il file del gruppo') + [
         data_table(['Voce', 'Con le parole del file'],
                    [[Paragraph(a, td), Paragraph(b, td)] for a, b in righe],
-                   [150, FW - 150], col),
-        SP(5),
-        T('Dal file LineeBisma del gruppo (20/10/2026), che segna tutto «da controllare»: sono '
-          'proposte, non rilievi. «Vicino» e «lontano» sono le sue colonne, non il lato tensione '
-          'e il lato statico; che cosa misuri «Schetchy» il file non lo dice.', small)])]
+                   [150, FW - 150], col)]
 
 
 def _figura_o_nota(s, l, col):
@@ -352,7 +388,10 @@ def scheda_completa(l, s):
 
     Ordine: testata e pastiglie, dove corre, i due lati, le coordinate di SlackMap,
     le parole del file, il materiale, le fotografie, l'A-frame, le varianti,
-    l'avvertenza propria della linea, che cosa manca. I lati si chiamano
+    l'avvertenza propria della linea, che cosa manca. Con 'foto_dopo_lati' (le
+    schede dalle fotografie) le foto salgono subito sotto i lati che le descrivono.
+    Il materiale, le parole del file e l'elenco di cio' che manca possono spezzarsi
+    fra due pagine. I lati si chiamano
     «tensione» e «statico» solo quando qualcuno lo ha dichiarato ('tensione' e
     'statico' nella scheda); altrimenti portano i nomi che da' la scheda ('lato_a'
     e 'lato_b', per il file del gruppo «vicino» e «lontano») e un colore neutro.
@@ -387,24 +426,32 @@ def scheda_completa(l, s):
     if b:
         blocchi.append(_blocco_lato(b, 'Lato B', tint(col, 0.75)))
     if blocchi:
-        S.append(two_cols(*blocchi[:2]) if len(blocchi) >= 2 else blocchi[0])
+        S.append(DueColonne(*blocchi[:2]) if len(blocchi) >= 2 else blocchi[0])
         for extra in blocchi[2:]:
             S += [SP(10), extra]
         nota = s.get('nota_coordinate') or s.get('lati_nota')
         if nota:
             S += [SP(10), T(nota, small)]
+
+    # ------------------------------------------------ fotografie, subito sotto i lati
+    # Nelle schede dalle fotografie le colonne dei lati descrivono proprio queste
+    # foto: stanno accanto. In coda, una coppia scivolava da sola su una pagina
+    # quasi bianca (p. 14, 28, 35, 39 dell'edizione 0.4).
+    if s.get('foto_dopo_lati'):
+        for v in s.get('foto', []):
+            S += [SP(12), _foto_voce(v, col, id_)]
     if s.get('pagina_dopo_lati'):
         S.append(PageBreak())
     else:
-        S.append(SP(16))
+        S.append(SP(STACCO))
 
     # ------------------------------------------------ dove sono i capi, secondo SlackMap
     if s.get('slackmap'):
-        S += tabella_slackmap(l, col) + [SP(16)]
+        S += tabella_slackmap(l, col) + [SP(STACCO)]
 
     # ------------------------------------------------ le parole del file del gruppo
     if s.get('file_gruppo'):
-        S += tabella_file_gruppo(l, col) + [SP(16)]
+        S += tabella_file_gruppo(l, col) + [SP(STACCO)]
 
     # ------------------------------------------------ il materiale di questa linea
     mat = s.get('materiale')
@@ -418,27 +465,23 @@ def scheda_completa(l, s):
         # scivolava da sola su una pagina quasi vuota
         tab.setStyle(TableStyle([('TOPPADDING', (0, 1), (-1, -1), 4),
                                  ('BOTTOMPADDING', (0, 1), (-1, -1), 4)]))
-        b_ = [_h3(mat.get('titolo', 'Il materiale')), SP(6), tab]
+        # la tabella si spezza, con l'intestazione ripetuta: tenuta intera lasciava
+        # mezza pagina bianca sopra di se' (p. 26 dell'edizione 0.4)
+        S += _h3_flusso(mat.get('titolo', 'Il materiale')) + [tab]
         if mat.get('nota'):
-            b_ += [SP(5), T(mat['nota'], small)]
-        S.append(KeepTogether(b_))
+            S += [SP(5), T(mat['nota'], small)]
         if mat.get('foto'):
             f, cap, ratio, focus = mat['foto']
             S += [SP(14), foto(f, FW, cap, col, ratio=ratio, focus=focus, id_linea=id_)]
         if s.get('pagina_dopo_materiale'):
             S.append(PageBreak())
         else:
-            S.append(SP(16))
-
-    # ------------------------------------------------ avvertenza e «da rilevare» prima
-    # delle foto: nelle schede dalle fotografie (foto_in_coda) l'elenco finiva da solo
-    # su una pagina nuova; le foto, che si spezzano a coppie, chiudono meglio
-    if s.get('foto_in_coda'):
-        S += _coda(s, col)
+            S.append(SP(STACCO))
 
     # ------------------------------------------------ fotografie
-    for v in s.get('foto', []):
-        S += [_foto_voce(v, col, id_), SP(16)]
+    if not s.get('foto_dopo_lati'):
+        for v in s.get('foto', []):
+            S += [_foto_voce(v, col, id_), SP(16)]
 
     # ------------------------------------------------ l'A-frame
     af = s.get('aframe')
@@ -449,18 +492,25 @@ def scheda_completa(l, s):
         b_.append(two_cols(gear_block('Com’è fatto', [marca(v) for v in af.get('come', [])],
                                       C_TEN),
                            gear_block('Da rilevare', af.get('da_rilevare', []), MUT)))
-        S += [KeepTogether(b_), SP(16)]
+        S += [KeepTogether(b_), SP(STACCO)]
 
     # ------------------------------------------------ varianti
     for v in s.get('varianti', []):
         b_ = [_h3(v['titolo']), SP(5), T(v['testo'], body)]
-        if v.get('foto'):
-            f1, c1, f2, c2, ratio, focus = v['foto']
+        # 'foto' e' una coppia, o un elenco di coppie: la prima resta con il testo, le
+        # altre scorrono dopo
+        coppie = v.get('foto') or []
+        if coppie and not isinstance(coppie, list):
+            coppie = [coppie]
+        if coppie:
+            f1, c1, f2, c2, ratio, focus = coppie[0]
             b_ += [SP(10), coppia(f1, c1, f2, c2, ratio, focus, col, id_)]
-        S += [KeepTogether(b_), SP(16)]
+        S += [KeepTogether(b_)]
+        for f1, c1, f2, c2, ratio, focus in coppie[1:]:
+            S += [SP(12), coppia(f1, c1, f2, c2, ratio, focus, col, id_)]
+        S += [SP(STACCO)]
 
-    if not s.get('foto_in_coda'):
-        S += _coda(s, col)
+    S += _coda(s, col)
     while S and isinstance(S[-1], Spacer):
         S.pop()
     S.append(PageBreak())
@@ -472,10 +522,17 @@ def _coda(s, col):
     out = []
     if s.get('avvertenza'):
         titolo, testo = s['avvertenza']
-        out += [callout(titolo, marca(testo), WARN, '!', FW, True), SP(16)]
+        out += [callout(titolo, marca(testo), WARN, '!', FW, True), SP(STACCO)]
     if s.get('da_rilevare'):
-        out += [KeepTogether([_h3('Ancora da rilevare su questa linea'), SP(5)]
-                             + [BUm(x, col) for x in s['da_rilevare']]), SP(16)]
+        # Un elenco breve resta intero: spezzato, lasciava tre righe orfane su una pagina
+        # nuova (108 m). Uno lungo puo' continuare sulla pagina dopo.
+        voci = [BUm(x, col) for x in s['da_rilevare']]
+        if len(voci) <= 8:
+            out += [KeepTogether([_h3('Ancora da rilevare su questa linea'), SP(5)] + voci),
+                    SP(STACCO)]
+        else:
+            out += (_h3_flusso('Ancora da rilevare su questa linea', 70) + voci
+                    + [SP(STACCO)])
     return out
 
 

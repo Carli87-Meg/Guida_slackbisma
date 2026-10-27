@@ -112,8 +112,10 @@ def main():
         out.write('    },\n')
     out.write('}\n\n\n')
     out.write('def di(id_linea):\n    return LINEE.get(id_linea)\n\n\n')
+    # il link di un capo apre il punto in i-pietra (?pos=lat,lng), non Google Maps:
+    # e' l'app che il gruppo usa sulla Pietra
     out.write('def mappa(lat, lon):\n')
-    out.write("    return 'https://www.google.com/maps?q=%.6f,%.6f' % (lat, lon)\n")
+    out.write("    return 'https://i-pietra.vercel.app/?pos=%.6f,%.6f' % (lat, lon)\n")
     DEST.write_text(out.getvalue(), encoding='utf-8', newline='\n')
     print('\nscritto %s (%d linee)' % (DEST, len(righe)))
 

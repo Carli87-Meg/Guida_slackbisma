@@ -501,9 +501,11 @@ def scheda_rilievo(l, primo_di_area=False):
                     'la scheda nella guida dice che cosa mostrano e che cosa ne scrive il '
                     'file. Non documentano il montaggio; il lato di tensione resta da '
                     'dichiarare.' % len(REG.foto_di(l)))
-        c = FC.di(l['id'])
-        if c and c.get('nota_rilievo'):
-            note.append(c['nota_rilievo'])
+    # la nota vale anche per una linea censita: la 108 ha perso le sue foto, che erano
+    # della 113, e chi va a rilevarla deve saperlo
+    c = FC.di(l['id'])
+    if c and c.get('nota_rilievo'):
+        note.append(c['nota_rilievo'])
     return _foglio(REG.nome_catalogo(l), sotto, note, REG.campi_rilievo(), col,
                    spazio_sopra=22 if primo_di_area else 0,
                    checklist=[t for t, _d in REG.FOTO_DA_FARE])

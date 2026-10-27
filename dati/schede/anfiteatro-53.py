@@ -21,8 +21,10 @@ DR = 'da rilevare'
 
 # Dieci letture del 22/08/2026 entro 3 m, a 51,4 m dal main: coordinate dal
 # telefono (EXIF), non un rilievo. Dubbio 3, chiuso.
-MAPPA_T = 'https://www.google.com/maps?q=44.419869,10.412353'
-MAPPA_S = 'https://www.google.com/maps?q=44.419453,10.412072'
+# Il link apre il punto in i-pietra (?pos=lat,lng; sul telefono con l'app installata
+# si apre l'app). La quota del telefono non va nel link: i-pietra la misura a modo suo.
+MAPPA_T = 'https://i-pietra.vercel.app/?pos=44.419869,10.412353'
+MAPPA_S = 'https://i-pietra.vercel.app/?pos=44.419453,10.412072'
 
 SCHEDA = {
     'id': 'anfiteatro-53',
@@ -30,12 +32,19 @@ SCHEDA = {
     # testata: riga sotto il titolo e paragrafo di apertura
     'occhiello': 'detta «la 50» · A-frame sul lato tensione',
     'intro': ('<b>GAS-OH</b> è il nome che la linea ha su SlackMap; sul campo la chiamano '
-              '<b>«la 50»</b>. Come si monta una linea è descritto nella parte 3; qui c’è '
-              'com’è fatta questa.'),
+              '<b>«la 50»</b>. La lunghezza di catalogo è 53 m; fra i due capi messi in '
+              'i-pietra la campata misura 50 m, con il lato di tensione circa 3 m più in basso. '
+              'Come si monta una linea è descritto nella parte 3; qui c’è com’è fatta questa.'),
 
     # pastiglie dei dati, subito sotto la testata: (etichetta, valore)
-    'chips': [('Lunghezza', '53 m · catalogo'),
-              ('Dislivello', DR),
+    # Lunghezza e dislivello: i due capi messi in i-pietra dall'utente il 27/10/2026
+    # (Firestore climbingRoutes/6Y8RO09OmxOxhEZ8SKTg, calibrazione mapCalibration/default,
+    # formule di src/services/mapCalibration.js): 49,7 m, 2,6 m di dislivello con il lato
+    # di tensione piu' basso. Confronto: catalogo e locandina 53 m, SlackMap 52,84 m
+    # (segmento disegnato), GPS del telefono 51,4 m. La calibrazione dichiara 3,5 m di
+    # errore medio sulla posizione; la lunghezza ne risente meno. Dubbi 1 e 2.
+    'chips': [('Lunghezza', '50 m · i-pietra'),
+              ('Dislivello', '3 m · i-pietra'),     # il lato di tensione e' il piu' basso
               ('Ancoraggi', 'roccia · roccia'),       # B3: solo roccia
               ('A-frame', 'lato tensione'),
               ('Montaggi', '2 documentati')],
@@ -54,7 +63,9 @@ SCHEDA = {
     'posizione': {
         'render': 'Anfiteatro',
         'estremi': ((476 / 1354, 299 / 884), (840 / 1354, 337 / 884)),
-        'ritaglio': (0.20, 0.16, 0.82, 0.62),       # sinistra, alto, destra, basso
+        # sinistra, alto, destra, basso. Era 0.16-0.62: con il BFK da confermare la nota sulle
+        # coordinate scivolava da sola su una pagina. I capi stanno a 0.34 e 0.38.
+        'ritaglio': (0.20, 0.18, 0.82, 0.60),
         'colore': (249, 115, 22),
         'didascalia': 'Dove corre la 53 m nella vista i-pietra dell’Anfiteatro: '
                       'i due cerchi sono gli ancoraggi',
@@ -72,7 +83,7 @@ SCHEDA = {
         'coord': '44.419869 · 10.412353 · 1025 m',
         'url': MAPPA_T,
         'voci': ['Sosta main: slinghe viola (quante e quanto lunghe, ' + DR + ')',
-                 'Sosta backup: corde rosa, collegate con 1 BFK',
+                 'Sosta backup: corde rosa, chiuse con il BFK, un nodo ' + DC,
                  '1 weblock («banana») con grillo a lira',
                  '1 paranchino di tensionamento della base',
                  'Blocco del backup su sosta main e sosta backup',
@@ -83,7 +94,9 @@ SCHEDA = {
         'url': MAPPA_S,
         # placchette: viste il 16/05 e il 22/08; il file del gruppo le mette «da
         # portare» (dubbio 70): le fonti si contraddicono, resta rosso
-        'voci': ['3 placchette su bullone: in loco o da portare ' + DC,
+        # dubbio 70: oggi montate (utente, 27/10/2026); se restano, da decidere nel gruppo
+        'voci': ['3 placchette su bullone, oggi montate in loco: se lasciarle o staccarle '
+                 'ogni volta, da decidere',
                  '1 corda verde acqua fra i punti',
                  'Slinga viola e carrucola bloccante',
                  '1 corda azzurra: linea vita',
@@ -92,10 +105,10 @@ SCHEDA = {
     # la scheda e' lunga: come nell'edizione 0.3, pagina nuova dopo i lati e dopo il materiale
     'pagina_dopo_lati': True,
     'pagina_dopo_materiale': True,
+    # I due GPS distano 51,4 m: coerenti con i 50 m fra i capi messi in i-pietra.
     'nota_coordinate': ('Le coordinate sono quelle registrate dal telefono stando agli '
                         'ancoraggi: servono ad avvicinarsi, non a ritrovare il singolo '
-                        'punto, che va cercato a vista. Le due posizioni distano circa '
-                        '51 m, coerente con i 53 m della linea: non è una misura.'),
+                        'punto, che va cercato a vista.'),
 
     # il materiale di questa linea, con le quantita'. Colonne: quantita', articolo,
     # dove si usa, misura. Le celle vuote sono dati non rilevati; il rosso resta
@@ -103,12 +116,13 @@ SCHEDA = {
     'materiale': {
         'titolo': 'Il materiale del montaggio del 16 maggio',
         'righe': [
-            ['3', 'Placchette su bullone — in loco o da portare ' + DC, 'ancoraggio statico', ''],
+            ['3', 'Placchette su bullone — oggi montate in loco', 'ancoraggio statico', ''],
             ['', 'Slinghe viola — brache ad anello industriali', 'sosta main', ''],
             ['', 'Corde rosa', 'sosta backup', ''],
-            ['1', 'BFK, moschettone d’acciaio grande', 'sulla corda rosa del backup', ''],
+            ['1', 'BFK: il nodo fatto con il backup ' + DC, 'sulla corda rosa del backup', ''],
             ['4', 'Maglie rapide delta', '', ''],
-            ['1', '«Mighty Lock», «quello quadratino» — nome incerto ' + DC, 'backup', ''],
+            ['1', '«Mighty Lock», «quello quadratino»: l’anello MightyLock, che fa da weblock ' + DC,
+             'backup', ''],
             ['1', 'Slinga verde lunga, «la più grossa che c’è»', '', ''],
             ['1', 'Slinga piccola viola', '', ''],
             ['≥1', 'Slinga verde e nera', '', ''],
@@ -135,8 +149,8 @@ SCHEDA = {
     # fotografie dei due lati e della linea in opera: coppie
     # (file1, didascalia1, file2, didascalia2, rapporto, fuoco)
     'foto': [
-        # sullo sfondo di IMG_1416 corre un'altra linea dello spot (dubbio 54)
-        ('IMG_1416.jpg', 'Lato tensione: l’A-frame; sullo sfondo, un’altra linea',
+        # sullo sfondo di IMG_1416 corre la 420, la 97 m (dubbio 54, utente 27/10/2026)
+        ('IMG_1416.jpg', 'Lato tensione: l’A-frame; sullo sfondo la 420 (AN-5)',
          'IMG_3329.jpg', 'Lato statico: placchette e slinghe', 0.82, 0.6),
         ('IMG_1401.jpg', 'La linea in opera, percorsa con il leash',
          'IMG_1398.jpg', 'La campata vista dal bordo', 0.68, 0.55),
@@ -176,11 +190,33 @@ SCHEDA = {
                   'materiale di questa variante non è stato rilevato.'),
         'foto': ('IMG_3324.jpg', 'Placchette, slinghe viola e corda annodata',
                  'IMG_3325.jpg', 'Dal grillo a lira ai bungee', 0.72, 0.45),
+    }, {
+        # Foto del file LineeBisma messe sulla riga di altre linee e riconosciute
+        # dall'utente il 27/10/2026: 53_02 e 53_03 erano 46_01 e 46_02 (dubbio 64), 53_04
+        # era 70_01 (dubbio 66); la 53_01 e' sulla riga della 53. Il rigger dei bungee e'
+        # nominato nelle risposte dell'artefatto, non qui: il repository e' pubblico.
+        'titolo': 'Dal file del gruppo: i bungee d’autunno, l’A-frame d’estate',
+        'testo': ('Il file del gruppo ha quattro foto del lato tensione di GAS-OH, con l’A-frame '
+                  'del gruppo; tre stavano sulla riga di altre linee. Tre sono di un '
+                  '<b>montaggio con i bungee</b>, d’autunno, fatto da un rigger esterno al '
+                  'gruppo con la sua attrezzatura: neri i bungee, lilla le slinghe '
+                  '[DA CONFERMARE]. La quarta è d’estate: l’A-frame di due pali, legato in cima '
+                  'con corda color canapa e più in basso con una fettuccia bianca e rossa. Le '
+                  'date non sono note, e il materiale non è stato rilevato.'),
+        'foto': [('anfiteatro-53_02_vicino_bungee-e-cavalletto.jpg',
+                  'I bungee in calza nera verso la linea (autunno)',
+                  'anfiteatro-53_03_vicino_bungee-dall-alto.jpg',
+                  'Gli stessi dall’alto, protezione «SPIDER»', 0.66, 0.5),
+                 ('anfiteatro-53_01_vicino_due-elementi-in-calza-e-pali.jpg',
+                  'Lo stesso montaggio: bungee, brache lilla, A-frame',
+                  'anfiteatro-53_04_vicino_cavalletto-di-due-pali-estate.jpg',
+                  'L’A-frame di due pali, d’estate', 0.66, 0.5)],
     }],
 
     # che cosa resta da rilevare su questa linea (dubbi 1, 2, 28, 37, 38, 39)
     'da_rilevare': [
-        'La lunghezza, misurata sui punti, e il dislivello.',
+        'La lunghezza misurata con un metro sui punti: quella di i-pietra (50 m) viene dai '
+        'capi messi sul modello 3D.',
         'I punti dell’ancoraggio di tensione: quanti e di che tipo.',
         'Una fotografia d’insieme dei tre punti, per l’angolo di apertura.',
         'Diametro e marca del bullone, e se è un tassello meccanico o una barra resinata '

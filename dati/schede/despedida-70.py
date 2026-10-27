@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 """Scheda di La lenza, Despedida 70 m (DE-4): linea fotografata.
 
-Fonti: le quattro fotografie del file LineeBisma (lavorazione/foto_linee/
+Fonti: le tre fotografie del file LineeBisma (lavorazione/foto_linee/
 despedida-70/, lette il 27/10/2026 e riguardate per questa scheda), la tipologia
 del file (che per questa linea non ha altro), il render i-pietra e il segmento
-SlackMap. Dubbi 60, 66.
+SlackMap. La foto del lato «vicino» era della 53 m (utente, 27/10/2026, dubbio 66):
+ora e' la 53_04. Dubbi 60, 66.
 """
 
 DC = '[DA CONFERMARE]'
@@ -12,14 +13,13 @@ DR = 'da rilevare'
 
 SCHEDA = {
     'id': 'despedida-70',
-    'occhiello': 'fotografata · 4 fotografie del gruppo',
+    'occhiello': 'fotografata · 3 fotografie del gruppo',
     'intro': ('<b>La lenza</b> è il nome che la linea ha su SlackMap. Le fotografie del gruppo '
-              'mostrano un cavalletto su tutti e due i lati del file, in due stagioni e di '
-              'forma diversa: se la linea abbia davvero un cavalletto a ciascun capo non si '
-              'ricava dalle immagini. Il lato di tensione non è dichiarato.'),
+              'mostrano un capo solo, il «lontano» del file, d’autunno: un cavalletto di tre '
+              'pali e la sosta sul bordo. Il lato di tensione non è dichiarato.'),
     'chips': [('Lunghezza', '70 m · catalogo'),
               ('Tipologia · file', 'Freestyle/Highline'),
-              ('Cavalletto', 'uno o due capi?'),
+              ('Cavalletto', '3 pali · «lontano»'),
               ('Ancoraggio', 'masso, alberello?'),
               ('Tensione', DR)],
 
@@ -34,21 +34,18 @@ SCHEDA = {
         'didascalia': 'Dove corre la 70 m nella vista i-pietra della Despedida: i due cerchi '
                       'sono i capi',
         'nota': 'La 70 m corre accanto alla 60 m, dallo stesso pilastro. Quale capo sia il '
-                '«vicino» del file, e quale il lato di tensione, non è noto.',
+                '«vicino» del file non è noto.',
     },
 
     'lato_a': {
         'titolo': 'Lato «vicino» del file',
-        'voci': ['Cavalletto di due pali tondi, legati in cima con corda color canapa e più in '
-                 'basso con una fettuccia bianca e rossa (estate)',
-                 'Slinga verde acqua, fettuccia bianca, cordino verde, corda bianca',
-                 'La linea, bianca con tratti scuri, verso una cima boscosa',
-                 'Punti e ancoraggio a terra: non in inquadratura'],
+        'voci': ['Nessuna foto: quella che il file metteva qui è della 53 m dell’Anfiteatro'],
     },
     'lato_b': {
         'titolo': 'Lato «lontano» del file',
         'voci': ['Cavalletto di tre pali tondi legati in cima con una slinga rossa (autunno)',
-                 'Due slinghe verdi che convergono in un nodo di cordino grigio; da lì una '
+                 'Due slinghe verdi tubolari (su una, una scritta: forse «GIBBON») che '
+                 'convergono in un nodo di cordino grigio; da lì una '
                  'corda chiara doppia verso l’interno: ancorata a che cosa ' + DC,
                  'Una slinga verde su una protezione tubolare bianca che gira attorno a un '
                  'masso sul bordo e arriva alla base di un alberello: chiusa su quale dei due '
@@ -57,45 +54,23 @@ SCHEDA = {
                  'Sulla linea, vicino al cavalletto, un tratto in calza rossa',
                  'Punti su roccia: nessuno visibile'],
     },
-    'lati_nota': ('Per la 70 m il file ha solo la tipologia: nessuno schema, nessuna nota. Le '
-                  'foto dei due lati sono di stagioni diverse: potrebbero essere dello stesso '
-                  'capo in due giornate, o di linee diverse.'),
+    'lati_nota': ('Per la 70 m il file ha solo la tipologia: nessuno schema, nessuna nota.'),
 
     'slackmap': True,
-    'foto_in_coda': True,        # avvertenza e «da rilevare» prima delle foto
+    'foto_dopo_lati': True,      # le foto subito sotto i lati che descrivono
     'file_gruppo': True,
 
-    'materiale': {
-        'titolo': 'Il materiale che si vede nelle foto',
-        'colonne': ['Lato', 'Che cosa si vede', 'Marca leggibile'],
-        'larghezze': [70, 331, 90],
-        'righe': [
-            ['vicino', 'Cavalletto di due pali tondi; legature in corda color canapa e '
-                       'fettuccia bianca e rossa', ''],
-            ['vicino', 'Slinga verde acqua, fettuccia bianca, cordino verde, corda bianca', ''],
-            ['lontano', 'Cavalletto di tre pali tondi; legatura con slinga rossa', ''],
-            ['lontano', 'Slinghe verdi tubolari (su una, una scritta: forse «GIBBON»)', ''],
-            ['lontano', 'Nodo di cordino grigio su una corda chiara doppia', ''],
-            ['lontano', 'Protezione tubolare bianca attorno a un masso, fino a un alberello', ''],
-            ['lontano', 'Fettucce gialla e azzurra; corda grigia a matassa', ''],
-            ['lontano', 'Tratto in calza rossa sulla linea, vicino al cavalletto', ''],
-        ],
-        'nota': 'Riconosciuto per forma. Nessuna quantità e nessuna misura.',
-    },
-
     'foto': [
-        ('despedida-70_01_vicino_cavalletto-e-linea.jpg',
-         '«Vicino»: cavalletto di due pali e la linea (estate)',
-         'despedida-70_02_lontano_cavalletto-e-linea.jpg',
-         '«Lontano»: cavalletto di tre pali, nebbia (autunno)', 0.66, 0.5),
-        ('despedida-70_03_lontano_sosta-sul-bordo.jpg',
-         'Le slinghe verdi annodate alla corda doppia',
-         'despedida-70_04_lontano_slinga-al-bordo.jpg',
-         'La protezione bianca attorno al masso', 0.66, 0.5),
+        ('despedida-70_02_lontano_cavalletto-e-linea.jpg',
+         '«Lontano»: cavalletto di tre pali, nebbia (autunno)',
+         'despedida-70_03_lontano_sosta-sul-bordo.jpg',
+         'Le slinghe verdi annodate alla corda doppia', 0.66, 0.5),
+        {'file': 'despedida-70_04_lontano_slinga-al-bordo.jpg',
+         'cap': 'La protezione bianca attorno al masso', 'ratio': 0.5, 'focus': 0.5},
     ],
 
     'da_rilevare': [
-        'Se c’è un cavalletto a tutti e due i capi, o se le due foto sono dello stesso capo.',
+        'Il lato «vicino» del file: nessuna foto, nessuna nota.',
         'Quale lato è quello di tensione.',
         'A che cosa è ancorata la corda doppia; che cosa c’è sotto la protezione bianca e su '
         'che cosa è chiusa: il masso, l’alberello o entrambi.',

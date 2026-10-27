@@ -12,3 +12,9 @@ Nome dei file: `<linea>_<NN>_<lato>_<soggetto>.jpg`. NN è solo l'ordine (la 01 
 | `despedida-70_04_lontano_slinga-al-bordo.jpg` (822×1096, raddrizzata) | D5 | lontano | `despedita-dacontrollare_D5_image32.jpeg` | Una slinga verde collegata a una protezione tubolare bianca che gira attorno a un masso sul bordo e arriva alla base di un alberello; nuvole (autunno) | nessuna |
 
 Le foto segnate «raddrizzata» sono salvate nel file ruotate di 90°: Excel le mostra dritte perché nel disegno hanno `rot="5400000"`. Le copie sono state ruotate di 90° in senso orario, come le mostra Excel, al momento della copia. Gli originali in `fonti/lineebisma/immagini/` restano come sono.
+
+**27/10/2026, notte — foto spostate** (voce 66: «questa foto non è di despedida ma della 50 di anfiteatro»). Le righe della tabella qui sopra restano come storia; i file ora stanno qui:
+
+| Era | Ora |
+|---|---|
+| `despedida-70_01_vicino_cavalletto-e-linea.jpg` | `anfiteatro-53/anfiteatro-53_04_vicino_cavalletto-di-due-pali-estate.jpg` |
