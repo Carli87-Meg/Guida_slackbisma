@@ -49,7 +49,7 @@ def parte_metodo():
 
     # ============================================================ 1 · i due lati
     # Ruoli dei due lati dall'ordine delle operazioni (NOTE_RIGGING A, D, E, F).
-    # Quale lato sia quale sulla 53 m e' il dubbio 56, e sta nella sua scheda.
+    # Quale lato sia quale sulla 53 m sta nella sua scheda (dubbio 56, chiuso il 27/10).
     sec(LINEA, 'Due lati', 'lati')
     S.append(_apre(
         _testata(1, 'Una linea, due lati', 'schema', LINEA),
@@ -147,8 +147,9 @@ def parte_metodo():
         SP(10),
         P('La roccia della Pietra è <b>arenaria</b>, meno tenace del calcare: va valutata '
           'attorno a ogni foro. I punti sono <b>placchette metalliche fissate con un dado '
-          'esagonale su bullone</b> — un tassello meccanico, non uno spit a vite né un '
-          'resinato con occhiello. La sosta si costruisce su <b>più punti</b>, collegati fra '
+          'esagonale su bullone</b> — non uno spit a vite né un resinato con occhiello; se '
+          'il bullone sia un tassello meccanico o una barra resinata si verifica sul posto. '
+          'La sosta si costruisce su <b>più punti</b>, collegati fra '
           'loro con una corda annodata.', lead),
         SP(12),
         foto('D1_ancoraggio.jpg', FW, 'Esempio dalla 53 m: sosta su tre punti — placchetta, '

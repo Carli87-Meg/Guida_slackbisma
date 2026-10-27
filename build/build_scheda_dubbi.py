@@ -120,7 +120,7 @@ def sezione(num, titolo, occhiello, color, intro, voci):
 # ================================================================ apertura
 sec(LINEA, 'Come si usa')
 S.append(LineHeader('', 'Dubbi da chiarire con chi ha montato', 'Scheda di verifica · edizione '
-                    'del 20/08/2026', LINEA))
+                    'del 27/10/2026', LINEA))
 S.append(SP(12))
 S.append(P('Questa scheda raccoglie i punti che il manuale non può stampare perché nessuna '
            'fonte disponibile li documenta. Non sono curiosità redazionali: finché restano '
@@ -139,19 +139,19 @@ S.append(callout('La regola di questo progetto',
                  'ma sbagliato, in un documento che descrive una linea sospesa nel vuoto, '
                  'è un rischio reale.', WARN, icon='!', strong=True))
 S.append(SP(16))
-S.append(P('<b>Le sette voci segnate PRIORITARIO</b> sono quelle che DUBBI.md indica come '
-           'più gravi: la portata delle brache, il nome della linea e quello del settore, '
-           'la fotografia dell\'ancoraggio, la lunghezza della campata, il nastro e il suo '
+S.append(P('<b>Le sette voci segnate PRIORITARIO</b> sono le più gravi: la portata delle '
+           'brache, il nome della linea e quello del settore, la '
+           'fotografia dell\'ancoraggio, la lunghezza della campata, il nastro e il suo '
            'backup. Se il tempo con i ragazzi '
            'è poco, si parte da lì.', body))
 S.append(SP(14))
 S.append(data_table(
     ['Sezione', 'Voci', 'Che tipo di risposta serve'],
-    [['1 · Quadro generale', '1-7', 'Misure e dati della linea e della giornata'],
+    [['1 · Quadro generale', '1-2, 4-7', 'Misure e dati della linea e della giornata'],
      ['2 · Materiale', '8-24', 'Lunghezze, diametri, modelli, quantità'],
      ['3 · Manovre', '25-36', 'Nomi di nodi, sequenze, esecuzione'],
-     ['4 · Ancoraggio', '37-41, 50-51', 'Verifiche a immagine e scatti da fare'],
-     ['5 · Nome e fonti', '42-52', 'Denominazione, locandina, buchi di ripresa']],
+     ['4 · Ancoraggio', '37-41, 50, 51, 54', 'Verifiche a immagine e scatti da fare'],
+     ['5 · Nome e fonti', '42-46, 49, 52, 57-58', 'Denominazione, locandina, foto, buchi di ripresa']],
     [118, 78, FW - 196], color=LINEA))
 S.append(PageBreak())
 
@@ -159,17 +159,15 @@ S.append(PageBreak())
 sezione('1', 'Quadro generale della linea', 'Sezione 1 · dati di testata', LINEA,
         'Dati che vanno nella testata del manuale e nella planimetria. Nessuno di questi '
         'viene pronunciato nei video: vanno misurati o ricordati.',
+        # La 56 (quale lato e' quale) e' chiusa il 27/10/2026: tensione sopra Cocoa.
         [(1, 'Lunghezza effettiva della campata. Il catalogo i-pietra e la locandina danno '
-             '53 m, ma è un dato di catalogo, non una misura fatta sui punti. Quanto misura '
-             'davvero da placchetta a placchetta?',
+             '53 m, SlackMap 52,84 m del segmento disegnato sulla mappa, i due GPS del '
+             'telefono 51,4 m: '
+             'nessuno è una misura. Quanto misura davvero da placchetta a placchetta?',
           'mai pronunciata · nota N2 del manuale', 2, True),
          (2, 'Dislivello fra i due lati — l\'offlevel. Quanto, e da che parte pende? '
              'Influenza il tensionamento.', 'mai pronunciato'),
-         (3, 'Coordinate GPS dell\'<b>ancoraggio opposto</b>. Quello main lo ha dato l\'EXIF '
-             'di IMG_1416 — 44.419869, 10.412353 — perche\' la foto e\' stata scattata '
-             'standoci. Basta una foto geolocalizzata di la\'.',
-          'IMG_1416 · main risolto il 20/08/2026'),
-         (4, 'Accesso e avvicinamento: da dove si parte, quanto si cammina, dove si '
+         (4,'Accesso e avvicinamento: da dove si parte, quanto si cammina, dove si '
              'parcheggia.', 'mai descritto', 3),
          (5, 'Autorizzazioni, divieti stagionali per nidificazione, accordi con il gestore. '
              'La Pietra è area protetta: se c\'è qualcosa da sapere, va scritto.',
@@ -192,8 +190,10 @@ sezione('2', 'Materiale', 'Sezione 2 · tabella materiale', C_TEN,
               'lunghezza.', '[IMG_1350 @ 0:37]'),
          (12, 'Le <b>4 maglie delta</b>: misura e materiale. La quantità è l\'unico numero '
               'certo di tutto il corpus.', '[IMG_1350 @ 0:53]'),
-         (13, 'Cos\'è il «<b>Mighty Lock</b>», descritto come «quello quadratino»? Il nome è '
-              'storpiato dalla trascrizione.', '[IMG_1351 @ 0:19-0:28]'),
+         (13, 'Cos\'è il «<b>Mighty Lock</b>», descritto come «quello quadratino»? Nella '
+              'lista della cernita di Matte Kode c\'è un <b>MightyLock di Balance '
+              'Community</b>, un anello quadrato: era quello? E come lavorava nel backup?',
+          '[IMG_1351 @ 0:19-0:28] · inventario KOD-009'),
          (14, 'Fettuccia <b>verde lunga</b>, «la più grossa che c\'è»: che misura?',
           '[IMG_1369 @ 0:31]'),
          (15, 'Fettuccia <b>piccola viola</b> dell\'ancoraggio: che misura?',
@@ -226,7 +226,10 @@ sezione('3', 'Manovre', 'Sezione 3 · sequenza di montaggio', C_SOS,
           '[IMG_1374 @ 0:42]'),
          (28, 'Come sono <b>collegati ed equalizzati i 3 punti</b>, e con che angolo di '
               'apertura? A immagine si vede corda verde acqua annodata, non fettuccia '
-              'scorrevole. Manca l\'inquadratura d\'insieme.', 'IMG_1371.JPEG', 3),
+              'scorrevole; in IMG_1369 sulla parete le placchette sono almeno tre. Più in '
+              'basso c\'è un altro punto: con placchetta il 16/05, senza il 22/08 — è lo '
+              'stesso? Manca l\'inquadratura d\'insieme.',
+          'IMG_1371.JPEG · IMG_1369 @ 0:05-0:45 · IMG_3331', 3),
          (29, 'Quale componente è quello che «<b>ruotando può cadere</b>»? Deve diventare '
               'un\'avvertenza, ma non si sa di cosa parli.', '[IMG_1370 @ 0:00-0:15]'),
          (30, 'Quale operazione è quella che «<b>andrebbe fatta dopo, quando c\'è del '
@@ -252,19 +255,24 @@ sezione('4', 'Ancoraggio e verifiche a immagine', 'Sezione 4 · da guardare e fo
         C_ANC,
         'Voci emerse esaminando i fotogrammi. Alcune si chiudono guardando meglio, altre '
         'richiedono uno scatto nuovo da fare sul posto.',
-        [(37, '<b>Portata (WLL) delle brache.</b> L\'etichetta esiste e si vede in '
-              'IMG_1360 e IMG_1357 — bianca, cucita con filo blu sulla cucitura della '
-              'calza — ma in tutte le inquadrature è rivoltata. <b>Serve una fotografia '
-              'ravvicinata dell\'etichetta distesa</b>, di una braca per ogni tipo usato: '
-              'e\' l\'unico modo di scrivere la portata senza indovinarla.',
-          'IMG_1360 · IMG_1357 · il danno peggiore possibile se sbagliata', 2, True),
+        [(37, '<b>Portata (WLL) delle brache.</b> Alla sosta main ci sono due tinte, lilla '
+              'chiaro e viola scuro; la lilla porta una linguetta blu e un\'etichetta '
+              'bianca, illeggibili in tutte le foto. Le etichette viola fotografate per il '
+              'catalogo non sono legate a nessun pezzo usato il 16/05. <b>Di chi erano le '
+              'viola della sosta main? Erano pezzi del catalogo, e quali?</b> Poi va letta '
+              'l\'etichetta sul pezzo.',
+          'IMG_1357 · IMG_1359 · catalogo · il danno peggiore possibile se sbagliata',
+          2, True),
          (38, 'Nell\'ancoraggio c\'è <b>protezione veloce</b> — un friend — accanto ai punti '
-              'fissi? Un dispositivo compatibile si intravede ma il fotogramma è mosso. '
-              '<b>Scatto da fare sul campo.</b>',
+              'fissi? L\'oggetto mosso di IMG_1374 @ 0:33 somiglia alla carrucola '
+              'bloccante, e in nessuna immagine si vede una camma: questo non prova che un '
+              'friend non ci fosse. <b>Scatto da fare sul campo.</b>',
           'IMG_1374 @ 0:33 · nota N1 del manuale', 2, True),
          (39, 'I <b>punti</b> sono placchetta metallica su bullone con dado esagonale — '
-              'confermato a immagine, quindi tassello meccanico. Restano <b>marca e '
-              'diametro del bullone</b>.', 'IMG_1371.JPEG · IMG_1372.JPEG'),
+              'confermato a immagine. <b>Tassello meccanico o barra resinata?</b> Su '
+              'SlackMap la Brifing ha barre resinate. Su una placchetta si legge «FOR 1 '
+              'PERSON», logo e codice incerti. Restano <b>marca e diametro del bullone</b>, '
+              'e <b>chi li ha posati</b>.', 'IMG_1371.JPEG · IMG_1372.JPEG · IMG_3324'),
          (40, '<b>Marca</b> della carrucola bloccante nera con puleggia arancio. Le marcature '
               'lette sono CE 0082, UK CA 20, EN 567:2013, Ø 7,8-11 mm; il logo non è '
               'leggibile.', 'IMG_1371.JPEG · dettaglio in lavorazione/dettagli/'),
@@ -273,13 +281,15 @@ sezione('4', 'Ancoraggio e verifiche a immagine', 'Sezione 4 · da guardare e fo
               'funzioni potrebbero coesistere.', 'IMG_1371.JPEG · [IMG_1350 @ 0:33]', 3),
          (50, '<b>A-frame</b>: quanto sono <b>alti</b> i pali, che legno e che diametro, '
               'come sono legati in testa, e di quanto sollevano la linea sopra il bordo? '
-              'In IMG_1416 attorno al piede di un palo si vedono giri di <b>filo '
-              'metallico</b>: tengono il palo o sono un recinto che c\'era già?',
+              'Al piede dei pali c\'è <b>filo metallico</b> — due o tre giri a quello di '
+              'sinistra, almeno uno a quello di destra — con fili da un palo all\'altro: '
+              'legano i piedi o sono un recinto che c\'era già?',
           'IMG_1396 · IMG_1416', 4),
          (54, 'Sullo sfondo di IMG_1416 e IMG_1396 corre una <b>linea tesa con sotto una '
-              'seconda linea appesa a festoni</b>. È la campata della 53 m vista di '
-              'scorcio o <b>un\'altra linea</b> dello spot? E la linea a festoni che cos\'è '
-              '— backup, tagline lasciata in posa, altro?', 'IMG_1416 · IMG_1396', 4),
+              'seconda linea appesa a festoni</b>: non è la 53 m, che nelle stesse foto si '
+              'vede a parte. <b>Quale linea è?</b> E quella a festoni '
+              'che cos\'è — backup, tagline lasciata in posa, altro?',
+          'IMG_1416 · IMG_1396 · voci 54-55', 4),
          (51, 'Il nastro appare <b>bianco o crema</b> in IMG_1401, con un secondo nastro '
               'chiaro parallelo. Se confermato chiude le voci 22 e 23.',
           'foto/IMG_1401.JPG')])
@@ -290,7 +300,8 @@ sezione('5', 'Nome della linea, fonti, buchi di ripresa', 'Sezione 5 · apparato
         'documento.',
         [(45, '<b>Titolo definitivo del manuale.</b> «La 50» collide con la <b>50 M del '
               'Settore Giallo</b>, che esiste davvero: un lettore potrebbe attrezzare la '
-              'linea sbagliata. Come si chiama davvero questa linea fra di voi?',
+              'linea sbagliata. Su SlackMap si chiama <b>«GAS-OH»</b> (i-pietra ha ripreso '
+              'quel nome): è il nome da usare nel titolo?',
           'locandina · l\'ambiguità più pericolosa del documento', 3, True),
          (52, '<b>I due cataloghi non concordano sul nome del settore.</b> i-pietra '
               'etichetta «Anfiteatro» anche le tre linee che la locandina mette sotto '
@@ -306,10 +317,18 @@ sezione('5', 'Nome della linea, fonti, buchi di ripresa', 'Sezione 5 · apparato
               'locandina. Il logo è poco leggibile.', 'locandina'),
          (46, 'Cos\'è la «<b>Bifida</b>»? Non compare sulla locandina.',
           '[IMG_1373 @ 0:24]'),
+         (57, 'Le foto del <b>22/08</b> sulla cresta (IMG_3308-3322): quali sono della '
+              '<b>Despedida</b> e quali del <b>Settore Giallo</b>? La roccia sullo sfondo '
+              'di IMG_3311 è davvero quella della Despedida 165 m?',
+          'IMG_3308-3322 · chi ha accompagnato il sopralluogo', 3),
          (49, 'Fra le <b>15:38 e le 17:08</b> non esiste nessuna ripresa, ma alle 17:08 la '
               'linea è montata e camminata. Manca la documentazione del tensionamento '
               'finale e dei primi passaggi: cosa è successo in quell\'ora e mezza?',
-          'metadati · il manuale deve dichiarare il buco', 3)])
+          'metadati · il manuale deve dichiarare il buco', 3),
+         (58, 'Il video <b>IMG_1376</b> sta fra le riprese della sosta sull\'altro lato, ma '
+              'il GPS lo colloca <b>al main</b>, a circa 5 m (accuratezza 13 m). Che cosa '
+              'si stava facendo lì?',
+          'GPS dei video · fase D di NOTE_RIGGING', 2)])
 
 # ================================================================ chiusura
 sec(LINEA, 'Dopo la compilazione')
@@ -333,7 +352,8 @@ S.append(campo('Note libere', FW))
 S.append(Righe(5))
 S.append(SP(14))
 S.append(P('Scheda generata da build/build_scheda_dubbi.py sulle voci aperte di DUBBI.md. '
-           'Le voci già chiuse — B1, B2, B3, 47, 48, M2 — non compaiono.', small))
+           'Le voci già chiuse — B1, B2, B3, 3, 47, 48, 53, 56, M2 — non compaiono; la 55 è '
+           'dentro la 54.', small))
 
 # ---------------------------------------------------------------- build
 OUT.parent.mkdir(parents=True, exist_ok=True)

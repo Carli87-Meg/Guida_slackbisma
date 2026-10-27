@@ -1,9 +1,14 @@
 # Fotografie degli ancoraggi
 
 Le foto che documentano **i punti di sosta**, scattate sul campo. Sono la fonte
-che manca al manuale: la scheda dell'Anfiteatro 53 m dichiara oggi, per iscritto,
-che «nessuna immagine disponibile inquadra i tre punti insieme, e l'angolo di
-apertura non è quindi verificabile».
+che manca al manuale: la scheda dell'Anfiteatro 53 m chiede ancora, fra le cose da
+rilevare, «una fotografia d'insieme dei tre punti, per l'angolo di apertura».
+
+In `anfiteatro-53/` ci sono otto scatti del 22/08/2026 all'altro capo della linea,
+fra `IMG_3323` e `IMG_3332` (data e GPS in `lavorazione/metadati_foto.md`). Sono del
+**lato statico**: il 27/10/2026 l'utente ha dichiarato che la tensione sta sul capo sopra
+il settore Cocoa, cioè al main (dubbio 56, chiuso). Restano senza prefisso perché il build
+li usa con il nome originale.
 
 Una cartella per linea, chiamata con l'**id** che la linea ha in `dati/linee.py`
 — settore in minuscolo, spazi sostituiti da trattini, poi la lunghezza in metri:
@@ -20,8 +25,9 @@ Gli id validi si stampano con `python dati/linee.py --id`.
 
 ## Il nome del file dice il lato
 
-`A_` e `B_` davanti al nome, con il lato dichiarato da chi ha scattato. **Non si
-ricava dall'immagine**: due soste di arenaria si somigliano, e attribuire un
+`A_` e `B_` davanti al nome, con il lato dichiarato da chi ha scattato (nella guida
+i lati si chiamano **di tensione** e **statico**: chi scatta dica quale dei due è
+A). **Non si ricava dall'immagine**: due soste di arenaria si somigliano, e attribuire un
 ancoraggio al lato sbagliato è l'errore che manda a montare dalla parte sbagliata.
 Se il lato non è noto, il file resta senza prefisso e la didascalia lo dice.
 

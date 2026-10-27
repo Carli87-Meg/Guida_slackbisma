@@ -5,10 +5,13 @@ Assemblatore: qui c'e' solo l'ordine delle parti e l'apparato. Il contenuto sta
 nei moduli, cosi' aggiungere una linea documentata non significa mettere le mani
 in questo file.
 
-    Parte 1  La Pietra          lo spot, la planimetria, il catalogo delle 24 linee
-    Parte 2  Tecnica            cio' che vale per lo spot, non per una linea sola
-    Parte 3  Le linee           il capitolo della 53 m + le schede di rilievo
-    Parte 4  Apparato           fonti con le loro date, avvertenza finale
+    Parte 1  La Pietra          lo spot, la panoramica, il catalogo delle 24 linee
+    Parte 2  Come si monta      il metodo, valido per ogni linea (metodo.py)
+    Parte 3  Le linee           la scheda della 53 m (scheda_53.py)
+    Parte 4  Apparato           glossario, fonti con le loro date, avvertenza finale
+
+Le schede di rilievo delle altre 23 linee escono in un fascicolo a parte
+(build_schede_rilievo.py), costruito anche da qui alla fine.
 
 Regola del documento: **niente dati dedotti**. Ogni numero viene da una fonte
 dichiarata — riprese, fotogrammi, catalogo i-pietra, locandina, risposte dirette
@@ -157,7 +160,8 @@ def page_end(cv, doc):
     cv.drawRightString(W - RM, 30, str(n))
 
 
-NUMERI = {5: 'cinque', 6: 'sei', 7: 'sette', 8: 'otto', 9: 'nove'}
+NUMERI = {5: 'cinque', 6: 'sei', 7: 'sette', 8: 'otto', 9: 'nove', 10: 'dieci',
+          11: 'undici', 12: 'dodici'}
 
 
 def FONTI():
@@ -181,6 +185,12 @@ def FONTI():
          '19/08/2026'],
         ['Panoramica i-pietra, settori segnati a mano', 'Posizione e ordine dei cinque '
          'settori lungo la cresta', '21/08/2026'],
+        ['Fotografie del 22 agosto', 'L’altro capo della 53 m, montata con i bungee',
+         '22/08/2026'],
+        ['Posizione GPS di foto e video', 'Su quale capo è stata girata ogni ripresa',
+         'letta il 27/10/2026'],
+        ['Conferma del lato di tensione', 'Il capo sopra il settore di falesia Cocoa',
+         '27/10/2026'],
     ]
 
 
@@ -477,7 +487,7 @@ def costruisci():
                'come riferimento operativo</b> finché quei campi non sono stati riempiti da '
                'chi ha eseguito il montaggio.', body))
     S.append(SP(12))
-    S.append(P('Edizione di lavoro dell’8 ottobre 2026, ricostruita dalle riprese del montaggio '
+    S.append(P('Edizione di lavoro del 27 ottobre 2026, ricostruita dalle riprese del montaggio '
                'del 16 maggio 2026. Sistema grafico ripreso dalla guida Sillschlucht.', small))
 
     return lega_testate(S)

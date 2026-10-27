@@ -31,8 +31,8 @@ basta ripassare gli originali dal telefono attraverso `importa_foto.py`.
 
 `IMG_1360` (13:07) e `IMG_1416` (17:14) sono state scattate entrambe all'ancoraggio
 main, a quattro ore l'una dall'altra, e le due posizioni distano **una manciata di
-metri**. Non e' una misura ripetuta — sono due letture dello stesso telefono nello
-stesso posto — ma concordano, e questo e' quanto di piu' vicino a una verifica il
+metri**. Non è una misura ripetuta — sono due letture dello stesso telefono nello
+stesso posto — ma concordano, e questo è quanto di più vicino a una verifica il
 progetto abbia oggi su quella coordinata.
 
 ## Che valore ha la posizione
@@ -55,11 +55,11 @@ IMG_3308-3332). Due gruppi:
   viola, corda verde annodata fra i punti e la linea che esce nella guaina dei
   bungee. Secondo l'utente è **la 53 m dell'Anfiteatro, montata con i bungee**.
   Il GPS lo conferma per un'altra strada: le dieci letture stanno entro 3 m
-  l'una dall'altra e a **51,5 m** dalla posizione dell'ancoraggio main
-  (`IMG_1416`). Una linea di 53 m ha i due capi a quella distanza: queste foto
-  sono state scattate all'**altro capo**. Il lato non è nel nome dei file perché
-  nessuno l'ha dichiarato (vedi `ancoraggi/LEGGIMI.md`): per il modello della
-  guida è il lato statico, dubbio 56.
+  l'una dall'altra e a **51,4 m** dalla posizione dell'ancoraggio main
+  (`IMG_1416`; ricalcolata il 27/10/2026, prima scritto 51,5). Una linea di 53 m
+  ha i due capi a quella distanza: queste foto sono state scattate all'**altro
+  capo**, che è il **lato statico** (dubbio 56, chiuso il 27/10/2026: la tensione
+  sta sul capo sopra il settore Cocoa).
   Il montaggio con i bungee è una variante: slinghe, corda verde, fettucce rosse
   e bungee sono quelli di quel giorno, non il materiale del 16 maggio.
   Nessuna inquadratura mostra tutti i punti insieme: il dubbio 28 resta aperto.

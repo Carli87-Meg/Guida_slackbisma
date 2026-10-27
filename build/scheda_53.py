@@ -120,7 +120,7 @@ def figura_posizione():
 # ---------------------------------------------------------------- la scheda
 C_SETTORE = LC[2]                       # Anfiteatro, come nel catalogo
 MAPPA = 'https://www.google.com/maps?q=44.419869,10.412353'
-# L'altro capo: dieci letture del 22/08/2026 entro 3 m, a 51,5 m dal main.
+# L'altro capo: dieci letture del 22/08/2026 entro 3 m, a 51,4 m dal main.
 MAPPA_S = 'https://www.google.com/maps?q=44.419453,10.412072'
 
 
@@ -153,12 +153,17 @@ def parte_53():
                        'Dove corre la 53 m nella vista i-pietra dell’Anfiteatro: '
                        'i due cerchi sono gli ancoraggi', C_SETTORE),
             SP(4),
-            P('Quale dei due sia l’ancoraggio di tensione: ' + DC + '.', small)]))
+            # dubbio 56, chiuso il 27/10/2026: la tensione sta sopra il settore Cocoa.
+            # Il render non dice quale cerchio sia quale, e la didascalia non lo inventa.
+            P('L’ancoraggio di tensione è il capo nord, sopra il settore di falesia Cocoa; '
+              'il render non distingue i due cerchi.', small)]))
         S.append(SP(14))
 
     # ------------------------------------------------ i due ancoraggi
-    # NOTE_RIGGING, «Materiale nominato» e sezioni A-F; lati: dubbio 56.
+    # NOTE_RIGGING, «Materiale nominato» e sezioni A-F; lati: dubbio 56, chiuso.
     # Coordinate: IMG_1416 (16/05, main) e IMG_3323-3332 (22/08, l'altro capo).
+    # Il bullone senza placchetta di IMG_3331 (22/08) sta fra le cose da rilevare,
+    # non qui: il 16/05 nello stesso punto c'era forse una placchetta (dubbi 28, 39).
     S.append(two_cols(
         gear_block('T · Ancoraggio di tensione', [
             'Sosta main: slinghe viola — quante e quanto lunghe ' + DC,
@@ -220,7 +225,8 @@ def parte_53():
     # ------------------------------------------------ fotografie dei due lati
     S.append(photo_pair(
         str(FOTO / 'IMG_1416.jpg'), str(ANCO / 'IMG_3329.jpg'),
-        'Lato tensione: l’A-frame visto dall’ancoraggio', 'Lato statico: placchette e slinghe',
+        # sullo sfondo di IMG_1416 corre un'altra linea dello spot (dubbio 54)
+        'Lato tensione: l’A-frame; sullo sfondo, un’altra linea', 'Lato statico: placchette e slinghe',
         *dim(FOTO / 'IMG_1416.jpg'), color=C_SETTORE, ratio=0.82, focus=0.6,
         ow2=dim(ANCO / 'IMG_3329.jpg')[0], oh2=dim(ANCO / 'IMG_3329.jpg')[1]))
     S.append(SP(16))
@@ -234,7 +240,8 @@ def parte_53():
         ow2=dim(FOTO / 'IMG_1398.jpg')[0], oh2=dim(FOTO / 'IMG_1398.jpg')[1]))
     S.append(SP(16))
     # ------------------------------------------------ l'A-frame di questa linea
-    # IMG_1396 e IMG_1416; posizione sul lato main dalla risposta del 20/08
+    # IMG_1396 e IMG_1416; posizione sul lato main dalla risposta del 20/08.
+    # Filo ai piedi, cordino in testa, slinga lilla e corde rosa: dubbio 50, 27/10/2026.
     S.append(KeepTogether([
         P('<b>L’A-frame di questa linea</b>', h3),
         SP(6),
@@ -244,10 +251,12 @@ def parte_53():
         two_cols(
             gear_block('Com’è fatto', [
                 'Due pali di legno tondo, incrociati e legati in testa',
-                'Fettuccia viola avvolta sulla testa dei pali',
-                'Corda verde fluo, fettuccia blu e corda rosa in testa',
+                'Slinga lilla avvolta sulla testa dei pali',
+                'Cordino annodato sotto l’incrocio; corda verde fluo e fettuccia blu in testa',
+                'Dall’A-frame passano le corde rosa della sosta backup',
+                'La linea passa sul fianco esterno di un palo, poco sotto l’incrocio',
                 'Piedi appoggiati sulla roccia del bordo',
-                'Giri di filo metallico attorno al piede di un palo',
+                'Filo metallico al piede dei pali: due o tre giri a quello di sinistra',
             ], C_TEN),
             gear_block('Ancora da rilevare', [
                 'Altezza dei pali — ' + DCC,
@@ -258,10 +267,14 @@ def parte_53():
                 'Di quanto solleva la linea sopra il bordo — ' + DCC,
             ], WARN))]))
     S.append(SP(16))
+    # Dubbio 56, chiuso il 27/10/2026: risposta dell'utente («la parte sopra Cocoa»),
+    # coerente con il GPS delle riprese (sosta su tre punti a 6-8 m dall'altro capo,
+    # tensionamento a 5-13 m dal main).
     S.append(callout('Quale lato è quale',
-                     'In questa scheda la tensione sta dove stanno sosta main, sosta backup e '
-                     'A-frame, e la sosta su tre punti è sul lato statico. È ricostruito '
-                     'dall’ordine delle operazioni del 16 maggio, e va confermato: ' + DC + '.',
+                     'La tensione sta sul capo nord, sopra il settore di falesia Cocoa: '
+                     'lì ci sono sosta main, sosta backup e A-frame. La sosta su tre punti è '
+                     'sul lato statico, all’altro capo. Confermato il 27 ottobre 2026, e '
+                     'coerente con il luogo in cui sono state girate le riprese del 16 maggio.',
                      C_TEN))
     S.append(SP(16))
     S.append(data_table(
@@ -275,17 +288,26 @@ def parte_53():
     S.append(KeepTogether([
         P('<b>Ancora da rilevare su questa linea</b>', h3),
         SP(5),
-        BU('Quale dei due estremi è l’ancoraggio di tensione.', C_SETTORE),
         BU('La lunghezza, misurata sui punti, e il dislivello.', C_SETTORE),
         BU('I punti dell’ancoraggio di tensione: quanti e di che tipo.', C_SETTORE),
         BU('Una fotografia d’insieme dei tre punti, per l’angolo di apertura.', C_SETTORE),
-        BU('Diametro e marca del bullone; marca della carrucola bloccante.', C_SETTORE),
+        BU('Diametro e marca del bullone, e se è un tassello meccanico o una barra resinata '
+           '(su una placchetta si legge «FOR 1 PERSON», logo e codice incerti); marca della '
+           'carrucola bloccante.', C_SETTORE),
+        BU('Più in basso c’è un altro bullone: con placchetta il 16 maggio, senza il '
+           '22 agosto. Se sia lo stesso punto, e a che cosa serva — ' + DCC, C_SETTORE),
         BU('Se accanto ai punti fissi c’è protezione veloce.', C_SETTORE),
-        BU('L’etichetta delle slinghe: c’è, ma nelle fotografie è rivoltata.', C_SETTORE)]))
+        # dubbio 37: le etichette viola del catalogo dicono 1 t, ma nessuna e' di un
+        # pezzo che si sa usato il 16/05. La portata non si stampa finche' non si sa.
+        BU('Le etichette delle slinghe della sosta main, lilla e viola scuro: sulla lilla '
+           'si vedono una linguetta blu e un’etichetta bianca, illeggibili in tutte le '
+           'fotografie. Vanno lette sul pezzo, sapendo di chi era.', C_SETTORE)]))
     S.append(SP(18))
 
     # ------------------------------------------------ la variante con i bungee
-    # IMG_3323-3332, 22/08/2026, all'altro capo della linea (51,5 m dal main).
+    # IMG_3323-3332, 22/08/2026, all'altro capo della linea (51,4 m dal main).
+    # In IMG_3324-3326 una slinga viola entra nel grillo a lira (dubbio 28); se ci
+    # arrivino tutte e due quelle di IMG_3329 non si vede.
     # L'utente: «il montaggio fatto quel giorno era della 53 ma con i bungee».
     # Le placchette sono fisse e valgono per ogni montaggio; slinghe, corda verde,
     # fettucce rosse e bungee sono di quel giorno.
@@ -293,14 +315,16 @@ def parte_53():
         P('<b>La stessa linea, montata con i bungee</b>', h3),
         SP(5),
         P('Il 22 agosto 2026 la 53 m è stata montata con i <b>bungee</b>. Le fotografie sono '
-          'state scattate all’ancoraggio statico: si vedono le placchette su bullone, le '
-          'slinghe viola che portano al masterpoint e la corda annodata fra i punti. Il '
-          'materiale di questa variante è ' + DC + '.', body),
+          'state scattate all’ancoraggio statico: si vedono le placchette su bullone, una '
+          'slinga viola che entra in un grillo a lira, senza maglia rapida visibile, e la '
+          'corda annodata fra i punti. Il materiale di questa variante è ' + DC + '.', body),
         SP(10),
         photo_pair(
             str(ANCO / 'IMG_3324.jpg'), str(ANCO / 'IMG_3325.jpg'),
-            'Placchette, slinghe viola e corda annodata', 'Dal masterpoint ai bungee',
-            *dim(ANCO / 'IMG_3324.jpg'), color=C_SETTORE, ratio=0.95, focus=0.45,
+            'Placchette, slinghe viola e corda annodata', 'Dal grillo a lira ai bungee',
+            # ratio 0.72: con le voci aggiunte il 27/10 a 0.95 il blocco scivolava
+            # sulla pagina dopo e lasciava due mezze pagine vuote
+            *dim(ANCO / 'IMG_3324.jpg'), color=C_SETTORE, ratio=0.72, focus=0.45,
             ow2=dim(ANCO / 'IMG_3325.jpg')[0], oh2=dim(ANCO / 'IMG_3325.jpg')[1])]))
     S.append(PageBreak())
     return S
