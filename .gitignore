@@ -40,3 +40,30 @@ __pycache__/
 *.py[cod]
 .venv/
 fonti/render_originali_png/
+
+# Riunioni dei Bismaliners: restano sul disco locale. Il repository e' pubblico,
+# e le trascrizioni contengono nomi, soldi e questioni interne del gruppo.
+# Entra in git solo il LEGGIMI che spiega come sono organizzate.
+riunioni/*
+!riunioni/LEGGIMI.md
+
+# Inventario materiale: nomi, prezzi e foto delle persone del gruppo.
+# Entra in git solo il LEGGIMI che spiega come funziona.
+inventario/*
+!inventario/LEGGIMI.md
+
+# Il file LineeBisma del gruppo e le fotografie che ne vengono restano fuori da
+# git finche' l'utente non decide se e quali versionare: vengono da un file del
+# gruppo e in alcune ci sono persone riconoscibili. Gli ORIGINE.md e i LETTURA.md
+# delle cartelle di foto_linee/ restano in git. Queste righe stanno dopo
+# "!lavorazione/foto_linee/" apposta: la regola che viene dopo prevale.
+fonti/lineebisma/
+lavorazione/foto_linee/**/*.jpg
+lavorazione/foto_linee/**/*.jpeg
+lavorazione/foto_linee/**/*.png
+lavorazione/foto_linee/**/*.webp
+lavorazione/foto_linee/**/*.heic
+lavorazione/foto_linee/**/*.gif
+
+# Configurazione locale di Claude Code e worktree delle sessioni.
+.claude/

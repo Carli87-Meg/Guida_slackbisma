@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 """Sistema grafico per la Guida Highline Sillschlucht (edizione italiana)."""
+import re
 from reportlab.lib.pagesizes import A4
 from reportlab.lib import colors
 from reportlab.lib.colors import HexColor
@@ -109,13 +110,23 @@ def A(url, text, c=None):
     return '<link href="%s"><font color="#%s">%s</font></link>' % (url, col, text)
 
 
+# anche con lo spazio non separabile, che tiene il segno su una riga sola
+_re_dc = re.compile('<font color="#B3261E">(\\[DA(?: |\u00a0|&nbsp;)CONF[^<]*\\])</font>')
+_UNITA = re.compile(r'(\d) (m|mm|cm|kN|kg|t|L)\b')
+
+
+def unito(t):
+    """Numero e unita' di misura non si separano a fine riga: \u00ab53 m\u00bb, non \u00ab53 / m\u00bb."""
+    return _UNITA.sub(r'\1&nbsp;\2', t)
+
+
 def P(t, s=body):
-    return Paragraph(t, s)
+    return Paragraph(unito(t), s)
 
 
 def BU(t, c=MUT):
     st = ParagraphStyle('i%s' % id(t), parent=item, bulletColor=c)
-    return Paragraph(t, st, bulletText='\u2014')
+    return Paragraph(unito(t), st, bulletText='\u2014')
 
 
 def SP(h):
@@ -173,9 +184,40 @@ class Accent(Flowable):
     def wrap(self, aw, ah):
         return (0, 0)
 
+    def drawOn(self, canvas, x, y, _sW=0):
+        # Una sezione che si apre in cima alla cornice e' quella della pagina.
+        # Una che si apre piu' in basso no: la pagina appartiene ancora alla
+        # sezione in corso, e la testatina deve dire quella. Prima vinceva
+        # l'ultimo marcatore disegnato, e la testatina annunciava il capitolo
+        # che cominciava in fondo pagina.
+        if y >= getattr(canvas, '_cima_cornice', float('inf')) - 1.0:
+            canvas._sect_pagina = self.label
+            canvas._accent_pagina = self.color
+        Flowable.drawOn(self, canvas, x, y, _sW)
+
     def draw(self):
         self.canv._accent = self.color
         self.canv._sect = self.label
+
+
+def lega_testate(storia):
+    """Lega ogni testata a cio' che la segue, cosi' non resta sola in fondo pagina.
+
+    Vale per le testate di capitolo e per i titoletti h3. Gli spaziatori subito
+    dopo vengono legati anche loro: una testata legata a uno spazio vuoto
+    resterebbe comunque orfana.
+    """
+    for i, f in enumerate(storia):
+        testata = isinstance(f, LineHeader) or (
+            isinstance(f, Paragraph) and getattr(f.style, 'name', '') == 'h3')
+        if not testata:
+            continue
+        f.keepWithNext = 1
+        j = i + 1
+        while j < len(storia) and isinstance(storia[j], Spacer):
+            storia[j].keepWithNext = 1
+            j += 1
+    return storia
 
 
 class LineHeader(Flowable):
@@ -216,6 +258,52 @@ class LineHeader(Flowable):
         c.line(0, 2, self.w, 2)
 
 
+class TestataLinea(Flowable):
+    """Testata di una scheda linea: sigla del settore, nome, lunghezza in grande.
+
+    Ricalca la scheda linea della guida Sillschlucht di Innsbruck, che e' il
+    modello di riferimento del progetto: chi apre la scheda vede subito quale
+    linea e' e quanto e' lunga.
+    """
+
+    def __init__(self, sigla, titolo, sotto, lunghezza, colore, w=FW):
+        self.sigla, self.titolo, self.sotto = sigla, titolo, sotto
+        self.lung, self.c, self.w = lunghezza, colore, w
+        self.h = 64
+
+    def wrap(self, aw, ah):
+        return (self.w, self.h)
+
+    def draw(self):
+        c = self.canv
+        c.setFillColor(PAPER)
+        c.roundRect(0, 0, self.w, self.h, 4, stroke=0, fill=1)
+        c.setFillColor(self.c)
+        c.rect(0, self.h - 3, self.w, 3, stroke=0, fill=1)
+        s = 38
+        y = (self.h - 3 - s) / 2
+        c.roundRect(14, y, s, s, 4, stroke=0, fill=1)
+        c.setFillColor(WHITE)
+        corpo = 15 if len(self.sigla) < 3 else 12
+        c.setFont('Pop-B', corpo)
+        c.drawString(14 + (s - stringWidth(self.sigla, 'Pop-B', corpo)) / 2,
+                     y + s / 2 - corpo * 0.36, self.sigla)
+        x = 14 + s + 14
+        c.setFillColor(INK)
+        c.setFont('Pop-B', 18)
+        c.drawString(x, self.h - 30, self.titolo)
+        c.setFillColor(MUT)
+        c.setFont('Lora', 9.4)
+        c.drawString(x, self.h - 46, self.sotto)
+        # la lunghezza a destra, grande, con l'unita' piccola accanto
+        c.setFillColor(self.c)
+        c.setFont('Pop-M', 10)
+        c.drawRightString(self.w - 14, self.h - 40, 'm')
+        c.setFont('Pop-B', 26)
+        c.drawRightString(self.w - 14 - stringWidth('m', 'Pop-M', 10) - 3, self.h - 40,
+                          str(self.lung))
+
+
 class ChipRow(Flowable):
     """Riga di pastiglie dati (etichetta piccola + valore)."""
 
@@ -241,9 +329,13 @@ class ChipRow(Flowable):
             c.setFont('Pop-M', 6.5)
             c.drawString(x + 10, self.h - 13, lab.upper())
             c.setFillColor(INK)
-            c.setFont('Pop-M', 9)
+            # il valore si rimpicciolisce fino a 7 pt prima di essere troncato
+            corpo = 9.0
+            while stringWidth(val, 'Pop-M', corpo) > cw - 18 and corpo > 7.0:
+                corpo -= 0.5
+            c.setFont('Pop-M', corpo)
             t = val
-            while stringWidth(t, 'Pop-M', 9) > cw - 18 and len(t) > 4:
+            while stringWidth(t, 'Pop-M', corpo) > cw - 18 and len(t) > 4:
                 t = t[:-2]
             c.drawString(x + 10, 9, t)
 
@@ -314,7 +406,12 @@ class PhotoStrip(Flowable):
             c.rect(0, self.h - self.ih - 11, 16, 2, stroke=0, fill=1)
             c.setFillColor(MUT)
             c.setFont('Pop', 7.4)
-            c.drawString(22, self.h - self.ih - 13.5, self.cap)
+            # la didascalia sta su una riga: se e' piu' larga della foto si tronca
+            # con i puntini, invece di finire sopra la didascalia accanto
+            cap = self.cap
+            while stringWidth(cap, 'Pop', 7.4) > self.w - 24 and len(cap) > 4:
+                cap = cap[:-2].rstrip() + '…' if not cap.endswith('…') else cap[:-2] + '…'
+            c.drawString(22, self.h - self.ih - 13.5, cap)
 
 
 def photo_pair(p1, p2, c1, c2, ow=600, oh=900, color=None, w=FW,
@@ -387,9 +484,14 @@ def callout(title, text, color=BRAND, icon='!', w=FW, strong=False):
                         textColor=tc)
     bs = ParagraphStyle('cb', fontName='Lora', fontSize=9.0, leading=13,
                         textColor=WHITE if strong else INK2)
-    inner = [[Paragraph(title, ts)]]
+    # Sul fondo pieno il segno [DA CONFERMARE], rosso, spariva: rosso su rosso.
+    # Proprio nelle avvertenze il dato mancante non si vedeva. Qui diventa bianco
+    # e in grassetto.
+    if strong and text:
+        text = _re_dc.sub(lambda m: '<b>%s</b>' % m.group(1), text)
+    inner = [[Paragraph(unito(title), ts)]]
     if text:
-        inner.append([Paragraph(text, bs)])
+        inner.append([Paragraph(unito(text), bs)])
     it = Table(inner, colWidths=[w - 46])
     it.setStyle(TableStyle([('LEFTPADDING', (0, 0), (-1, -1), 0),
                             ('RIGHTPADDING', (0, 0), (-1, -1), 0),
@@ -453,14 +555,44 @@ def photo_row(items, color=None, w=FW, gap=12):
     return t
 
 
+def _a_capo(testo, font, corpo, larghezza):
+    """Spezza un testo in righe che stanno nella larghezza data.
+
+    Solo sugli spazi normali: lo spazio non separabile (U+00A0) tiene insieme
+    «[DA CONFERMARE]», che str.split() senza argomenti spezzerebbe.
+    """
+    righe, riga = [], ''
+    for parola in re.split(r'[ \t\r\n]+', testo.strip()):
+        prova = (riga + ' ' + parola).strip()
+        if riga and stringWidth(prova, font, corpo) > larghezza:
+            righe.append(riga)
+            riga = parola
+        else:
+            riga = prova
+    if riga:
+        righe.append(riga)
+    return righe or ['']
+
+
 class Steps(Flowable):
-    """Sequenza numerata su due colonne."""
+    """Sequenza numerata su due colonne.
+
+    La descrizione va a capo. Prima veniva accorciata un carattere alla volta
+    finche' non entrava, e il passo 8 della cronologia finiva in «fino alle 17:».
+    """
+
+    INTERLINEA = 10.4
 
     def __init__(self, steps, color, w=FW, cols=2):
         self.s, self.c, self.w, self.cols = steps, color, w, cols
-        self.rows = (len(steps) + cols - 1) // cols
-        self.rh = 34
-        self.h = self.rows * self.rh
+        cw = w / cols
+        self.righe = [_a_capo(d, 'Lora', 8.2, cw - 34) for _, d in steps]
+        n_righe = (len(steps) + cols - 1) // cols
+        self.alt_riga = []
+        for r in range(n_righe):
+            gruppo = self.righe[r * cols:(r + 1) * cols]
+            self.alt_riga.append(24 + self.INTERLINEA * max(len(g) for g in gruppo))
+        self.h = sum(self.alt_riga)
 
     def wrap(self, aw, ah):
         return (self.w, self.h)
@@ -468,25 +600,29 @@ class Steps(Flowable):
     def draw(self):
         cv = self.canv
         cw = self.w / self.cols
-        for i, (t, d) in enumerate(self.s):
-            col, row = i % self.cols, i // self.cols
-            x = col * cw
-            y = self.h - (row + 1) * self.rh
-            cv.setFillColor(self.c)
-            cv.circle(x + 9, y + 20, 9, stroke=0, fill=1)
-            cv.setFillColor(WHITE)
-            cv.setFont('Pop-B', 8.4)
-            n = str(i + 1)
-            cv.drawString(x + 9 - stringWidth(n, 'Pop-B', 8.4) / 2, y + 17, n)
-            cv.setFillColor(INK)
-            cv.setFont('Pop-M', 8.6)
-            cv.drawString(x + 25, y + 20, t)
-            cv.setFillColor(MUT)
-            cv.setFont('Lora', 8.2)
-            s2 = d
-            while stringWidth(s2, 'Lora', 8.2) > cw - 34 and len(s2) > 6:
-                s2 = s2[:-2]
-            cv.drawString(x + 25, y + 8, s2)
+        cima = self.h
+        for r, alt in enumerate(self.alt_riga):
+            for k in range(self.cols):
+                i = r * self.cols + k
+                if i >= len(self.s):
+                    break
+                t, _ = self.s[i]
+                x = k * cw
+                y = cima - 14          # linea di base del titolo del passo
+                cv.setFillColor(self.c)
+                cv.circle(x + 9, y + 3, 9, stroke=0, fill=1)
+                cv.setFillColor(WHITE)
+                cv.setFont('Pop-B', 8.4)
+                n = str(i + 1)
+                cv.drawString(x + 9 - stringWidth(n, 'Pop-B', 8.4) / 2, y, n)
+                cv.setFillColor(INK)
+                cv.setFont('Pop-M', 8.6)
+                cv.drawString(x + 25, y + 3, t)
+                cv.setFillColor(MUT)
+                cv.setFont('Lora', 8.2)
+                for k2, riga in enumerate(self.righe[i]):
+                    cv.drawString(x + 25, y - 9 - k2 * self.INTERLINEA, riga)
+            cima -= alt
 
 
 class Bars(Flowable):
@@ -516,3 +652,53 @@ class Bars(Flowable):
             cv.setFillColor(INK)
             cv.setFont('Pop-M', 8.2)
             cv.drawRightString(self.w, y + 6, '%d %s' % (v, self.unit))
+
+
+# ---------------------------------------------------------------- aggiunte 0.4
+class Checklist(Flowable):
+    """Caselle da spuntare, su una o piu' colonne.
+
+    Ripresa dalla guida Sillschlucht: serve alle schede di rilievo per le foto da
+    fare. Il testo va a capo invece di essere accorciato.
+    """
+
+    def __init__(self, items, color, w=FW, cols=2, corpo=8.4):
+        self.items, self.c, self.w, self.cols, self.corpo = items, color, w, cols, corpo
+        cw = w / cols
+        self.righe = [_a_capo(t, 'Lora', corpo, cw - 24) for t in items]
+        n_righe = (len(items) + cols - 1) // cols
+        self.alt = []
+        for r in range(n_righe):
+            gruppo = self.righe[r * cols:(r + 1) * cols]
+            self.alt.append(6 + (corpo + 3) * max(len(g) for g in gruppo))
+        self.h = sum(self.alt)
+
+    def wrap(self, aw, ah):
+        return (self.w, self.h)
+
+    def draw(self):
+        cv = self.canv
+        cw = self.w / self.cols
+        cima = self.h
+        for r, alt in enumerate(self.alt):
+            for k in range(self.cols):
+                i = r * self.cols + k
+                if i >= len(self.items):
+                    break
+                x = k * cw
+                y = cima - self.corpo - 3
+                cv.setStrokeColor(self.c)
+                cv.setLineWidth(1)
+                cv.rect(x, y - 1, 8, 8, stroke=1, fill=0)
+                cv.setFillColor(INK2)
+                cv.setFont('Lora', self.corpo)
+                for k2, riga in enumerate(self.righe[i]):
+                    cv.drawString(x + 15, y - k2 * (self.corpo + 3), riga)
+            cima -= alt
+
+
+def livello_chip(testo, colore):
+    """Etichetta piccola e colorata, per lo stato di una linea nelle tabelle."""
+    return Paragraph('<font name="Pop-M" size="7.2" color="#%s">%s</font>'
+                     % (colore.hexval()[2:], testo.upper()),
+                     ParagraphStyle('lv', fontName='Pop', leading=10))

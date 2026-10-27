@@ -1,0 +1,18 @@
+# Origine delle fotografie — anfiteatro-108
+
+Dalla scheda «Anfiteatro-DaControllare» di `LineeBisma.xlsx` (Drive del gruppo, 20/10/2026), copiate il 27/10/2026 da `fonti/lineebisma/immagini/` con `tools/importa_foto.py` (lato lungo ≤ 2000 px). Il file mette ogni foto sulla riga della linea e nella colonna del lato («Near Side» = vicino, «Far Side» = lontano); «vicino» e «lontano» sono le sue colonne, **non** i lati di tensione e statico della guida. Nessuna foto ha EXIF: data, luogo e autore vanno chiesti a chi ha compilato il file. Tutto «da controllare», come dice il file.
+
+Nome dei file: `<linea>_<NN>_<lato>_<soggetto>.jpg`. NN è solo l'ordine (la 01 è la miniatura stampata nella guida); il lato è quello della colonna del file (vicino = «Near Side», lontano = «Far Side», lato-nd = fuori dalle colonne dei lati); il soggetto è ciò che si vede. La cella d'origine sta nella tabella; il dettaglio in `LETTURA.md`. Nella colonna «Persone» si dice solo se qualcuno si vede e se è riconoscibile: niente descrizioni delle persone.
+
+| File | Cella | Lato (file) | Originale | Che cosa mostra | Persone |
+|---|---|---|---|---|---|
+| `anfiteatro-108_01_lontano_sosta-con-tronco.jpg` (940×1253, raddrizzata) | D7 | lontano | `anfiteatro-dacontrollare_D7_image11.jpeg` | La sosta con il tronco: tronco con la corteccia, coperto in parte da un'imbottitura bianca su un tessuto rosso, legato con cordino viola; slinghe verdi, matassa bianco-nera, calza grigia e rossa che esce verso l'interno; un albero subito a sinistra della sosta; di fronte una torre a sommità piatta (estate) | nessuna |
+| `anfiteatro-108_02_lontano_sosta-con-tronco-dall-alto.jpg` (917×1255, raddrizzata) | D7 | lontano | `anfiteatro-dacontrollare_D7_image16.jpeg` | La stessa sosta da dietro e più in alto: tronco con imbottitura bianca, slinghe verdi, calza rossa verso destra, braca viola, matassa bianco-nera; dietro, l'albero (estate) | una persona in piedi, dalle gambe al busto, volto non visibile; riconoscibile da chi la conosce |
+| `anfiteatro-108_03_lato-nd_sosta-con-tronco-altra-vista.jpg` (893×1252, raddrizzata) | U7 | fuori dalle colonne dei lati (riga della 108) | `anfiteatro-dacontrollare_U7_image12.jpeg` | La stessa sosta, quasi con la stessa inquadratura della 113_07: estremità del tronco con la corteccia, cordino viola alle due estremità, convergenza sul bordo in alto a sinistra (estate) | nessuna |
+| `anfiteatro-108_04_lato-nd_linea-dal-bordo-nella-nebbia.jpg` (893×1252, raddrizzata) | L7 | fuori dalle colonne dei lati (riga della 108) | `anfiteatro-dacontrollare_L7_image13.jpeg` | Una persona seduta sul bordo, di spalle; la linea bianca verso una torre a sommità piatta nella nebbia; in basso un tronco con la corteccia, un elemento rosso imbottito, slinghe verdi, corda bianca (autunno) | una persona di spalle, volto non visibile; riconoscibile da chi la conosce |
+
+Foto diverse della stessa sosta con il tronco compaiono sia sulla riga della 108 (D7, U7) sia su quella della 113 (D8): a quale delle due linee appartengano va chiesto a chi le ha messe nel file (voce 59).
+
+La 02 e la 04 mostrano una persona riconoscibile da chi la conosce: come tutte le jpg di questa cartella restano fuori da git (`.gitignore`) finché l'utente non decide se versionarle.
+
+Le foto segnate «raddrizzata» sono salvate nel file ruotate di 90°: Excel le mostra dritte perché nel disegno hanno `rot="5400000"`. Le copie sono state ruotate di 90° in senso orario, come le mostra Excel: la 01 al momento della copia, la 02, la 03 e la 04 dopo la verifica del 27/10/2026, rigenerandole dall'originale. Gli originali in `fonti/lineebisma/immagini/` restano come sono.

@@ -1,5 +1,10 @@
 # Prompt da incollare nel primo messaggio di Claude Code
 
+> **Storico.** È il messaggio con cui il progetto è partito, ad agosto 2026, quando si
+> pensava a un manuale della sola «50». Le fasi sono state tutte percorse e il perimetro
+> è diventato la guida alle 24 linee: lo stato attuale è in `README.md`, `CLAUDE.md` e
+> `DUBBI.md`. Non va incollato di nuovo.
+
 Copia tutto quello che sta sotto la riga.
 
 ---

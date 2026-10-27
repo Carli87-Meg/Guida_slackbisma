@@ -1,0 +1,17 @@
+# Origine delle fotografie — anfiteatro-97
+
+Dalla scheda «Anfiteatro-DaControllare» di `LineeBisma.xlsx` (Drive del gruppo, 20/10/2026), copiate il 27/10/2026 da `fonti/lineebisma/immagini/` con `tools/importa_foto.py` (lato lungo ≤ 2000 px). Il file mette ogni foto sulla riga della linea e nella colonna del lato («Near Side» = vicino, «Far Side» = lontano); «vicino» e «lontano» sono le sue colonne, **non** i lati di tensione e statico della guida. Il file chiama questa riga «91»: le foto sono state messe sulla 97 m del registro per posizione (voce 62). Nessuna foto ha EXIF: data, luogo e autore vanno chiesti a chi ha compilato il file. Tutto «da controllare», come dice il file.
+
+Nome dei file: `<linea>_<NN>_<lato>_<soggetto>.jpg`. NN è solo l'ordine (la 01 è la miniatura stampata nella guida); il lato è quello della colonna del file (vicino = «Near Side», lontano = «Far Side»); il soggetto è ciò che si vede, senza nomi di dispositivi che la foto non dimostra. La cella d'origine sta nella tabella; il dettaglio in `LETTURA.md`. Nella colonna «Persone» si dice solo se qualcuno si vede e se è riconoscibile: niente descrizioni delle persone.
+
+| File | Cella | Lato (file) | Originale | Che cosa mostra | Persone |
+|---|---|---|---|---|---|
+| `anfiteatro-97_01_lontano_brache-fra-gli-alberi.jpg` (1754×1360) | D6 | lontano | `anfiteatro-dacontrollare_D6_image9.jpeg` | Fra alcuni tronchi, due brache viola riunite da un grillo a lira; la larga va a un moschettone su un elemento metallico sulla roccia (forse una placchetta: da confermare), dove arriva anche una corda arancione annodata; nebbia (autunno) | nessuna |
+| `anfiteatro-97_02_lontano_palo-legato-a-un-albero.jpg` (908×1290, raddrizzata) | D6 | lontano | `anfiteatro-dacontrollare_D6_image8.jpeg` | Un palo di legno orizzontale legato con cordino verde-blu a un tronco verticale; braca viola con protezione nera, un'altra braca viola dietro (autunno) | nessuna |
+| `anfiteatro-97_03_vicino_linee-controluce.jpg` (1504×2000, raddrizzata) | C6 | vicino | `anfiteatro-dacontrollare_C6_image7.jpeg` | Controluce: due linee con due highliner verso una torre di roccia, e una terza linea che parte da un ancoraggio in basso a destra. Nel file la foto è ritagliata su quell'ancoraggio (`srcRect` l=58107 b=65846); parcheggio sotto | due highliner: quello seduto ha il volto visibile, **riconoscibile**; l'altro lontano, non riconoscibile. Non stampata nella guida |
+
+Le foto segnate «raddrizzata» sono salvate nel file ruotate di 90°: Excel le mostra dritte perché nel disegno hanno `rot="5400000"`. Le copie sono state ruotate di 90° in senso orario, come le mostra Excel. Gli originali in `fonti/lineebisma/immagini/` restano come sono.
+
+**Rinumerazione del 27/10/2026.** La miniatura stampata nella guida è la 01. Prima la 01 era la foto controluce, in cui si riconosce un volto (alla copia era stata dichiarata «non riconoscibili»): ora è la 03, e la 01 è la foto delle brache fra gli alberi, senza persone. Nomi di prima: `anfiteatro-97_01_vicino_due-linee-controluce.jpg` (ora 03), `anfiteatro-97_02_lontano_palo-del-cavalletto-su-albero.jpg` (ora 02: «del cavalletto» non è dimostrato), `anfiteatro-97_03_lontano_ancoraggio-su-alberi.jpg` (ora 01: «su alberi» non è certo).
+
+La `C6_image7` (ora 03) mostra un volto riconoscibile che alla copia non era stato dichiarato: se tenerla in locale, e se versionarla, lo decide l'utente. Come tutte le jpg di questa cartella è fuori da git (`.gitignore`). Non è stampata nella guida.

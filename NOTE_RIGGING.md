@@ -1,8 +1,14 @@
-# Note di rigging — Highline «la 50», settore Anfiteatro, Pietra di Bismantova
+# Note di rigging — Highline «la 50» (nel titolo della guida: GAS-OH), settore Anfiteatro, Pietra di Bismantova
 
 > Documento intermedio, estratto **solo** dalle trascrizioni audio dei 28 video.
-> Da validare prima di impaginare. Ogni voce riporta la fonte `[file @ mm:ss]`.
-> Nessun dato qui sotto è dedotto: se non è stato detto a voce, non c'è.
+> Ogni voce riporta la fonte `[file @ mm:ss]`. Nessun dato qui sotto è dedotto: se non è
+> stato detto a voce, non c'è.
+>
+> **È il documento della Fase 3 (19/08/2026), validato e superato dalla guida.** Resta
+> come indice delle trascrizioni. Quello che si è chiarito dopo — dai fotogrammi, dalle
+> foto, dalle risposte dell'utente — sta in `DUBBI.md`, che è il riferimento aggiornato;
+> qui sotto è segnato con «poi:» solo dove questa pagina, letta da sola, porterebbe fuori
+> strada.
 
 ---
 
@@ -56,7 +62,7 @@ confermi le misure. Vedi «Come proseguire» in fondo.
 
 | Voce | Valore | Fonte |
 |---|---|---|
-| Nome di lavoro | **«la 50»** — deciso dall'utente, è come la chiamano sul campo | utente 19/08/2026 |
+| Nome di lavoro | **«la 50»** — deciso dall'utente, è come la chiamano sul campo. Poi: nel titolo della guida la linea si chiama **«GAS-OH»**, il nome che ha su SlackMap; «la 50» resta il soprannome (decisione dell'utente del 27/10/2026, dubbio 45 chiuso) | utente 19/08/2026 e 27/10/2026 |
 | Settore | **Anfiteatro** ✅ | utente + locandina + i-pietra |
 | Lunghezza | `[DA CONFERMARE]` — i-pietra la registra come **53 m**, la locandina conferma una 53 M all'Anfiteatro, ma l'utente rimisurerà sui punti | i-pietra `6Y8RO09OmxOxhEZ8SKTg` + locandina |
 | Località | **Pietra di Bismantova** (Castelnovo ne' Monti, RE), settore **Anfiteatro** ✅ | utente + i-pietra |
@@ -66,11 +72,11 @@ confermi le misure. Vedi «Come proseguire» in fondo.
 | Dislivello / offlevel | `[DA CONFERMARE]` — mai nominato | — |
 | Tipo di ancoraggio lato A | Sosta su **3 punti** su **roccia**, **placchette su bullone con dado esagonale** ✅ | `[IMG_1374 @ 0:29]` + `IMG_1371.JPEG` + utente |
 | Tipo di ancoraggio lato B | Su **roccia** ✅ — numero e tipo dei punti `[DA CONFERMARE]` | risposta utente 19/08/2026 |
-| Coordinate lato A / lato B | `[DA CONFERMARE]` — mai nominate | — |
+| Coordinate | Mai nominate a voce. Poi: **ancoraggio main** `44.419869, 10.412353` (EXIF di `IMG_1416`, 16/05) e **altro capo** `44.419453, 10.412072` (EXIF di `IMG_3323`-`3332`, 22/08). Il lato tensione è il main, sopra il settore Cocoa: dubbio 56, chiuso il 27/10/2026 | `lavorazione/metadati_foto.md` |
 | Accesso / avvicinamento | `[DA CONFERMARE]` — mai nominato | — |
 | Data di montaggio | 16/05/2026, dalle 13:00 alle 15:38 | metadati dei file |
 | Arco temporale coperto | circa 2 h 38 min | metadati dei file |
-| Persone presenti | almeno 4 · dall'utente: **Erman**, **Matte**, **Lasa**, **Dave** (l'audio trascriveva «Herman», «Malte») | utente + `[IMG_1373 @ 0:24]`, `[IMG_1394 @ 0:06]` |
+| Persone presenti | almeno 4 · dall'utente: **Ermy**, **Matte Kode**, **Lasa**, **Dave** (l'audio trascriveva «Herman», «Malte») | utente + `[IMG_1373 @ 0:24]`, `[IMG_1394 @ 0:06]` |
 
 > Nota sui tempi: i 28 video coprono **22 min 47 s** su un arco di **2 h 38 min**. Sono
 > campioni sparsi, non una ripresa continua. Buona parte del montaggio non è filmata.
@@ -99,6 +105,10 @@ crea un'ambiguità con una linea reale di un altro settore. Nel manuale la tengo
 come titolo nudo. Prima della pubblicazione va deciso il titolo definitivo: è l'unico punto
 in cui un lettore potrebbe attrezzare la linea sbagliata.
 
+> Poi: deciso dall'utente il 27/10/2026 (dubbio 45, chiuso). Nel titolo la linea si chiama
+> **«GAS-OH»**, il nome che ha su SlackMap; «la 50» resta il soprannome del gruppo, sempre
+> con la nota sulla 50 m del Settore Giallo.
+
 ### La locandina non coincide con i-pietra
 
 Da segnalare per quando lavoreremo sul catalogo — **qui non tocco nulla**.
@@ -116,6 +126,13 @@ Da segnalare per quando lavoreremo sul catalogo — **qui non tocco nulla**.
 - Nell'Anfiteatro i-pietra **non ha la 20 m né la 108 m**.
 - **Settore Giallo e Despedida mancano del tutto**: 10 linee non censite.
 - Il totale è 24 linee sulla locandina contro 12 in i-pietra.
+
+> Poi: questo confronto vale per lo **snapshot di i-pietra del 5 agosto 2026**. I render
+> del 20/08/2026 mostrano censiti anche Settore Giallo e Despedida: **22 linee su 24**,
+> mancano solo la 20 m e la 108 m dell'Anfiteatro. Dubbio 53, chiuso. E ancora dopo:
+> all'export di i-pietra del 21/10/2026 le linee sono **24 su 24**; la 20 m e la 108 m
+> risultano create il 21/08/2026. Sul nome del settore Anfite-altro ha deciso l'utente il
+> 27/10/2026: la guida usa quello della locandina (dubbio 52, chiuso).
 
 ### E scioglie i riferimenti dell'audio
 
@@ -135,7 +152,7 @@ Tutto per colore o per gesto. **Nessuna misura pronunciata.**
 | 1 | **BFK** (moschettone d'acciaio grande) | `[DA CONF.]` | Sulla corda rosa del backup | `[IMG_1350 @ 0:00]` |
 | 1 | Corda **azzurra** | `[DA CONF.]` | Prima per portare la tagline, poi linea vita sulla sosta opposta | `[IMG_1350 @ 0:33-0:41]` |
 | 4 | Maglie rapide **delta** | `[DA CONF.]` | `[DA CONFERMARE]` | `[IMG_1350 @ 0:53]` |
-| 1 | «**Mighty Lock**» — «quello quadratino» `[trascrizione incerta]` | `[DA CONF.]` | Backup | `[IMG_1351 @ 0:19-0:28]` |
+| 1 | «**Mighty Lock**» — «quello quadratino» `[trascrizione incerta]` · poi: il nome esiste, dubbio 13 | `[DA CONF.]` | Backup | `[IMG_1351 @ 0:19-0:28]` |
 | 1 | Slinga **verde lunga**, «la più grossa che c'è» | `[DA CONF.]` | `[DA CONFERMARE]` | `[IMG_1369 @ 0:31]` |
 | 1 | Slinga **piccola viola** | `[DA CONF.]` | `[DA CONFERMARE]` | `[IMG_1373 @ 0:41]` |
 | ≥1 | Slinga **verde e nera** | `[DA CONF.]` | `[DA CONFERMARE]` | `[IMG_1389 @ 0:02]` |
@@ -307,7 +324,8 @@ Sono solo tre, e tutte incomplete.
   scherzare sul cibo. Il contenuto tecnico si ferma a «parte con un otto».
 - `[IMG_1374 @ 0:42]` — «slide next» è quasi certamente un termine tecnico storpiato.
   Da verificare con te, **non da dedurre**.
-- `[IMG_1351 @ 0:19]` — «Mighty Lock»: nome commerciale probabilmente storpiato.
+- `[IMG_1351 @ 0:19]` — «Mighty Lock»: nome commerciale probabilmente storpiato. Poi: non
+  lo era, nel materiale del gruppo c'è un MightyLock di Balance Community (dubbio 13).
 - `[IMG_1380 @ 0:09]` — «Asulina»: probabile «asola» o «una sling».
 - `[IMG_1383 @ 0:19]` — «in sciancio»: incomprensibile.
 - `[IMG_1373 @ 0:27]` — «vado a Lai Montone per la sosta»: incomprensibile.
@@ -349,7 +367,9 @@ uso le tue risposte per le misure.
 2. ✅ **Ancoraggi solo su roccia.** Il manuale usa quindi la terminologia di CLAUDE.md per
    la roccia — placchette, fittoni, clessidre, cordini di collegamento, equalizzazione,
    angolo di apertura — e **non** quella arborea di Sillschlucht (niente protezione per
-   l'albero, niente braca ad anello, salvo che compaia nei fotogrammi).
+   l'albero, niente braca ad anello, salvo che compaia nei fotogrammi). Poi: nei
+   fotogrammi le brache ad anello ci sono, e l'utente ha confermato che le slinghe viola
+   sono brache industriali (dubbio 37).
 3. ✅ **`IMG_1375` è utilizzabile**: la richiesta di non pubblicare era una battuta.
 
 Si procede con la **Strada 1**: fotogrammi come fonte primaria, trascrizioni come indice,

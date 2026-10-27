@@ -113,8 +113,8 @@ def fase_d():
 
     a = Annotatore(DETT / 'IMG_1372_placchetta.jpg')
     a.cerchio((0.27, 0.72), 0.105, 'dado esagonale', C)
-    a.didascalia('Placchetta fissata con dado su bullone: tassello meccanico, '
-                 'non spit a vite né resinato  ·  misura [DA CONFERMARE]', C)
+    a.didascalia('Placchetta fissata con dado su bullone: non spit a vite né resinato '
+                 'con occhiello  ·  tipo e misura [DA CONFERMARE]', C)
     a.salva(DEST / 'D2_placchetta_dettaglio.jpg')
 
 
