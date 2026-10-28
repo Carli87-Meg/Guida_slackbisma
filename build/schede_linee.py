@@ -74,9 +74,13 @@ _AVVISO_DATO = False
 
 def foto_mancanti():
     """Linee che il file del gruppo descrive come fotografate ma senza foto su disco."""
+    # solo le righe che descrivono delle foto: la 46 e la 108 non ne hanno piu' (le loro
+    # erano di GAS-OH e della 113), e non devono far scattare l'avviso
+    def descrive_foto(c):
+        return any(c.get(k) for k in ('foto_vicino', 'foto_lontano', 'foto_fuori'))
     return [l['id'] for l in REG.LINEE
             if REG.livello(l) < REG.DOCUMENTATA and FC.di(l['id']) is not None
-            and not REG.foto_di(l)]
+            and descrive_foto(FC.di(l['id'])) and not REG.foto_di(l)]
 
 
 def avvisa_foto_mancanti():
